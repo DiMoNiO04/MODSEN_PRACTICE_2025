@@ -23,6 +23,18 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      'no-unused-vars': 'warn',
+      'no-undef': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      'react/prop-types': 'off',
+      'max-len': [
+        'warn',
+        {
+          code: 120,
+          ignoreUrls: true,
+          ignoreComments: false,
+        },
+      ],
     },
   },
 )
