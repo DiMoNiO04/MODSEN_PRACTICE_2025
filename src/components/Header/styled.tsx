@@ -25,7 +25,7 @@ export const Header = () => {
       <Container>
         <HeaderContainer>
           <Logo />
-          <BtnAddIcon hasBorder handle={() => alert('1')} />
+          <BtnAddIcon hasBorder handle={() => alert('Добавление таски')} />
         </HeaderContainer>
       </Container>
     </HeaderBlock>

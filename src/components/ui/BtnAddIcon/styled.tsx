@@ -6,7 +6,7 @@ interface IBtnAddIconProps extends IPlusIconProps {
   handle: () => void;
 }
 
-const BtnAddIconBlock = styled.button<{ hasBorder: boolean }>`
+const Button = styled.button<{ hasBorder: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,15 +17,17 @@ const BtnAddIconBlock = styled.button<{ hasBorder: boolean }>`
   cursor: pointer;
   transition: background 0.2s ease;
 
-  &:hover {
-    background: #cbd5e1;
+  @media (any-hover: hover) {
+    &:hover {
+      background: #cbd5e1;
+    }
   }
 `;
 
 export const BtnAddIcon = ({ size, color, hasBorder = false, handle }: IBtnAddIconProps) => {
   return (
-    <BtnAddIconBlock hasBorder={hasBorder} type="button" onClick={handle}>
+    <Button hasBorder={hasBorder} type="button" onClick={handle}>
       <PlusIcon size={size} color={color} />
-    </BtnAddIconBlock>
+    </Button>
   );
 };
