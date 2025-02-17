@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Container } from '../Container';
 import { Logo } from '../ui/Logo';
+import { BtnAddIcon } from '../ui/BtnAddIcon/styled';
 
 const HeaderBlock = styled.header`
   position: fixed;
@@ -24,6 +25,7 @@ export const Header = () => {
       <Container>
         <HeaderContainer>
           <Logo />
+          <BtnAddIcon hasBorder handle={() => alert('1')} />
         </HeaderContainer>
       </Container>
     </HeaderBlock>
