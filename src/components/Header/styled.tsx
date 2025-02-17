@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Container } from '../Container';
-import { Logo } from '../Logo';
+import { Logo } from '../ui/Logo';
 
 const HeaderBlock = styled.header`
   position: fixed;
