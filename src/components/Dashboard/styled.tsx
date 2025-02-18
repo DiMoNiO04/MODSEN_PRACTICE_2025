@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Container } from '../Container';
 import { TodoColumn } from '../TodoColumn';
+import { tasksData } from '@/assets/data/tasks';
 
 const DashboardContainer = styled.div`
   padding: 32px;
@@ -14,9 +15,9 @@ export const Dashboard = () => {
     <section>
       <Container>
         <DashboardContainer>
-          <TodoColumn color="#4F46E5" title="To Do" count={2} />
-          <TodoColumn color="#F59E0B" title="In progress" count={2} />
-          <TodoColumn color="#22C55E" title="Done" count={3} />
+          <TodoColumn color="#4F46E5" title="To Do" count={2} tasks={tasksData[0]} />
+          <TodoColumn color="#F59E0B" title="In progress" count={2} tasks={tasksData[1]} />
+          <TodoColumn color="#22C55E" title="Done" count={3} tasks={tasksData[2]} />
         </DashboardContainer>
       </Container>
     </section>
