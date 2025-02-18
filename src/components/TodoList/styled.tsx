@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Card, ICardProps } from '../Card';
 
 const List = styled.div`
   display: flex;
@@ -7,19 +8,14 @@ const List = styled.div`
 `;
 
 interface ITodoListProps {
-  tasks: {
-    id: number;
-    title: string;
-    desc: string;
-    priority?: string;
-  }[];
+  tasks: ICardProps[];
 }
 
 export const TodoList = ({ tasks }: ITodoListProps) => {
   return (
     <List>
       {tasks.map((task) => (
-        <div>{task.title}</div>
+        <Card key={task.id} {...task} />
       ))}
     </List>
   );

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { ITodoColumnHeaderProps, TodoColumnHeader } from '../TodoColumnHeader';
 import { TodoColumnTaskAdd } from '../TodoColumnTaskAdd';
 import { TodoList } from '../TodoList';
+import { ICardProps } from '../Card';
 
 const Container = styled.div`
   border-radius: 32px;
@@ -13,12 +14,7 @@ const Container = styled.div`
 `;
 
 interface ITodoColumnProps extends ITodoColumnHeaderProps {
-  tasks: {
-    id: number;
-    title: string;
-    desc: string;
-    priority?: string;
-  }[];
+  tasks: ICardProps[];
 }
 
 export const TodoColumn = ({ color, title, count, tasks }: ITodoColumnProps) => {

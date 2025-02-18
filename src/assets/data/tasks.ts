@@ -1,4 +1,6 @@
-export const tasksData = [
+import { ICardProps } from '@/components/Card';
+
+export const tasksData: ICardProps[][] = [
   [
     {
       id: 1,
@@ -21,7 +23,7 @@ export const tasksData = [
     },
     {
       id: 4,
-      title: 'Healthcare app wireframe flow 👩‍⚕️',
+      title: 'Healthcare app wireframe flow',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
     },
   ],
@@ -42,7 +44,6 @@ export const tasksData = [
       id: 7,
       title: 'UI/UX Design in the age of AI',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
-      priority: 'Low',
     },
   ],
 ];

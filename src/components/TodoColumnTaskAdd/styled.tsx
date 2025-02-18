@@ -1,5 +1,6 @@
-import { getOpacityColor } from '@/utils/getOpacityColor';
 import styled from 'styled-components';
+import { getOpacityColor } from '@/utils/getOpacityColor';
+import { ItemHash } from '../ui/ItemHash';
 
 const Button = styled.button<{ color: string }>`
   background: #ffffff;
@@ -17,17 +18,6 @@ const Button = styled.button<{ color: string }>`
   }
 `;
 
-const Text = styled.div<{ color: string }>`
-  border-radius: 32px;
-  padding: 4px 8px;
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600;
-  width: fit-content;
-  color: ${(props) => props.color};
-  background: ${(props) => getOpacityColor(props.color, 10)};
-`;
-
 interface ITodoColumnTaskAddProps {
   color: string;
 }
@@ -35,7 +25,7 @@ interface ITodoColumnTaskAddProps {
 export const TodoColumnTaskAdd = ({ color }: ITodoColumnTaskAddProps) => {
   return (
     <Button type="button" color={color}>
-      <Text color={color}>Add task...</Text>
+      <ItemHash color={color} text="Add task..." />
     </Button>
   );
 };
