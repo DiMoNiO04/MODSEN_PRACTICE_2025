@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Container } from '../Container';
+import { TodoColumn } from '../TodoColumn';
 
 const DashboardContainer = styled.div`
   padding: 32px;
@@ -13,9 +14,9 @@ export const Dashboard = () => {
     <section>
       <Container>
         <DashboardContainer>
-          <p>123</p>
-          <p>456</p>
-          <p>678</p>
+          <TodoColumn />
+          <TodoColumn />
+          <TodoColumn />
         </DashboardContainer>
       </Container>
     </section>
