@@ -1,4 +1,4 @@
-import { IChildrenProps } from '@/utils/interfaces';
+import { IChildrenProps } from '@/utils';
 import styled from 'styled-components';
 
 const Block = styled.main`

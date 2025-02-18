@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BtnAddIcon } from '../ui/BtnAddIcon';
+import { getOpacityColor } from '@/utils';
 
 const Container = styled.div<{ color: string }>`
   border-radius: 32px;
@@ -28,7 +29,7 @@ const TaskCount = styled.div<{ color: string }>`
   height: 32px;
   border-radius: 50%;
   background-color: #fff;
-  color: ${(props) => props.color || '#C8CDC2'};
+  color: ${(props) => getOpacityColor(props.color) || '#C8CDC2'};
   display: flex;
   align-items: center;
   justify-content: center;
