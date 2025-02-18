@@ -1,0 +1,58 @@
+import styled from 'styled-components';
+import { BtnAddIcon } from '../ui/BtnAddIcon/styled';
+
+const Container = styled.div<{ color: string }>`
+  border-radius: 32px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: ${(props) => props.color || '#C8CDC2'};
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const Title = styled.h3`
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 700;
+  letter-spacing: 1.12px;
+  color: #fff;
+`;
+
+const TaskCount = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: ${(props) => props.color || '#C8CDC2'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 1px;
+  font-weight: 600;
+`;
+
+export interface ITodoColumnHeaderProps {
+  color: string;
+  title: string;
+  count: number;
+}
+
+export const TodoColumnHeader = ({ color, count, title }: ITodoColumnHeaderProps) => {
+  return (
+    <Container color={color}>
+      <TitleWrapper>
+        <TaskCount color={color}>{count}</TaskCount>
+        <Title>{title}</Title>
+      </TitleWrapper>
+      <BtnAddIcon color="#FFFFFF" handle={() => alert('Добавление таски')} />
+    </Container>
+  );
+};

@@ -12,8 +12,8 @@ const Button = styled.button<{ hasBorder: boolean }>`
   justify-content: center;
   background: transparent;
   border: ${({ hasBorder }) => (hasBorder ? '1px solid #CBD5E1' : 'none')};
+  padding: ${({ hasBorder }) => (hasBorder ? '8px' : 'none')};
   border-radius: 50%;
-  padding: 8px;
   cursor: pointer;
   transition: background 0.2s ease;
 

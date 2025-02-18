@@ -14,9 +14,9 @@ export const Dashboard = () => {
     <section>
       <Container>
         <DashboardContainer>
-          <TodoColumn />
-          <TodoColumn />
-          <TodoColumn />
+          <TodoColumn color="#4F46E5" title="To Do" count={2} />
+          <TodoColumn color="#F59E0B" title="In progress" count={2} />
+          <TodoColumn color="#22C55E" title="Done" count={3} />
         </DashboardContainer>
       </Container>
     </section>

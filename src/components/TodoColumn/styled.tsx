@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ITodoColumnHeaderProps, TodoColumnHeader } from '../TodoColumnHeader';
 
 const Container = styled.div`
   border-radius: 32px;
@@ -9,6 +10,10 @@ const Container = styled.div`
   row-gap: 16px;
 `;
 
-export const TodoColumn = () => {
-  return <Container></Container>;
+export const TodoColumn = ({ color, title, count }: ITodoColumnHeaderProps) => {
+  return (
+    <Container>
+      <TodoColumnHeader color={color} title={title} count={count} />
+    </Container>
+  );
 };
