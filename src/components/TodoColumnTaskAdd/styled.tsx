@@ -12,7 +12,7 @@ const Button = styled.button<{ color: string }>`
 
   @media (any-hover: hover) {
     &:hover {
-      background: ${(props) => getOpacityColor(props.color)};
+      background: ${(props) => getOpacityColor(props.color, 10)};
     }
   }
 `;
@@ -25,7 +25,7 @@ const Text = styled.div<{ color: string }>`
   font-weight: 600;
   width: fit-content;
   color: ${(props) => props.color};
-  background: ${(props) => getOpacityColor(props.color)};
+  background: ${(props) => getOpacityColor(props.color, 10)};
 `;
 
 interface ITodoColumnTaskAddProps {

@@ -1,1 +1,1 @@
-export const getOpacityColor = (color: string) => `${color}10`;
+export const getOpacityColor = (color: string, opacity: number) => `${color}${opacity}`;
