@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BtnAddIcon } from '../ui/BtnAddIcon/styled';
+import { BtnAddIcon } from '../ui/BtnAddIcon';
 
 const Container = styled.div<{ color: string }>`
   border-radius: 32px;
@@ -20,11 +20,10 @@ const Title = styled.h3`
   font-size: 16px;
   line-height: 22px;
   font-weight: 700;
-  letter-spacing: 1.12px;
   color: #fff;
 `;
 
-const TaskCount = styled.div`
+const TaskCount = styled.div<{ color: string }>`
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -35,7 +34,6 @@ const TaskCount = styled.div`
   justify-content: center;
   font-size: 14px;
   line-height: 22px;
-  letter-spacing: 1px;
   font-weight: 600;
 `;
 

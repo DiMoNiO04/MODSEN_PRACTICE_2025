@@ -1,3 +1,3 @@
-import { PlusIcon } from '../PlusIcon';
+import { BtnAddIcon } from './styled';
 
-export { PlusIcon };
+export { BtnAddIcon };
