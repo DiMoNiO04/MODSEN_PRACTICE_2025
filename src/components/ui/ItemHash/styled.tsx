@@ -8,9 +8,9 @@ const Text = styled.div<{ color: string; isLevel?: boolean }>`
   line-height: 16px;
   font-weight: 600;
   width: fit-content;
-  color: ${(props) => props.color};
-  background: ${(props) => getOpacityColor(props.color, 10)};
-  margin-bottom: ${(props) => (props.isLevel ? '12px' : '0')};
+  color: ${({ color }) => color};
+  background: ${({ color }) => getOpacityColor(color, 10)};
+  margin-bottom: ${({ isLevel }) => (isLevel ? '12px' : '0')};
 `;
 
 interface IItemHashProps {

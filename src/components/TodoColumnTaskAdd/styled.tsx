@@ -13,7 +13,7 @@ const Button = styled.button<{ color: string }>`
 
   @media (any-hover: hover) {
     &:hover {
-      background: ${(props) => getOpacityColor(props.color, 10)};
+      background: ${({ color }) => getOpacityColor(color, 10)};
     }
   }
 `;

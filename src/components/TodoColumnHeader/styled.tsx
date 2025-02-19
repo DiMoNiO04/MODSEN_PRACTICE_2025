@@ -8,7 +8,7 @@ const Container = styled.div<{ color: string }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: ${(props) => props.color || '#C8CDC2'};
+  background-color: ${({ color }) => color || '#C8CDC2'};
 `;
 
 const TitleWrapper = styled.div`
@@ -29,7 +29,7 @@ const TaskCount = styled.div<{ color: string }>`
   height: 32px;
   border-radius: 50%;
   background-color: #fff;
-  color: ${(props) => getOpacityColor(props.color, 50) || '#C8CDC2'};
+  color: ${({ color }) => getOpacityColor(color, 50) || '#C8CDC2'};
   display: flex;
   align-items: center;
   justify-content: center;
