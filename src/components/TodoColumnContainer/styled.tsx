@@ -1,5 +1,5 @@
-import { IChildrenProps } from '@/utils';
 import styled from 'styled-components';
+import { IChildrenProps } from '@/utils';
 
 const Container = styled.div<{ isFullHeight?: boolean }>`
   border-radius: 32px;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { BtnAddIcon } from '../ui/BtnAddIcon';
 import { getOpacityColor } from '@/utils';
+import { BtnAddIcon } from '../ui';
 
 const Container = styled.div<{ color: string }>`
   border-radius: 32px;

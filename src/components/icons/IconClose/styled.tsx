@@ -1,4 +1,4 @@
-import { IIconProps } from '../interface';
+import { IIconProps } from '..';
 
 export const IconClose = ({ size = 24, color = '#475569' }: IIconProps) => {
   return (

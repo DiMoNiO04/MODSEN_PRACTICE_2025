@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ItemHash } from '../ui/ItemHash';
+import { ItemHash } from '..';
 
 const Block = styled.div`
   border-radius: 32px;

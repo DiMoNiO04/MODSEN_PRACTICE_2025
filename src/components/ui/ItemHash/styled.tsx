@@ -1,5 +1,5 @@
-import { getOpacityColor } from '@/utils';
 import styled from 'styled-components';
+import { getOpacityColor } from '@/utils';
 
 const Text = styled.div<{ color: string; isLevel?: boolean }>`
   border-radius: 32px;

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { Container } from '../Container';
-import { Logo } from '../ui/Logo';
-import { BtnAddIcon } from '../ui/BtnAddIcon/styled';
+import { Container } from '..';
+import { BtnAddIcon, Logo } from '@/components/ui';
 
 const HeaderBlock = styled.header`
   position: fixed;

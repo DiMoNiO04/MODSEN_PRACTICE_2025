@@ -1,8 +1,8 @@
 import { ITodoColumnHeaderProps, TodoColumnHeader } from '../TodoColumnHeader';
 import { TodoColumnTaskAdd } from '../TodoColumnTaskAdd';
 import { TodoList } from '../TodoList';
-import { ICardProps } from '../Card';
 import { TodoColumnContainer } from '../TodoColumnContainer';
+import { ICardProps } from '../ui';
 
 interface ITodoColumnProps extends ITodoColumnHeaderProps {
   tasks: ICardProps[];

@@ -1,5 +1,5 @@
-import { IChildrenProps } from '@/utils';
 import styled from 'styled-components';
+import { IChildrenProps } from '@/utils';
 
 const Block = styled.main`
   margin-top: 100px;

@@ -1,6 +1,5 @@
-import { IconPlus } from '@/components/icons/IconPlus';
-import { IIconProps } from '@/components/icons/interface';
 import styled from 'styled-components';
+import { IIconProps, IconPlus } from '@/components/icons';
 
 interface IBtnAddIconProps extends IIconProps {
   hasBorder?: boolean;

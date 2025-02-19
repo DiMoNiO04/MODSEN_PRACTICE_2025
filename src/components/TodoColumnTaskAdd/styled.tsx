@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { getOpacityColor } from '@/utils/getOpacityColor';
-import { ItemHash } from '../ui/ItemHash';
+import { ItemHash } from '../ui';
 
 const Button = styled.button<{ color: string }>`
   background: #ffffff;

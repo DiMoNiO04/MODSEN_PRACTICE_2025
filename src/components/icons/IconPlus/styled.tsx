@@ -1,4 +1,4 @@
-import { IIconProps } from '../interface';
+import { IIconProps } from '..';
 
 export const IconPlus = ({ size = 24, color = '#475569' }: IIconProps) => {
   return (

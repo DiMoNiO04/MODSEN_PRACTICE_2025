@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card, ICardProps } from '../Card';
+import { Card, ICardProps } from '../ui';
 
 const List = styled.div`
   display: flex;

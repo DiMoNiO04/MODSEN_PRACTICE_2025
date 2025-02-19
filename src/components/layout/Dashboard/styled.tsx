@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Container } from '../Container';
-import { TodoColumn } from '../TodoColumn';
+import { TodoColumn } from '@/components/TodoColumn';
 import { tasksData } from '@/assets/data/tasks';
-import { AddNewColumn } from '../AddNewColumn';
+import { AddNewColumn } from '@/components/AddNewColumn';
+import { Container } from '..';
 
 const DashboardContainer = styled.div`
   padding: 32px;
