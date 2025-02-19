@@ -1,7 +1,8 @@
+import { IconPlus } from '@/components/icons/IconPlus';
+import { IIconProps } from '@/components/icons/interface';
 import styled from 'styled-components';
-import { IPlusIconProps, PlusIcon } from '../PlusIcon';
 
-interface IBtnAddIconProps extends IPlusIconProps {
+interface IBtnAddIconProps extends IIconProps {
   hasBorder?: boolean;
   handle: () => void;
 }
@@ -27,7 +28,7 @@ const Button = styled.button<{ hasBorder: boolean }>`
 export const BtnAddIcon = ({ size, color, hasBorder = false, handle }: IBtnAddIconProps) => {
   return (
     <Button hasBorder={hasBorder} type="button" onClick={handle}>
-      <PlusIcon size={size} color={color} />
+      <IconPlus size={size} color={color} />
     </Button>
   );
 };

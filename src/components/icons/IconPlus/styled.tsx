@@ -1,9 +1,6 @@
-export interface IPlusIconProps {
-  size?: number;
-  color?: string;
-}
+import { IIconProps } from '../interface';
 
-export const PlusIcon = ({ size = 24, color = '#475569' }: IPlusIconProps) => {
+export const IconPlus = ({ size = 24, color = '#475569' }: IIconProps) => {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path

@@ -42,16 +42,17 @@ export interface ITodoColumnHeaderProps {
   color: string;
   title: string;
   count: number;
+  handle: () => void;
 }
 
-export const TodoColumnHeader = ({ color, count, title }: ITodoColumnHeaderProps) => {
+export const TodoColumnHeader = ({ color, count, title, handle }: ITodoColumnHeaderProps) => {
   return (
     <Container color={color}>
       <TitleWrapper>
         <TaskCount color={color}>{count}</TaskCount>
         <Title>{title}</Title>
       </TitleWrapper>
-      <BtnAddIcon color="#FFFFFF" handle={() => alert('Добавление таски')} />
+      <BtnAddIcon color="#FFFFFF" handle={handle} />
     </Container>
   );
 };
