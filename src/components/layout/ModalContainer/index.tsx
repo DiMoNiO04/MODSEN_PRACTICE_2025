@@ -1,0 +1,30 @@
+import { useState, useEffect } from 'react';
+import { BtnRound } from '@/components/ui';
+import { IChildrenProps, IModalCloseProps } from '@/utils';
+import { BtnCloseBlock, ModalContent, ModalOverlay } from './styled';
+
+export interface IModalProps extends IChildrenProps, IModalCloseProps {}
+
+export const ModalContainer = ({ onClose, children }: IModalProps) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    setTimeout(onClose, 200);
+  };
+
+  return (
+    <ModalOverlay isVisible={isVisible} onClick={handleClose}>
+      <ModalContent isVisible={isVisible} onClick={(e) => e.stopPropagation()}>
+        <BtnCloseBlock>
+          <BtnRound type="close" size={28} handle={handleClose} />
+        </BtnCloseBlock>
+        {children}
+      </ModalContent>
+    </ModalOverlay>
+  );
+};

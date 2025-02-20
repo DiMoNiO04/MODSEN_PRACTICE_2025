@@ -1,5 +1,5 @@
-import { getOpacityColor } from '@/utils';
 import styled from 'styled-components';
+import { getOpacityColor } from '@/utils';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -28,17 +28,4 @@ const TaskCount = styled.div<{ color: string }>`
   font-weight: 600;
 `;
 
-export interface ITitleWithCountProps {
-  color: string;
-  title: string;
-  count: number;
-}
-
-export const TitleWithCount = ({ count, title, color }: ITitleWithCountProps) => {
-  return (
-    <TitleWrapper>
-      <TaskCount color={color}>{count}</TaskCount>
-      <Title>{title}</Title>
-    </TitleWrapper>
-  );
-};
+export { TitleWrapper, Title, TaskCount };
