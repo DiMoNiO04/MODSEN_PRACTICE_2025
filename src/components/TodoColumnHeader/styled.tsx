@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { getOpacityColor } from '@/utils';
-import { BtnAddIcon } from '../ui';
+import { BtnRound } from '../ui';
 
 const Container = styled.div<{ color: string }>`
   border-radius: 32px;
@@ -9,6 +9,7 @@ const Container = styled.div<{ color: string }>`
   align-items: center;
   justify-content: space-between;
   background-color: ${({ color }) => color || '#C8CDC2'};
+  position: relative;
 `;
 
 const TitleWrapper = styled.div`
@@ -38,21 +39,46 @@ const TaskCount = styled.div<{ color: string }>`
   font-weight: 600;
 `;
 
+const Btns = styled.div`
+  display: flex;
+  column-gap: 10px;
+`;
+
+const EditDeleteBtns = styled.div`
+  display: flex;
+  column-gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+
+  ${Container}:hover & {
+    opacity: 1;
+    visibility: visible;
+  }
+`;
+
 export interface ITodoColumnHeaderProps {
   color: string;
   title: string;
   count: number;
-  handle: () => void;
 }
 
-export const TodoColumnHeader = ({ color, count, title, handle }: ITodoColumnHeaderProps) => {
+export const TodoColumnHeader = ({ color, count, title }: ITodoColumnHeaderProps) => {
   return (
     <Container color={color}>
       <TitleWrapper>
         <TaskCount color={color}>{count}</TaskCount>
         <Title>{title}</Title>
       </TitleWrapper>
-      <BtnAddIcon color="#FFFFFF" handle={handle} />
+      <Btns>
+        <EditDeleteBtns>
+          <BtnRound color="#FFFFFF" handle={() => alert('Редактирование колонки')} type="edit" />
+          <BtnRound color="#FFFFFF" handle={() => alert('Удаление колонки')} type="delete" />
+        </EditDeleteBtns>
+        <BtnRound color="#FFFFFF" handle={() => alert('Добавление задачи')} type="add" />
+      </Btns>
     </Container>
   );
 };

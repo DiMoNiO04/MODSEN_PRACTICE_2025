@@ -8,10 +8,10 @@ interface ITodoColumnProps extends ITodoColumnHeaderProps {
   tasks: ICardProps[];
 }
 
-export const TodoColumn = ({ color, title, count, tasks, handle }: ITodoColumnProps) => {
+export const TodoColumn = ({ color, title, count, tasks }: ITodoColumnProps) => {
   return (
     <TodoColumnContainer>
-      <TodoColumnHeader color={color} title={title} count={count} handle={handle} />
+      <TodoColumnHeader color={color} title={title} count={count} />
       <TodoList tasks={tasks} />
       <TodoColumnTaskAdd color={color} />
     </TodoColumnContainer>

@@ -1,8 +1,8 @@
 import { IconClose } from './IconClose';
 import { IconDelete } from './IconDelete';
 import { IconEdit } from './IconEdit';
-import { IconPlus } from './IconPlus';
+import { IconAdd } from './IconAdd';
 import { IIconProps } from './interface';
 
-export { IconClose, IconDelete, IconEdit, IconPlus };
+export { IconClose, IconDelete, IconEdit, IconAdd };
 export type { IIconProps };

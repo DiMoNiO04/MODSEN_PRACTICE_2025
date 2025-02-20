@@ -1,6 +1,6 @@
 import { IIconProps } from '..';
 
-export const IconPlus = ({ size = 24, color = '#475569' }: IIconProps) => {
+export const IconAdd = ({ size = 24, color = '#475569' }: IIconProps) => {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path

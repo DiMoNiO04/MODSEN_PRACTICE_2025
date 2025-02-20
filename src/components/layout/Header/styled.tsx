@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Container } from '..';
-import { BtnAddIcon, Logo } from '@/components/ui';
+import { BtnRound, Logo } from '@/components/ui';
 
 const HeaderBlock = styled.header`
   position: fixed;
@@ -24,7 +24,7 @@ export const Header = () => {
       <Container>
         <HeaderContainer>
           <Logo />
-          <BtnAddIcon hasBorder handle={() => alert('Добавление таски')} />
+          <BtnRound hasBorder handle={() => alert('Добавление таски')} type="add" />
         </HeaderContainer>
       </Container>
     </HeaderBlock>

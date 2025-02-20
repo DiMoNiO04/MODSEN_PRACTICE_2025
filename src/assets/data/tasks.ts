@@ -1,4 +1,4 @@
-import { ICardProps } from '@/components/Card';
+import { ICardProps } from '@/components/ui';
 
 export const tasksData: ICardProps[][] = [
   [

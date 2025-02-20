@@ -1,7 +1,7 @@
-import { BtnAddIcon } from './BtnAddIcon';
+import { BtnRound } from './BtnRound';
 import { Card, ICardProps } from './Card';
 import { ItemHash } from './ItemHash';
 import { Logo } from './Logo';
 
-export { BtnAddIcon, Card, ItemHash, Logo };
+export { BtnRound, Card, ItemHash, Logo };
 export type { ICardProps };
