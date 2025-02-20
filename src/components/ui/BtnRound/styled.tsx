@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { IIconProps, IconAdd, IconEdit, IconDelete, IconMaximize } from '@/components/icons';
+import { IIconProps, IconAdd, IconEdit, IconDelete, IconMaximize, IconClose } from '@/components/icons';
 import { forwardRef } from 'react';
 
-type TBtnRound = 'add' | 'delete' | 'edit' | 'maximize';
+type TBtnRound = 'add' | 'delete' | 'edit' | 'maximize' | 'close';
 
 interface IBtnRoundProps extends IIconProps {
   hasBorder?: boolean;
@@ -49,6 +49,8 @@ export const BtnRound = forwardRef<HTMLButtonElement, IBtnRoundProps>(
           return <IconDelete size={size} color={color} />;
         case 'maximize':
           return <IconMaximize size={size} color={color} />;
+        case 'close':
+          return <IconClose size={size} color={color} />;
       }
     };
 

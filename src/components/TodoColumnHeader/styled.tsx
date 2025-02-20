@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { BtnRound } from '../ui';
 import { TitleWithCount } from '../TitleWithCount';
+import { ModalContainer } from '../layout';
 
 const Container = styled.div<{ color: string }>`
   border-radius: 32px;
@@ -40,20 +42,32 @@ export interface ITodoColumnHeaderProps {
 }
 
 export const TodoColumnHeader = ({ color, title, count, showEditDelete }: ITodoColumnHeaderProps) => {
-  const handleClickBtnAdd = () => (showEditDelete ? alert('Добавление задачи') : alert('Добавление колонки'));
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleClickBtnAdd = () => {
+    setIsModalOpen(true);
+  };
 
   return (
-    <Container color={color}>
-      <TitleWithCount color={color} title={title} count={count} />
-      <Btns>
-        {showEditDelete && (
-          <EditDeleteBtns>
-            <BtnRound color="#FFFFFF" handle={() => alert('Редактирование колонки')} type="edit" />
-            <BtnRound color="#FFFFFF" handle={() => alert('Удаление колонки')} type="delete" />
-          </EditDeleteBtns>
-        )}
-        <BtnRound color="#FFFFFF" handle={handleClickBtnAdd} type="add" />
-      </Btns>
-    </Container>
+    <>
+      <Container color={color}>
+        <TitleWithCount color={color} title={title} count={count} />
+        <Btns>
+          {showEditDelete && (
+            <EditDeleteBtns>
+              <BtnRound color="#FFFFFF" handle={() => alert('Редактирование колонки')} type="edit" />
+              <BtnRound color="#FFFFFF" handle={() => alert('Удаление колонки')} type="delete" />
+            </EditDeleteBtns>
+          )}
+          <BtnRound color="#FFFFFF" handle={handleClickBtnAdd} type="add" />
+        </Btns>
+      </Container>
+
+      {isModalOpen && (
+        <ModalContainer onClose={() => setIsModalOpen(false)}>
+          <p>Добавление задачи</p>
+        </ModalContainer>
+      )}
+    </>
   );
 };

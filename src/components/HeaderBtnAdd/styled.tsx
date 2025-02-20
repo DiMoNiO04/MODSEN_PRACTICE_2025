@@ -28,9 +28,12 @@ export const HeaderBtnAdd = () => {
   }, [isMenuOpen, closeMenu]);
 
   return (
-    <Block>
-      <BtnRound ref={buttonRef} hasBorder handle={() => setIsMenuOpen(!isMenuOpen)} type="add" />
-      {isMenuOpen && <HeaderDropdown />}
-    </Block>
+    <>
+      <Block>
+        <BtnRound ref={buttonRef} hasBorder handle={() => setIsMenuOpen(!isMenuOpen)} type="add" />
+        {isMenuOpen && <HeaderDropdown />}
+      </Block>
+      {}
+    </>
   );
 };
