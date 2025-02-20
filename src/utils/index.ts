@@ -1,5 +1,5 @@
 import { getOpacityColor } from './getOpacityColor';
-import { IChildrenProps } from './interfaces';
+import { IChildrenProps, IModalCloseProps } from './interfaces';
 
 export { getOpacityColor };
-export type { IChildrenProps };
+export type { IChildrenProps, IModalCloseProps };

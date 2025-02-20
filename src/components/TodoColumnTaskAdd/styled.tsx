@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { getOpacityColor } from '@/utils/getOpacityColor';
 import { ItemHash } from '../ui';
+import { useState } from 'react';
+import { ModalAddTask } from '../modals';
 
 const Button = styled.button<{ color: string }>`
   background: #ffffff;
@@ -23,9 +25,16 @@ interface ITodoColumnTaskAddProps {
 }
 
 export const TodoColumnTaskAdd = ({ color }: ITodoColumnTaskAddProps) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const toggleModalOpen = () => setIsModalOpen(!isModalOpen);
+
   return (
-    <Button type="button" color={color}>
-      <ItemHash color={color} text="Add task..." />
-    </Button>
+    <>
+      <Button type="button" color={color} onClick={toggleModalOpen}>
+        <ItemHash color={color} text="Add task..." />
+      </Button>
+      {isModalOpen && <ModalAddTask onClose={toggleModalOpen} />}
+    </>
   );
 };

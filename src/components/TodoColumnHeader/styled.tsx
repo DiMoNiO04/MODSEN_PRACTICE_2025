@@ -2,7 +2,8 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { BtnRound } from '../ui';
 import { TitleWithCount } from '../TitleWithCount';
-import { ModalContainer } from '../layout';
+import { ModalAddColumn, ModalAddTask } from '../modals';
+import { ModalEditColumn } from '../modals/ModalEditColumn';
 
 const Container = styled.div<{ color: string }>`
   border-radius: 32px;
@@ -38,24 +39,28 @@ export interface ITodoColumnHeaderProps {
   color: string;
   title: string;
   count: number;
-  showEditDelete?: boolean;
+  isAddNewColumn?: boolean;
 }
 
-export const TodoColumnHeader = ({ color, title, count, showEditDelete }: ITodoColumnHeaderProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export const TodoColumnHeader = ({ color, title, count, isAddNewColumn = false }: ITodoColumnHeaderProps) => {
+  const [isModalOpenAddColumn, setIsModalOpenAddColumn] = useState<boolean>(false);
+  const [isModalOpenEditColumn, setIsModalOpenEditColumn] = useState<boolean>(false);
+  const [isModalOpenAddTask, setIsModalOpenAddTask] = useState<boolean>(false);
 
-  const handleClickBtnAdd = () => {
-    setIsModalOpen(true);
-  };
+  const toggleModalOpenAddColumn = () => setIsModalOpenAddColumn(!isModalOpenAddColumn);
+  const toggleModalOpenEditColumn = () => setIsModalOpenEditColumn(!isModalOpenEditColumn);
+  const toggleModalOpenAddTask = () => setIsModalOpenAddTask(!isModalOpenAddTask);
+
+  const handleClickBtnAdd = () => (isAddNewColumn ? toggleModalOpenAddColumn() : toggleModalOpenAddTask());
 
   return (
     <>
       <Container color={color}>
         <TitleWithCount color={color} title={title} count={count} />
         <Btns>
-          {showEditDelete && (
+          {!isAddNewColumn && (
             <EditDeleteBtns>
-              <BtnRound color="#FFFFFF" handle={() => alert('Редактирование колонки')} type="edit" />
+              <BtnRound color="#FFFFFF" handle={toggleModalOpenEditColumn} type="edit" />
               <BtnRound color="#FFFFFF" handle={() => alert('Удаление колонки')} type="delete" />
             </EditDeleteBtns>
           )}
@@ -63,11 +68,9 @@ export const TodoColumnHeader = ({ color, title, count, showEditDelete }: ITodoC
         </Btns>
       </Container>
 
-      {isModalOpen && (
-        <ModalContainer onClose={() => setIsModalOpen(false)}>
-          <p>Добавление задачи</p>
-        </ModalContainer>
-      )}
+      {isModalOpenAddColumn && <ModalAddColumn onClose={toggleModalOpenAddColumn} />}
+      {isModalOpenEditColumn && <ModalEditColumn onClose={toggleModalOpenEditColumn} />}
+      {isModalOpenAddTask && <ModalAddTask onClose={toggleModalOpenAddTask} />}
     </>
   );
 };

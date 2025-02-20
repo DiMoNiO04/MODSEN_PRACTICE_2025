@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { BtnRound } from '@/components/ui';
-import { IChildrenProps } from '@/utils';
+import { IChildrenProps, IModalCloseProps } from '@/utils';
 
 const ModalOverlay = styled.div<{ isVisible: boolean }>`
   position: fixed;
@@ -31,7 +31,7 @@ const ModalContent = styled.div<{ isVisible: boolean }>`
   flex-shrink: 0;
   width: 100%;
   max-width: 500px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 4px -2px #1717170f;
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   transition:
     opacity 0.2s ease-out,
@@ -45,9 +45,7 @@ const BtnCloseBlock = styled.div`
   right: 12px;
 `;
 
-interface IModalProps extends IChildrenProps {
-  onClose: () => void;
-}
+export interface IModalProps extends IChildrenProps, IModalCloseProps {}
 
 export const ModalContainer = ({ onClose, children }: IModalProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
