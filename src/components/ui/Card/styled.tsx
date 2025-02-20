@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { BtnRound, ItemHash } from '..';
+import { useState } from 'react';
+import { ModalTask } from '@/components/modals';
 
 const TopBlockInfo = styled.div<{ hasPriority: boolean }>`
   display: flex;
@@ -49,16 +51,21 @@ export interface ICardProps {
 }
 
 export const Card = ({ title, desc, priority }: ICardProps) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const toggleModalOpen = () => setIsModalOpen(!isModalOpen);
+
   const hasPriority = Boolean(priority);
 
   return (
     <Block>
       <TopBlockInfo hasPriority={hasPriority}>
         {hasPriority && <ItemHash isLevel color="#4F46E5" text={priority} />}
-        <BtnRound type="maximize" size={20} handle={() => alert('Развернуть таску')} />
+        <BtnRound type="maximize" size={20} handle={toggleModalOpen} />
       </TopBlockInfo>
       <Title>{title}</Title>
       <Description>{desc}</Description>
+      {isModalOpen && <ModalTask onClose={toggleModalOpen} />}
     </Block>
   );
 };
