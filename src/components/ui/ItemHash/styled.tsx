@@ -10,7 +10,6 @@ const Text = styled.div<{ color: string; isLevel?: boolean }>`
   width: fit-content;
   color: ${({ color }) => color};
   background: ${({ color }) => getOpacityColor(color, 10)};
-  margin-bottom: ${({ isLevel }) => (isLevel ? '12px' : '0')};
 `;
 
 interface IItemHashProps {

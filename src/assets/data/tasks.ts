@@ -4,8 +4,9 @@ export const tasksData: ICardProps[][] = [
   [
     {
       id: 1,
-      title: 'UI/UX Design in the age of AI',
-      desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
+      title: 'UI/UX Design in the age of Blog Copywriting UI/UX Design UI/UX Design',
+      desc: `Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit. 
+        Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.`,
       priority: 'Medium',
     },
     {

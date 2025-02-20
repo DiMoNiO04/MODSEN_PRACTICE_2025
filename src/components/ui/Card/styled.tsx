@@ -1,5 +1,12 @@
 import styled from 'styled-components';
-import { ItemHash } from '..';
+import { BtnRound, ItemHash } from '..';
+
+const TopBlockInfo = styled.div<{ hasPriority: boolean }>`
+  display: flex;
+  justify-content: ${({ hasPriority }) => (hasPriority ? 'space-between' : 'flex-end')};
+  align-items: center;
+  margin-bottom: 12px;
+`;
 
 const Block = styled.div`
   border-radius: 32px;
@@ -15,6 +22,11 @@ const Title = styled.h3`
   font-weight: 600;
   color: #1e293b;
   margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Description = styled.p`
@@ -22,6 +34,11 @@ const Description = styled.p`
   font-size: 16px;
   line-height: 25.6px;
   font-weight: 400;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export interface ICardProps {
@@ -32,9 +49,14 @@ export interface ICardProps {
 }
 
 export const Card = ({ title, desc, priority }: ICardProps) => {
+  const hasPriority = Boolean(priority);
+
   return (
     <Block>
-      <ItemHash isLevel color="#4F46E5" text={priority} />
+      <TopBlockInfo hasPriority={hasPriority}>
+        {hasPriority && <ItemHash isLevel color="#4F46E5" text={priority} />}
+        <BtnRound type="maximize" size={20} handle={() => alert('Развернуть таску')} />
+      </TopBlockInfo>
       <Title>{title}</Title>
       <Description>{desc}</Description>
     </Block>
