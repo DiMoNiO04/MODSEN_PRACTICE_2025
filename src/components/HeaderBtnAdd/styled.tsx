@@ -10,9 +10,15 @@ const Block = styled.div`
 export const HeaderBtnAdd = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   const closeMenu = useCallback((e: MouseEvent) => {
-    if (buttonRef.current && !buttonRef.current.contains(e.target as Node)) {
+    if (
+      buttonRef.current &&
+      !buttonRef.current.contains(e.target as Node) &&
+      menuRef.current &&
+      !menuRef.current.contains(e.target as Node)
+    ) {
       setIsMenuOpen(false);
     }
   }, []);
@@ -28,12 +34,9 @@ export const HeaderBtnAdd = () => {
   }, [isMenuOpen, closeMenu]);
 
   return (
-    <>
-      <Block>
-        <BtnRound ref={buttonRef} hasBorder handle={() => setIsMenuOpen(!isMenuOpen)} type="add" />
-        {isMenuOpen && <HeaderDropdown />}
-      </Block>
-      {}
-    </>
+    <Block>
+      <BtnRound ref={buttonRef} hasBorder handle={() => setIsMenuOpen(!isMenuOpen)} type="add" />
+      {isMenuOpen && <HeaderDropdown ref={menuRef} />}
+    </Block>
   );
 };

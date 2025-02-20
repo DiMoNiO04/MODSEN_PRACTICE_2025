@@ -1,4 +1,6 @@
+import { forwardRef, useState } from 'react';
 import styled from 'styled-components';
+import { ModalAddColumn, ModalAddTask } from '../modals';
 
 const Dropdown = styled.div`
   position: absolute;
@@ -33,11 +35,21 @@ const MenuItem = styled.button`
   }
 `;
 
-export const HeaderDropdown = () => {
+export const HeaderDropdown = forwardRef<HTMLDivElement>((_, ref) => {
+  const [isModalOpenAddColumn, setIsModalOpenAddColumn] = useState<boolean>(false);
+  const [isModalOpenAddTask, setIsModalOpenAddTask] = useState<boolean>(false);
+
+  const toggleModalOpenAddColumn = () => setIsModalOpenAddColumn(!isModalOpenAddColumn);
+  const toggleModalOpenAddTask = () => setIsModalOpenAddTask(!isModalOpenAddTask);
+
   return (
-    <Dropdown>
-      <MenuItem onClick={() => alert('Добавление колонки')}>Добавить колонку</MenuItem>
-      <MenuItem onClick={() => alert('Добавление задачи')}>Добавить задачу</MenuItem>
-    </Dropdown>
+    <>
+      <Dropdown ref={ref}>
+        <MenuItem onClick={toggleModalOpenAddColumn}>Добавить колонку</MenuItem>
+        <MenuItem onClick={toggleModalOpenAddTask}>Добавить задачу</MenuItem>
+      </Dropdown>
+      {isModalOpenAddColumn && <ModalAddColumn onClose={toggleModalOpenAddColumn} />}
+      {isModalOpenAddTask && <ModalAddTask onClose={toggleModalOpenAddTask} />}
+    </>
   );
-};
+});
