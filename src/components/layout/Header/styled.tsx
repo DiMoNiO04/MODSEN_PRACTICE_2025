@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Container } from '..';
-import { BtnRound, Logo } from '@/components/ui';
+import { Logo } from '@/components/ui';
+import { HeaderBtnAdd } from '@/components/HeaderBtnAdd';
 
 const HeaderBlock = styled.header`
   position: fixed;
@@ -24,7 +25,7 @@ export const Header = () => {
       <Container>
         <HeaderContainer>
           <Logo />
-          <BtnRound hasBorder handle={() => alert('Добавление таски')} type="add" />
+          <HeaderBtnAdd />
         </HeaderContainer>
       </Container>
     </HeaderBlock>

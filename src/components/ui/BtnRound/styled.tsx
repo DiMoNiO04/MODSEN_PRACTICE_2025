@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { IIconProps, IconAdd, IconEdit, IconDelete, IconMaximize } from '@/components/icons';
+import { forwardRef } from 'react';
 
 type TBtnRound = 'add' | 'delete' | 'edit' | 'maximize';
 
@@ -7,6 +8,7 @@ interface IBtnRoundProps extends IIconProps {
   hasBorder?: boolean;
   type: TBtnRound;
   handle: () => void;
+  ref?: unknown;
 }
 
 const Button = styled.button<{ hasBorder: boolean }>`
@@ -35,23 +37,25 @@ const Button = styled.button<{ hasBorder: boolean }>`
   }
 `;
 
-export const BtnRound = ({ size, color, hasBorder = false, handle, type }: IBtnRoundProps) => {
-  const renderIcon = () => {
-    switch (type) {
-      case 'add':
-        return <IconAdd size={size} color={color} />;
-      case 'edit':
-        return <IconEdit size={size} color={color} />;
-      case 'delete':
-        return <IconDelete size={size} color={color} />;
-      case 'maximize':
-        return <IconMaximize size={size} color={color} />;
-    }
-  };
+export const BtnRound = forwardRef<HTMLButtonElement, IBtnRoundProps>(
+  ({ color, size, hasBorder = false, handle, type }: IBtnRoundProps, ref) => {
+    const renderIcon = () => {
+      switch (type) {
+        case 'add':
+          return <IconAdd size={size} color={color} />;
+        case 'edit':
+          return <IconEdit size={size} color={color} />;
+        case 'delete':
+          return <IconDelete size={size} color={color} />;
+        case 'maximize':
+          return <IconMaximize size={size} color={color} />;
+      }
+    };
 
-  return (
-    <Button hasBorder={hasBorder} type="button" onClick={handle}>
-      {renderIcon()}
-    </Button>
-  );
-};
+    return (
+      <Button hasBorder={hasBorder} type="button" onClick={handle} ref={ref}>
+        {renderIcon()}
+      </Button>
+    );
+  }
+);
