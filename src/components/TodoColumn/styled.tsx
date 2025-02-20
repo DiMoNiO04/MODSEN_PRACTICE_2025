@@ -11,7 +11,7 @@ interface ITodoColumnProps extends ITodoColumnHeaderProps {
 export const TodoColumn = ({ color, title, count, tasks }: ITodoColumnProps) => {
   return (
     <TodoColumnContainer>
-      <TodoColumnHeader color={color} title={title} count={count} />
+      <TodoColumnHeader color={color} title={title} count={count} showEditDelete />
       <TodoList tasks={tasks} />
       <TodoColumnTaskAdd color={color} />
     </TodoColumnContainer>

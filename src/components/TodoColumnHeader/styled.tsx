@@ -36,18 +36,23 @@ export interface ITodoColumnHeaderProps {
   color: string;
   title: string;
   count: number;
+  showEditDelete?: boolean;
 }
 
-export const TodoColumnHeader = ({ color, count, title }: ITodoColumnHeaderProps) => {
+export const TodoColumnHeader = ({ color, title, count, showEditDelete }: ITodoColumnHeaderProps) => {
+  const handleClickBtnAdd = () => (showEditDelete ? alert('Добавление задачи') : alert('Добавление колонки'));
+
   return (
     <Container color={color}>
       <TitleWithCount color={color} title={title} count={count} />
       <Btns>
-        <EditDeleteBtns>
-          <BtnRound color="#FFFFFF" handle={() => alert('Редактирование колонки')} type="edit" />
-          <BtnRound color="#FFFFFF" handle={() => alert('Удаление колонки')} type="delete" />
-        </EditDeleteBtns>
-        <BtnRound color="#FFFFFF" handle={() => alert('Добавление задачи')} type="add" />
+        {showEditDelete && (
+          <EditDeleteBtns>
+            <BtnRound color="#FFFFFF" handle={() => alert('Редактирование колонки')} type="edit" />
+            <BtnRound color="#FFFFFF" handle={() => alert('Удаление колонки')} type="delete" />
+          </EditDeleteBtns>
+        )}
+        <BtnRound color="#FFFFFF" handle={handleClickBtnAdd} type="add" />
       </Btns>
     </Container>
   );
