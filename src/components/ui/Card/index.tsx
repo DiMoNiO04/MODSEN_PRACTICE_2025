@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { BtnRound, ItemHash } from '..';
+import { BtnRound } from '..';
 import { ModalTask } from '@/components/modals';
 import { Block, Description, Title, TopBlockInfo } from './styled';
 import { ICardPriority } from '@/utils';
+import { Priority } from '@/components/Priority';
 
 export interface ICardProps {
   id: number;
@@ -19,7 +20,7 @@ export const Card = ({ title, desc, priority }: ICardProps) => {
   return (
     <Block>
       <TopBlockInfo>
-        <ItemHash isLevel color={priority.color} text={priority.text} />
+        <Priority color={priority.color} text={priority.text} />
         <BtnRound type="maximize" handle={toggleModalOpen} />
       </TopBlockInfo>
       <Title>{title}</Title>

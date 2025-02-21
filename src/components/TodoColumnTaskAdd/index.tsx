@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { ItemHash } from '../ui';
 import { ModalAddTask } from '../modals';
 import { Button } from './styled';
+import { ColorText } from '../ui';
 
 interface ITodoColumnTaskAddProps {
   color: string;
@@ -15,7 +15,7 @@ export const TodoColumnTaskAdd = ({ color }: ITodoColumnTaskAddProps) => {
   return (
     <>
       <Button type="button" color={color} onClick={toggleModalOpen}>
-        <ItemHash color={color} text="Add task..." />
+        <ColorText color={color} text="Add task..." />
       </Button>
       {isModalOpen && <ModalAddTask onClose={toggleModalOpen} />}
     </>

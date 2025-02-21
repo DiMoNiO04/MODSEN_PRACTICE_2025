@@ -9,3 +9,11 @@
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
+
+button {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
