@@ -1,4 +1,5 @@
 import { ICardProps } from '@/components/ui';
+import { CARD_STATUS } from '@/utils';
 
 export const tasksData: ICardProps[][] = [
   [
@@ -7,12 +8,13 @@ export const tasksData: ICardProps[][] = [
       title: 'UI/UX Design in the age of Blog Copywriting UI/UX Design UI/UX Design',
       desc: `Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit. 
         Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.`,
-      priority: 'Medium',
+      status: CARD_STATUS.critical,
     },
     {
       id: 2,
       title: 'Blog Copywriting',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
+      status: CARD_STATUS.null,
     },
   ],
   [
@@ -20,12 +22,13 @@ export const tasksData: ICardProps[][] = [
       id: 3,
       title: 'User flow confirmation for finance app',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
-      priority: 'Medium',
+      status: CARD_STATUS.high,
     },
     {
       id: 4,
       title: 'Healthcare app wireframe flow',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
+      status: CARD_STATUS.null,
     },
   ],
   [
@@ -33,18 +36,19 @@ export const tasksData: ICardProps[][] = [
       id: 5,
       title: 'UI/UX Design in the age of AI',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
-      priority: 'Low',
+      status: CARD_STATUS.low,
     },
     {
       id: 6,
       title: 'UI/UX Design in the age of AI',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
-      priority: 'Low',
+      status: CARD_STATUS.normal,
     },
     {
       id: 7,
       title: 'UI/UX Design in the age of AI',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
+      status: CARD_STATUS.critical,
     },
   ],
 ];

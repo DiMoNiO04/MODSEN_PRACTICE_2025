@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
-const TopBlockInfo = styled.div<{ hasPriority: boolean }>`
+const TopBlockInfo = styled.div`
   display: flex;
-  justify-content: ${({ hasPriority }) => (hasPriority ? 'space-between' : 'flex-end')};
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
+  width: 100%;
 `;
 
 const Block = styled.div`

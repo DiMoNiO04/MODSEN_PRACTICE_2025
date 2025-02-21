@@ -7,9 +7,9 @@ interface IItemHashProps {
 }
 
 export const ItemHash = ({ color, text, isLevel }: IItemHashProps) => {
-  return text ? (
+  return (
     <Text color={color} isLevel={isLevel}>
-      {text}
+      {text ? text : '—'}
     </Text>
-  ) : null;
+  );
 };
