@@ -20,7 +20,7 @@ const Button = styled.button<{ hasBorder: boolean }>`
       background: ${({ hasBorder }) => (hasBorder ? '#cbd5e1' : 'none')};
 
       & > svg {
-        filter: invert(0.5);
+        filter: ${({ hasBorder }) => (hasBorder ? 'invert(0)' : 'invert(0.5)')};
       }
     }
   }

@@ -23,7 +23,7 @@ export const BtnRound = forwardRef<HTMLButtonElement, IBtnRoundProps>(
         case 'close':
           return <IconClose />;
         case 'more':
-          return <IconMore />;
+          return <IconMore color={color} />;
       }
     };
 

@@ -1,8 +1,8 @@
 import { forwardRef, useState } from 'react';
 import { ModalAddTask } from '../modals';
-import { Dropdown, MenuItem, MenuItemDelete } from './styled';
 import { ModalEditColumn } from '../modals/ModalEditColumn';
 import { ModalConfirm } from '../modals/ModalConfirm';
+import { BtnMenuItem, Dropdown } from '../ui';
 
 export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement>((_, ref) => {
   const [isModalOpenAddTask, setIsModalOpenAddTask] = useState<boolean>(false);
@@ -16,9 +16,9 @@ export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <>
       <Dropdown ref={ref}>
-        <MenuItem onClick={toggleModalOpenAddTask}>Add new task</MenuItem>
-        <MenuItem onClick={toggleModalOpenEditColumn}>Edit column</MenuItem>
-        <MenuItemDelete onClick={toggleModalOpenDeleteColumn}>Delete column</MenuItemDelete>
+        <BtnMenuItem onClick={toggleModalOpenAddTask} text={'Add new task'} typeBtn="add" />
+        <BtnMenuItem onClick={toggleModalOpenEditColumn} text={'Edit column'} typeBtn="edit" />
+        <BtnMenuItem onClick={toggleModalOpenDeleteColumn} text={'Delete column'} typeBtn="delete" />
       </Dropdown>
       {isModalOpenAddTask && <ModalAddTask onClose={toggleModalOpenAddTask} />}
       {isModalOpenEditColmn && <ModalEditColumn onClose={toggleModalOpenEditColumn} />}

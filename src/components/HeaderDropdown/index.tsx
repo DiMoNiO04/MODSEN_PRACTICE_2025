@@ -1,6 +1,6 @@
 import { forwardRef, useState } from 'react';
 import { ModalAddColumn, ModalAddTask } from '../modals';
-import { Dropdown, MenuItem } from './styled';
+import { BtnMenuItem, Dropdown } from '../ui';
 
 export const HeaderDropdown = forwardRef<HTMLDivElement>((_, ref) => {
   const [isModalOpenAddColumn, setIsModalOpenAddColumn] = useState<boolean>(false);
@@ -12,8 +12,8 @@ export const HeaderDropdown = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <>
       <Dropdown ref={ref}>
-        <MenuItem onClick={toggleModalOpenAddColumn}>Add new column</MenuItem>
-        <MenuItem onClick={toggleModalOpenAddTask}>Add new task</MenuItem>
+        <BtnMenuItem onClick={toggleModalOpenAddColumn} text={'Add new column'} />
+        <BtnMenuItem onClick={toggleModalOpenAddTask} text={'Add new task'} />
       </Dropdown>
       {isModalOpenAddColumn && <ModalAddColumn onClose={toggleModalOpenAddColumn} />}
       {isModalOpenAddTask && <ModalAddTask onClose={toggleModalOpenAddTask} />}

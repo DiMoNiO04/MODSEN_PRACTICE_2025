@@ -39,7 +39,12 @@ export const TodoColumnHeader = ({ color, title, count, isAddNewColumn = false }
           <BtnRound color="#FFFFFF" handle={handleClickBtnAdd} type="add" />
         ) : (
           <>
-            <BtnRound ref={refDropdownBtn} color="#FFFFFF" handle={handleClickBtnMore} type="more" />
+            <BtnRound
+              ref={refDropdownBtn}
+              color={isDropdownOpen ? '#475569' : '#FFFFFF'}
+              handle={handleClickBtnMore}
+              type="more"
+            />
             {isDropdownOpen && <TodoColumnHeaderDropdown ref={refDropdownMenu} />}
           </>
         )}

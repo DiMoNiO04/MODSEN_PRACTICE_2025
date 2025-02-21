@@ -10,7 +10,13 @@ export const HeaderBtnAdd = () => {
 
   return (
     <HeaderBtnAddBlock>
-      <BtnRound ref={refDropdownBtn} hasBorder handle={handleClickBtnAdd} type="add" />
+      <BtnRound
+        ref={refDropdownBtn}
+        color={isDropdownOpen ? '#000000' : '#475569'}
+        hasBorder
+        handle={handleClickBtnAdd}
+        type="add"
+      />
       {isDropdownOpen && <HeaderDropdown ref={refDropdownMenu} />}
     </HeaderBtnAddBlock>
   );
