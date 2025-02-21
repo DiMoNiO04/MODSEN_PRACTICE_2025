@@ -1,7 +1,6 @@
 import { IconClose } from './IconClose';
-import { IconDelete } from './IconDelete';
-import { IconEdit } from './IconEdit';
 import { IconAdd } from './IconAdd';
 import { IconMaximize } from './IconMaximize';
+import { IconMore } from './IconMore';
 
-export { IconClose, IconDelete, IconEdit, IconAdd, IconMaximize };
+export { IconClose, IconAdd, IconMaximize, IconMore };

@@ -21,7 +21,7 @@ export const Card = ({ title, desc, priority }: ICardProps) => {
     <Block>
       <TopBlockInfo hasPriority={hasPriority}>
         {hasPriority && <ItemHash isLevel color="#4F46E5" text={priority} />}
-        <BtnRound type="maximize" size={20} handle={toggleModalOpen} />
+        <BtnRound type="maximize" handle={toggleModalOpen} />
       </TopBlockInfo>
       <Title>{title}</Title>
       <Description>{desc}</Description>

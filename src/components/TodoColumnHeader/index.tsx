@@ -4,7 +4,9 @@ import { TitleWithCount } from '../TitleWithCount';
 import { ModalAddColumn, ModalAddTask } from '../modals';
 import { ModalEditColumn } from '../modals/ModalEditColumn';
 import { ModalConfirm } from '../modals/ModalConfirm';
-import { Btns, EditDeleteBtns, TodoColumnHeaderContainer } from './styled';
+import { TodoColumnHeaderContainer } from './styled';
+import { TodoColumnHeaderDropdown } from '../TodoColumnHeaderDropdown';
+import { useDropdownToggle } from '@/hooks';
 
 export interface ITodoColumnHeaderProps {
   color: string;
@@ -19,26 +21,28 @@ export const TodoColumnHeader = ({ color, title, count, isAddNewColumn = false }
   const [isModalOpenDeleteColumn, setIsModalOpenDeleteColumn] = useState<boolean>(false);
   const [isModalOpenAddTask, setIsModalOpenAddTask] = useState<boolean>(false);
 
+  const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
+
   const toggleModalOpenAddColumn = () => setIsModalOpenAddColumn(!isModalOpenAddColumn);
   const toggleModalOpenEditColumn = () => setIsModalOpenEditColumn(!isModalOpenEditColumn);
   const toggleModalOpenDeleteColumn = () => setIsModalOpenDeleteColumn(!isModalOpenDeleteColumn);
   const toggleModalOpenAddTask = () => setIsModalOpenAddTask(!isModalOpenAddTask);
 
   const handleClickBtnAdd = () => (isAddNewColumn ? toggleModalOpenAddColumn() : toggleModalOpenAddTask());
+  const handleClickBtnMore = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
     <>
       <TodoColumnHeaderContainer color={color}>
         <TitleWithCount color={color} title={title} count={count} />
-        <Btns>
-          {!isAddNewColumn && (
-            <EditDeleteBtns>
-              <BtnRound color="#FFFFFF" handle={toggleModalOpenEditColumn} type="edit" />
-              <BtnRound color="#FFFFFF" handle={toggleModalOpenDeleteColumn} type="delete" />
-            </EditDeleteBtns>
-          )}
+        {isAddNewColumn ? (
           <BtnRound color="#FFFFFF" handle={handleClickBtnAdd} type="add" />
-        </Btns>
+        ) : (
+          <>
+            <BtnRound ref={refDropdownBtn} color="#FFFFFF" handle={handleClickBtnMore} type="more" />
+            {isDropdownOpen && <TodoColumnHeaderDropdown ref={refDropdownMenu} />}
+          </>
+        )}
       </TodoColumnHeaderContainer>
 
       {isModalOpenAddColumn && <ModalAddColumn onClose={toggleModalOpenAddColumn} />}

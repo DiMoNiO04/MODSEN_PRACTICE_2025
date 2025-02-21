@@ -12,8 +12,8 @@ export const HeaderDropdown = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <>
       <Dropdown ref={ref}>
-        <MenuItem onClick={toggleModalOpenAddColumn}>Добавить колонку</MenuItem>
-        <MenuItem onClick={toggleModalOpenAddTask}>Добавить задачу</MenuItem>
+        <MenuItem onClick={toggleModalOpenAddColumn}>Add new column</MenuItem>
+        <MenuItem onClick={toggleModalOpenAddTask}>Add new task</MenuItem>
       </Dropdown>
       {isModalOpenAddColumn && <ModalAddColumn onClose={toggleModalOpenAddColumn} />}
       {isModalOpenAddTask && <ModalAddTask onClose={toggleModalOpenAddTask} />}

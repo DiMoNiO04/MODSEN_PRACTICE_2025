@@ -1,8 +1,8 @@
 import { IIconProps } from '@/utils';
 
-export const IconAdd = ({ size = 24, color = '#475569' }: IIconProps) => {
+export const IconAdd = ({ color = '#475569' }: IIconProps) => {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M13.125 13.0781H13.0781V13.125V20.25C13.0781 20.5359 12.9645 20.8102 12.7623 21.0123
           C12.5602 21.2145 12.2859 21.3281 12 21.3281C11.7141 21.3281 11.4398 21.2145 11.2377 21.0123

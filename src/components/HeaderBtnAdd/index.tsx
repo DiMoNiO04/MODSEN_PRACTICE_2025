@@ -1,38 +1,17 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
 import { BtnRound } from '../ui';
 import { HeaderDropdown } from '../HeaderDropdown';
 import { HeaderBtnAddBlock } from './styled';
+import { useDropdownToggle } from '@/hooks';
 
 export const HeaderBtnAdd = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const menuRef = useRef<HTMLDivElement | null>(null);
+  const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
 
-  const closeMenu = useCallback((e: MouseEvent) => {
-    if (
-      buttonRef.current &&
-      !buttonRef.current.contains(e.target as Node) &&
-      menuRef.current &&
-      !menuRef.current.contains(e.target as Node)
-    ) {
-      setIsMenuOpen(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.addEventListener('click', closeMenu);
-    } else {
-      document.removeEventListener('click', closeMenu);
-    }
-
-    return () => document.removeEventListener('click', closeMenu);
-  }, [isMenuOpen, closeMenu]);
+  const handleClickBtnAdd = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
     <HeaderBtnAddBlock>
-      <BtnRound ref={buttonRef} hasBorder handle={() => setIsMenuOpen(!isMenuOpen)} type="add" />
-      {isMenuOpen && <HeaderDropdown ref={menuRef} />}
+      <BtnRound ref={refDropdownBtn} hasBorder handle={handleClickBtnAdd} type="add" />
+      {isDropdownOpen && <HeaderDropdown ref={refDropdownMenu} />}
     </HeaderBtnAddBlock>
   );
 };

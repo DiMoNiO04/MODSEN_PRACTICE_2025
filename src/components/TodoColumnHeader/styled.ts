@@ -10,24 +10,4 @@ const TodoColumnHeaderContainer = styled.div<{ color: string }>`
   position: relative;
 `;
 
-const Btns = styled.div`
-  display: flex;
-  column-gap: 10px;
-`;
-
-const EditDeleteBtns = styled.div`
-  display: flex;
-  column-gap: 10px;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
-
-  ${TodoColumnHeaderContainer}:hover & {
-    opacity: 1;
-    visibility: visible;
-  }
-`;
-
-export { TodoColumnHeaderContainer, Btns, EditDeleteBtns };
+export { TodoColumnHeaderContainer };
