@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { BtnRound, ItemHash } from '..';
 import { ModalTask } from '@/components/modals';
 import { Block, Description, Title, TopBlockInfo } from './styled';
-import { ICardStatus } from '@/utils';
+import { ICardPriority } from '@/utils';
 
 export interface ICardProps {
   id: number;
   title: string;
   desc: string;
-  status: ICardStatus;
+  priority: ICardPriority;
 }
 
-export const Card = ({ title, desc, status }: ICardProps) => {
+export const Card = ({ title, desc, priority }: ICardProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const toggleModalOpen = () => setIsModalOpen(!isModalOpen);
@@ -19,7 +19,7 @@ export const Card = ({ title, desc, status }: ICardProps) => {
   return (
     <Block>
       <TopBlockInfo>
-        <ItemHash isLevel color={status.color} text={status.text} />
+        <ItemHash isLevel color={priority.color} text={priority.text} />
         <BtnRound type="maximize" handle={toggleModalOpen} />
       </TopBlockInfo>
       <Title>{title}</Title>
