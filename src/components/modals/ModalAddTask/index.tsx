@@ -1,10 +1,11 @@
 import { ModalContainer } from '@/components/layout';
+import { ModalTitle } from '@/components/ui';
 import { IModalCloseProps } from '@/utils';
 
 export const ModalAddTask = ({ onClose }: IModalCloseProps) => {
   return (
     <ModalContainer onClose={onClose}>
-      <p>Добавить задачу</p>
+      <ModalTitle text="Add new task" />
     </ModalContainer>
   );
 };

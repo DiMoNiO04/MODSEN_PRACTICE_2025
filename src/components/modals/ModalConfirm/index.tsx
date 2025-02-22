@@ -1,10 +1,11 @@
 import { ModalContainer } from '@/components/layout';
+import { ModalTitle } from '@/components/ui';
 import { IModalCloseProps } from '@/utils';
 
 export const ModalConfirm = ({ onClose }: IModalCloseProps) => {
   return (
     <ModalContainer onClose={onClose}>
-      <p>Подтверждение действия</p>
+      <ModalTitle text="Confirm action" />
     </ModalContainer>
   );
 };

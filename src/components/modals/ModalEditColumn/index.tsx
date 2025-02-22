@@ -1,10 +1,11 @@
 import { ModalContainer } from '@/components/layout';
+import { ModalTitle } from '@/components/ui';
 import { IModalCloseProps } from '@/utils';
 
 export const ModalEditColumn = ({ onClose }: IModalCloseProps) => {
   return (
     <ModalContainer onClose={onClose}>
-      <p>Редактировать колонку</p>
+      <ModalTitle text="Edit column" />
     </ModalContainer>
   );
 };
