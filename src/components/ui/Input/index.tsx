@@ -1,4 +1,6 @@
-import { InputInp, Label, LabelText, RequiredText } from './styled';
+import { Label } from '../Label';
+import { LabelText } from '../LabelText';
+import { InputField } from './styled';
 
 interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   labelText: string;
@@ -6,10 +8,7 @@ interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = ({ labelText, required = false, ...props }: IInputProps) => (
   <Label>
-    <LabelText>
-      {labelText}
-      {required && <RequiredText>*</RequiredText>}
-    </LabelText>
-    <InputInp required={required} autoComplete="off" {...props} />
+    <LabelText text={labelText} required={required} />
+    <InputField required={required} autoComplete="off" {...props} />
   </Label>
 );

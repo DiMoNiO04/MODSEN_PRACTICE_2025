@@ -8,6 +8,23 @@ import { ModalTitle } from './ModalTitle';
 import { Form } from './Form';
 import { BtnDef } from './BtnDef';
 import { Input } from './Input';
+import { RequiredText } from './RequiredTxt';
+import { LabelText } from './LabelText';
+import { Label } from './Label';
 
-export { BtnRound, Card, Logo, BtnMenuItem, Dropdown, ColorText, ModalTitle, Form, BtnDef, Input };
+export {
+  BtnRound,
+  Card,
+  Logo,
+  BtnMenuItem,
+  Dropdown,
+  ColorText,
+  ModalTitle,
+  Form,
+  BtnDef,
+  Input,
+  RequiredText,
+  LabelText,
+  Label,
+};
 export type { ICardProps };

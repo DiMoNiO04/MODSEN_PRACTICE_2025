@@ -1,6 +1,6 @@
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
-import { useColumnForm } from '@/hooks';
+import { useForm } from '@/hooks';
 import { IModalCloseProps } from '@/utils';
 import { IFormDataColumn } from '@/utils/interfaces';
 
@@ -8,7 +8,7 @@ interface IModalEditColumnProps extends IModalCloseProps, IFormDataColumn {}
 
 export const ModalEditColumn = ({ onClose, name, color }: IModalEditColumnProps) => {
   const initialData: IFormDataColumn = { name, color };
-  const { formData, handleChange, handleSubmit } = useColumnForm({ initialData, onClose });
+  const { formData, handleChange, handleSubmit } = useForm<IFormDataColumn>({ initialData, onClose });
 
   return (
     <ModalContainer onClose={onClose}>

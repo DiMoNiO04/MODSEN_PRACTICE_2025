@@ -1,5 +1,5 @@
 import { useDropdownToggle } from './useDropdownToggle';
 import { useBodyScrollBlock } from './useBodyScrollBlock';
-import { useColumnForm } from './useColumnForm';
+import { useForm } from './useForm';
 
-export { useDropdownToggle, useBodyScrollBlock, useColumnForm };
+export { useDropdownToggle, useBodyScrollBlock, useForm };

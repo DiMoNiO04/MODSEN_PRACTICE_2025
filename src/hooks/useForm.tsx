@@ -1,13 +1,13 @@
-import { IFormDataColumn } from '@/utils/interfaces';
 import { useState } from 'react';
 
-interface IUseFormColumnProps {
-  initialData: IFormDataColumn;
+interface IUseFormProps<T> {
+  initialData: T;
   onClose: () => void;
+  onSubmit?: (data: T) => void;
 }
 
-export const useColumnForm = ({ initialData, onClose }: IUseFormColumnProps) => {
-  const [formData, setFormData] = useState<IFormDataColumn>(initialData);
+export const useForm = <T,>({ initialData, onClose, onSubmit }: IUseFormProps<T>) => {
+  const [formData, setFormData] = useState<T>(initialData);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -16,7 +16,9 @@ export const useColumnForm = ({ initialData, onClose }: IUseFormColumnProps) => 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`${formData.name}\n${formData.color}`);
+    if (onSubmit) {
+      onSubmit(formData);
+    }
     onClose();
   };
 
