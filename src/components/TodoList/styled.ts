@@ -4,8 +4,6 @@ const List = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 12px;
-  max-height: 75vh;
-  overflow-y: scroll;
 
   &::-webkit-scrollbar {
     width: 0px;

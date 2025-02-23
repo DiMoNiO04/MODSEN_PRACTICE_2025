@@ -11,4 +11,9 @@ interface IIconProps {
   color?: string;
 }
 
-export type { IChildrenProps, IModalCloseProps, IIconProps };
+interface IFormDataColumn {
+  name: string;
+  color?: string;
+}
+
+export type { IChildrenProps, IModalCloseProps, IIconProps, IFormDataColumn };

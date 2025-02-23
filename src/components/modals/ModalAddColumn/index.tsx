@@ -1,26 +1,12 @@
-import { useState } from 'react';
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { getRandomColor, IModalCloseProps } from '@/utils';
-
-interface IFormDataAddColumn {
-  name: string;
-  color?: string;
-}
+import { useColumnForm } from '@/hooks/useColumnForm';
+import { IFormDataColumn } from '@/utils/interfaces';
 
 export const ModalAddColumn = ({ onClose }: IModalCloseProps) => {
-  const [formData, setFormData] = useState<IFormDataAddColumn>({ name: '', color: getRandomColor() });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`${formData.name}\n${formData?.color}`);
-    onClose();
-  };
+  const initialData: IFormDataColumn = { name: '', color: getRandomColor() };
+  const { formData, handleChange, handleSubmit } = useColumnForm({ initialData, onClose });
 
   return (
     <ModalContainer onClose={onClose}>
