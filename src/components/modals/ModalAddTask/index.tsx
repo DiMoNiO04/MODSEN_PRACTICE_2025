@@ -23,6 +23,7 @@ export const ModalAddTask = ({ onClose }: IModalCloseProps) => {
         />
         <Select
           labelText={'Priority'}
+          name="priority"
           options={Object.entries(CARD_PRIORITY).map(([_, { value }]) => ({
             value,
             label: value,

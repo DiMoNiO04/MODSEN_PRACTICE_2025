@@ -28,7 +28,7 @@ export const BtnRound = forwardRef<HTMLButtonElement, IBtnRoundProps>(
     };
 
     return (
-      <Button hasBorder={hasBorder} type="button" onClick={handle} ref={ref}>
+      <Button $hasBorder={hasBorder} type="button" onClick={handle} ref={ref}>
         {renderIcon()}
       </Button>
     );

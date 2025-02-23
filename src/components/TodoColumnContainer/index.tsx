@@ -6,5 +6,5 @@ interface ITodoColumnContainer extends IChildrenProps {
 }
 
 export const TodoColumnContainer = ({ children, isFullHeight = true }: ITodoColumnContainer) => {
-  return <TodoColumnContainerBlock isFullHeight={isFullHeight}>{children}</TodoColumnContainerBlock>;
+  return <TodoColumnContainerBlock $isFullHeight={isFullHeight}>{children}</TodoColumnContainerBlock>;
 };
