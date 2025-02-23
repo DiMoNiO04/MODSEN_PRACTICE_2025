@@ -21,7 +21,13 @@ export const ModalAddTask = ({ onClose }: IModalCloseProps) => {
           value={formData.description}
           onChange={handleChange}
         />
-        <Select labelText={'Priority'} options={[{ value: '1', label: '12' }]} />
+        <Select
+          labelText={'Priority'}
+          options={Object.entries(CARD_PRIORITY).map(([_, { value }]) => ({
+            value,
+            label: value,
+          }))}
+        />
         <BtnDef text="Save" typeBtn="submit" />
       </Form>
     </ModalContainer>

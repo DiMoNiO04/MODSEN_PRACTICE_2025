@@ -20,7 +20,7 @@ export const Card = ({ title, desc, priority }: ICardProps) => {
   return (
     <Block>
       <TopBlockInfo>
-        <Priority color={priority.color} text={priority.text} />
+        <Priority color={priority.color} value={priority.value} />
         <BtnRound type="maximize" handle={toggleModalOpen} />
       </TopBlockInfo>
       <Title>{title}</Title>

@@ -16,6 +16,7 @@ export const useForm = <T,>({ initialData, onClose, onSubmit }: IUseFormProps<T>
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(formData);
     if (onSubmit) {
       onSubmit(formData);
     }
