@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { TBtnMenuItem } from '.';
 
-const BtnMenuItemBlock = styled.button<{ typeBtn?: TBtnMenuItem }>`
+const BtnMenuItemBlock = styled.button<{ $typeBtn?: TBtnMenuItem }>`
   border: none;
   background: none;
   border-radius: 8px;
@@ -17,8 +17,8 @@ const BtnMenuItemBlock = styled.button<{ typeBtn?: TBtnMenuItem }>`
     color 0.2s,
     border 0.2s;
 
-  ${({ typeBtn }) => {
-    switch (typeBtn) {
+  ${({ $typeBtn }) => {
+    switch ($typeBtn) {
       case 'delete':
         return css`
           color: #dc2626;

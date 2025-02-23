@@ -10,7 +10,7 @@ interface IBtnMenuItemProps {
 
 export const BtnMenuItem = ({ onClick, text, typeBtn = 'default' }: IBtnMenuItemProps) => {
   return (
-    <BtnMenuItemBlock onClick={onClick} typeBtn={typeBtn} type="button">
+    <BtnMenuItemBlock onClick={onClick} $typeBtn={typeBtn} type="button">
       {text}
     </BtnMenuItemBlock>
   );

@@ -21,8 +21,8 @@ export const ModalContainer = ({ onClose, children }: IModalProps) => {
   };
 
   return (
-    <ModalOverlay isVisible={isVisible} onClick={handleClose}>
-      <ModalContent isVisible={isVisible} onClick={(e) => e.stopPropagation()}>
+    <ModalOverlay $isVisible={isVisible} onClick={handleClose}>
+      <ModalContent $isVisible={isVisible} onClick={(e) => e.stopPropagation()}>
         <BtnCloseBlock>
           <BtnRound type="close" handle={handleClose} />
         </BtnCloseBlock>
