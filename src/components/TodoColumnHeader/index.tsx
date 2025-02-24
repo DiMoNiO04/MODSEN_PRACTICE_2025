@@ -4,15 +4,15 @@ import { TitleWithCount } from '../TitleWithCount';
 import { TodoColumnHeaderContainer } from './styled';
 import { TodoColumnHeaderDropdown } from '../TodoColumnHeaderDropdown';
 import { useDropdownToggle } from '@/hooks';
+import { IOption } from '@/utils';
 
 export interface ITodoColumnHeaderProps {
-  color: string;
-  title: string;
+  status: IOption;
   count: number;
   isAddNewColumn?: boolean;
 }
 
-export const TodoColumnHeader = ({ color, title, count, isAddNewColumn = false }: ITodoColumnHeaderProps) => {
+export const TodoColumnHeader = ({ status, count, isAddNewColumn = false }: ITodoColumnHeaderProps) => {
   const [isModalOpenAddColumn, setIsModalOpenAddColumn] = useState<boolean>(false);
   const [isModalOpenAddTask, setIsModalOpenAddTask] = useState<boolean>(false);
 
@@ -25,8 +25,8 @@ export const TodoColumnHeader = ({ color, title, count, isAddNewColumn = false }
   const handleClickBtnMore = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
-    <TodoColumnHeaderContainer color={color}>
-      <TitleWithCount color={color} title={title} count={count} />
+    <TodoColumnHeaderContainer color={status.color}>
+      <TitleWithCount color={status.color} title={status.value} count={count} />
       {isAddNewColumn ? (
         <BtnRound color="#FFFFFF" handle={handleClickBtnAdd} type="add" />
       ) : (
@@ -37,7 +37,9 @@ export const TodoColumnHeader = ({ color, title, count, isAddNewColumn = false }
             handle={handleClickBtnMore}
             type="more"
           />
-          {isDropdownOpen && <TodoColumnHeaderDropdown ref={refDropdownMenu} name={title} color={color} />}
+          {isDropdownOpen && (
+            <TodoColumnHeaderDropdown ref={refDropdownMenu} name={status.value} color={status.color} />
+          )}
         </>
       )}
     </TodoColumnHeaderContainer>

@@ -1,5 +1,3 @@
-import { ICardPriority } from './cardPriority';
-
 interface IChildrenProps {
   children: React.ReactNode;
 }
@@ -21,7 +19,13 @@ interface IFormDataColumn {
 interface IFormDataTask {
   name: string;
   description?: string;
-  priority: ICardPriority;
+  priority: IOption;
+  status: IOption;
 }
 
-export type { IChildrenProps, IModalCloseProps, IIconProps, IFormDataColumn, IFormDataTask };
+interface IOption {
+  color: string;
+  value: string;
+}
+
+export type { IChildrenProps, IModalCloseProps, IIconProps, IFormDataColumn, IFormDataTask, IOption };

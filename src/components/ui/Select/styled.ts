@@ -5,11 +5,11 @@ const SelectContainer = styled.div`
   width: 100%;
 `;
 
-const SelectArrowIcon = styled.div<{ isRotate?: boolean }>`
+const SelectArrowIcon = styled.div<{ $isRotate?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: rotate(${({ isRotate }) => (isRotate ? '180deg' : '0deg')});
+  transform: rotate(${({ $isRotate }) => ($isRotate ? '180deg' : '0deg')});
   transition: transform 0.2s ease;
 `;
 

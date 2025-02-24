@@ -1,3 +1,4 @@
+import { IOption } from '@/utils';
 import { useState } from 'react';
 
 interface IUseFormProps<T> {
@@ -9,9 +10,12 @@ interface IUseFormProps<T> {
 export const useForm = <T,>({ initialData, onClose, onSubmit }: IUseFormProps<T>) => {
   const [formData, setFormData] = useState<T>(initialData);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: { target: { name: string; value: IOption | string } }) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {

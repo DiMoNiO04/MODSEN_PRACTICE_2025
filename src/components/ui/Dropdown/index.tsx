@@ -9,7 +9,7 @@ interface IDropdownProps extends IChildrenProps {
 
 export const Dropdown = forwardRef<HTMLDivElement, IDropdownProps>(({ children, isPriority, isFullWidth }, ref) => {
   return (
-    <DropdownBlock ref={ref} isPriority={isPriority} isFullWidth={isFullWidth}>
+    <DropdownBlock ref={ref} $isPriority={isPriority} $isFullWidth={isFullWidth}>
       {children}
     </DropdownBlock>
   );

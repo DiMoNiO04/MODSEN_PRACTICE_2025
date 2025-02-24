@@ -1,10 +1,10 @@
 import { ITodoColumnHeaderProps, TodoColumnHeader } from '../TodoColumnHeader';
 import { TodoColumnContainer } from '../TodoColumnContainer';
 
-export const AddNewColumn = ({ color, title, count }: ITodoColumnHeaderProps) => {
+export const AddNewColumn = ({ status, count }: ITodoColumnHeaderProps) => {
   return (
     <TodoColumnContainer isFullHeight={false}>
-      <TodoColumnHeader color={color} title={title} count={count} isAddNewColumn />
+      <TodoColumnHeader status={status} count={count} isAddNewColumn />
     </TodoColumnContainer>
   );
 };

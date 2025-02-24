@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Label } from '../Label';
 import { LabelText } from '../LabelText';
 import { SelectContainer, SelectButton, SelectArrowIcon } from './styled';
@@ -6,40 +5,38 @@ import { BtnMenuItem } from '../BtnMenuItem';
 import { Dropdown } from '../Dropdown';
 import { IconArrow } from '@/components/icons';
 import { useDropdownToggle } from '@/hooks';
+import { IOption } from '@/utils';
 
 interface ISelectProps {
   labelText: string;
-  value: string;
-  options: { value: string; label: string }[];
-  onChange: (value: string) => void;
+  value: IOption;
+  options: IOption[];
+  onChange: (selectedOption: IOption) => void;
 }
 
 export const Select = ({ labelText, options, value, onChange }: ISelectProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
-  const [selected, setSelected] = useState<string>(value);
+  const selectedOption = options.find((option) => option.value === value.value);
 
-  const handleSelect = (value: string) => {
-    setSelected(value);
-    onChange(value);
+  const handleSelect = (option: { color: string; value: string }) => {
+    onChange(option);
     setTimeout(() => setIsDropdownOpen(false), 0);
   };
-
-  const handleClickBtnOpen = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
     <Label>
       <LabelText text={labelText} />
       <SelectContainer>
-        <SelectButton type="button" onClick={handleClickBtnOpen} ref={refDropdownBtn}>
-          {selected}
-          <SelectArrowIcon isRotate={isDropdownOpen}>
+        <SelectButton type="button" onClick={() => setIsDropdownOpen(!isDropdownOpen)} ref={refDropdownBtn}>
+          {selectedOption?.value || 'Select'}
+          <SelectArrowIcon $isRotate={isDropdownOpen}>
             <IconArrow />
           </SelectArrowIcon>
         </SelectButton>
         {isDropdownOpen && (
           <Dropdown isFullWidth={true} ref={refDropdownMenu}>
             {options.map((option) => (
-              <BtnMenuItem key={option.value} onClick={() => handleSelect(option.value)} text={option.label} />
+              <BtnMenuItem key={option.value} onClick={() => handleSelect(option)} text={option.value} />
             ))}
           </Dropdown>
         )}

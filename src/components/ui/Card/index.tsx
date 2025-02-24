@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { BtnRound } from '..';
 import { ModalTask } from '@/components/modals';
 import { Block, Description, Title, TopBlockInfo } from './styled';
-import { ICardPriority } from '@/utils';
 import { Priority } from '@/components/Priority';
+import { IOption } from '@/utils';
 
 export interface ICardProps {
   id: number;
   title: string;
   desc: string;
-  priority: ICardPriority;
+  priority: IOption;
 }
 
 export const Card = ({ title, desc, priority }: ICardProps) => {

@@ -2,11 +2,21 @@ import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { Select } from '@/components/ui/Select';
 import { useForm } from '@/hooks';
-import { CARD_PRIORITY, IModalCloseProps } from '@/utils';
-import { IFormDataTask } from '@/utils/interfaces';
+import { CARD_PRIORITY, CARD_STATUS, IModalCloseProps } from '@/utils';
+import { IFormDataTask, IOption } from '@/utils/interfaces';
 
-export const ModalAddTask = ({ onClose }: IModalCloseProps) => {
-  const initialData: IFormDataTask = { name: '', description: '', priority: CARD_PRIORITY.null };
+interface IModalAddTaskProps extends IModalCloseProps {
+  isFromHeader?: boolean;
+  status?: IOption;
+}
+
+export const ModalAddTask = ({ onClose, isFromHeader = false, status }: IModalAddTaskProps) => {
+  const initialData: IFormDataTask = {
+    name: '',
+    description: '',
+    priority: CARD_PRIORITY.null,
+    status: status || CARD_STATUS.toDo,
+  };
   const { formData, handleChange, handleSubmit } = useForm<IFormDataTask>({ initialData, onClose });
 
   return (
@@ -23,15 +33,19 @@ export const ModalAddTask = ({ onClose }: IModalCloseProps) => {
         />
         <Select
           labelText="Priority"
-          value={formData.priority.value}
-          onChange={(value) =>
-            handleChange({ target: { name: 'priority', value } } as React.ChangeEvent<HTMLInputElement>)
-          }
-          options={Object.entries(CARD_PRIORITY).map(([_, { value }]) => ({
-            value,
-            label: value,
-          }))}
+          value={formData.priority}
+          onChange={(selectedOption) => handleChange({ target: { name: 'priority', value: selectedOption } })}
+          options={Object.values(CARD_PRIORITY)}
         />
+
+        {isFromHeader && (
+          <Select
+            labelText="Status"
+            value={formData.status}
+            onChange={(selectedOption) => handleChange({ target: { name: 'status', value: selectedOption } })}
+            options={Object.values(CARD_STATUS)}
+          />
+        )}
         <BtnDef text="Save" typeBtn="submit" />
       </Form>
     </ModalContainer>

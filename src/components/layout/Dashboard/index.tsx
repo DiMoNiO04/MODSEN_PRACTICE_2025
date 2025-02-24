@@ -3,16 +3,17 @@ import { tasksData } from '@/assets/data/tasks';
 import { AddNewColumn } from '@/components/AddNewColumn';
 import { Container } from '..';
 import { DashboardContainer } from './styled';
+import { CARD_STATUS } from '@/utils';
 
 export const Dashboard = () => {
   return (
     <section>
       <Container>
         <DashboardContainer>
-          <TodoColumn color="#4F46E5" title="To Do" count={2} tasks={tasksData[0]} />
-          <TodoColumn color="#F59E0B" title="In progress" count={2} tasks={tasksData[1]} />
-          <TodoColumn color="#22C55E" title="Done" count={3} tasks={tasksData[2]} />
-          <AddNewColumn color="#C8CDC2" title="Add New Column" count={0} />
+          <TodoColumn status={CARD_STATUS.toDo} tasks={tasksData[0]} />
+          <TodoColumn status={CARD_STATUS.inProgress} tasks={tasksData[1]} />
+          <TodoColumn status={CARD_STATUS.done} tasks={tasksData[2]} />
+          <AddNewColumn status={{ color: '#C8CDC2', value: 'Add New Column' }} count={0} />
         </DashboardContainer>
       </Container>
     </section>
