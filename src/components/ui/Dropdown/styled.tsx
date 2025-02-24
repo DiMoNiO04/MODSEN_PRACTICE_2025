@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const DropdownBlock = styled.div<{ isPriority?: boolean }>`
+const DropdownBlock = styled.div<{ isPriority?: boolean; isFullWidth?: boolean }>`
   position: absolute;
-  width: max-content;
+  width: ${({ isFullWidth }) => (isFullWidth ? '100%' : 'max-content')};
   z-index: 10;
   background: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

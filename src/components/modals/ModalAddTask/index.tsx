@@ -22,8 +22,11 @@ export const ModalAddTask = ({ onClose }: IModalCloseProps) => {
           onChange={handleChange}
         />
         <Select
-          labelText={'Priority'}
-          name="priority"
+          labelText="Priority"
+          value={formData.priority.value}
+          onChange={(value) =>
+            handleChange({ target: { name: 'priority', value } } as React.ChangeEvent<HTMLInputElement>)
+          }
           options={Object.entries(CARD_PRIORITY).map(([_, { value }]) => ({
             value,
             label: value,
