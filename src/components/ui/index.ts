@@ -1,3 +1,4 @@
+import { TextH3 } from './TextH3';
 import { BtnRound } from './BtnRound';
 import { Card, ICardProps } from './Card';
 import { Logo } from './Logo';
@@ -11,6 +12,9 @@ import { Input } from './Input';
 import { RequiredText } from './RequiredTxt';
 import { LabelText } from './LabelText';
 import { Label } from './Label';
+import { TextDef } from './TextDef';
+import { BtnsBlock } from './BtnsBlock';
+import { TextArea } from './Textarea';
 
 export {
   BtnRound,
@@ -26,5 +30,9 @@ export {
   RequiredText,
   LabelText,
   Label,
+  TextH3,
+  TextDef,
+  BtnsBlock,
+  TextArea,
 };
 export type { ICardProps };

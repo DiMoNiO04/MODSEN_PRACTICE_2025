@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { BtnRound } from '..';
+import { BtnRound, TextDef, TextH3 } from '..';
 import { ModalTask } from '@/components/modals';
-import { Block, Description, Title, TopBlockInfo } from './styled';
+import { Block, TopBlockInfo } from './styled';
 import { Priority } from '@/components/Priority';
 import { IOption } from '@/utils';
 
@@ -10,9 +10,11 @@ export interface ICardProps {
   title: string;
   desc: string;
   priority: IOption;
+  status: IOption;
 }
 
-export const Card = ({ title, desc, priority }: ICardProps) => {
+export const Card = (cardData: ICardProps) => {
+  const { title, desc, priority } = cardData;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const toggleModalOpen = () => setIsModalOpen(!isModalOpen);
@@ -23,9 +25,9 @@ export const Card = ({ title, desc, priority }: ICardProps) => {
         <Priority color={priority.color} value={priority.value} />
         <BtnRound type="maximize" handle={toggleModalOpen} />
       </TopBlockInfo>
-      <Title>{title}</Title>
-      <Description>{desc}</Description>
-      {isModalOpen && <ModalTask onClose={toggleModalOpen} />}
+      <TextH3 text={title} />
+      <TextDef text={desc} maxLines={3} />
+      {isModalOpen && <ModalTask onClose={toggleModalOpen} cardData={cardData} />}
     </Block>
   );
 };

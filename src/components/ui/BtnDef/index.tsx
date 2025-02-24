@@ -11,7 +11,7 @@ interface IBtnDefProps {
 
 export const BtnDef = ({ text, typeBtn, onClick, isInvert }: IBtnDefProps) => {
   return (
-    <Button type={typeBtn} onClick={onClick} isInvert={isInvert}>
+    <Button type={typeBtn} onClick={onClick} $isInvert={isInvert}>
       {text}
     </Button>
   );

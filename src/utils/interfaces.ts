@@ -28,4 +28,8 @@ interface IOption {
   value: string;
 }
 
-export type { IChildrenProps, IModalCloseProps, IIconProps, IFormDataColumn, IFormDataTask, IOption };
+interface IText {
+  text: string;
+}
+
+export type { IChildrenProps, IModalCloseProps, IIconProps, IFormDataColumn, IFormDataTask, IOption, IText };

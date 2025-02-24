@@ -1,7 +1,6 @@
 import { ModalContainer } from '@/components/layout';
-import { BtnDef, ModalTitle } from '@/components/ui';
+import { BtnDef, BtnsBlock, ModalTitle } from '@/components/ui';
 import { IModalCloseProps } from '@/utils';
-import { Btns } from './styled';
 
 interface IModalConfirm extends IModalCloseProps {
   text: string;
@@ -12,10 +11,10 @@ export const ModalConfirm = ({ text, onClose, handleYes }: IModalConfirm) => {
   return (
     <ModalContainer onClose={onClose}>
       <ModalTitle text={text} />
-      <Btns>
-        <BtnDef text={'No'} typeBtn={'button'} onClick={onClose} isInvert />
-        <BtnDef text={'Yes'} typeBtn={'button'} onClick={handleYes} />
-      </Btns>
+      <BtnsBlock>
+        <BtnDef text={'No'} typeBtn={'button'} onClick={onClose} />
+        <BtnDef text={'Yes'} typeBtn={'button'} onClick={handleYes} isInvert />
+      </BtnsBlock>
     </ModalContainer>
   );
 };

@@ -16,29 +16,4 @@ const Block = styled.div`
   background: #ffffff;
 `;
 
-const Title = styled.h3`
-  font-size: 16px;
-  line-height: 22px;
-  font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 8px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const Description = styled.p`
-  color: #475569;
-  font-size: 16px;
-  line-height: 25.6px;
-  font-weight: 400;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-export { TopBlockInfo, Block, Title, Description };
+export { TopBlockInfo, Block };

@@ -1,5 +1,5 @@
 import { ModalContainer } from '@/components/layout';
-import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
+import { BtnDef, Form, Input, ModalTitle, TextArea } from '@/components/ui';
 import { Select } from '@/components/ui/Select';
 import { useForm } from '@/hooks';
 import { CARD_PRIORITY, CARD_STATUS, IModalCloseProps } from '@/utils';
@@ -24,10 +24,9 @@ export const ModalAddTask = ({ onClose, isFromHeader = false, status }: IModalAd
       <ModalTitle text="Add new task" />
       <Form onSubmit={handleSubmit}>
         <Input labelText="Name task" name="name" type="text" value={formData.name} onChange={handleChange} required />
-        <Input
+        <TextArea
           labelText="Description task"
           name="description"
-          type="text"
           value={formData.description}
           onChange={handleChange}
         />
