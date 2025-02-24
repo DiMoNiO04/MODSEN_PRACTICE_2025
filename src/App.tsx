@@ -1,5 +1,14 @@
+import { Dashboard, Header, Main } from './components/layout';
+
 function App() {
-  return <div>123</div>;
+  return (
+    <>
+      <Header />
+      <Main>
+        <Dashboard />
+      </Main>
+    </>
+  );
 }
 
 export default App;
