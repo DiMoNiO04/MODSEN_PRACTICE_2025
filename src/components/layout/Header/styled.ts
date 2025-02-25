@@ -5,15 +5,15 @@ const HeaderBlock = styled.header`
   width: 100%;
   left: 0;
   top: 0;
-  z-index: 100;
-  background-color: #f8fafc;
+  z-index: var(--index-xl);
+  background-color: var(--color-light);
 `;
 
 const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 32px;
+  padding: var(--padding-xxl);
 `;
 
 export { HeaderBlock, HeaderContainer };

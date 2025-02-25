@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 const InputField = styled.input`
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #f59e0b;
-  border-radius: 4px;
+  padding: var(--padding-s);
+  font-size: var(--font-size-m);
+  border: 1px solid var(--color-dark);
+  border-radius: var(--radius-xs);
 
   &:focus {
-    border-color: #4f46e5;
+    border-color: var(--color-orange);
     outline: none;
   }
 `;

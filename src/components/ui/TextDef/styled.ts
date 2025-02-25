@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 
 const Text = styled.p<{ $maxLines?: number }>`
-  color: #475569;
-  font-size: 16px;
-  line-height: 25.6px;
+  color: var(--color-dark);
+  font-size: var(--font-size-m);
+  line-height: var(--font-height-l);
   font-weight: 400;
 
   ${({ $maxLines }) =>
