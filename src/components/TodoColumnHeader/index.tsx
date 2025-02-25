@@ -20,25 +20,22 @@ export const TodoColumnHeader = ({ status, count, isAddNewColumn = false }: ITod
 
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
 
-  const toggleModalOpenAddColumn = () => setIsModalOpenAddColumn(!isModalOpenAddColumn);
-  const toggleModalOpenAddTask = () => setIsModalOpenAddTask(!isModalOpenAddTask);
+  const buttonColor = isDropdownOpen ? '#475569' : '#FFFFFF';
 
-  const handleClickBtnAdd = () => (isAddNewColumn ? toggleModalOpenAddColumn() : toggleModalOpenAddTask());
-  const handleClickBtnMore = () => setIsDropdownOpen(!isDropdownOpen);
+  const toggleAddColumnModal = () => setIsModalOpenAddColumn(!isModalOpenAddColumn);
+  const toggleAddTaskModal = () => setIsModalOpenAddTask(!isModalOpenAddTask);
+
+  const handleAddButtonClick = () => (isAddNewColumn ? toggleAddColumnModal() : toggleAddTaskModal());
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
     <TodoColumnHeaderContainer color={status.color}>
       <TitleWithCount color={status.color} title={status.value} count={count} />
       {isAddNewColumn ? (
-        <BtnRound color="#FFFFFF" handle={handleClickBtnAdd} type="add" />
+        <BtnRound color="#FFFFFF" handle={handleAddButtonClick} type="add" />
       ) : (
         <>
-          <BtnRound
-            ref={refDropdownBtn}
-            color={isDropdownOpen ? '#475569' : '#FFFFFF'}
-            handle={handleClickBtnMore}
-            type="more"
-          />
+          <BtnRound ref={refDropdownBtn} color={buttonColor} handle={toggleDropdown} type="more" />
           {isDropdownOpen && (
             <TodoColumnHeaderDropdown ref={refDropdownMenu} name={status.value} color={status.color} />
           )}

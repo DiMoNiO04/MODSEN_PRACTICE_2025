@@ -17,16 +17,18 @@ export const ModalContainer = ({ onClose, children }: IModalProps) => {
     setIsVisible(true);
   }, []);
 
-  const handleClose = () => {
+  const closeModalWithAnimation = () => {
     setIsVisible(false);
     setTimeout(onClose, 200);
   };
 
+  const stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation();
+
   return (
-    <ModalOverlay $isVisible={isVisible} onClick={handleClose}>
-      <ModalContent $isVisible={isVisible} onClick={(e) => e.stopPropagation()}>
+    <ModalOverlay $isVisible={isVisible} onClick={closeModalWithAnimation}>
+      <ModalContent $isVisible={isVisible} onClick={stopPropagation}>
         <BtnCloseBlock>
-          <BtnRound type="close" handle={handleClose} />
+          <BtnRound type="close" handle={closeModalWithAnimation} />
         </BtnCloseBlock>
         {children}
       </ModalContent>

@@ -4,20 +4,20 @@ import { ModalAddColumn, ModalAddTask } from '../modals';
 import { BtnMenuItem, Dropdown } from '../ui';
 
 export const HeaderDropdown = forwardRef<HTMLDivElement>((_, ref) => {
-  const [isModalOpenAddColumn, setIsModalOpenAddColumn] = useState<boolean>(false);
-  const [isModalOpenAddTask, setIsModalOpenAddTask] = useState<boolean>(false);
+  const [isColumnModalOpen, setIsColumnModalOpen] = useState(false);
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
 
-  const toggleModalOpenAddColumn = () => setIsModalOpenAddColumn(!isModalOpenAddColumn);
-  const toggleModalOpenAddTask = () => setIsModalOpenAddTask(!isModalOpenAddTask);
+  const toggleColumnModal = () => setIsColumnModalOpen((prev) => !prev);
+  const toggleTaskModal = () => setIsTaskModalOpen((prev) => !prev);
 
   return (
     <>
       <Dropdown ref={ref}>
-        <BtnMenuItem onClick={toggleModalOpenAddColumn} text={'Add new column'} />
-        <BtnMenuItem onClick={toggleModalOpenAddTask} text={'Add new task'} />
+        <BtnMenuItem onClick={toggleColumnModal} text="Add new column" />
+        <BtnMenuItem onClick={toggleTaskModal} text="Add new task" />
       </Dropdown>
-      {isModalOpenAddColumn && <ModalAddColumn onClose={toggleModalOpenAddColumn} />}
-      {isModalOpenAddTask && <ModalAddTask onClose={toggleModalOpenAddTask} isFromHeader={true} />}
+      {isColumnModalOpen && <ModalAddColumn onClose={toggleColumnModal} />}
+      {isTaskModalOpen && <ModalAddTask onClose={toggleTaskModal} isFromHeader />}
     </>
   );
 });

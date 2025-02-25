@@ -1,6 +1,6 @@
 import { useForm } from '@/hooks';
 import { CARD_PRIORITY, CARD_STATUS } from '@/utils';
-import { IFormDataTask } from '@/utils/interfaces';
+import { IFormDataTask, IOption } from '@/utils/interfaces';
 
 import { BtnDef, BtnsBlock, Form, ICardProps, Input, ModalTitle, TextArea } from '../ui';
 import { Select } from '../ui/Select';
@@ -23,6 +23,12 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
 
   const { formData, handleChange, handleSubmit } = useForm<IFormDataTask>({ initialData, onClose });
 
+  const onPriorityChange = (selectedOption: IOption) =>
+    handleChange({ target: { name: 'priority', value: selectedOption } });
+
+  const onStatusChange = (selectedOption: IOption) =>
+    handleChange({ target: { name: 'status', value: selectedOption } });
+
   return (
     <>
       <ModalTitle text={'Edit Task'} />
@@ -37,13 +43,13 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
         <Select
           labelText="Priority"
           value={formData.priority}
-          onChange={(selectedOption) => handleChange({ target: { name: 'priority', value: selectedOption } })}
+          onChange={onPriorityChange}
           options={Object.values(CARD_PRIORITY)}
         />
         <Select
           labelText="Status"
           value={formData.status}
-          onChange={(selectedOption) => handleChange({ target: { name: 'status', value: selectedOption } })}
+          onChange={onStatusChange}
           options={Object.values(CARD_STATUS)}
         />
         <BtnsBlock>

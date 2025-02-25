@@ -17,15 +17,22 @@ export const ModalAddTask = ({ onClose, isFromHeader = false, status }: IModalAd
     priority: CARD_PRIORITY.null,
     status: status || CARD_STATUS.toDo,
   };
+
   const { formData, handleChange, handleSubmit } = useForm<IFormDataTask>({ initialData, onClose });
+
+  const onPriorityChange = (selectedOption: IOption) =>
+    handleChange({ target: { name: 'priority', value: selectedOption } });
+
+  const onStatusChange = (selectedOption: IOption) =>
+    handleChange({ target: { name: 'status', value: selectedOption } });
 
   return (
     <ModalContainer onClose={onClose}>
       <ModalTitle text="Add new task" />
       <Form onSubmit={handleSubmit}>
-        <Input labelText="Name task" name="name" type="text" value={formData.name} onChange={handleChange} required />
+        <Input labelText="Task Name" name="name" type="text" value={formData.name} onChange={handleChange} required />
         <TextArea
-          labelText="Description task"
+          labelText="Task Description"
           name="description"
           value={formData.description}
           onChange={handleChange}
@@ -33,7 +40,7 @@ export const ModalAddTask = ({ onClose, isFromHeader = false, status }: IModalAd
         <Select
           labelText="Priority"
           value={formData.priority}
-          onChange={(selectedOption) => handleChange({ target: { name: 'priority', value: selectedOption } })}
+          onChange={onPriorityChange}
           options={Object.values(CARD_PRIORITY)}
         />
 
@@ -41,7 +48,7 @@ export const ModalAddTask = ({ onClose, isFromHeader = false, status }: IModalAd
           <Select
             labelText="Status"
             value={formData.status}
-            onChange={(selectedOption) => handleChange({ target: { name: 'status', value: selectedOption } })}
+            onChange={onStatusChange}
             options={Object.values(CARD_STATUS)}
           />
         )}

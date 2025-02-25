@@ -19,8 +19,16 @@ export const Select = ({ labelText, options, value, onChange }: ISelectProps) =>
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
   const selectedOption = options.find((option) => option.value === value.value);
 
-  const handleSelect = (option: { color: string; value: string }) => {
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
+
+  const handleSelect = (option: IOption) => {
     onChange(option);
+    closeDropdown();
+  };
+
+  const closeDropdown = () => {
     setTimeout(() => setIsDropdownOpen(false), 0);
   };
 
@@ -28,7 +36,7 @@ export const Select = ({ labelText, options, value, onChange }: ISelectProps) =>
     <Label>
       <LabelText text={labelText} />
       <SelectContainer>
-        <SelectButton type="button" onClick={() => setIsDropdownOpen(!isDropdownOpen)} ref={refDropdownBtn}>
+        <SelectButton type="button" onClick={toggleDropdown} ref={refDropdownBtn}>
           {selectedOption?.value || 'Select'}
           <SelectArrowIcon $isRotate={isDropdownOpen}>
             <IconArrow />
@@ -37,7 +45,7 @@ export const Select = ({ labelText, options, value, onChange }: ISelectProps) =>
         {isDropdownOpen && (
           <Dropdown isFullWidth={true} ref={refDropdownMenu}>
             {options.map((option) => (
-              <BtnMenuItem key={option.value} onClick={() => handleSelect(option)} text={option.value} />
+              <BtnMenuItem key={option.value} onClick={handleSelect.bind(null, option)} text={option.value} />
             ))}
           </Dropdown>
         )}

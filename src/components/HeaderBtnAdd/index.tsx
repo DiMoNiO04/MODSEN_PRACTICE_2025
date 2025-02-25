@@ -7,17 +7,13 @@ import { HeaderBtnAddBlock } from './styled';
 export const HeaderBtnAdd = () => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
 
-  const handleClickBtnAdd = () => setIsDropdownOpen(!isDropdownOpen);
+  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
+
+  const buttonColor = isDropdownOpen ? '#000000' : '#475569';
 
   return (
     <HeaderBtnAddBlock>
-      <BtnRound
-        ref={refDropdownBtn}
-        color={isDropdownOpen ? '#000000' : '#475569'}
-        hasBorder
-        handle={handleClickBtnAdd}
-        type="add"
-      />
+      <BtnRound ref={refDropdownBtn} color={buttonColor} hasBorder handle={toggleDropdown} type="add" />
       {isDropdownOpen && <HeaderDropdown ref={refDropdownMenu} />}
     </HeaderBtnAddBlock>
   );

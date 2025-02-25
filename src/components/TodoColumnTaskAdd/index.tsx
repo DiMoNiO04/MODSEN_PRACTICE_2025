@@ -13,14 +13,14 @@ interface ITodoColumnTaskAddProps {
 export const TodoColumnTaskAdd = ({ status }: ITodoColumnTaskAddProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const toggleModalOpen = () => setIsModalOpen(!isModalOpen);
+  const toggleTaskModal = () => setIsModalOpen(!isModalOpen);
 
   return (
     <>
-      <Button type="button" color={status.color} onClick={toggleModalOpen}>
+      <Button type="button" color={status.color} onClick={toggleTaskModal}>
         <ColorText color={status.color} text="Add task..." />
       </Button>
-      {isModalOpen && <ModalAddTask onClose={toggleModalOpen} status={status} />}
+      {isModalOpen && <ModalAddTask onClose={toggleTaskModal} status={status} />}
     </>
   );
 };
