@@ -10,7 +10,7 @@ const ModalOverlay = styled.div<{ $isVisible: boolean }>`
   padding: 20px;
   width: 100%;
   height: 100%;
-  background-color: rgba(34, 34, 35, 0.9);
+  background-color: #222223;
   backdrop-filter: blur(12px);
   z-index: 100;
   opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
@@ -22,7 +22,7 @@ const ModalOverlay = styled.div<{ $isVisible: boolean }>`
 `;
 
 const ModalContent = styled.div<{ $isVisible: boolean }>`
-  background: white;
+  background: #ffffff;
   padding: 32px 16px;
   border-radius: 12px;
   flex-shrink: 0;

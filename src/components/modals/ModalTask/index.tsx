@@ -12,7 +12,7 @@ interface IModalTaskProps extends IModalCloseProps {
 }
 
 export const ModalTask = ({ onClose, cardData }: IModalTaskProps) => {
-  const { title, desc } = cardData;
+  const { title } = cardData;
 
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);

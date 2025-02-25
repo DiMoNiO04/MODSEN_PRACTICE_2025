@@ -5,9 +5,9 @@ const Button = styled.button<{ $isInvert?: boolean }>`
   font-size: 20px;
   line-height: 24px;
   font-weight: 600;
-  background-color: ${({ $isInvert }) => ($isInvert ? 'white' : '#f59e0b')};
-  color: ${({ $isInvert }) => ($isInvert ? 'red' : 'white')};
-  border: ${({ $isInvert }) => ($isInvert ? '2px solid red' : '2px solid #f59e0b')};
+  background-color: ${({ $isInvert }) => ($isInvert ? '#FFFFFF' : '#F59E0B')};
+  color: ${({ $isInvert }) => ($isInvert ? '#FF0000' : '#FFFFFF')};
+  border: ${({ $isInvert }) => ($isInvert ? '2px solid #FF0000' : '2px solid #F59E0B')};
   border-radius: 8px;
   cursor: pointer;
   transition:
@@ -16,8 +16,8 @@ const Button = styled.button<{ $isInvert?: boolean }>`
 
   @media (any-hover: hover) {
     &:hover {
-      background-color: ${({ $isInvert }) => ($isInvert ? 'red' : 'transparent')};
-      color: ${({ $isInvert }) => ($isInvert ? 'white' : '#f59e0b')};
+      background-color: ${({ $isInvert }) => ($isInvert ? '#FF0000' : 'transparent')};
+      color: ${({ $isInvert }) => ($isInvert ? '#FFFFFF' : '#F59E0B')};
     }
   }
 `;

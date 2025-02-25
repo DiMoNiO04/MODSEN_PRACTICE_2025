@@ -4,8 +4,8 @@ const DropdownBlock = styled.div<{ $isPriority?: boolean; $isFullWidth?: boolean
   position: absolute;
   width: ${({ $isFullWidth }) => ($isFullWidth ? '100%' : 'max-content')};
   z-index: 10;
-  background: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  box-shadow: 0 4px 6px #e6e6e6;
   border-radius: 8px;
   padding: 8px;
   display: flex;
