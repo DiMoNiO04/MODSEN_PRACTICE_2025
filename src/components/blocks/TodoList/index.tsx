@@ -1,4 +1,5 @@
-import { Card, ICardProps } from '../ui';
+import { Card, ICardProps } from '@/components/ui';
+
 import { List } from './styled';
 
 interface ITodoListProps {

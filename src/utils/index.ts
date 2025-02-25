@@ -1,5 +1,13 @@
 import { getOpacityColor, getRandomColor } from './functions';
-import { IChildrenProps, IIconProps, IModalCloseProps, IOption } from './interfaces';
+import {
+  IChildrenProps,
+  IFormDataColumn,
+  IFormDataTask,
+  IIconProps,
+  IModalCloseProps,
+  IOption,
+  IText,
+} from './interfaces';
 
 export { getOpacityColor, getRandomColor };
-export type { IChildrenProps, IIconProps, IModalCloseProps, IOption };
+export type { IChildrenProps, IFormDataColumn, IFormDataTask, IIconProps, IModalCloseProps, IOption, IText };

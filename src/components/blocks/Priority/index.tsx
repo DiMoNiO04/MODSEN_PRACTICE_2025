@@ -1,8 +1,8 @@
+import { ColorText } from '@/components/ui';
 import { useDropdownToggle } from '@/hooks';
 import { IOption } from '@/utils';
 
 import { PriorityDropdown } from '../PriorityDropdown';
-import { ColorText } from '../ui';
 import { PriorityBlock, PriorityButton } from './styled';
 
 export const Priority = ({ color, value }: IOption) => {

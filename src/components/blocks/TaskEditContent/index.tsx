@@ -1,9 +1,8 @@
+import { BtnDef, BtnsBlock, Form, ICardProps, Input, ModalTitle, TextArea } from '@/components/ui';
+import { Select } from '@/components/ui/Select';
 import { CARD_PRIORITY, CARD_STATUS } from '@/constants';
 import { useForm } from '@/hooks';
-import { IFormDataTask, IOption } from '@/utils/interfaces';
-
-import { BtnDef, BtnsBlock, Form, ICardProps, Input, ModalTitle, TextArea } from '../ui';
-import { Select } from '../ui/Select';
+import { IFormDataTask, IOption } from '@/utils';
 
 interface ITaskEditContentProps {
   cardData: ICardProps;

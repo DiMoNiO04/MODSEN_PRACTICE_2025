@@ -1,8 +1,8 @@
 import { forwardRef } from 'react';
 
+import { ColorText, Dropdown } from '@/components/ui';
 import { CARD_PRIORITY } from '@/constants';
 
-import { ColorText, Dropdown } from '../ui';
 import { PriorityItemBtn } from './styled';
 
 export const PriorityDropdown = forwardRef<HTMLDivElement>((_, ref) => {

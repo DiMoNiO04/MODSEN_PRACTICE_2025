@@ -1,4 +1,5 @@
-import { BtnDef, BtnsBlock, ColorText, ICardProps, ModalTitle, TextDef } from '../ui';
+import { BtnDef, BtnsBlock, ColorText, ICardProps, ModalTitle, TextDef } from '@/components/ui';
+
 import { Content } from './styled';
 
 interface ITaskModalContentProps {

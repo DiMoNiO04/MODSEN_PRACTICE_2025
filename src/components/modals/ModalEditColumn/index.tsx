@@ -1,8 +1,7 @@
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { useForm } from '@/hooks';
-import { IModalCloseProps } from '@/utils';
-import { IFormDataColumn } from '@/utils/interfaces';
+import { IFormDataColumn, IModalCloseProps } from '@/utils';
 
 interface IModalEditColumnProps extends IModalCloseProps, IFormDataColumn {}
 

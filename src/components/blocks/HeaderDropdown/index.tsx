@@ -1,7 +1,7 @@
 import { forwardRef, useState } from 'react';
 
-import { ModalAddColumn, ModalAddTask } from '../modals';
-import { BtnMenuItem, Dropdown } from '../ui';
+import { ModalAddColumn, ModalAddTask } from '@/components/modals';
+import { BtnMenuItem, Dropdown } from '@/components/ui';
 
 export const HeaderDropdown = forwardRef<HTMLDivElement>((_, ref) => {
   const [isColumnModalOpen, setIsColumnModalOpen] = useState<boolean>(false);

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
+import { BtnRound } from '@/components/ui';
 import { useDropdownToggle } from '@/hooks';
 import { IOption } from '@/utils';
 
 import { TitleWithCount } from '../TitleWithCount';
 import { TodoColumnHeaderDropdown } from '../TodoColumnHeaderDropdown';
-import { BtnRound } from '../ui';
 import { TodoColumnHeaderContainer } from './styled';
 
 export interface ITodoColumnHeaderProps {

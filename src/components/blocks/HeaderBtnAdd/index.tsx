@@ -1,7 +1,7 @@
+import { BtnRound } from '@/components/ui';
 import { useDropdownToggle } from '@/hooks';
 
 import { HeaderDropdown } from '../HeaderDropdown';
-import { BtnRound } from '../ui';
 import { HeaderBtnAddBlock } from './styled';
 
 export const HeaderBtnAdd = () => {

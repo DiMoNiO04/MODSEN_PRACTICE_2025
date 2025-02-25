@@ -1,8 +1,7 @@
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
-import { useForm } from '@/hooks/useForm';
-import { getRandomColor, IModalCloseProps } from '@/utils';
-import { IFormDataColumn } from '@/utils/interfaces';
+import { useForm } from '@/hooks';
+import { getRandomColor, IFormDataColumn, IModalCloseProps } from '@/utils';
 
 export const ModalAddColumn = ({ onClose }: IModalCloseProps) => {
   const initialData: IFormDataColumn = { name: '', color: getRandomColor() };

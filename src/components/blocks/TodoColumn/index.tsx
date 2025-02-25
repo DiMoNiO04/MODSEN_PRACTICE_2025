@@ -1,10 +1,10 @@
+import { ICardProps } from '@/components/ui';
 import { IOption } from '@/utils';
 
 import { TodoColumnContainer } from '../TodoColumnContainer';
 import { TodoColumnHeader } from '../TodoColumnHeader';
 import { TodoColumnTaskAdd } from '../TodoColumnTaskAdd';
 import { TodoList } from '../TodoList';
-import { ICardProps } from '../ui';
 
 interface ITodoColumnProps {
   status: IOption;

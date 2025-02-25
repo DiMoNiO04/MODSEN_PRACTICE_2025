@@ -1,9 +1,7 @@
 import { useState } from 'react';
 
+import { TaskDeleteContent, TaskEditContent, TaskModalContent } from '@/components/blocks';
 import { ModalContainer } from '@/components/layout';
-import { TaskDeleteContent } from '@/components/TaskDeleteContent';
-import { TaskEditContent } from '@/components/TaskEditContent';
-import { TaskModalContent } from '@/components/TaskModalContent';
 import { ICardProps } from '@/components/ui';
 import { IModalCloseProps } from '@/utils';
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
+import { Priority } from '@/components/blocks';
 import { ModalTask } from '@/components/modals';
-import { Priority } from '@/components/Priority';
 import { IOption } from '@/utils';
 
 import { BtnRound, TextDef, TextH3 } from '..';

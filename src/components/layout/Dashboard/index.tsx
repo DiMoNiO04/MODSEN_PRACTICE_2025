@@ -1,5 +1,4 @@
-import { AddNewColumn } from '@/components/AddNewColumn';
-import { TodoColumn } from '@/components/TodoColumn';
+import { AddNewColumn, TodoColumn } from '@/components/blocks';
 import { CARD_STATUS, TASKS_DATA } from '@/constants';
 
 import { Container } from '..';

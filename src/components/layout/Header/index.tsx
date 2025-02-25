@@ -1,4 +1,4 @@
-import { HeaderBtnAdd } from '@/components/HeaderBtnAdd';
+import { HeaderBtnAdd } from '@/components/blocks';
 import { Logo } from '@/components/ui';
 
 import { Container } from '..';

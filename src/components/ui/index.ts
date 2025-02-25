@@ -12,6 +12,7 @@ import { LabelText } from './LabelText';
 import { Logo } from './Logo';
 import { ModalTitle } from './ModalTitle';
 import { RequiredText } from './RequiredTxt';
+import { Select } from './Select';
 import { TextArea } from './Textarea';
 import { TextDef } from './TextDef';
 import { TextH3 } from './TextH3';
@@ -31,6 +32,7 @@ export {
   Logo,
   ModalTitle,
   RequiredText,
+  Select,
   TextArea,
   TextDef,
   TextH3,

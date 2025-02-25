@@ -1,4 +1,4 @@
-import { BtnDef, BtnsBlock, ModalTitle } from '../ui';
+import { BtnDef, BtnsBlock, ModalTitle } from '@/components/ui';
 
 interface ITaskDeleteContentProps {
   title: string;
