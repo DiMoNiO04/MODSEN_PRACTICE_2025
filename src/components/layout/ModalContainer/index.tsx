@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
 import { BtnRound } from '@/components/ui';
-import { IChildrenProps, IModalCloseProps } from '@/utils';
-import { BtnCloseBlock, ModalContent, ModalOverlay } from './styled';
 import { useBodyScrollBlock } from '@/hooks';
+import { IChildrenProps, IModalCloseProps } from '@/utils';
+
+import { BtnCloseBlock, ModalContent, ModalOverlay } from './styled';
 
 export interface IModalProps extends IChildrenProps, IModalCloseProps {}
 

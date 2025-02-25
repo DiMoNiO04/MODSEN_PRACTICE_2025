@@ -1,4 +1,5 @@
 import { IText } from '@/utils/interfaces';
+
 import { Text } from './styled';
 
 interface ITextDefProps extends IText {

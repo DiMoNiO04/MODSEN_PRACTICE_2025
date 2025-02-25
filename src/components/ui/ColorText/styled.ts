@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { getOpacityColor } from '@/utils';
 
 const Text = styled.div<{ color: string; isFullWidth?: boolean }>`

@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { ModalAddTask } from '../modals';
-import { Button } from './styled';
-import { ColorText } from '../ui';
+
 import { IOption } from '@/utils';
+
+import { ModalAddTask } from '../modals';
+import { ColorText } from '../ui';
+import { Button } from './styled';
 
 interface ITodoColumnTaskAddProps {
   status: IOption;

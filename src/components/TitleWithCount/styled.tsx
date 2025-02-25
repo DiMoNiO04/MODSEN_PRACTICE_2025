@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { getOpacityColor } from '@/utils';
 
 const TitleWrapper = styled.div`
@@ -28,4 +29,4 @@ const TaskCount = styled.div<{ color: string }>`
   font-weight: 600;
 `;
 
-export { TitleWrapper, Title, TaskCount };
+export { TaskCount, Title, TitleWrapper };

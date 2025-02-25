@@ -1,8 +1,9 @@
 import { useForm } from '@/hooks';
+import { CARD_PRIORITY, CARD_STATUS } from '@/utils';
+import { IFormDataTask } from '@/utils/interfaces';
+
 import { BtnDef, BtnsBlock, Form, ICardProps, Input, ModalTitle, TextArea } from '../ui';
 import { Select } from '../ui/Select';
-import { IFormDataTask } from '@/utils/interfaces';
-import { CARD_PRIORITY, CARD_STATUS } from '@/utils';
 
 interface ITaskEditContentProps {
   cardData: ICardProps;

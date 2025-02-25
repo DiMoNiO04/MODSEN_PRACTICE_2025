@@ -42,4 +42,4 @@ const BtnCloseBlock = styled.div`
   right: 12px;
 `;
 
-export { ModalOverlay, ModalContent, BtnCloseBlock };
+export { BtnCloseBlock, ModalContent, ModalOverlay };

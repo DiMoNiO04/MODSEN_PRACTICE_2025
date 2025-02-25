@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { BtnRound } from '../ui';
-import { TitleWithCount } from '../TitleWithCount';
-import { TodoColumnHeaderContainer } from './styled';
-import { TodoColumnHeaderDropdown } from '../TodoColumnHeaderDropdown';
+
 import { useDropdownToggle } from '@/hooks';
 import { IOption } from '@/utils';
+
+import { TitleWithCount } from '../TitleWithCount';
+import { TodoColumnHeaderDropdown } from '../TodoColumnHeaderDropdown';
+import { BtnRound } from '../ui';
+import { TodoColumnHeaderContainer } from './styled';
 
 export interface ITodoColumnHeaderProps {
   status: IOption;

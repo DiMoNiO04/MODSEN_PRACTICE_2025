@@ -30,4 +30,4 @@ const SelectButton = styled.button`
   }
 `;
 
-export { SelectContainer, SelectButton, SelectArrowIcon };
+export { SelectArrowIcon, SelectButton, SelectContainer };

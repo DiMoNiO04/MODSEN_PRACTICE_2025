@@ -16,4 +16,4 @@ const Block = styled.div`
   background: #ffffff;
 `;
 
-export { TopBlockInfo, Block };
+export { Block, TopBlockInfo };

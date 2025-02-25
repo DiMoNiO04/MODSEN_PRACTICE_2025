@@ -1,7 +1,9 @@
 import { forwardRef } from 'react';
-import { IconAdd, IconMaximize, IconClose, IconMore } from '@/components/icons';
-import { Button } from './styled';
+
+import { IconAdd, IconClose, IconMaximize, IconMore } from '@/components/icons';
 import { IIconProps } from '@/utils';
+
+import { Button } from './styled';
 
 type TBtnRound = 'add' | 'maximize' | 'close' | 'more';
 

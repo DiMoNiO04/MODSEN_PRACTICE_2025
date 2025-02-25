@@ -1,7 +1,7 @@
-import { IconClose } from './IconClose';
 import { IconAdd } from './IconAdd';
+import { IconArrow } from './IconArrow';
+import { IconClose } from './IconClose';
 import { IconMaximize } from './IconMaximize';
 import { IconMore } from './IconMore';
-import { IconArrow } from './IconArrow';
 
-export { IconClose, IconAdd, IconMaximize, IconMore, IconArrow };
+export { IconAdd, IconArrow, IconClose, IconMaximize, IconMore };

@@ -1,9 +1,10 @@
-import { TodoColumn } from '@/components/TodoColumn';
 import { tasksData } from '@/assets/data/tasks';
 import { AddNewColumn } from '@/components/AddNewColumn';
+import { TodoColumn } from '@/components/TodoColumn';
+import { CARD_STATUS } from '@/utils';
+
 import { Container } from '..';
 import { DashboardContainer } from './styled';
-import { CARD_STATUS } from '@/utils';
 
 export const Dashboard = () => {
   return (

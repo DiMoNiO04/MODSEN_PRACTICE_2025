@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { getOpacityColor } from '@/utils';
 
 const Button = styled.button<{ color: string }>`

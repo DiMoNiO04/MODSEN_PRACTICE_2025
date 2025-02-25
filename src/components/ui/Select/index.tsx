@@ -1,11 +1,12 @@
-import { Label } from '../Label';
-import { LabelText } from '../LabelText';
-import { SelectContainer, SelectButton, SelectArrowIcon } from './styled';
-import { BtnMenuItem } from '../BtnMenuItem';
-import { Dropdown } from '../Dropdown';
 import { IconArrow } from '@/components/icons';
 import { useDropdownToggle } from '@/hooks';
 import { IOption } from '@/utils';
+
+import { BtnMenuItem } from '../BtnMenuItem';
+import { Dropdown } from '../Dropdown';
+import { Label } from '../Label';
+import { LabelText } from '../LabelText';
+import { SelectArrowIcon, SelectButton, SelectContainer } from './styled';
 
 interface ISelectProps {
   labelText: string;

@@ -1,9 +1,11 @@
 import { forwardRef, useState } from 'react';
-import { ModalAddTask } from '../modals';
-import { ModalEditColumn } from '../modals/ModalEditColumn';
-import { ModalConfirm } from '../modals/ModalConfirm';
-import { BtnMenuItem, Dropdown } from '../ui';
+
 import { IFormDataColumn } from '@/utils/interfaces';
+
+import { ModalAddTask } from '../modals';
+import { ModalConfirm } from '../modals/ModalConfirm';
+import { ModalEditColumn } from '../modals/ModalEditColumn';
+import { BtnMenuItem, Dropdown } from '../ui';
 
 const CONFIRM_TEXT_DELETE = 'Are you sure you want to delete the column and all its associated tasks?';
 

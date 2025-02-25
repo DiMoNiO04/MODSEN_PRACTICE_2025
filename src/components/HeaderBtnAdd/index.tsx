@@ -1,7 +1,8 @@
-import { BtnRound } from '../ui';
-import { HeaderDropdown } from '../HeaderDropdown';
-import { HeaderBtnAddBlock } from './styled';
 import { useDropdownToggle } from '@/hooks';
+
+import { HeaderDropdown } from '../HeaderDropdown';
+import { BtnRound } from '../ui';
+import { HeaderBtnAddBlock } from './styled';
 
 export const HeaderBtnAdd = () => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
