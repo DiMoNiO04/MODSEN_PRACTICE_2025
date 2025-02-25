@@ -1,5 +1,5 @@
+import { CARD_PRIORITY, CARD_STATUS } from '@/constants';
 import { useForm } from '@/hooks';
-import { CARD_PRIORITY, CARD_STATUS } from '@/utils';
 import { IFormDataTask, IOption } from '@/utils/interfaces';
 
 import { BtnDef, BtnsBlock, Form, ICardProps, Input, ModalTitle, TextArea } from '../ui';

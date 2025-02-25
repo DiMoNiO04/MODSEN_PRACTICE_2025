@@ -1,4 +1,4 @@
-import { IOption } from './interfaces';
+import { IOption } from '@/utils';
 
 type TCardStatus = 'toDo' | 'inProgress' | 'done';
 

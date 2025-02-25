@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { CARD_PRIORITY } from '@/utils';
+import { CARD_PRIORITY } from '@/constants';
 
 import { ColorText, Dropdown } from '../ui';
 import { PriorityItemBtn } from './styled';

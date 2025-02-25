@@ -1,7 +1,9 @@
 import { ICardProps } from '@/components/ui';
-import { CARD_PRIORITY, CARD_STATUS } from '@/utils';
 
-export const tasksData: ICardProps[][] = [
+import { CARD_PRIORITY } from './cardPriority';
+import { CARD_STATUS } from './cardStatus';
+
+export const TASKS_DATA: ICardProps[][] = [
   [
     {
       id: 1,

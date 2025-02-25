@@ -1,8 +1,9 @@
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle, TextArea } from '@/components/ui';
 import { Select } from '@/components/ui/Select';
+import { CARD_PRIORITY, CARD_STATUS } from '@/constants';
 import { useForm } from '@/hooks';
-import { CARD_PRIORITY, CARD_STATUS, IModalCloseProps } from '@/utils';
+import { IModalCloseProps } from '@/utils';
 import { IFormDataTask, IOption } from '@/utils/interfaces';
 
 interface IModalAddTaskProps extends IModalCloseProps {

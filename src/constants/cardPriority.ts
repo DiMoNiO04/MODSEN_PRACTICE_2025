@@ -1,8 +1,8 @@
-import { IOption } from './interfaces';
+import { IOption } from '@/utils';
 
-type CardPriority = 'null' | 'low' | 'normal' | 'high' | 'critical';
+type TCardPriority = 'null' | 'low' | 'normal' | 'high' | 'critical';
 
-export const CARD_PRIORITY: Record<CardPriority, IOption> = {
+export const CARD_PRIORITY: Record<TCardPriority, IOption> = {
   null: { color: '#B0BEC5', value: '—' },
   low: { color: '#4CAF50', value: 'Low' },
   normal: { color: '#4F46E5', value: 'Normal' },
