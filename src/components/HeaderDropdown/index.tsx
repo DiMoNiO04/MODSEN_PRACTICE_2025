@@ -4,8 +4,8 @@ import { ModalAddColumn, ModalAddTask } from '../modals';
 import { BtnMenuItem, Dropdown } from '../ui';
 
 export const HeaderDropdown = forwardRef<HTMLDivElement>((_, ref) => {
-  const [isColumnModalOpen, setIsColumnModalOpen] = useState(false);
-  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  const [isColumnModalOpen, setIsColumnModalOpen] = useState<boolean>(false);
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState<boolean>(false);
 
   const toggleColumnModal = () => setIsColumnModalOpen((prev) => !prev);
   const toggleTaskModal = () => setIsTaskModalOpen((prev) => !prev);

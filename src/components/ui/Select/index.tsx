@@ -15,21 +15,16 @@ interface ISelectProps {
   onChange: (selectedOption: IOption) => void;
 }
 
-export const Select = ({ labelText, options, value, onChange }: ISelectProps) => {
+export const Select = ({ labelText, value, options, onChange }: ISelectProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
   const selectedOption = options.find((option) => option.value === value.value);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prev) => !prev);
-  };
+  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
+  const closeDropdown = () => setTimeout(() => setIsDropdownOpen(false), 0);
 
   const handleSelect = (option: IOption) => {
     onChange(option);
     closeDropdown();
-  };
-
-  const closeDropdown = () => {
-    setTimeout(() => setIsDropdownOpen(false), 0);
   };
 
   return (
@@ -37,7 +32,7 @@ export const Select = ({ labelText, options, value, onChange }: ISelectProps) =>
       <LabelText text={labelText} />
       <SelectContainer>
         <SelectButton type="button" onClick={toggleDropdown} ref={refDropdownBtn}>
-          {selectedOption?.value || 'Select'}
+          {selectedOption?.value || 'Select...'}
           <SelectArrowIcon $isRotate={isDropdownOpen}>
             <IconArrow />
           </SelectArrowIcon>
