@@ -1,4 +1,4 @@
-import { Dashboard, Header, Main } from './components/layout';
+import { Dashboard, Header, Main } from '../layout';
 
 function App() {
   return (
