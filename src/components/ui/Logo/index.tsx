@@ -1,5 +1,7 @@
+import { UITexts } from '@/constants';
+
 import { LogoBlock } from './styled';
 
 export const Logo = () => {
-  return <LogoBlock>Kanban Dashboard</LogoBlock>;
+  return <LogoBlock>{UITexts.LOGO_TITLE}</LogoBlock>;
 };

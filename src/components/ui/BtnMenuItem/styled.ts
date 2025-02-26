@@ -1,17 +1,18 @@
 import styled, { css } from 'styled-components';
+
 import { TBtnMenuItem } from '.';
 
 const BtnMenuItemBlock = styled.button<{ $typeBtn?: TBtnMenuItem }>`
   border: none;
   background: none;
-  border-radius: 8px;
-  padding: 8px 16px;
+  border-radius: var(--radius-s);
+  padding: var(--padding-s) var(--padding-l);
   cursor: pointer;
   text-align: left;
   width: 100%;
   flex-shrink: 0;
   font-weight: 500;
-  font-size: 16px;
+  font-size: var(--font-size-m);
   transition:
     background-color 0.2s,
     color 0.2s,
@@ -21,37 +22,37 @@ const BtnMenuItemBlock = styled.button<{ $typeBtn?: TBtnMenuItem }>`
     switch ($typeBtn) {
       case 'delete':
         return css`
-          color: #dc2626;
-          border: 1px solid #dc2626;
-          background-color: #fee2e2;
+          color: var(--color-red);
+          border: 1px solid var(--color-red);
+          background-color: var(--color-white);
 
           @media (any-hover: hover) {
             &:hover {
-              background-color: #fecaca;
+              background-color: var(--color-red-hover);
             }
           }
         `;
       case 'edit':
         return css`
-          color: #f59e0b;
-          border: 1px solid #f59e0b;
-          background-color: #fef3c7;
+          color: var(--color-orange);
+          border: 1px solid var(--color-orange);
+          background-color: var(--color-white);
 
           @media (any-hover: hover) {
             &:hover {
-              background-color: #fde68a;
+              background-color: var(--color-orange-hover);
             }
           }
         `;
       case 'add':
         return css`
-          color: #16a34a;
-          border: 1px solid #16a34a;
-          background-color: #dcfce7;
+          color: var(--color-green);
+          border: 1px solid var(--color-green);
+          background-color: var(--color-white);
 
           @media (any-hover: hover) {
             &:hover {
-              background-color: #bbf7d0;
+              background-color: var(--color-green-hover);
             }
           }
         `;
@@ -59,7 +60,7 @@ const BtnMenuItemBlock = styled.button<{ $typeBtn?: TBtnMenuItem }>`
         return css`
           @media (any-hover: hover) {
             &:hover {
-              background-color: #f8fafc;
+              background-color: var(--color-gray-cool);
             }
           }
         `;

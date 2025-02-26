@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const DashboardContainer = styled.div`
-  padding: 32px;
+  padding: var(--padding-xxl);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: var(--gap-xl);
 `;
 
 export { DashboardContainer };

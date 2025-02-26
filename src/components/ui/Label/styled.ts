@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const LabelBlock = styled.label`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--gap-s);
 `;
 
 export { LabelBlock };

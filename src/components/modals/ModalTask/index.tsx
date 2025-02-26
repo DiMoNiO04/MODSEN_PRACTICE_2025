@@ -1,18 +1,15 @@
+import { useState } from 'react';
+
+import { TaskDeleteContent, TaskEditContent, TaskModalContent } from '@/components/blocks';
 import { ModalContainer } from '@/components/layout';
-import { TaskDeleteContent } from '@/components/TaskDeleteContent';
-import { TaskEditContent } from '@/components/TaskEditContent';
-import { TaskModalContent } from '@/components/TaskModalContent';
 import { ICardProps } from '@/components/ui';
 import { IModalCloseProps } from '@/utils';
-import { useState } from 'react';
 
 interface IModalTaskProps extends IModalCloseProps {
   cardData: ICardProps;
 }
 
 export const ModalTask = ({ onClose, cardData }: IModalTaskProps) => {
-  const { title, desc } = cardData;
-
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -28,7 +25,7 @@ export const ModalTask = ({ onClose, cardData }: IModalTaskProps) => {
       {isEditing ? (
         <TaskEditContent cardData={cardData} onClose={onClose} handleCancel={handleCancel} />
       ) : isDeleting ? (
-        <TaskDeleteContent title={title} handleCancel={handleCancel} handleClose={onClose} />
+        <TaskDeleteContent handleCancel={handleCancel} handleClose={onClose} />
       ) : (
         <TaskModalContent cardData={cardData} handleOpenDelete={handleOpenDelete} handleOpenEdit={handleOpenEdit} />
       )}

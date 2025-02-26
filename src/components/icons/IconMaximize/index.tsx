@@ -1,3 +1,5 @@
+import { EColors } from '@/constants';
+
 export const IconMaximize = () => {
   return (
     <svg
@@ -6,7 +8,7 @@ export const IconMaximize = () => {
       height={24}
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#475569"
+      stroke={EColors.DARK}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"

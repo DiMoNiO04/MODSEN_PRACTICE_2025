@@ -1,6 +1,8 @@
-import { IChildrenProps } from '@/utils';
-import { DropdownBlock } from './styled';
 import { forwardRef } from 'react';
+
+import { IChildrenProps } from '@/utils';
+
+import { DropdownBlock } from './styled';
 
 interface IDropdownProps extends IChildrenProps {
   isPriority?: boolean;

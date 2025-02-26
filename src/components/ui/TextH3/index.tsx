@@ -1,4 +1,5 @@
-import { IText } from '@/utils/interfaces';
+import { IText } from '@/utils';
+
 import { Text } from './styled';
 
 export const TextH3 = ({ text }: IText) => {

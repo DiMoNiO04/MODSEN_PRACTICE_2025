@@ -4,11 +4,11 @@ export type TBtnMenuItem = 'add' | 'edit' | 'delete' | 'default';
 
 interface IBtnMenuItemProps {
   text: string;
-  onClick: () => void;
   typeBtn?: TBtnMenuItem;
+  onClick: () => void;
 }
 
-export const BtnMenuItem = ({ onClick, text, typeBtn = 'default' }: IBtnMenuItemProps) => {
+export const BtnMenuItem = ({ text, typeBtn = 'default', onClick }: IBtnMenuItemProps) => {
   return (
     <BtnMenuItemBlock onClick={onClick} $typeBtn={typeBtn} type="button">
       {text}

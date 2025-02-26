@@ -1,6 +1,7 @@
-import { Container } from '..';
+import { HeaderBtnAdd } from '@/components/blocks';
 import { Logo } from '@/components/ui';
-import { HeaderBtnAdd } from '@/components/HeaderBtnAdd';
+
+import { Container } from '..';
 import { HeaderBlock, HeaderContainer } from './styled';
 
 export const Header = () => {

@@ -4,23 +4,23 @@ const DropdownBlock = styled.div<{ $isPriority?: boolean; $isFullWidth?: boolean
   position: absolute;
   width: ${({ $isFullWidth }) => ($isFullWidth ? '100%' : 'max-content')};
   z-index: 10;
-  background: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 8px;
+  background: var(--color-white);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius-s);
+  padding: var(--padding-s);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-m);
 
   ${({ $isPriority }) =>
     $isPriority
       ? `
         left: 0;
-        top: 28px;
+        top: var(--top-xl);
       `
       : `
         right: 0;
-        top: 40px;
+        top: var(--right-xxl);
       `}
 `;
 

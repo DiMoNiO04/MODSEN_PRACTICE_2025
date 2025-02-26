@@ -1,11 +1,13 @@
-import { Label } from '../Label';
-import { LabelText } from '../LabelText';
-import { SelectContainer, SelectButton, SelectArrowIcon } from './styled';
-import { BtnMenuItem } from '../BtnMenuItem';
-import { Dropdown } from '../Dropdown';
 import { IconArrow } from '@/components/icons';
+import { UITexts } from '@/constants';
 import { useDropdownToggle } from '@/hooks';
 import { IOption } from '@/utils';
+
+import { BtnMenuItem } from '../BtnMenuItem';
+import { Dropdown } from '../Dropdown';
+import { Label } from '../Label';
+import { LabelText } from '../LabelText';
+import { SelectArrowIcon, SelectButton, SelectContainer } from './styled';
 
 interface ISelectProps {
   labelText: string;
@@ -14,21 +16,24 @@ interface ISelectProps {
   onChange: (selectedOption: IOption) => void;
 }
 
-export const Select = ({ labelText, options, value, onChange }: ISelectProps) => {
+export const Select = ({ labelText, value, options, onChange }: ISelectProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
   const selectedOption = options.find((option) => option.value === value.value);
 
-  const handleSelect = (option: { color: string; value: string }) => {
+  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
+  const closeDropdown = () => setTimeout(() => setIsDropdownOpen(false), 0);
+
+  const handleSelect = (option: IOption) => {
     onChange(option);
-    setTimeout(() => setIsDropdownOpen(false), 0);
+    closeDropdown();
   };
 
   return (
     <Label>
       <LabelText text={labelText} />
       <SelectContainer>
-        <SelectButton type="button" onClick={() => setIsDropdownOpen(!isDropdownOpen)} ref={refDropdownBtn}>
-          {selectedOption?.value || 'Select'}
+        <SelectButton type="button" onClick={toggleDropdown} ref={refDropdownBtn}>
+          {selectedOption?.value || UITexts.LABELS.SELECT}
           <SelectArrowIcon $isRotate={isDropdownOpen}>
             <IconArrow />
           </SelectArrowIcon>
@@ -36,7 +41,7 @@ export const Select = ({ labelText, options, value, onChange }: ISelectProps) =>
         {isDropdownOpen && (
           <Dropdown isFullWidth={true} ref={refDropdownMenu}>
             {options.map((option) => (
-              <BtnMenuItem key={option.value} onClick={() => handleSelect(option)} text={option.value} />
+              <BtnMenuItem key={option.value} onClick={handleSelect.bind(null, option)} text={option.value} />
             ))}
           </Dropdown>
         )}

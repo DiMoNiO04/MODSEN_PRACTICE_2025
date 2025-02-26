@@ -32,4 +32,4 @@ interface IText {
   text: string;
 }
 
-export type { IChildrenProps, IModalCloseProps, IIconProps, IFormDataColumn, IFormDataTask, IOption, IText };
+export type { IChildrenProps, IFormDataColumn, IFormDataTask, IIconProps, IModalCloseProps, IOption, IText };

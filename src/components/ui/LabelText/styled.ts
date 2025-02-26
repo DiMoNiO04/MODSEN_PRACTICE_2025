@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Text = styled.p`
-  font-size: 14px;
+  font-size: var(--font-size-s);
   font-weight: 700;
 `;
 

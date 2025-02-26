@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const Text = styled.span`
-  font-size: 14px;
+  font-size: var(--font-size-s);
   font-weight: 700;
-  color: #f59e0b;
+  color: var(--color-orange);
 `;
 
 export { Text };

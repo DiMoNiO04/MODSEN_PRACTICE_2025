@@ -14,10 +14,10 @@ const SelectArrowIcon = styled.div<{ $isRotate?: boolean }>`
 `;
 
 const SelectButton = styled.button`
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #f59e0b;
-  border-radius: 4px;
+  padding: var(--padding-s);
+  font-size: var(--font-size-m);
+  border: 1px solid var(--color-dark);
+  border-radius: var(--radius-xs);
   text-align: left;
   width: 100%;
   display: flex;
@@ -25,9 +25,9 @@ const SelectButton = styled.button`
   justify-content: space-between;
 
   &:focus {
-    border-color: #4f46e5;
+    border-color: var(--color-orange);
     outline: none;
   }
 `;
 
-export { SelectContainer, SelectButton, SelectArrowIcon };
+export { SelectArrowIcon, SelectButton, SelectContainer };

@@ -1,38 +1,40 @@
-import { TextH3 } from './TextH3';
-import { BtnRound } from './BtnRound';
-import { Card, ICardProps } from './Card';
-import { Logo } from './Logo';
-import { BtnMenuItem } from './BtnMenuItem';
-import { Dropdown } from './Dropdown';
-import { ColorText } from './ColorText';
-import { ModalTitle } from './ModalTitle';
-import { Form } from './Form';
 import { BtnDef } from './BtnDef';
-import { Input } from './Input';
-import { RequiredText } from './RequiredTxt';
-import { LabelText } from './LabelText';
-import { Label } from './Label';
-import { TextDef } from './TextDef';
+import { BtnMenuItem } from './BtnMenuItem';
+import { BtnRound } from './BtnRound';
 import { BtnsBlock } from './BtnsBlock';
+import { Card, ICardProps } from './Card';
+import { ColorText } from './ColorText';
+import { Dropdown } from './Dropdown';
+import { Form } from './Form';
+import { Input } from './Input';
+import { Label } from './Label';
+import { LabelText } from './LabelText';
+import { Logo } from './Logo';
+import { ModalTitle } from './ModalTitle';
+import { RequiredText } from './RequiredTxt';
+import { Select } from './Select';
 import { TextArea } from './Textarea';
+import { TextDef } from './TextDef';
+import { TextH3 } from './TextH3';
 
 export {
-  BtnRound,
-  Card,
-  Logo,
-  BtnMenuItem,
-  Dropdown,
-  ColorText,
-  ModalTitle,
-  Form,
   BtnDef,
-  Input,
-  RequiredText,
-  LabelText,
-  Label,
-  TextH3,
-  TextDef,
+  BtnMenuItem,
+  BtnRound,
   BtnsBlock,
+  Card,
+  ColorText,
+  Dropdown,
+  Form,
+  Input,
+  Label,
+  LabelText,
+  Logo,
+  ModalTitle,
+  RequiredText,
+  Select,
   TextArea,
+  TextDef,
+  TextH3,
 };
 export type { ICardProps };

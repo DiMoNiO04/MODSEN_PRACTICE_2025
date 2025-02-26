@@ -1,5 +1,83 @@
 @import './fonts.css';
 
+:root {
+  --color-white: #ffffff;
+  --color-light: #f8fafc;
+  --color-gray-cool: #e2e8f0;
+  --color-gray-slate: #1717170f;
+  --color-black: #222223;
+  --color-dark: #475569;
+  --color-sage: #c8cdc2;
+  --color-red: #dc2626;
+  --color-red-hover: #fee2e2;
+  --color-orange: #f59e0b;
+  --color-orange-hover: #fef3c7;
+  --color-blue: #4f46e5;
+  --color-green: #16a34a;
+  --color-green-hover: #dcfce7;
+  --color-shadow: #0000001a;
+
+  --padding-xs: 4px;
+  --padding-s: 8px;
+  --padding-m: 12px;
+  --padding-l: 16px;
+  --padding-xl: 20px;
+  --padding-xxl: 32px;
+
+  --margin-xs: 8px;
+  --margin-s: 12px;
+  --margin-m: 20px;
+  --margin-l: 24px;
+  --margin-xl: 100px;
+  --margin-auto: 0 auto;
+
+  --gap-s: 4px;
+  --gap-m: 8px;
+  --gap-l: 12px;
+  --gap-xl: 16px;
+  --gap-xxl: 20px;
+
+  --blur: 12px;
+
+  --font-size-xs: 12px;
+  --font-size-s: 14px;
+  --font-size-m: 16px;
+  --font-size-l: 20px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 30px;
+
+  --font-height-s: 16px;
+  --font-height-m: 22px;
+  --line-height-l: 24px;
+  --line-height-xl: 32px;
+  --line-height-xxl: 38px;
+
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --radius-xs: 4px;
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-xl: 32px;
+  --radius-full: 50%;
+
+  --shadow: 0px 4px 6px var(--color-shadow), 0px 4px 12px var(--color-shadow);
+
+  --index-xl: 100;
+
+  --top-l: 12px;
+  --top-xl: 28px;
+
+  --right-l: 12px;
+  --right-xxl: 40px;
+
+  --width-m: 32px;
+  --max-width-modal: 500px;
+
+  --height-m: 32px;
+}
+
 * {
   margin: 0;
   padding: 0;

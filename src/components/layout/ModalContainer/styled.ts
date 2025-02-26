@@ -7,12 +7,12 @@ const ModalOverlay = styled.div<{ $isVisible: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: var(--padding-xl);
   width: 100%;
   height: 100%;
-  background-color: rgba(34, 34, 35, 0.9);
-  backdrop-filter: blur(12px);
-  z-index: 100;
+  background-color: var(--color-black);
+  backdrop-filter: blur(var(--blur));
+  z-index: var(--index-xl);
   opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
   visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
   transition:
@@ -22,13 +22,13 @@ const ModalOverlay = styled.div<{ $isVisible: boolean }>`
 `;
 
 const ModalContent = styled.div<{ $isVisible: boolean }>`
-  background: white;
-  padding: 32px 16px;
-  border-radius: 12px;
+  background: var(--color-white);
+  padding: var(--padding-xxl) var(--padding-l);
+  border-radius: var(--radius-m);
   flex-shrink: 0;
   width: 100%;
-  max-width: 500px;
-  box-shadow: 0px 2px 4px -2px #1717170f;
+  max-width: var(--max-width-modal);
+  box-shadow: var(----shadow);
   opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
   transition:
     opacity 0.2s ease-out,
@@ -38,8 +38,8 @@ const ModalContent = styled.div<{ $isVisible: boolean }>`
 
 const BtnCloseBlock = styled.div`
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: var(--top-l);
+  right: var(--right-l);
 `;
 
-export { ModalOverlay, ModalContent, BtnCloseBlock };
+export { BtnCloseBlock, ModalContent, ModalOverlay };

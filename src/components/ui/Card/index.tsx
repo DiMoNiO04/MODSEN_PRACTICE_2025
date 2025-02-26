@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { BtnRound, TextDef, TextH3 } from '..';
+
+import { Priority } from '@/components/blocks';
 import { ModalTask } from '@/components/modals';
-import { Block, TopBlockInfo } from './styled';
-import { Priority } from '@/components/Priority';
 import { IOption } from '@/utils';
+
+import { BtnRound, TextDef, TextH3 } from '..';
+import { Block, TopBlockInfo } from './styled';
 
 export interface ICardProps {
   id: number;
