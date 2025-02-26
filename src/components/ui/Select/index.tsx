@@ -1,4 +1,5 @@
 import { IconArrow } from '@/components/icons';
+import { UITexts } from '@/constants';
 import { useDropdownToggle } from '@/hooks';
 import { IOption } from '@/utils';
 
@@ -32,7 +33,7 @@ export const Select = ({ labelText, value, options, onChange }: ISelectProps) =>
       <LabelText text={labelText} />
       <SelectContainer>
         <SelectButton type="button" onClick={toggleDropdown} ref={refDropdownBtn}>
-          {selectedOption?.value || 'Select...'}
+          {selectedOption?.value || UITexts.LABELS.SELECT}
           <SelectArrowIcon $isRotate={isDropdownOpen}>
             <IconArrow />
           </SelectArrowIcon>

@@ -1,5 +1,6 @@
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
+import { UITexts } from '@/constants';
 import { useForm } from '@/hooks';
 import { IFormDataColumn, IModalCloseProps } from '@/utils';
 
@@ -11,11 +12,24 @@ export const ModalEditColumn = ({ onClose, name, color }: IModalEditColumnProps)
 
   return (
     <ModalContainer onClose={onClose}>
-      <ModalTitle text="Edit column" />
+      <ModalTitle text={UITexts.COLUMN.EDIT} />
       <Form onSubmit={handleSubmit}>
-        <Input labelText="Name column" name="name" type="text" value={formData.name} onChange={handleChange} required />
-        <Input labelText="Color column" name="color" type="color" value={formData.color} onChange={handleChange} />
-        <BtnDef text="Save" typeBtn="submit" />
+        <Input
+          labelText={UITexts.LABELS.NAME}
+          name="name"
+          type="text"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <Input
+          labelText={UITexts.LABELS.COLOR}
+          name="color"
+          type="color"
+          value={formData.color}
+          onChange={handleChange}
+        />
+        <BtnDef text={UITexts.BTNS.SAVE} typeBtn="submit" />
       </Form>
     </ModalContainer>
   );

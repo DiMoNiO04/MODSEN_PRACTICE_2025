@@ -1,18 +1,18 @@
 import { BtnDef, BtnsBlock, ModalTitle } from '@/components/ui';
+import { UITexts } from '@/constants';
 
 interface ITaskDeleteContentProps {
-  title: string;
   handleCancel: () => void;
   handleClose: () => void;
 }
 
-export const TaskDeleteContent = ({ title, handleCancel, handleClose }: ITaskDeleteContentProps) => {
+export const TaskDeleteContent = ({ handleCancel, handleClose }: ITaskDeleteContentProps) => {
   return (
     <>
-      <ModalTitle text={`Are you sure you want to delete ${title} task?`} />
+      <ModalTitle text={UITexts.TASK.CONFIRM_DELETE} />
       <BtnsBlock>
-        <BtnDef text={'Cancel'} typeBtn={'button'} onClick={handleCancel} />
-        <BtnDef text={'Yes, Delete'} typeBtn={'button'} onClick={handleClose} isInvert />
+        <BtnDef text={UITexts.BTNS.CANCEL} typeBtn={'button'} onClick={handleCancel} />
+        <BtnDef text={UITexts.BTNS.CONFIRM_DELETE} typeBtn={'button'} onClick={handleClose} isInvert />
       </BtnsBlock>
     </>
   );

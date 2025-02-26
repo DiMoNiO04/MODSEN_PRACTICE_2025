@@ -1,6 +1,6 @@
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle, Select, TextArea } from '@/components/ui';
-import { CARD_PRIORITY, CARD_STATUS } from '@/constants';
+import { CARD_PRIORITY, CARD_STATUS, UITexts } from '@/constants';
 import { useForm } from '@/hooks';
 import { IFormDataTask, IModalCloseProps, IOption } from '@/utils';
 
@@ -27,17 +27,24 @@ export const ModalAddTask = ({ onClose, isFromHeader = false, status }: IModalAd
 
   return (
     <ModalContainer onClose={onClose}>
-      <ModalTitle text="Add new task" />
+      <ModalTitle text={UITexts.TASK.ADD_NEW} />
       <Form onSubmit={handleSubmit}>
-        <Input labelText="Task Name" name="name" type="text" value={formData.name} onChange={handleChange} required />
+        <Input
+          labelText={UITexts.LABELS.NAME}
+          name="name"
+          type="text"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
         <TextArea
-          labelText="Task Description"
+          labelText={UITexts.LABELS.DESCRIPTION}
           name="description"
           value={formData.description}
           onChange={handleChange}
         />
         <Select
-          labelText="Priority"
+          labelText={UITexts.LABELS.PRIORITY}
           value={formData.priority}
           onChange={onPriorityChange}
           options={Object.values(CARD_PRIORITY)}
@@ -45,13 +52,13 @@ export const ModalAddTask = ({ onClose, isFromHeader = false, status }: IModalAd
 
         {isFromHeader && (
           <Select
-            labelText="Status"
+            labelText={UITexts.LABELS.STATUS}
             value={formData.status}
             onChange={onStatusChange}
             options={Object.values(CARD_STATUS)}
           />
         )}
-        <BtnDef text="Save" typeBtn="submit" />
+        <BtnDef text={UITexts.BTNS.SAVE} typeBtn="submit" />
       </Form>
     </ModalContainer>
   );

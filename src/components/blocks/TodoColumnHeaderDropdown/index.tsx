@@ -2,9 +2,8 @@ import { forwardRef, useState } from 'react';
 
 import { ModalAddTask, ModalConfirm, ModalEditColumn } from '@/components/modals';
 import { BtnMenuItem, Dropdown } from '@/components/ui';
+import { UITexts } from '@/constants';
 import { IFormDataColumn } from '@/utils';
-
-const CONFIRM_TEXT_DELETE = 'Are you sure you want to delete the column and all its associated tasks?';
 
 export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IFormDataColumn>(
   ({ color, name }: IFormDataColumn, ref) => {
@@ -20,14 +19,18 @@ export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IFormDataColu
     return (
       <>
         <Dropdown ref={ref}>
-          <BtnMenuItem onClick={toggleAddTaskModal} text={'Add new task'} typeBtn="add" />
-          <BtnMenuItem onClick={toggleEditColumnModal} text={'Edit column'} typeBtn="edit" />
-          <BtnMenuItem onClick={toggleDeleteColumnModal} text={'Delete column'} typeBtn="delete" />
+          <BtnMenuItem onClick={toggleAddTaskModal} text={UITexts.TASK.ADD_NEW} typeBtn="add" />
+          <BtnMenuItem onClick={toggleEditColumnModal} text={UITexts.COLUMN.EDIT} typeBtn="edit" />
+          <BtnMenuItem onClick={toggleDeleteColumnModal} text={UITexts.COLUMN.DELETE} typeBtn="delete" />
         </Dropdown>
         {isModalOpenAddTask && <ModalAddTask onClose={toggleAddTaskModal} />}
         {isModalOpenEditColumn && <ModalEditColumn onClose={toggleEditColumnModal} name={name} color={color} />}
         {isModalOpenDeleteColumn && (
-          <ModalConfirm onClose={toggleDeleteColumnModal} text={CONFIRM_TEXT_DELETE} handleYes={handleConfirmYes} />
+          <ModalConfirm
+            onClose={toggleDeleteColumnModal}
+            text={UITexts.COLUMN.CONFIRM_DELETE}
+            handleYes={handleConfirmYes}
+          />
         )}
       </>
     );

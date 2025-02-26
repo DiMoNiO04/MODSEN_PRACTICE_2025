@@ -1,0 +1,46 @@
+export const UITexts = {
+  COLUMN: {
+    ADD_NEW: 'Add new column',
+    EDIT: 'Edit column',
+    DELETE: 'Delete column',
+    CONFIRM_DELETE: 'Are you sure you want to delete the column and all its associated tasks?',
+  },
+  TASK: {
+    ADD_NEW: 'Add new task',
+    EDIT: 'Edit task',
+    CONFIRM_DELETE: 'Are you sure you want to delete task?',
+    INFO: 'Info task',
+  },
+  LABELS: {
+    NAME: 'Name',
+    DESCRIPTION: 'Description',
+    PRIORITY: 'Priority',
+    STATUS: 'Status',
+    COLOR: 'Color',
+    REQUIRED: '*',
+    SELECT: 'Select ...',
+  },
+  BTNS: {
+    CANCEL: 'Cancel',
+    CONFIRM_DELETE: 'Yes, Delete',
+    SAVE: 'Save',
+    EDIT: 'Edit',
+    DELETE: 'Delete',
+    ADD_TASK: 'Add task ...',
+    NO: 'No',
+    YES: 'Yes',
+  },
+  LOGO_TITLE: 'Kanban Dashboard',
+  PRIORITIES: {
+    NULL: '-',
+    LOW: 'Low',
+    NORMAL: 'Normal',
+    HIGH: 'High',
+    CRITICAL: 'Critical',
+  },
+  STATUSES: {
+    TODO: 'To Do',
+    PROGRESS: 'In progress',
+    DONE: 'Done',
+  },
+};

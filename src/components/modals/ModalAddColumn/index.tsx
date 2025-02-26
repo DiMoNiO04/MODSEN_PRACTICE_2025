@@ -1,5 +1,6 @@
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
+import { UITexts } from '@/constants';
 import { useForm } from '@/hooks';
 import { getRandomColor, IFormDataColumn, IModalCloseProps } from '@/utils';
 
@@ -9,11 +10,24 @@ export const ModalAddColumn = ({ onClose }: IModalCloseProps) => {
 
   return (
     <ModalContainer onClose={onClose}>
-      <ModalTitle text="Add new column" />
+      <ModalTitle text={UITexts.COLUMN.ADD_NEW} />
       <Form onSubmit={handleSubmit}>
-        <Input labelText="Name column" name="name" type="text" value={formData.name} onChange={handleChange} required />
-        <Input labelText="Color column" name="color" type="color" value={formData.color} onChange={handleChange} />
-        <BtnDef text="Save" typeBtn="submit" />
+        <Input
+          labelText={UITexts.LABELS.NAME}
+          name="name"
+          type="text"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <Input
+          labelText={UITexts.LABELS.COLOR}
+          name="color"
+          type="color"
+          value={formData.color}
+          onChange={handleChange}
+        />
+        <BtnDef text={UITexts.BTNS.SAVE} typeBtn="submit" />
       </Form>
     </ModalContainer>
   );

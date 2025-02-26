@@ -1,4 +1,5 @@
 import { BtnDef, BtnsBlock, ColorText, ICardProps, ModalTitle, TextDef } from '@/components/ui';
+import { UITexts } from '@/constants';
 
 import { Content } from './styled';
 
@@ -17,16 +18,16 @@ export const TaskModalContent = ({ cardData, handleOpenDelete, handleOpenEdit }:
       <Content>
         <TextDef text={desc} />
         <div>
-          <TextDef text={'Prioritet'} />
+          <TextDef text={UITexts.LABELS.PRIORITY} />
           <ColorText color={priority.color} text={priority.value} isFullWidth />
         </div>
         <div>
-          <TextDef text={'Status'} />
+          <TextDef text={UITexts.LABELS.STATUS} />
           <ColorText color={status.color} text={status.value} isFullWidth />
         </div>
         <BtnsBlock>
-          <BtnDef text={'Edit'} typeBtn={'button'} onClick={handleOpenEdit} />
-          <BtnDef text={'Delete'} typeBtn={'button'} isInvert onClick={handleOpenDelete} />
+          <BtnDef text={UITexts.BTNS.EDIT} typeBtn={'button'} onClick={handleOpenEdit} />
+          <BtnDef text={UITexts.BTNS.DELETE} typeBtn={'button'} isInvert onClick={handleOpenDelete} />
         </BtnsBlock>
       </Content>
     </>

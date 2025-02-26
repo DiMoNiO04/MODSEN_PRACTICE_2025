@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { ModalAddTask } from '@/components/modals';
 import { ColorText } from '@/components/ui';
+import { UITexts } from '@/constants';
 import { IOption } from '@/utils';
 
 import { Button } from './styled';
@@ -18,7 +19,7 @@ export const TodoColumnTaskAdd = ({ status }: ITodoColumnTaskAddProps) => {
   return (
     <>
       <Button type="button" color={status.color} onClick={toggleTaskModal}>
-        <ColorText color={status.color} text="Add task..." />
+        <ColorText color={status.color} text={UITexts.BTNS.ADD_TASK} />
       </Button>
       {isModalOpen && <ModalAddTask onClose={toggleTaskModal} status={status} />}
     </>

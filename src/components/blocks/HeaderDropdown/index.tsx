@@ -2,6 +2,7 @@ import { forwardRef, useState } from 'react';
 
 import { ModalAddColumn, ModalAddTask } from '@/components/modals';
 import { BtnMenuItem, Dropdown } from '@/components/ui';
+import { UITexts } from '@/constants';
 
 export const HeaderDropdown = forwardRef<HTMLDivElement>((_, ref) => {
   const [isColumnModalOpen, setIsColumnModalOpen] = useState<boolean>(false);
@@ -13,8 +14,8 @@ export const HeaderDropdown = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <>
       <Dropdown ref={ref}>
-        <BtnMenuItem onClick={toggleColumnModal} text="Add new column" />
-        <BtnMenuItem onClick={toggleTaskModal} text="Add new task" />
+        <BtnMenuItem onClick={toggleColumnModal} text={UITexts.COLUMN.ADD_NEW} />
+        <BtnMenuItem onClick={toggleTaskModal} text={UITexts.TASK.ADD_NEW} />
       </Dropdown>
       {isColumnModalOpen && <ModalAddColumn onClose={toggleColumnModal} />}
       {isTaskModalOpen && <ModalAddTask onClose={toggleTaskModal} isFromHeader />}

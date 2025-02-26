@@ -1,6 +1,6 @@
 import { BtnDef, BtnsBlock, Form, ICardProps, Input, ModalTitle, TextArea } from '@/components/ui';
 import { Select } from '@/components/ui/Select';
-import { CARD_PRIORITY, CARD_STATUS } from '@/constants';
+import { CARD_PRIORITY, CARD_STATUS, UITexts } from '@/constants';
 import { useForm } from '@/hooks';
 import { IFormDataTask, IOption } from '@/utils';
 
@@ -30,30 +30,30 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
 
   return (
     <>
-      <ModalTitle text={'Edit Task'} />
+      <ModalTitle text={UITexts.TASK.EDIT} />
       <Form onSubmit={handleSubmit}>
-        <Input labelText={'Name Task'} name="name" type="text" value={formData.name} onChange={handleChange} />
+        <Input labelText={UITexts.LABELS.NAME} name="name" type="text" value={formData.name} onChange={handleChange} />
         <TextArea
-          labelText={'Description Task'}
+          labelText={UITexts.LABELS.DESCRIPTION}
           name="description"
           value={formData.description}
           onChange={handleChange}
         />
         <Select
-          labelText="Priority"
+          labelText={UITexts.LABELS.PRIORITY}
           value={formData.priority}
           onChange={onPriorityChange}
           options={Object.values(CARD_PRIORITY)}
         />
         <Select
-          labelText="Status"
+          labelText={UITexts.LABELS.STATUS}
           value={formData.status}
           onChange={onStatusChange}
           options={Object.values(CARD_STATUS)}
         />
         <BtnsBlock>
-          <BtnDef text={'Info Task'} typeBtn={'button'} onClick={handleCancel} isInvert />
-          <BtnDef text={'Save'} typeBtn={'submit'} />
+          <BtnDef text={UITexts.TASK.INFO} typeBtn={'button'} onClick={handleCancel} isInvert />
+          <BtnDef text={UITexts.BTNS.SAVE} typeBtn={'submit'} />
         </BtnsBlock>
       </Form>
     </>

@@ -1,5 +1,7 @@
+import { UITexts } from '@/constants';
+
 import { Text } from './styled';
 
 export const RequiredText = () => {
-  return <Text>*</Text>;
+  return <Text>{UITexts.LABELS.REQUIRED}</Text>;
 };
