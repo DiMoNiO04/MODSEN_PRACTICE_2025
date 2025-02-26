@@ -1,6 +1,7 @@
+import { EColors } from '@/constants';
 import { IIconProps } from '@/utils';
 
-export const IconMore = ({ color }: IIconProps) => {
+export const IconMore = ({ color = EColors.DARK }: IIconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -1,4 +1,5 @@
 import { BtnRound } from '@/components/ui';
+import { EColors } from '@/constants';
 import { useDropdownToggle } from '@/hooks';
 
 import { HeaderDropdown } from '../HeaderDropdown';
@@ -9,7 +10,7 @@ export const HeaderBtnAdd = () => {
 
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
-  const buttonColor = isDropdownOpen ? '#000000' : '#475569';
+  const buttonColor = isDropdownOpen ? EColors.BLACK : EColors.DARK;
 
   return (
     <HeaderBtnAddBlock>

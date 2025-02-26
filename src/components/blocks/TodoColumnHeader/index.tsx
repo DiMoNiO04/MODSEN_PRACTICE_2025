@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { BtnRound } from '@/components/ui';
+import { EColors } from '@/constants';
 import { useDropdownToggle } from '@/hooks';
 import { IOption } from '@/utils';
 
@@ -20,7 +21,7 @@ export const TodoColumnHeader = ({ status, count, isAddNewColumn = false }: ITod
 
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
 
-  const buttonColor = isDropdownOpen ? '#475569' : '#FFFFFF';
+  const buttonColor = isDropdownOpen ? EColors.DARK : EColors.WHITE;
 
   const toggleAddColumnModal = () => setIsModalOpenAddColumn(!isModalOpenAddColumn);
   const toggleAddTaskModal = () => setIsModalOpenAddTask(!isModalOpenAddTask);
@@ -32,7 +33,7 @@ export const TodoColumnHeader = ({ status, count, isAddNewColumn = false }: ITod
     <TodoColumnHeaderContainer color={status.color}>
       <TitleWithCount color={status.color} title={status.value} count={count} />
       {isAddNewColumn ? (
-        <BtnRound color="#FFFFFF" handle={handleAddButtonClick} type="add" />
+        <BtnRound color={EColors.WHITE} handle={handleAddButtonClick} type="add" />
       ) : (
         <>
           <BtnRound ref={refDropdownBtn} color={buttonColor} handle={toggleDropdown} type="more" />
