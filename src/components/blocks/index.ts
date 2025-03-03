@@ -1,6 +1,7 @@
 import { AddNewColumn } from './AddNewColumn';
 import { HeaderBtnAdd } from './HeaderBtnAdd';
 import { HeaderDropdown } from './HeaderDropdown';
+import { NotFound } from './NotFound';
 import { Priority } from './Priority';
 import { PriorityDropdown } from './PriorityDropdown';
 import { TaskDeleteContent } from './TaskDeleteContent';
@@ -18,6 +19,7 @@ export {
   AddNewColumn,
   HeaderBtnAdd,
   HeaderDropdown,
+  NotFound,
   Priority,
   PriorityDropdown,
   TaskDeleteContent,
