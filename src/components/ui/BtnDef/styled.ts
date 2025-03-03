@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 const Button = styled.button<{ $isInvert?: boolean }>`
+  display: block;
+  text-decoration: none;
   padding: var(--padding-m);
   font-size: var(--font-size-l);
   line-height: var(--font-height-l);
