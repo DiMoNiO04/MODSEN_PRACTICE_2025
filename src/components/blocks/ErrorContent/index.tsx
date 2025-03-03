@@ -2,10 +2,14 @@ import { BtnDef } from '@/components/ui';
 
 import { Block, Title } from './styled';
 
-export const NotFound = () => {
+interface IErrorContentProps {
+  text: string;
+}
+
+export const ErrorContent = ({ text }: IErrorContentProps) => {
   return (
     <Block>
-      <Title>Страница не найдена - 404</Title>
+      <Title>{text}</Title>
       <BtnDef text={'На главную'} typeBtn={'button'} to="/" />
     </Block>
   );

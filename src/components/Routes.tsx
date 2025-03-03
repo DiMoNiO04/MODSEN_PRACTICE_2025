@@ -1,11 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { NotFound } from './blocks';
+import { UITexts } from '@/constants';
+
+import { ErrorContent } from './blocks';
 import { App } from './layout';
 
 export const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<App />} />
-    <Route path="*" element={<NotFound />} />
+    <Route path="*" element={<ErrorContent text={UITexts.ERRORS.NOT_FOUND} />} />
   </Routes>
 );

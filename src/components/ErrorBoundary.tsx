@@ -1,5 +1,9 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
 
+import { UITexts } from '@/constants';
+
+import { ErrorContent } from './blocks';
+
 interface IErrorBoundaryProps {
   children: ReactNode;
 }
@@ -28,7 +32,7 @@ export class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundary
 
   render() {
     if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>;
+      return <ErrorContent text={UITexts.ERRORS.GENERAL} />;
     }
 
     return this.props.children;

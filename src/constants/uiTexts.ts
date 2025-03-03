@@ -43,4 +43,8 @@ export const UITexts = {
     PROGRESS: 'In progress',
     DONE: 'Done',
   },
+  ERRORS: {
+    NOT_FOUND: 'Страница не найдена - 404',
+    GENERAL: 'Что-то пошло не так...',
+  },
 };
