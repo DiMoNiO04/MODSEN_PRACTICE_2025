@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { BREAKPOINTS } from '@/utils';
+
 const HeaderBlock = styled.header`
   position: fixed;
   width: 100%;
@@ -7,6 +9,10 @@ const HeaderBlock = styled.header`
   top: 0;
   z-index: var(--index-xl);
   background-color: var(--color-light);
+
+  @media (max-width: ${BREAKPOINTS.mobile}) {
+    background-color: var(--color-white);
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -14,6 +20,10 @@ const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: var(--padding-xxl);
+
+  @media (max-width: ${BREAKPOINTS.mobile}) {
+    padding: var(--padding-m) var(--padding-l);
+  }
 `;
 
 export { HeaderBlock, HeaderContainer };

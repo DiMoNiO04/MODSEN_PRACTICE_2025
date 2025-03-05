@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { BREAKPOINTS } from '@/utils';
+
 const DropdownBlock = styled.div<{ $isPriority?: boolean; $isFullWidth?: boolean }>`
   position: absolute;
   width: ${({ $isFullWidth }) => ($isFullWidth ? '100%' : 'max-content')};
@@ -22,6 +24,11 @@ const DropdownBlock = styled.div<{ $isPriority?: boolean; $isFullWidth?: boolean
         right: 0;
         top: var(--right-xxl);
       `}
+
+  @media (max-width: ${BREAKPOINTS.mobile}) {
+    max-height: 150px;
+    overflow: scroll;
+  }
 `;
 
 export { DropdownBlock };

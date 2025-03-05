@@ -8,7 +8,7 @@ interface IColorTextProps {
 
 export const ColorText = ({ color, text, isFullWidth }: IColorTextProps) => {
   return (
-    <Text color={color} isFullWidth={isFullWidth}>
+    <Text color={color} $isFullWidth={isFullWidth}>
       {text ? text : '—'}
     </Text>
   );

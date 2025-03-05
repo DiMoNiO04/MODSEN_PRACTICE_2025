@@ -1,3 +1,4 @@
+import { BREAKPOINTS } from './breakpoints';
 import { getOpacityColor, getRandomColor } from './functions';
 import {
   IChildrenProps,
@@ -9,5 +10,5 @@ import {
   IText,
 } from './interfaces';
 
-export { getOpacityColor, getRandomColor };
+export { BREAKPOINTS,getOpacityColor, getRandomColor };
 export type { IChildrenProps, IFormDataColumn, IFormDataTask, IIconProps, IModalCloseProps, IOption, IText };
