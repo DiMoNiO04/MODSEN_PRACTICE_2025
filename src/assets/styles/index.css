@@ -16,6 +16,7 @@
   --color-green: #16a34a;
   --color-green-hover: #dcfce7;
   --color-shadow: #0000001a;
+  --color-bg-mob: #F1F5F9;
 
   --padding-xs: 4px;
   --padding-s: 8px;
@@ -99,4 +100,10 @@ button {
 a {
   text-decoration: none;
   display: block;
+}
+
+@media (max-width: 767px) {
+  body {
+    background-color: var(--color-light);
+  }
 }
