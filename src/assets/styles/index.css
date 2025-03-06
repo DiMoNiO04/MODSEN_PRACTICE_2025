@@ -75,15 +75,21 @@
   --right-xxl: 40px;
 
   --width-m: 32px;
+  --width-l: 40px;
   --max-width-modal: 500px;
 
   --height-m: 32px;
+  --width-l: 40px;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {

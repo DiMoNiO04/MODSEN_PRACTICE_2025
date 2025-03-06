@@ -2,6 +2,7 @@ import { BtnDef } from './BtnDef';
 import { BtnMenuItem } from './BtnMenuItem';
 import { BtnRound } from './BtnRound';
 import { BtnsBlock } from './BtnsBlock';
+import { BurgerBtn } from './BurgerBtn';
 import { Card, ICardProps } from './Card';
 import { ColorText } from './ColorText';
 import { Dropdown } from './Dropdown';
@@ -22,6 +23,7 @@ export {
   BtnMenuItem,
   BtnRound,
   BtnsBlock,
+  BurgerBtn,
   Card,
   ColorText,
   Dropdown,
