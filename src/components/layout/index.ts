@@ -5,5 +5,6 @@ import { Header } from './Header';
 import { HeaderMenuMob } from './HeaderMenuMob';
 import { Main } from './Main';
 import { ModalContainer } from './ModalContainer';
+import { Modals } from './Modals';
 
-export { App, Container, Dashboard, Header, HeaderMenuMob, Main, ModalContainer };
+export { App, Container, Dashboard, Header, HeaderMenuMob, Main, ModalContainer, Modals };

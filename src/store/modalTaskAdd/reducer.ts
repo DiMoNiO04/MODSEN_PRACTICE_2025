@@ -3,6 +3,7 @@ import { IInitialModalTaskAddState, TModalTaskAddAction } from './types';
 
 const initialModalTaskAddState: IInitialModalTaskAddState = {
   isOpen: false,
+  isFromHeader: false,
 };
 
 const modalTaskAddReducer = (
@@ -11,7 +12,11 @@ const modalTaskAddReducer = (
 ): IInitialModalTaskAddState => {
   switch (action.type) {
     case EModalTaskAddActions.TOGGLE_MODAL:
-      return { ...state, isOpen: !state.isOpen };
+      return {
+        ...state,
+        isOpen: !state.isOpen,
+        isFromHeader: action.payload,
+      };
     default:
       return state;
   }
