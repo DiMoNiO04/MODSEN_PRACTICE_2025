@@ -4,6 +4,7 @@ import { IInitialModalTaskAddState, TModalTaskAddAction } from './types';
 const initialModalTaskAddState: IInitialModalTaskAddState = {
   isOpen: false,
   isFromHeader: false,
+  status: null,
 };
 
 const modalTaskAddReducer = (
@@ -15,7 +16,8 @@ const modalTaskAddReducer = (
       return {
         ...state,
         isOpen: !state.isOpen,
-        isFromHeader: action.payload,
+        isFromHeader: action.payload.isFromHeader ?? false,
+        status: action.payload.status ?? null,
       };
     default:
       return state;

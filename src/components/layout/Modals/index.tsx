@@ -9,17 +9,19 @@ export const Modals = () => {
 
   const { isOpen: isOpenModalTask, cardData } = useAppSelector(({ modals }) => modals.modalTask);
   const { isOpen: isOpenModalColumn } = useAppSelector(({ modals }) => modals.modalColumnAdd);
-  const { isOpen: isOpenModalTaskAdd, isFromHeader } = useAppSelector(({ modals }) => modals.modalTaskAdd);
+  const { isOpen: isOpenModalTaskAdd, isFromHeader, status } = useAppSelector(({ modals }) => modals.modalTaskAdd);
 
   const handleCloseModalTask = () => dispatch(toggleModalTask(null));
   const handleCloseModalColumnAdd = () => dispatch(toggleModaColumnAdd());
-  const handleCloseModalTaskAdd = () => dispatch(toggleModalTaskAdd(false));
+  const handleCloseModalTaskAdd = () => dispatch(toggleModalTaskAdd());
 
   return (
     <>
       {isOpenModalTask && cardData && <ModalTask onClose={handleCloseModalTask} cardData={cardData} />}
       {isOpenModalColumn && <ModalAddColumn onClose={handleCloseModalColumnAdd} />}
-      {isOpenModalTaskAdd && <ModalAddTask onClose={handleCloseModalTaskAdd} isFromHeader={isFromHeader} />}
+      {isOpenModalTaskAdd && (
+        <ModalAddTask onClose={handleCloseModalTaskAdd} isFromHeader={isFromHeader} status={status ?? undefined} />
+      )}
     </>
   );
 };

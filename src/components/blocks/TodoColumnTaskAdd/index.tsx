@@ -1,8 +1,7 @@
-import { useState } from 'react';
-
-import { ModalAddTask } from '@/components/modals';
 import { ColorText } from '@/components/ui';
 import { UITexts } from '@/constants';
+import { toggleModalTaskAdd } from '@/store/modalTaskAdd/actions';
+import { useAppDispatch } from '@/store/store';
 import { IOption } from '@/utils';
 
 import { Button } from './styled';
@@ -12,16 +11,15 @@ interface ITodoColumnTaskAddProps {
 }
 
 export const TodoColumnTaskAdd = ({ status }: ITodoColumnTaskAddProps) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
-  const toggleTaskModal = () => setIsModalOpen(!isModalOpen);
+  const toggleTaskModal = () => {
+    dispatch(toggleModalTaskAdd({ status, isFromHeader: false }));
+  };
 
   return (
-    <>
-      <Button type="button" color={status.color} onClick={toggleTaskModal}>
-        <ColorText color={status.color} text={UITexts.BTNS.ADD_TASK} />
-      </Button>
-      {isModalOpen && <ModalAddTask onClose={toggleTaskModal} status={status} />}
-    </>
+    <Button type="button" color={status.color} onClick={toggleTaskModal}>
+      <ColorText color={status.color} text={UITexts.BTNS.ADD_TASK} />
+    </Button>
   );
 };

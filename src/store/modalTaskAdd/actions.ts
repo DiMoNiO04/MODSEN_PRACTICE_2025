@@ -1,10 +1,13 @@
+import { IToggleModalTaskAddPayload } from './types';
+
 enum EModalTaskAddActions {
   TOGGLE_MODAL = 'TOGGLE_MODAL_TASK_ADD',
 }
 
-const toggleModalTaskAdd = (isFromHeader: boolean = false) => ({
+const toggleModalTaskAdd = (payload: IToggleModalTaskAddPayload = {}) => ({
   type: EModalTaskAddActions.TOGGLE_MODAL,
-  payload: isFromHeader,
+  payload,
 });
 
 export { EModalTaskAddActions, toggleModalTaskAdd };
+export type { IToggleModalTaskAddPayload };
