@@ -16,6 +16,7 @@
   --color-green: #16a34a;
   --color-green-hover: #dcfce7;
   --color-shadow: #0000001a;
+  --color-bg-mob: #F1F5F9;
 
   --padding-xs: 4px;
   --padding-s: 8px;
@@ -28,7 +29,8 @@
   --margin-s: 12px;
   --margin-m: 20px;
   --margin-l: 24px;
-  --margin-xl: 100px;
+  --margin-xl: 64px;
+  --margin-xxl: 100px;
   --margin-auto: 0 auto;
 
   --gap-s: 4px;
@@ -73,15 +75,21 @@
   --right-xxl: 40px;
 
   --width-m: 32px;
+  --width-l: 40px;
   --max-width-modal: 500px;
 
   --height-m: 32px;
+  --width-l: 40px;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -99,4 +107,10 @@ button {
 a {
   text-decoration: none;
   display: block;
+}
+
+@media (max-width: 767px) {
+  body {
+    background-color: var(--color-light);
+  }
 }
