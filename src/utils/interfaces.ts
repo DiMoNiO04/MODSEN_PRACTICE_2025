@@ -32,18 +32,4 @@ interface IText {
   text: string;
 }
 
-interface IMobileMenu {
-  isOpen: boolean;
-  onClick: () => void;
-}
-
-export type {
-  IChildrenProps,
-  IFormDataColumn,
-  IFormDataTask,
-  IIconProps,
-  IMobileMenu,
-  IModalCloseProps,
-  IOption,
-  IText,
-};
+export type { IChildrenProps, IFormDataColumn, IFormDataTask, IIconProps, IModalCloseProps, IOption, IText };
