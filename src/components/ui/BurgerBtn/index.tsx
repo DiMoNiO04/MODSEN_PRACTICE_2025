@@ -1,14 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
-
 import { useBodyScrollBlock } from '@/hooks';
-import { toggleMenuMob } from '@/store/actions';
-import { IInitialMenuMobState } from '@/store/reducer';
+import { toggleMenuMob } from '@/store/menuMob/actions';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 
 import { BurgerButton, BurgerButtonLine } from './styled';
 
 export const BurgerBtn = () => {
-  const isOpenMenuMob = useSelector((state: IInitialMenuMobState) => state.isOpen);
-  const dispatch = useDispatch();
+  const isOpenMenuMob = useAppSelector((state) => state.menuMob.isOpen);
+  const dispatch = useAppDispatch();
 
   const onClickBurgerBtn = () => dispatch(toggleMenuMob());
 

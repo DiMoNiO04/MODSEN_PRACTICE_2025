@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { ModalAddColumn, ModalAddTask } from '@/components/modals';
 import { BtnMenuItem } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { useBodyScrollBlock } from '@/hooks';
-import { toggleMenuMob } from '@/store/actions';
-import { IInitialMenuMobState } from '@/store/reducer';
+import { toggleMenuMob } from '@/store/menuMob/actions';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 
 import { Block } from './styled';
 
@@ -14,8 +13,8 @@ export const HeaderMenuMob = () => {
   const [isColumnModalOpen, setIsColumnModalOpen] = useState<boolean>(false);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState<boolean>(false);
 
-  const isOpenMenuMob = useSelector((state: IInitialMenuMobState) => state.isOpen);
-  const dispatch = useDispatch();
+  const isOpenMenuMob = useAppSelector((state) => state.menuMob.isOpen);
+  const dispatch = useAppDispatch();
 
   const onClickBurgerBtn = () => dispatch(toggleMenuMob());
 

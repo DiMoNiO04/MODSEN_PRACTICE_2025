@@ -1,7 +1,16 @@
-import { createStore } from 'redux';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { combineReducers, createStore } from 'redux';
 
-import { menuMobReducer } from './reducer';
+import { menuMobReducer } from './menuMob/reducer';
 
-const store = createStore(menuMobReducer);
+const rootReducer = combineReducers({
+  menuMob: menuMobReducer,
+});
 
-export default store;
+export const store = createStore(rootReducer);
+
+type RootState = ReturnType<typeof rootReducer>;
+type AppDispatch = typeof store.dispatch;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

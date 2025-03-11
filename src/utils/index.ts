@@ -10,5 +10,5 @@ import {
   IText,
 } from './interfaces';
 
-export { BREAKPOINTS,getOpacityColor, getRandomColor };
+export { BREAKPOINTS, getOpacityColor, getRandomColor };
 export type { IChildrenProps, IFormDataColumn, IFormDataTask, IIconProps, IModalCloseProps, IOption, IText };
