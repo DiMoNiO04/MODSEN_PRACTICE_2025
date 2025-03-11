@@ -96,6 +96,10 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+body.--lock {
+  overflow: hidden;
+}
+
 button {
   padding: 0;
   margin: 0;
