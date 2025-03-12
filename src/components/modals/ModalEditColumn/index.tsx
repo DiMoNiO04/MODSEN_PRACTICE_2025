@@ -2,13 +2,19 @@ import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { useForm } from '@/hooks';
-import { IFormDataColumn, IModalCloseProps } from '@/utils';
+import { toggleModaColumnEdit } from '@/store/modalColumnEdit/actions';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { IFormDataColumn } from '@/utils';
 
-interface IModalEditColumnProps extends IModalCloseProps, IFormDataColumn {}
+export const ModalEditColumn = () => {
+  const dispatch = useAppDispatch();
+  const { name, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
+  const onClose = () => dispatch(toggleModaColumnEdit({ name, color }));
 
-export const ModalEditColumn = ({ onClose, name, color }: IModalEditColumnProps) => {
   const initialData: IFormDataColumn = { name, color };
   const { formData, handleChange, handleSubmit } = useForm<IFormDataColumn>({ initialData, onClose });
+
+  if (!isOpen) return null;
 
   return (
     <ModalContainer onClose={onClose}>

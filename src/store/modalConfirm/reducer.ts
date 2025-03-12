@@ -4,7 +4,7 @@ import { IInitialModalConfirmState, TModalConfirmAction } from './types';
 const initialModalConfirmState: IInitialModalConfirmState = {
   isOpen: false,
   text: null,
-  onConfirm: null,
+  onConfirm: undefined,
 };
 
 const modalConfirmReducer = (
@@ -17,7 +17,7 @@ const modalConfirmReducer = (
         ...state,
         isOpen: !state.isOpen,
         text: action.payload.text,
-        onConfirm: action.payload.onConfirm || null,
+        onConfirm: action.payload.onConfirm || undefined,
       };
     default:
       return state;

@@ -2,14 +2,14 @@ import { useState } from 'react';
 
 import { TaskDeleteContent, TaskEditContent, TaskModalContent } from '@/components/blocks';
 import { ModalContainer } from '@/components/layout';
-import { ICardProps } from '@/components/ui';
-import { IModalCloseProps } from '@/utils';
+import { toggleModalTask } from '@/store/modalTask/actions';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 
-interface IModalTaskProps extends IModalCloseProps {
-  cardData: ICardProps;
-}
+export const ModalTask = () => {
+  const dispatch = useAppDispatch();
+  const { cardData, isOpen } = useAppSelector(({ modals }) => modals.modalTask);
+  const onClose = () => dispatch(toggleModalTask(null));
 
-export const ModalTask = ({ onClose, cardData }: IModalTaskProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -19,6 +19,8 @@ export const ModalTask = ({ onClose, cardData }: IModalTaskProps) => {
     setIsEditing(false);
     setIsDeleting(false);
   };
+
+  if (!cardData || !isOpen) return null;
 
   return (
     <ModalContainer onClose={onClose}>

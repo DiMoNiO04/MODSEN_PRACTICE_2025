@@ -6,7 +6,7 @@ interface IInitialModalConfirmState extends IToggleModalConfirmPayload {
 
 interface IToggleModalConfirmPayload {
   text: string | null;
-  onConfirm?: (() => void) | null;
+  onConfirm?: () => void;
 }
 
 type TModalConfirmAction = {

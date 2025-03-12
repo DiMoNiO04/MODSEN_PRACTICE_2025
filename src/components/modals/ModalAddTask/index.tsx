@@ -2,14 +2,15 @@ import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle, Select, TextArea } from '@/components/ui';
 import { CARD_PRIORITY, CARD_STATUS, UITexts } from '@/constants';
 import { useForm } from '@/hooks';
-import { IFormDataTask, IModalCloseProps, IOption } from '@/utils';
+import { toggleModalTaskAdd } from '@/store/modalTaskAdd/actions';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { IFormDataTask, IOption } from '@/utils';
 
-interface IModalAddTaskProps extends IModalCloseProps {
-  isFromHeader?: boolean;
-  status?: IOption;
-}
+export const ModalAddTask = () => {
+  const dispatch = useAppDispatch();
+  const { isFromHeader, status, isOpen } = useAppSelector(({ modals }) => modals.modalTaskAdd);
+  const onClose = () => dispatch(toggleModalTaskAdd());
 
-export const ModalAddTask = ({ onClose, isFromHeader = false, status }: IModalAddTaskProps) => {
   const initialData: IFormDataTask = {
     name: '',
     description: '',
@@ -24,6 +25,8 @@ export const ModalAddTask = ({ onClose, isFromHeader = false, status }: IModalAd
 
   const onStatusChange = (selectedOption: IOption) =>
     handleChange({ target: { name: 'status', value: selectedOption } });
+
+  if (!isOpen) return null;
 
   return (
     <ModalContainer onClose={onClose}>
