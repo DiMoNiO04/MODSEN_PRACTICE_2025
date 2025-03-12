@@ -3,6 +3,8 @@ import { IInitialModalColumnEditState, TModalColumnEditAction } from './types';
 
 const initialModalColumnAddState: IInitialModalColumnEditState = {
   isOpen: false,
+  name: '',
+  color: undefined,
 };
 
 const modalColumnEditReducer = (
@@ -11,7 +13,12 @@ const modalColumnEditReducer = (
 ): IInitialModalColumnEditState => {
   switch (action.type) {
     case EModalColumnEditActions.TOGGLE_MODAL:
-      return { ...state, isOpen: !state.isOpen };
+      return {
+        ...state,
+        isOpen: !state.isOpen,
+        name: action.payload.name ?? null,
+        color: action.payload.color ?? undefined,
+      };
     default:
       return state;
   }

@@ -1,9 +1,17 @@
 import { EModalColumnEditActions } from './actions';
 
-interface IInitialModalColumnEditState {
+interface IInitialModalColumnEditState extends IToggleModalColumnEditPayload {
   isOpen: boolean;
 }
 
-type TModalColumnEditAction = { type: EModalColumnEditActions.TOGGLE_MODAL };
+interface IToggleModalColumnEditPayload {
+  name: string;
+  color: string | undefined;
+}
 
-export type { IInitialModalColumnEditState, TModalColumnEditAction };
+type TModalColumnEditAction = {
+  type: EModalColumnEditActions.TOGGLE_MODAL;
+  payload: { name: string; color: string | undefined };
+};
+
+export type { IInitialModalColumnEditState, IToggleModalColumnEditPayload, TModalColumnEditAction };
