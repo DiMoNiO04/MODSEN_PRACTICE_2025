@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { TaskDeleteContent, TaskEditContent, TaskModalContent } from '@/components/blocks';
 import { ModalContainer } from '@/components/layout';
@@ -19,6 +19,11 @@ export const ModalTask = () => {
     setIsEditing(false);
     setIsDeleting(false);
   };
+
+  useEffect(() => {
+    setIsDeleting(false);
+    setIsEditing(false);
+  }, [isOpen]);
 
   if (!cardData || !isOpen) return null;
 

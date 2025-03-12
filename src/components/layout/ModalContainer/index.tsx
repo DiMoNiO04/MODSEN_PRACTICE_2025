@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { BtnRound } from '@/components/ui';
 import { useBodyScrollBlock } from '@/hooks';
-import { IChildrenProps, IModalCloseProps } from '@/utils';
+import { IChildrenProps } from '@/utils';
 
 import { BtnCloseBlock, ModalContent, ModalOverlay } from './styled';
 
-export interface IModalProps extends IChildrenProps, IModalCloseProps {}
+interface IModalProps extends IChildrenProps {
+  onClose: () => void;
+}
 
 export const ModalContainer = ({ onClose, children }: IModalProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
