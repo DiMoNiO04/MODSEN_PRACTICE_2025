@@ -1,4 +1,4 @@
-import { EModalConfirmActions } from './actions';
+import { EModalConfirmActions } from './types';
 import { IInitialModalConfirmState, TModalConfirmAction } from './types';
 
 const initialModalConfirmState: IInitialModalConfirmState = {
@@ -12,12 +12,16 @@ const modalConfirmReducer = (
   action: TModalConfirmAction
 ): IInitialModalConfirmState => {
   switch (action.type) {
-    case EModalConfirmActions.TOGGLE_MODAL:
+    case EModalConfirmActions.OPEN_MODAL:
       return {
         ...state,
-        isOpen: !state.isOpen,
+        isOpen: true,
         text: action.payload.text,
-        onConfirm: action.payload.onConfirm || undefined,
+        onConfirm: action.payload.onConfirm,
+      };
+    case EModalConfirmActions.CLOSE_MODAL:
+      return {
+        ...initialModalConfirmState,
       };
     default:
       return state;

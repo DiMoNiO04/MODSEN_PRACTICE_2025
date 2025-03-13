@@ -1,12 +1,13 @@
-import { IToggleModalConfirmPayload } from './types';
+import { EModalConfirmActions } from './types';
+import { IOpenModalConfirmPayload, TModalConfirmAction } from './types';
 
-enum EModalConfirmActions {
-  TOGGLE_MODAL = 'TOGGLE_MODAL_CONFIRM',
-}
-
-const toggleModalConfirm = (payload: IToggleModalConfirmPayload) => ({
-  type: EModalConfirmActions.TOGGLE_MODAL,
+const openModalConfirm = (payload: IOpenModalConfirmPayload): TModalConfirmAction => ({
+  type: EModalConfirmActions.OPEN_MODAL,
   payload,
 });
 
-export { EModalConfirmActions, toggleModalConfirm };
+const closeModalConfirm = (): TModalConfirmAction => ({
+  type: EModalConfirmActions.CLOSE_MODAL,
+});
+
+export { closeModalConfirm, EModalConfirmActions, openModalConfirm };

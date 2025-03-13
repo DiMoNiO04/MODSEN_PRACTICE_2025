@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { BtnMenuItem, Dropdown } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { toggleModaColumnEdit } from '@/store/modalColumnEdit/actions';
-import { toggleModalConfirm } from '@/store/modalConfirm/actions';
+import { openModalConfirm } from '@/store/modalConfirm/actions';
 import { toggleModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch } from '@/store/store';
 import { IFormDataColumn } from '@/utils';
@@ -16,7 +16,7 @@ export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IFormDataColu
     const handleOpenModalColumnEdit = () => dispatch(toggleModaColumnEdit({ name, color }));
     const handleOpenModalConfirm = () =>
       dispatch(
-        toggleModalConfirm({
+        openModalConfirm({
           text: UITexts.COLUMN.CONFIRM_DELETE,
           onConfirm: () => alert('Deleted'),
         })

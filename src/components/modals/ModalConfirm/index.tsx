@@ -1,13 +1,13 @@
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, BtnsBlock, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
-import { toggleModalConfirm } from '@/store/modalConfirm/actions';
+import { closeModalConfirm } from '@/store/modalConfirm/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 
 export const ModalConfirm = () => {
   const dispatch = useAppDispatch();
   const { isOpen, text, onConfirm } = useAppSelector(({ modals }) => modals.modalConfirm);
-  const onClose = () => dispatch(toggleModalConfirm({ text, onConfirm }));
+  const onClose = () => dispatch(closeModalConfirm());
 
   if (!text || !isOpen) return null;
 

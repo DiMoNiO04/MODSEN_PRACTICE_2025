@@ -1,20 +1,20 @@
-import { EModalConfirmActions } from './actions';
-
-interface IInitialModalConfirmState extends IToggleModalConfirmPayload {
-  isOpen: boolean;
+enum EModalConfirmActions {
+  OPEN_MODAL = 'OPEN_MODAL_CONFIRM',
+  CLOSE_MODAL = 'CLOSE_MODAL_CONFIRM',
 }
 
-interface IToggleModalConfirmPayload {
+interface IOpenModalConfirmPayload {
   text: string | null;
   onConfirm?: () => void;
 }
 
-type TModalConfirmAction = {
-  type: EModalConfirmActions.TOGGLE_MODAL;
-  payload: {
-    text: string | null;
-    onConfirm?: (() => void) | null;
-  };
-};
+interface IInitialModalConfirmState extends IOpenModalConfirmPayload {
+  isOpen: boolean;
+}
 
-export type { IInitialModalConfirmState, IToggleModalConfirmPayload, TModalConfirmAction };
+type TModalConfirmAction =
+  | { type: EModalConfirmActions.OPEN_MODAL; payload: IOpenModalConfirmPayload }
+  | { type: EModalConfirmActions.CLOSE_MODAL };
+
+export { EModalConfirmActions };
+export type { IInitialModalConfirmState, IOpenModalConfirmPayload, TModalConfirmAction };

@@ -11,7 +11,7 @@ const modalTaskReducer = (state = initialModalTaskState, action: TModalTaskActio
     case EModalTaskActions.OPEN_MODAL:
       return { ...state, isOpen: true, cardData: action.payload };
     case EModalTaskActions.CLOSE_MODAL:
-      return { ...state, isOpen: false, cardData: null };
+      return { ...initialModalTaskState };
     default:
       return state;
   }
