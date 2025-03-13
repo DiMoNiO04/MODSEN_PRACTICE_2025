@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
+
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { useForm } from '@/hooks';
-import { toggleModaColumnEdit } from '@/store/modalColumnEdit/actions';
+import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { IFormDataColumn } from '@/utils';
 
@@ -10,12 +12,21 @@ export const ModalEditColumn = () => {
   const dispatch = useAppDispatch();
   const { name, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
   const onClose = () => {
-    dispatch(toggleModaColumnEdit({ name, color }));
+    dispatch(closeModalColumnEdit());
     resetForm();
   };
 
-  const initialData: IFormDataColumn = { name, color };
-  const { formData, handleChange, handleSubmit, resetForm } = useForm<IFormDataColumn>({ initialData, onClose });
+  const initialData: IFormDataColumn = { name, color: color || '#000000' };
+  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataColumn>({
+    initialData,
+    onClose,
+  });
+
+  useEffect(() => {
+    if (isOpen) {
+      setFormData(initialData);
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -35,7 +46,7 @@ export const ModalEditColumn = () => {
           labelText={UITexts.LABELS.COLOR}
           name="color"
           type="color"
-          value={formData.color}
+          value={formData.color || '#000000'}
           onChange={handleChange}
         />
         <BtnDef text={UITexts.BTNS.SAVE} typeBtn="submit" />

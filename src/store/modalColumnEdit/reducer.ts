@@ -1,24 +1,26 @@
-import { EModalColumnEditActions } from './actions';
+import { EModalColumnEditActions } from './types';
 import { IInitialModalColumnEditState, TModalColumnEditAction } from './types';
 
-const initialModalColumnAddState: IInitialModalColumnEditState = {
+const initialModalColumnEditState: IInitialModalColumnEditState = {
   isOpen: false,
   name: '',
-  color: undefined,
+  color: '',
 };
 
 const modalColumnEditReducer = (
-  state = initialModalColumnAddState,
+  state = initialModalColumnEditState,
   action: TModalColumnEditAction
 ): IInitialModalColumnEditState => {
   switch (action.type) {
-    case EModalColumnEditActions.TOGGLE_MODAL:
+    case EModalColumnEditActions.OPEN_MODAL:
       return {
         ...state,
-        isOpen: !state.isOpen,
-        name: action.payload.name ?? null,
-        color: action.payload.color ?? undefined,
+        isOpen: true,
+        name: action.payload.name,
+        color: action.payload.color,
       };
+    case EModalColumnEditActions.CLOSE_MODAL:
+      return { ...initialModalColumnEditState };
     default:
       return state;
   }

@@ -1,17 +1,20 @@
-import { EModalColumnEditActions } from './actions';
+enum EModalColumnEditActions {
+  OPEN_MODAL = 'OPEN_MODAL_COLUMN_EDIT',
+  CLOSE_MODAL = 'CLOSE_MODAL_COLUMN_EDIT',
+}
 
-interface IInitialModalColumnEditState extends IToggleModalColumnEditPayload {
+interface IOpenModalColumnEditPayload {
+  name: string;
+  color: string;
+}
+
+interface IInitialModalColumnEditState extends IOpenModalColumnEditPayload {
   isOpen: boolean;
 }
 
-interface IToggleModalColumnEditPayload {
-  name: string;
-  color: string | undefined;
-}
+type TModalColumnEditAction =
+  | { type: EModalColumnEditActions.OPEN_MODAL; payload: IOpenModalColumnEditPayload }
+  | { type: EModalColumnEditActions.CLOSE_MODAL };
 
-type TModalColumnEditAction = {
-  type: EModalColumnEditActions.TOGGLE_MODAL;
-  payload: { name: string; color: string | undefined };
-};
-
-export type { IInitialModalColumnEditState, IToggleModalColumnEditPayload, TModalColumnEditAction };
+export { EModalColumnEditActions };
+export type { IInitialModalColumnEditState, IOpenModalColumnEditPayload, TModalColumnEditAction };

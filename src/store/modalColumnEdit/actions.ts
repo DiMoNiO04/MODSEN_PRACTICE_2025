@@ -1,12 +1,13 @@
-import { IToggleModalColumnEditPayload } from './types';
+import { EModalColumnEditActions } from './types';
+import { IOpenModalColumnEditPayload, TModalColumnEditAction } from './types';
 
-enum EModalColumnEditActions {
-  TOGGLE_MODAL = 'TOGGLE_MODAL_COLUMN_EDIT',
-}
-
-const toggleModaColumnEdit = (payload: IToggleModalColumnEditPayload) => ({
-  type: EModalColumnEditActions.TOGGLE_MODAL,
+const openModalColumnEdit = (payload: IOpenModalColumnEditPayload): TModalColumnEditAction => ({
+  type: EModalColumnEditActions.OPEN_MODAL,
   payload,
 });
 
-export { EModalColumnEditActions, toggleModaColumnEdit };
+const closeModalColumnEdit = (): TModalColumnEditAction => ({
+  type: EModalColumnEditActions.CLOSE_MODAL,
+});
+
+export { closeModalColumnEdit, openModalColumnEdit };

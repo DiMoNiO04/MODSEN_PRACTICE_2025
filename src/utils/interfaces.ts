@@ -9,7 +9,7 @@ interface IIconProps {
 
 interface IFormDataColumn {
   name: string;
-  color?: string;
+  color: string;
 }
 
 interface IFormDataTask {

@@ -24,6 +24,7 @@ export const useForm = <T,>({ initialData, onClose, onSubmit }: IUseFormProps<T>
     if (onSubmit) {
       onSubmit(formData);
     }
+    console.log(formData);
     onClose();
   };
 

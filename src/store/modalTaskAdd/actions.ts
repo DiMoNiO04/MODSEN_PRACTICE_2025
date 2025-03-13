@@ -10,4 +10,4 @@ const closeModalTaskAdd = (): TModalTaskAddAction => ({
   type: EModalTaskAddActions.CLOSE_MODAL,
 });
 
-export { closeModalTaskAdd, EModalTaskAddActions,openModalTaskAdd };
+export { closeModalTaskAdd, EModalTaskAddActions, openModalTaskAdd };
