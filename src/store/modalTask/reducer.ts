@@ -8,12 +8,10 @@ const initialModalTaskState: IInitialModalTaskState = {
 
 const modalTaskReducer = (state = initialModalTaskState, action: TModalTaskAction): IInitialModalTaskState => {
   switch (action.type) {
-    case EModalTaskActions.TOGGLE_MODAL:
-      return {
-        ...state,
-        isOpen: !state.isOpen,
-        cardData: action.payload,
-      };
+    case EModalTaskActions.OPEN_MODAL:
+      return { ...state, isOpen: true, cardData: action.payload };
+    case EModalTaskActions.CLOSE_MODAL:
+      return { ...state, isOpen: false, cardData: null };
     default:
       return state;
   }

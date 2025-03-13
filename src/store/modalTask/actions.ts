@@ -1,12 +1,14 @@
 import { ICardProps } from '@/components/ui';
 
-enum EModalTaskActions {
-  TOGGLE_MODAL = 'TOGGLE_MODAL_TASK',
-}
+import { EModalTaskActions, TModalTaskAction } from './types';
 
-const toggleModalTask = (cardData: ICardProps | null) => ({
-  type: EModalTaskActions.TOGGLE_MODAL,
+const openModalTask = (cardData: ICardProps): TModalTaskAction => ({
+  type: EModalTaskActions.OPEN_MODAL,
   payload: cardData,
 });
 
-export { EModalTaskActions, toggleModalTask };
+const closeModalTask = (): TModalTaskAction => ({
+  type: EModalTaskActions.CLOSE_MODAL,
+});
+
+export { closeModalTask, EModalTaskActions, openModalTask };

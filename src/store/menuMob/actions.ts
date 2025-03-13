@@ -1,10 +1,10 @@
-import { EMenuMobActions } from './types';
+import { EMenuMobActions, TMenuMobAction } from './types';
 
-const openMenuMob = () => ({
+const openMenuMob = (): TMenuMobAction => ({
   type: EMenuMobActions.OPEN_MENU,
 });
 
-const closeMenuMob = () => ({
+const closeMenuMob = (): TMenuMobAction => ({
   type: EMenuMobActions.CLOSE_MENU,
 });
 

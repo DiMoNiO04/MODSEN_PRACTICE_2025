@@ -1,5 +1,5 @@
 import { Priority } from '@/components/blocks';
-import { toggleModalTask } from '@/store/modalTask/actions';
+import { openModalTask } from '@/store/modalTask/actions';
 import { useAppDispatch } from '@/store/store';
 import { IOption } from '@/utils';
 
@@ -19,7 +19,7 @@ export const Card = (cardData: ICardProps) => {
 
   const dispatch = useAppDispatch();
 
-  const handleOpenModal = () => dispatch(toggleModalTask(cardData));
+  const handleOpenModal = () => dispatch(openModalTask(cardData));
 
   return (
     <Block>

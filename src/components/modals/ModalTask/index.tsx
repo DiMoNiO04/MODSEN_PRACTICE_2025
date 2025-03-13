@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { TaskDeleteContent, TaskEditContent, TaskModalContent } from '@/components/blocks';
 import { ModalContainer } from '@/components/layout';
-import { toggleModalTask } from '@/store/modalTask/actions';
+import { closeModalTask } from '@/store/modalTask/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 
 export const ModalTask = () => {
   const dispatch = useAppDispatch();
   const { cardData, isOpen } = useAppSelector(({ modals }) => modals.modalTask);
-  const onClose = () => dispatch(toggleModalTask(null));
+  const onClose = () => dispatch(closeModalTask());
 
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);

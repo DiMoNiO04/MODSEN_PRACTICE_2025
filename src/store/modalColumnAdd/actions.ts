@@ -1,10 +1,10 @@
-import { EModalColumnAddActions } from './types';
+import { EModalColumnAddActions, TModalColumnAddAction } from './types';
 
-const openModaColumnAdd = () => ({
+const openModaColumnAdd = (): TModalColumnAddAction => ({
   type: EModalColumnAddActions.OPEN_MODAL,
 });
 
-const closeModaColumnAdd = () => ({
+const closeModaColumnAdd = (): TModalColumnAddAction => ({
   type: EModalColumnAddActions.CLOSE_MODAL,
 });
 
