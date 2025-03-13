@@ -1,7 +1,4 @@
-enum EMenuMobActions {
-  OPEN_MENU = 'OPEN_MENU',
-  CLOSE_MENU = 'CLOSE_MENU',
-}
+import { EMenuMobActions } from './types';
 
 const openMenuMob = () => ({
   type: EMenuMobActions.OPEN_MENU,

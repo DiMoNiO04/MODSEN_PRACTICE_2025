@@ -10,8 +10,10 @@ const modalColumnAddReducer = (
   action: TModalColumnAddAction
 ): IInitialModalColumnAddState => {
   switch (action.type) {
-    case EModalColumnAddActions.TOGGLE_MODAL:
-      return { ...state, isOpen: !state.isOpen };
+    case EModalColumnAddActions.OPEN_MODAL:
+      return { ...state, isOpen: true };
+    case EModalColumnAddActions.CLOSE_MODAL:
+      return { ...state, isOpen: false };
     default:
       return state;
   }

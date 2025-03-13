@@ -1,9 +1,11 @@
-enum EModalColumnAddActions {
-  TOGGLE_MODAL = 'TOGGLE_MODAL_COLUMN_ADD',
-}
+import { EModalColumnAddActions } from './types';
 
-const toggleModaColumnAdd = () => ({
-  type: EModalColumnAddActions.TOGGLE_MODAL,
+const openModaColumnAdd = () => ({
+  type: EModalColumnAddActions.OPEN_MODAL,
 });
 
-export { EModalColumnAddActions, toggleModaColumnAdd };
+const closeModaColumnAdd = () => ({
+  type: EModalColumnAddActions.CLOSE_MODAL,
+});
+
+export { closeModaColumnAdd, EModalColumnAddActions, openModaColumnAdd };
