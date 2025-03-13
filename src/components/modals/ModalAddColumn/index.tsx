@@ -9,10 +9,13 @@ import { getRandomColor, IFormDataColumn } from '@/utils';
 export const ModalAddColumn = () => {
   const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector(({ modals }) => modals.modalColumnAdd);
-  const onClose = () => dispatch(closeModaColumnAdd());
+  const onClose = () => {
+    dispatch(closeModaColumnAdd());
+    resetForm();
+  };
 
   const initialData: IFormDataColumn = { name: '', color: getRandomColor() };
-  const { formData, handleChange, handleSubmit } = useForm<IFormDataColumn>({ initialData, onClose });
+  const { formData, handleChange, handleSubmit, resetForm } = useForm<IFormDataColumn>({ initialData, onClose });
 
   if (!isOpen) return null;
 

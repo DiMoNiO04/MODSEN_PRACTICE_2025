@@ -4,7 +4,7 @@ import { BtnMenuItem, Dropdown } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { toggleModaColumnEdit } from '@/store/modalColumnEdit/actions';
 import { openModalConfirm } from '@/store/modalConfirm/actions';
-import { toggleModalTaskAdd } from '@/store/modalTaskAdd/actions';
+import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch } from '@/store/store';
 import { IFormDataColumn } from '@/utils';
 
@@ -12,7 +12,7 @@ export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IFormDataColu
   ({ color, name }: IFormDataColumn, ref) => {
     const dispatch = useAppDispatch();
 
-    const handleOpenModalTaskAdd = () => dispatch(toggleModalTaskAdd({ isFromHeader: false }));
+    const handleOpenModalTaskAdd = () => dispatch(openModalTaskAdd());
     const handleOpenModalColumnEdit = () => dispatch(toggleModaColumnEdit({ name, color }));
     const handleOpenModalConfirm = () =>
       dispatch(

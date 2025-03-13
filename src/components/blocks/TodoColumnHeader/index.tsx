@@ -2,7 +2,7 @@ import { BtnRound } from '@/components/ui';
 import { EColors } from '@/constants';
 import { useDropdownToggle } from '@/hooks';
 import { openModaColumnAdd } from '@/store/modalColumnAdd/actions';
-import { toggleModalTaskAdd } from '@/store/modalTaskAdd/actions';
+import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch } from '@/store/store';
 import { IOption } from '@/utils';
 
@@ -26,7 +26,7 @@ export const TodoColumnHeader = ({ status, count, isAddNewColumn = false }: ITod
     if (isAddNewColumn) {
       dispatch(openModaColumnAdd());
     } else {
-      dispatch(toggleModalTaskAdd({ isFromHeader: true, status: status }));
+      dispatch(openModalTaskAdd({ status }));
     }
   };
 

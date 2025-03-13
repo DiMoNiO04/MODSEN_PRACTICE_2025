@@ -1,13 +1,13 @@
-import { IToggleModalTaskAddPayload } from './types';
+import { EModalTaskAddActions } from './types';
+import { IToggleModalTaskAddPayload, TModalTaskAddAction } from './types';
 
-enum EModalTaskAddActions {
-  TOGGLE_MODAL = 'TOGGLE_MODAL_TASK_ADD',
-}
-
-const toggleModalTaskAdd = (payload: IToggleModalTaskAddPayload = {}) => ({
-  type: EModalTaskAddActions.TOGGLE_MODAL,
+const openModalTaskAdd = (payload?: IToggleModalTaskAddPayload): TModalTaskAddAction => ({
+  type: EModalTaskAddActions.OPEN_MODAL,
   payload,
 });
 
-export { EModalTaskAddActions, toggleModalTaskAdd };
-export type { IToggleModalTaskAddPayload };
+const closeModalTaskAdd = (): TModalTaskAddAction => ({
+  type: EModalTaskAddActions.CLOSE_MODAL,
+});
+
+export { closeModalTaskAdd, EModalTaskAddActions,openModalTaskAdd };

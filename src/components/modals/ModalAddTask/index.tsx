@@ -1,15 +1,20 @@
+import { useEffect } from 'react';
+
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle, Select, TextArea } from '@/components/ui';
 import { CARD_PRIORITY, CARD_STATUS, UITexts } from '@/constants';
 import { useForm } from '@/hooks';
-import { toggleModalTaskAdd } from '@/store/modalTaskAdd/actions';
+import { closeModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { IFormDataTask, IOption } from '@/utils';
 
 export const ModalAddTask = () => {
   const dispatch = useAppDispatch();
   const { isFromHeader, status, isOpen } = useAppSelector(({ modals }) => modals.modalTaskAdd);
-  const onClose = () => dispatch(toggleModalTaskAdd());
+  const onClose = () => {
+    dispatch(closeModalTaskAdd());
+    resetForm();
+  };
 
   const initialData: IFormDataTask = {
     name: '',
@@ -18,7 +23,16 @@ export const ModalAddTask = () => {
     status: status || CARD_STATUS.toDo,
   };
 
-  const { formData, handleChange, handleSubmit } = useForm<IFormDataTask>({ initialData, onClose });
+  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataTask>({
+    initialData,
+    onClose,
+  });
+
+  useEffect(() => {
+    if (isOpen) {
+      setFormData(initialData);
+    }
+  }, [isOpen, status]);
 
   const onPriorityChange = (selectedOption: IOption) =>
     handleChange({ target: { name: 'priority', value: selectedOption } });

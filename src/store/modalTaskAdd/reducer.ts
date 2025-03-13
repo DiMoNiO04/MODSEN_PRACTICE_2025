@@ -1,10 +1,12 @@
-import { EModalTaskAddActions } from './actions';
+import { CARD_STATUS } from '@/constants';
+
+import { EModalTaskAddActions } from './types';
 import { IInitialModalTaskAddState, TModalTaskAddAction } from './types';
 
 const initialModalTaskAddState: IInitialModalTaskAddState = {
   isOpen: false,
   isFromHeader: false,
-  status: null,
+  status: CARD_STATUS.toDo,
 };
 
 const modalTaskAddReducer = (
@@ -12,13 +14,15 @@ const modalTaskAddReducer = (
   action: TModalTaskAddAction
 ): IInitialModalTaskAddState => {
   switch (action.type) {
-    case EModalTaskAddActions.TOGGLE_MODAL:
+    case EModalTaskAddActions.OPEN_MODAL:
       return {
         ...state,
-        isOpen: !state.isOpen,
-        isFromHeader: action.payload.isFromHeader ?? false,
-        status: action.payload.status ?? null,
+        isOpen: true,
+        isFromHeader: action.payload?.isFromHeader ?? false,
+        status: action.payload?.status ?? undefined,
       };
+    case EModalTaskAddActions.CLOSE_MODAL:
+      return { ...initialModalTaskAddState };
     default:
       return state;
   }

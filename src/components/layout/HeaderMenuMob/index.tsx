@@ -3,7 +3,7 @@ import { UITexts } from '@/constants';
 import { useBodyScrollBlock } from '@/hooks';
 import { closeMenuMob } from '@/store/menuMob/actions';
 import { openModaColumnAdd } from '@/store/modalColumnAdd/actions';
-import { toggleModalTaskAdd } from '@/store/modalTaskAdd/actions';
+import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 
 import { Block } from './styled';
@@ -14,15 +14,15 @@ export const HeaderMenuMob = () => {
 
   const handleCloseMenuMob = () => dispatch(closeMenuMob());
   const openColumnModalAdd = () => dispatch(openModaColumnAdd());
-  const toggleTaskModalAdd = () => dispatch(toggleModalTaskAdd());
+  const openTaskModalAdd = () => dispatch(openModalTaskAdd({ isFromHeader: true }));
 
   const openColumnModal = () => {
     openColumnModalAdd();
     handleCloseMenuMob();
   };
 
-  const toggleTaskModal = () => {
-    toggleTaskModalAdd();
+  const openTaskModal = () => {
+    openTaskModalAdd();
     handleCloseMenuMob();
   };
 
@@ -31,7 +31,7 @@ export const HeaderMenuMob = () => {
   return (
     <Block $isOpen={isOpenMenuMob}>
       <BtnMenuItem onClick={openColumnModal} text={UITexts.COLUMN.ADD_NEW} />
-      <BtnMenuItem onClick={toggleTaskModal} text={UITexts.TASK.ADD_NEW} />
+      <BtnMenuItem onClick={openTaskModal} text={UITexts.TASK.ADD_NEW} />
     </Block>
   );
 };

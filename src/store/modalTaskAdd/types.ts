@@ -1,19 +1,22 @@
 import { IOption } from '@/utils';
 
-import { EModalTaskAddActions } from './actions';
+enum EModalTaskAddActions {
+  OPEN_MODAL = 'OPEN_MODAL_TASK_ADD',
+  CLOSE_MODAL = 'CLOSE_MODAL_TASK_ADD',
+}
+
+interface IToggleModalTaskAddPayload {
+  isFromHeader?: boolean;
+  status?: IOption;
+}
 
 interface IInitialModalTaskAddState extends IToggleModalTaskAddPayload {
   isOpen: boolean;
 }
 
-interface IToggleModalTaskAddPayload {
-  isFromHeader?: boolean;
-  status?: IOption | null;
-}
+type TModalTaskAddAction =
+  | { type: EModalTaskAddActions.OPEN_MODAL; payload?: IToggleModalTaskAddPayload }
+  | { type: EModalTaskAddActions.CLOSE_MODAL };
 
-type TModalTaskAddAction = {
-  type: EModalTaskAddActions.TOGGLE_MODAL;
-  payload: { isFromHeader?: boolean; status?: IOption | null };
-};
-
+export { EModalTaskAddActions };
 export type { IInitialModalTaskAddState, IToggleModalTaskAddPayload, TModalTaskAddAction };

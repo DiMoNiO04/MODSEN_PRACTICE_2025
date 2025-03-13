@@ -21,12 +21,13 @@ export const useForm = <T,>({ initialData, onClose, onSubmit }: IUseFormProps<T>
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
     if (onSubmit) {
       onSubmit(formData);
     }
     onClose();
   };
 
-  return { formData, handleChange, handleSubmit };
+  const resetForm = () => setFormData(initialData);
+
+  return { formData, handleChange, handleSubmit, resetForm, setFormData };
 };

@@ -1,6 +1,6 @@
 import { ColorText } from '@/components/ui';
 import { UITexts } from '@/constants';
-import { toggleModalTaskAdd } from '@/store/modalTaskAdd/actions';
+import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch } from '@/store/store';
 import { IOption } from '@/utils';
 
@@ -13,9 +13,7 @@ interface ITodoColumnTaskAddProps {
 export const TodoColumnTaskAdd = ({ status }: ITodoColumnTaskAddProps) => {
   const dispatch = useAppDispatch();
 
-  const toggleTaskModal = () => {
-    dispatch(toggleModalTaskAdd({ status, isFromHeader: false }));
-  };
+  const toggleTaskModal = () => dispatch(openModalTaskAdd({ status }));
 
   return (
     <Button type="button" color={status.color} onClick={toggleTaskModal}>

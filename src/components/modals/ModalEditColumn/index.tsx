@@ -9,10 +9,13 @@ import { IFormDataColumn } from '@/utils';
 export const ModalEditColumn = () => {
   const dispatch = useAppDispatch();
   const { name, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
-  const onClose = () => dispatch(toggleModaColumnEdit({ name, color }));
+  const onClose = () => {
+    dispatch(toggleModaColumnEdit({ name, color }));
+    resetForm();
+  };
 
   const initialData: IFormDataColumn = { name, color };
-  const { formData, handleChange, handleSubmit } = useForm<IFormDataColumn>({ initialData, onClose });
+  const { formData, handleChange, handleSubmit, resetForm } = useForm<IFormDataColumn>({ initialData, onClose });
 
   if (!isOpen) return null;
 
