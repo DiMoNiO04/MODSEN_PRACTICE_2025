@@ -7,8 +7,10 @@ const initialMenuMobState: IInitialMenuMobState = {
 
 const menuMobReducer = (state = initialMenuMobState, action: TMenuMobAction): IInitialMenuMobState => {
   switch (action.type) {
-    case EMenuMobActions.TOGGLE_MENU:
-      return { ...state, isOpen: !state.isOpen };
+    case EMenuMobActions.OPEN_MENU:
+      return { ...state, isOpen: true };
+    case EMenuMobActions.CLOSE_MENU:
+      return { ...state, isOpen: false };
     default:
       return state;
   }

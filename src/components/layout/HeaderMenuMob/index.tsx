@@ -1,7 +1,7 @@
 import { BtnMenuItem } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { useBodyScrollBlock } from '@/hooks';
-import { toggleMenuMob } from '@/store/menuMob/actions';
+import { closeMenuMob } from '@/store/menuMob/actions';
 import { toggleModaColumnAdd } from '@/store/modalColumnAdd/actions';
 import { toggleModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
@@ -12,18 +12,18 @@ export const HeaderMenuMob = () => {
   const isOpenMenuMob = useAppSelector((state) => state.menuMob.isOpen);
   const dispatch = useAppDispatch();
 
-  const onClickBurgerBtn = () => dispatch(toggleMenuMob());
+  const handleCloseMenuMob = () => dispatch(closeMenuMob());
   const toggleColumnModalAdd = () => dispatch(toggleModaColumnAdd());
   const toggleTaskModalAdd = () => dispatch(toggleModalTaskAdd());
 
   const toggleColumnModal = () => {
     toggleColumnModalAdd();
-    onClickBurgerBtn();
+    handleCloseMenuMob();
   };
 
   const toggleTaskModal = () => {
     toggleTaskModalAdd();
-    onClickBurgerBtn();
+    handleCloseMenuMob();
   };
 
   useBodyScrollBlock(isOpenMenuMob);

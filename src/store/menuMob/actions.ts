@@ -1,9 +1,14 @@
 enum EMenuMobActions {
-  TOGGLE_MENU = 'TOGGLE_MENU',
+  OPEN_MENU = 'OPEN_MENU',
+  CLOSE_MENU = 'CLOSE_MENU',
 }
 
-const toggleMenuMob = () => ({
-  type: EMenuMobActions.TOGGLE_MENU,
+const openMenuMob = () => ({
+  type: EMenuMobActions.OPEN_MENU,
 });
 
-export { EMenuMobActions, toggleMenuMob };
+const closeMenuMob = () => ({
+  type: EMenuMobActions.CLOSE_MENU,
+});
+
+export { closeMenuMob, EMenuMobActions, openMenuMob };
