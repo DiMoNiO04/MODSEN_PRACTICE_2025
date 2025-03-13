@@ -1,14 +1,34 @@
+import { useEffect } from 'react';
+
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { useForm } from '@/hooks';
-import { IFormDataColumn, IModalCloseProps } from '@/utils';
+import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { IFormDataColumn } from '@/utils';
 
-interface IModalEditColumnProps extends IModalCloseProps, IFormDataColumn {}
+export const ModalEditColumn = () => {
+  const dispatch = useAppDispatch();
+  const { name, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
+  const onClose = () => {
+    dispatch(closeModalColumnEdit());
+    resetForm();
+  };
 
-export const ModalEditColumn = ({ onClose, name, color }: IModalEditColumnProps) => {
-  const initialData: IFormDataColumn = { name, color };
-  const { formData, handleChange, handleSubmit } = useForm<IFormDataColumn>({ initialData, onClose });
+  const initialData: IFormDataColumn = { name, color: color || '#000000' };
+  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataColumn>({
+    initialData,
+    onClose,
+  });
+
+  useEffect(() => {
+    if (isOpen) {
+      setFormData(initialData);
+    }
+  }, [isOpen]);
+
+  if (!isOpen) return null;
 
   return (
     <ModalContainer onClose={onClose}>
@@ -26,7 +46,7 @@ export const ModalEditColumn = ({ onClose, name, color }: IModalEditColumnProps)
           labelText={UITexts.LABELS.COLOR}
           name="color"
           type="color"
-          value={formData.color}
+          value={formData.color || '#000000'}
           onChange={handleChange}
         />
         <BtnDef text={UITexts.BTNS.SAVE} typeBtn="submit" />

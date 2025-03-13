@@ -1,8 +1,9 @@
-import { useState } from 'react';
-
 import { BtnRound } from '@/components/ui';
 import { EColors } from '@/constants';
 import { useDropdownToggle } from '@/hooks';
+import { openModaColumnAdd } from '@/store/modalColumnAdd/actions';
+import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
+import { useAppDispatch } from '@/store/store';
 import { IOption } from '@/utils';
 
 import { TitleWithCount } from '../TitleWithCount';
@@ -16,17 +17,19 @@ export interface ITodoColumnHeaderProps {
 }
 
 export const TodoColumnHeader = ({ status, count, isAddNewColumn = false }: ITodoColumnHeaderProps) => {
-  const [isModalOpenAddColumn, setIsModalOpenAddColumn] = useState<boolean>(false);
-  const [isModalOpenAddTask, setIsModalOpenAddTask] = useState<boolean>(false);
-
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
+  const dispatch = useAppDispatch();
 
   const buttonColor = isDropdownOpen ? EColors.DARK : EColors.WHITE;
 
-  const toggleAddColumnModal = () => setIsModalOpenAddColumn(!isModalOpenAddColumn);
-  const toggleAddTaskModal = () => setIsModalOpenAddTask(!isModalOpenAddTask);
+  const handleAddButtonClick = () => {
+    if (isAddNewColumn) {
+      dispatch(openModaColumnAdd());
+    } else {
+      dispatch(openModalTaskAdd({ status }));
+    }
+  };
 
-  const handleAddButtonClick = () => (isAddNewColumn ? toggleAddColumnModal() : toggleAddTaskModal());
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (

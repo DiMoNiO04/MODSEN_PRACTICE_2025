@@ -1,35 +1,37 @@
-import { useState } from 'react';
-
-import { ModalAddColumn, ModalAddTask } from '@/components/modals';
 import { BtnMenuItem } from '@/components/ui';
 import { UITexts } from '@/constants';
-import { IMobileMenu } from '@/utils/interfaces';
+import { useBodyScrollBlock } from '@/hooks';
+import { closeMenuMob } from '@/store/menuMob/actions';
+import { openModaColumnAdd } from '@/store/modalColumnAdd/actions';
+import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 
 import { Block } from './styled';
 
-export const HeaderMenuMob = ({ isOpen, onClick }: IMobileMenu) => {
-  const [isColumnModalOpen, setIsColumnModalOpen] = useState<boolean>(false);
-  const [isTaskModalOpen, setIsTaskModalOpen] = useState<boolean>(false);
+export const HeaderMenuMob = () => {
+  const isOpenMenuMob = useAppSelector((state) => state.menuMob.isOpen);
+  const dispatch = useAppDispatch();
 
-  const toggleColumnModal = () => {
-    setIsColumnModalOpen((prev) => !prev);
-    onClick();
+  const handleCloseMenuMob = () => dispatch(closeMenuMob());
+  const openColumnModalAdd = () => dispatch(openModaColumnAdd());
+  const openTaskModalAdd = () => dispatch(openModalTaskAdd({ isFromHeader: true }));
+
+  const openColumnModal = () => {
+    openColumnModalAdd();
+    handleCloseMenuMob();
   };
 
-  const toggleTaskModal = () => {
-    setIsTaskModalOpen((prev) => !prev);
-    onClick();
+  const openTaskModal = () => {
+    openTaskModalAdd();
+    handleCloseMenuMob();
   };
+
+  useBodyScrollBlock(isOpenMenuMob);
 
   return (
-    <>
-      <Block $isOpen={isOpen}>
-        <BtnMenuItem onClick={toggleColumnModal} text={UITexts.COLUMN.ADD_NEW} />
-        <BtnMenuItem onClick={toggleTaskModal} text={UITexts.TASK.ADD_NEW} />
-      </Block>
-
-      {isColumnModalOpen && <ModalAddColumn onClose={() => setIsColumnModalOpen(false)} />}
-      {isTaskModalOpen && <ModalAddTask onClose={() => setIsTaskModalOpen(false)} isFromHeader />}
-    </>
+    <Block $isOpen={isOpenMenuMob}>
+      <BtnMenuItem onClick={openColumnModal} text={UITexts.COLUMN.ADD_NEW} />
+      <BtnMenuItem onClick={openTaskModal} text={UITexts.TASK.ADD_NEW} />
+    </Block>
   );
 };

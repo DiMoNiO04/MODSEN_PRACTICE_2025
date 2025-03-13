@@ -2,11 +2,22 @@ import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { useForm } from '@/hooks';
-import { getRandomColor, IFormDataColumn, IModalCloseProps } from '@/utils';
+import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { getRandomColor, IFormDataColumn } from '@/utils';
 
-export const ModalAddColumn = ({ onClose }: IModalCloseProps) => {
+export const ModalAddColumn = () => {
+  const dispatch = useAppDispatch();
+  const { isOpen } = useAppSelector(({ modals }) => modals.modalColumnAdd);
+  const onClose = () => {
+    dispatch(closeModaColumnAdd());
+    resetForm();
+  };
+
   const initialData: IFormDataColumn = { name: '', color: getRandomColor() };
-  const { formData, handleChange, handleSubmit } = useForm<IFormDataColumn>({ initialData, onClose });
+  const { formData, handleChange, handleSubmit, resetForm } = useForm<IFormDataColumn>({ initialData, onClose });
+
+  if (!isOpen) return null;
 
   return (
     <ModalContainer onClose={onClose}>

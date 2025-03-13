@@ -2,10 +2,6 @@ interface IChildrenProps {
   children: React.ReactNode;
 }
 
-interface IModalCloseProps {
-  onClose: () => void;
-}
-
 interface IIconProps {
   size?: number;
   color?: string;
@@ -13,7 +9,7 @@ interface IIconProps {
 
 interface IFormDataColumn {
   name: string;
-  color?: string;
+  color: string;
 }
 
 interface IFormDataTask {
@@ -32,18 +28,4 @@ interface IText {
   text: string;
 }
 
-interface IMobileMenu {
-  isOpen: boolean;
-  onClick: () => void;
-}
-
-export type {
-  IChildrenProps,
-  IFormDataColumn,
-  IFormDataTask,
-  IIconProps,
-  IMobileMenu,
-  IModalCloseProps,
-  IOption,
-  IText,
-};
+export type { IChildrenProps, IFormDataColumn, IFormDataTask, IIconProps, IOption, IText };

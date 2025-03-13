@@ -6,7 +6,7 @@ import { PriorityDropdown } from '../PriorityDropdown';
 import { PriorityBlock, PriorityButton } from './styled';
 
 export const Priority = ({ color, value }: IOption) => {
-  const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle(true);
+  const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
