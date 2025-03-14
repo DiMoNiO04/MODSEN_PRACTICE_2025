@@ -1,11 +1,12 @@
-import { BtnDef, BtnsBlock, Form, ICardProps, Input, ModalTitle, TextArea } from '@/components/ui';
+import { BtnDef, BtnsBlock, Form, Input, ModalTitle, TextArea } from '@/components/ui';
 import { Select } from '@/components/ui/Select';
 import { CARD_PRIORITY, CARD_STATUS, UITexts } from '@/constants';
 import { useForm } from '@/hooks';
 import { IFormDataTask, IOption } from '@/utils';
+import { ICard } from '@/utils/interfaces';
 
 interface ITaskEditContentProps {
-  cardData: ICardProps;
+  cardData: ICard;
   handleCancel: () => void;
   onClose: () => void;
 }

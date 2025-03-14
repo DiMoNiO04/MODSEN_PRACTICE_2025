@@ -1,8 +1,8 @@
-import { ICardProps } from '@/components/ui';
+import { ICard } from '@/utils/interfaces';
 
 import { EModalTaskActions, TModalTaskAction } from './types';
 
-const openModalTask = (cardData: ICardProps): TModalTaskAction => ({
+const openModalTask = (cardData: ICard): TModalTaskAction => ({
   type: EModalTaskActions.OPEN_MODAL,
   payload: cardData,
 });

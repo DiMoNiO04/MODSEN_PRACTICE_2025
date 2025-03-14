@@ -1,20 +1,12 @@
 import { Priority } from '@/components/blocks';
 import { openModalTask } from '@/store/modalTask/actions';
 import { useAppDispatch } from '@/store/store';
-import { IOption } from '@/utils';
+import { ICard } from '@/utils/interfaces';
 
 import { BtnRound, TextDef, TextH3 } from '..';
 import { Block, TopBlockInfo } from './styled';
 
-export interface ICardProps {
-  id: number;
-  title: string;
-  desc: string;
-  priority: IOption;
-  status: IOption;
-}
-
-export const Card = (cardData: ICardProps) => {
+export const Card = (cardData: ICard) => {
   const { title, desc, priority } = cardData;
 
   const dispatch = useAppDispatch();

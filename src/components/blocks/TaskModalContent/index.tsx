@@ -1,10 +1,11 @@
-import { BtnDef, BtnsBlock, ColorText, ICardProps, ModalTitle, TextDef } from '@/components/ui';
+import { BtnDef, BtnsBlock, ColorText, ModalTitle, TextDef } from '@/components/ui';
 import { UITexts } from '@/constants';
+import { ICard } from '@/utils/interfaces';
 
 import { Content } from './styled';
 
 interface ITaskModalContentProps {
-  cardData: ICardProps;
+  cardData: ICard;
   handleOpenDelete: () => void;
   handleOpenEdit: () => void;
 }
