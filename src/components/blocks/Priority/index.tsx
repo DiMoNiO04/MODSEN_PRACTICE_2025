@@ -13,7 +13,7 @@ export const Priority = ({ color, value }: IOption) => {
   return (
     <PriorityBlock>
       <PriorityButton type="button" onClick={toggleDropdown} ref={refDropdownBtn}>
-        <ColorText color={color} text={value} />
+        <ColorText color={color} text={value} isFullWidth />
       </PriorityButton>
       {isDropdownOpen && <PriorityDropdown ref={refDropdownMenu} />}
     </PriorityBlock>

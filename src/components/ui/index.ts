@@ -3,7 +3,7 @@ import { BtnMenuItem } from './BtnMenuItem';
 import { BtnRound } from './BtnRound';
 import { BtnsBlock } from './BtnsBlock';
 import { BurgerBtn } from './BurgerBtn';
-import { Card, ICardProps } from './Card';
+import { Card } from './Card';
 import { ColorText } from './ColorText';
 import { Dropdown } from './Dropdown';
 import { Form } from './Form';
@@ -39,4 +39,3 @@ export {
   TextDef,
   TextH3,
 };
-export type { ICardProps };

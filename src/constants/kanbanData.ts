@@ -1,63 +1,72 @@
-import { ICardProps } from '@/components/ui';
+import { IKanbanData } from '@/utils/interfaces';
 
 import { CARD_PRIORITY } from './cardPriority';
 import { CARD_STATUS } from './cardStatus';
 
-export const TASKS_DATA: ICardProps[][] = [
-  [
-    {
-      id: 1,
-      title: 'UI/UX Design in the age of Blog Copywriting UI/UX Design UI/UX Design',
-      desc: `Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit. 
-        Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.`,
+export const KANBAN_DATA: IKanbanData = {
+  columns: {
+    'column-1': { id: 'column-1', status: CARD_STATUS.toDo, cardIds: ['card-1', 'card-2'] },
+    'column-2': { id: 'column-2', status: CARD_STATUS.inProgress, cardIds: ['card-3', 'card-4'] },
+    'column-3': { id: 'column-3', status: CARD_STATUS.done, cardIds: ['card-5', 'card-6', 'card-7'] },
+  },
+  cards: {
+    'card-1': {
+      id: 'card-1',
+      title: 'UI/UX Design in the age of Blog Copywriting',
+      desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
       priority: CARD_PRIORITY.critical,
       status: CARD_STATUS.toDo,
     },
-    {
-      id: 2,
+    'card-2': {
+      id: 'card-2',
       title: 'Blog Copywriting',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
       priority: CARD_PRIORITY.null,
       status: CARD_STATUS.toDo,
     },
-  ],
-  [
-    {
-      id: 3,
+    'card-3': {
+      id: 'card-3',
       title: 'User flow confirmation for finance app',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
       priority: CARD_PRIORITY.high,
       status: CARD_STATUS.inProgress,
     },
-    {
-      id: 4,
+    'card-4': {
+      id: 'card-4',
       title: 'Healthcare app wireframe flow',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
       priority: CARD_PRIORITY.null,
       status: CARD_STATUS.inProgress,
     },
-  ],
-  [
-    {
-      id: 5,
+    'card-5': {
+      id: 'card-5',
       title: 'UI/UX Design in the age of AI',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
       priority: CARD_PRIORITY.low,
       status: CARD_STATUS.done,
     },
-    {
-      id: 6,
+    'card-6': {
+      id: 'card-6',
       title: 'UI/UX Design in the age of AI',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
       priority: CARD_PRIORITY.normal,
       status: CARD_STATUS.done,
     },
-    {
-      id: 7,
+    'card-7': {
+      id: 'card-7',
       title: 'UI/UX Design in the age of AI',
       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
       priority: CARD_PRIORITY.critical,
       status: CARD_STATUS.done,
     },
-  ],
-];
+  },
+};
+
+// export const KANBAN_DATA: IKanbanData = {
+//   columns: {
+//     'column-1': { id: 'column-1', status: CARD_STATUS.toDo, cardIds: [] },
+//     'column-2': { id: 'column-2', status: CARD_STATUS.inProgress, cardIds: [] },
+//     'column-3': { id: 'column-3', status: CARD_STATUS.done, cardIds: [] },
+//   },
+//   cards: {},
+// };

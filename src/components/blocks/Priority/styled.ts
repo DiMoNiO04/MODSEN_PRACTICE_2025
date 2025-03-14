@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const PriorityBlock = styled.div`
   position: relative;
+  min-width: 82px;
 `;
 
 const PriorityButton = styled.button`

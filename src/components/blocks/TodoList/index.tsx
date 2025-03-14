@@ -1,9 +1,10 @@
-import { Card, ICardProps } from '@/components/ui';
+import { Card } from '@/components/ui';
+import { ICard } from '@/utils/interfaces';
 
 import { List } from './styled';
 
 interface ITodoListProps {
-  tasks: ICardProps[];
+  tasks: ICard[];
 }
 
 export const TodoList = ({ tasks }: ITodoListProps) => {
