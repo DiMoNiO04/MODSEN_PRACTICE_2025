@@ -3,7 +3,7 @@ import { IKanbanData } from '@/utils/interfaces';
 import { CARD_PRIORITY } from './cardPriority';
 import { CARD_STATUS } from './cardStatus';
 
-export const TASKS_DATA: IKanbanData = {
+export const KANBAN_DATA: IKanbanData = {
   columns: {
     'column-1': { id: 'column-1', status: CARD_STATUS.toDo, cardIds: ['card-1', 'card-2'] },
     'column-2': { id: 'column-2', status: CARD_STATUS.inProgress, cardIds: ['card-3', 'card-4'] },
@@ -61,3 +61,12 @@ export const TASKS_DATA: IKanbanData = {
     },
   },
 };
+
+// export const KANBAN_DATA: IKanbanData = {
+//   columns: {
+//     'column-1': { id: 'column-1', status: CARD_STATUS.toDo, cardIds: [] },
+//     'column-2': { id: 'column-2', status: CARD_STATUS.inProgress, cardIds: [] },
+//     'column-3': { id: 'column-3', status: CARD_STATUS.done, cardIds: [] },
+//   },
+//   cards: {},
+// };
