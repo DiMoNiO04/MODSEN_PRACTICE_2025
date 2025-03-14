@@ -32,7 +32,7 @@ export const UITexts = {
   },
   LOGO_TITLE: 'Kanban Dashboard',
   PRIORITIES: {
-    NULL: '-',
+    NULL: '—',
     LOW: 'Low',
     NORMAL: 'Normal',
     HIGH: 'High',
