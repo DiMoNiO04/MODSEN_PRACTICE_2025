@@ -107,7 +107,9 @@ body.dark {
 
   --height-sm: 16px;
   --height-m: 32px;
-  --width-l: 40px;
+  --height-l: 40px;
+
+  --height-header: 64px;
 }
 
 * {

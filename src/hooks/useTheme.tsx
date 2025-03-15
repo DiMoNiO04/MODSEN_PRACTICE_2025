@@ -2,12 +2,12 @@ import { useContext, useEffect } from 'react';
 
 import { ETheme, LS_KEY_THEME, ThemeContext } from '../context/themeContext';
 
-interface UseThemeResult {
+interface IUseThemeResult {
   toggleTheme: () => void;
   theme: ETheme;
 }
 
-export const useTheme = (): UseThemeResult => {
+export const useTheme = (): IUseThemeResult => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   useEffect(() => {
