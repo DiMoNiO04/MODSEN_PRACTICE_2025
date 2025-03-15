@@ -42,7 +42,7 @@ export const ModalEditColumn = () => {
     dispatch(
       openNotification({
         isSuccess: true,
-        text: `Column ${formData.title} has been successfully edited`,
+        text: `Column '${formData.title}' has been successfully edited`,
       })
     );
   };

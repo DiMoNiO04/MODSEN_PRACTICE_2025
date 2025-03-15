@@ -1,4 +1,4 @@
-import { ModalAddColumn, ModalAddTask, ModalConfirm, ModalEditColumn, ModalTask } from '@/components/modals';
+import { ModalAddColumn, ModalAddTask, ModalColumnDelete, ModalEditColumn, ModalTask } from '@/components/modals';
 
 export const Modals = () => {
   return (
@@ -7,7 +7,7 @@ export const Modals = () => {
       <ModalAddTask />
       <ModalAddColumn />
       <ModalEditColumn />
-      <ModalConfirm />
+      <ModalColumnDelete />
     </>
   );
 };

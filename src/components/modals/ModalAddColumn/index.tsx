@@ -40,7 +40,7 @@ export const ModalAddColumn = () => {
     dispatch(
       openNotification({
         isSuccess: true,
-        text: `Column ${formData.title} has been successfully added`,
+        text: `Column '${formData.title}' has been successfully added`,
       })
     );
   };
