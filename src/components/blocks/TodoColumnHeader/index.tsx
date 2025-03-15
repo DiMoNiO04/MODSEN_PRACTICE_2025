@@ -41,7 +41,7 @@ export const TodoColumnHeader = ({ status, count, isAddNewColumn = false }: ITod
         <>
           <BtnRound ref={refDropdownBtn} color={buttonColor} handle={toggleDropdown} type="more" />
           {isDropdownOpen && (
-            <TodoColumnHeaderDropdown ref={refDropdownMenu} name={status.value} color={status.color} />
+            <TodoColumnHeaderDropdown id="1" ref={refDropdownMenu} name={status.value} color={status.color} />
           )}
         </>
       )}

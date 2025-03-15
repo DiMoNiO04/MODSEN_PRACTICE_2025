@@ -1,15 +1,17 @@
+import { useEffect } from 'react';
+
 import { AddNewColumn, TodoColumn } from '@/components/blocks';
-import { Notification } from '@/components/ui/Notification';
 import { EColors, UITexts } from '@/constants';
-import { useKanbanData } from '@/hooks';
+import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
+import { useAppDispatch,useAppSelector } from '@/store/store';
+import { kanbanStorage } from '@/utils';
 
 import { Container } from '..';
 import { DashboardContainer } from './styled';
 
 export const Dashboard = () => {
-  const kanbanData = useKanbanData();
-
-  const { columns, cards } = kanbanData;
+  const kanbanData = useAppSelector((state) => state.kanbanBoard.kanbanData);
+  const { columns, cards } = kanbanData.kanbanData;
 
   return (
     <section>
@@ -21,8 +23,6 @@ export const Dashboard = () => {
           <AddNewColumn status={{ color: EColors.GRAY, value: UITexts.COLUMN.ADD_NEW }} count={0} />
         </DashboardContainer>
       </Container>
-
-      <Notification text="12312" isSuccess={false} />
     </section>
   );
 };

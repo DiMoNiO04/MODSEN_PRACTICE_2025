@@ -8,6 +8,7 @@ interface IIconProps {
 }
 
 interface IFormDataColumn {
+  id: string;
   name: string;
   color: string;
 }

@@ -16,7 +16,7 @@ export const ModalEditColumn = () => {
     resetForm();
   };
 
-  const initialData: IFormDataColumn = { name, color: color || '#000000' };
+  const initialData: IFormDataColumn = { id: '1', name, color: color || '#000000' };
   const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataColumn>({
     initialData,
     onClose,

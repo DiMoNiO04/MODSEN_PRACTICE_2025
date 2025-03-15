@@ -1,6 +1,7 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 
+import { kanbanBoardReducer } from './kanbanBoard/reducer';
 import { menuMobReducer } from './menuMob/reducer';
 import { modalColumnAddReducer } from './modalColumnAdd/reducer';
 import { modalColumnEditReducer } from './modalColumnEdit/reducer';
@@ -16,9 +17,14 @@ const modalsReducer = combineReducers({
   modalConfirm: modalConfirmReducer,
 });
 
+const boardReducer = combineReducers({
+  kanbanData: kanbanBoardReducer,
+});
+
 const rootReducer = combineReducers({
   menuMob: menuMobReducer,
   modals: modalsReducer,
+  kanbanBoard: boardReducer,
 });
 
 const store = createStore(rootReducer);
