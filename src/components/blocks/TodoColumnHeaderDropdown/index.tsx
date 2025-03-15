@@ -22,11 +22,18 @@ export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IFormDataColu
         })
       );
 
+    const isSpecialColumn = ['column-1', 'column-2', 'column-3'].includes(id);
+
     return (
       <Dropdown ref={ref}>
         <BtnMenuItem onClick={handleOpenModalTaskAdd} text={UITexts.TASK.ADD_NEW} typeBtn="add" />
-        <BtnMenuItem onClick={handleOpenModalColumnEdit} text={UITexts.COLUMN.EDIT} typeBtn="edit" />
-        <BtnMenuItem onClick={handleOpenModalConfirm} text={UITexts.COLUMN.DELETE} typeBtn="delete" />
+
+        {!isSpecialColumn && (
+          <>
+            <BtnMenuItem onClick={handleOpenModalColumnEdit} text={UITexts.COLUMN.EDIT} typeBtn="edit" />
+            <BtnMenuItem onClick={handleOpenModalConfirm} text={UITexts.COLUMN.DELETE} typeBtn="delete" />
+          </>
+        )}
       </Dropdown>
     );
   }
