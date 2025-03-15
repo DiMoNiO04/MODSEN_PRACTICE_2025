@@ -39,7 +39,9 @@ const Block = styled.div<{ $isSuccess: boolean }>`
   right: var(--right-xl);
   padding: var(--padding-m) var(--padding-l);
   border-radius: var(--radius-m);
-  width: 240px;
+  z-index: var(--index-xxl);
+  width: fit-content;
+  max-width: 320px;
   background: ${({ $isSuccess }) => ($isSuccess ? 'var(--color-green)' : 'var(--color-red)')};
   display: flex;
   align-items: center;

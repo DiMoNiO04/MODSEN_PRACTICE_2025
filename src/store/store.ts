@@ -8,6 +8,7 @@ import { modalColumnEditReducer } from './modalColumnEdit/reducer';
 import { modalConfirmReducer } from './modalConfirm/reducer';
 import { modalTaskReducer } from './modalTask/reducer';
 import { modalTaskAddReducer } from './modalTaskAdd/reducer';
+import { notificationReducer } from './notification/reducer';
 
 const modalsReducer = combineReducers({
   modalColumnAdd: modalColumnAddReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   menuMob: menuMobReducer,
   modals: modalsReducer,
   kanbanBoard: kanbanBoardReducer,
+  notification: notificationReducer,
 });
 
 const store = createStore(rootReducer);

@@ -4,6 +4,7 @@ import { UITexts } from '@/constants';
 import { useForm } from '@/hooks';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
+import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getRandomColor, IFormDataColumn } from '@/utils';
 
@@ -35,6 +36,13 @@ export const ModalAddColumn = () => {
     };
 
     dispatch(setKanbanBoardData(updatedKanbanData));
+
+    dispatch(
+      openNotification({
+        isSuccess: true,
+        text: `Column ${formData.title} has been successfully added`,
+      })
+    );
   };
 
   const { formData, handleChange, handleSubmit, resetForm } = useForm<IFormDataColumn>({

@@ -1,3 +1,5 @@
+import { Notification } from '@/components/ui/Notification';
+
 import { Dashboard } from '../Dashboard';
 import { Header } from '../Header';
 import { Main } from '../Main';
@@ -11,6 +13,7 @@ export const App = () => {
         <Dashboard />
       </Main>
       <Modals />
+      <Notification />
     </>
   );
 };

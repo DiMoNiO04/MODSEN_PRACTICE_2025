@@ -6,6 +6,7 @@ import { UITexts } from '@/constants';
 import { useForm } from '@/hooks';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
+import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { IFormDataColumn } from '@/utils';
 
@@ -37,6 +38,13 @@ export const ModalEditColumn = () => {
     };
 
     dispatch(setKanbanBoardData(updatedKanbanData));
+
+    dispatch(
+      openNotification({
+        isSuccess: true,
+        text: `Column ${formData.title} has been successfully edited`,
+      })
+    );
   };
 
   const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataColumn>({
