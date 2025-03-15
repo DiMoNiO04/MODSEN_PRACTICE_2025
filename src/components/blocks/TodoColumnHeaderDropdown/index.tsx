@@ -9,11 +9,11 @@ import { useAppDispatch } from '@/store/store';
 import { IFormDataColumn } from '@/utils';
 
 export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IFormDataColumn>(
-  ({ color, name }: IFormDataColumn, ref) => {
+  ({ color, title }: IFormDataColumn, ref) => {
     const dispatch = useAppDispatch();
 
     const handleOpenModalTaskAdd = () => dispatch(openModalTaskAdd());
-    const handleOpenModalColumnEdit = () => dispatch(openModalColumnEdit({ name, color }));
+    const handleOpenModalColumnEdit = () => dispatch(openModalColumnEdit({ title, color }));
     const handleOpenModalConfirm = () =>
       dispatch(
         openModalConfirm({

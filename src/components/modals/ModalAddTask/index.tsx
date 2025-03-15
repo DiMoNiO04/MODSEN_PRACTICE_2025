@@ -6,24 +6,24 @@ import { CARD_PRIORITY, CARD_STATUS, UITexts } from '@/constants';
 import { useForm } from '@/hooks';
 import { closeModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { IFormDataTask, IOption } from '@/utils';
+import { IFormDataCard, IOption } from '@/utils';
 
 export const ModalAddTask = () => {
   const dispatch = useAppDispatch();
-  const { isFromHeader, status, isOpen } = useAppSelector(({ modals }) => modals.modalTaskAdd);
+  const { isFromHeader, isOpen } = useAppSelector(({ modals }) => modals.modalTaskAdd);
   const onClose = () => {
     dispatch(closeModalTaskAdd());
     resetForm();
   };
 
-  const initialData: IFormDataTask = {
+  const initialData: IFormDataCard = {
     name: '',
     description: '',
     priority: CARD_PRIORITY.null,
-    status: status || CARD_STATUS.toDo,
+    columnId: 'column-1',
   };
 
-  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataTask>({
+  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataCard>({
     initialData,
     onClose,
   });
@@ -70,7 +70,7 @@ export const ModalAddTask = () => {
         {isFromHeader && (
           <Select
             labelText={UITexts.LABELS.STATUS}
-            value={formData.status}
+            value={CARD_STATUS.done}
             onChange={onStatusChange}
             options={Object.values(CARD_STATUS)}
           />

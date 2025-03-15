@@ -10,13 +10,13 @@ import { IFormDataColumn } from '@/utils';
 
 export const ModalEditColumn = () => {
   const dispatch = useAppDispatch();
-  const { name, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
+  const { title, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
   const onClose = () => {
     dispatch(closeModalColumnEdit());
     resetForm();
   };
 
-  const initialData: IFormDataColumn = { id: '1', name, color: color || '#000000' };
+  const initialData: IFormDataColumn = { id: '1', title, color: color || '#000000' };
   const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataColumn>({
     initialData,
     onClose,
@@ -36,9 +36,9 @@ export const ModalEditColumn = () => {
       <Form onSubmit={handleSubmit}>
         <Input
           labelText={UITexts.LABELS.NAME}
-          name="name"
+          name="title"
           type="text"
-          value={formData.name}
+          value={formData.title}
           onChange={handleChange}
           required
         />

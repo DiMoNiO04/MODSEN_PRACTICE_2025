@@ -3,7 +3,7 @@ import { IInitialModalColumnEditState, TModalColumnEditAction } from './types';
 
 const initialModalColumnEditState: IInitialModalColumnEditState = {
   isOpen: false,
-  name: '',
+  title: '',
   color: '',
 };
 
@@ -16,7 +16,7 @@ const modalColumnEditReducer = (
       return {
         ...state,
         isOpen: true,
-        name: action.payload.name,
+        title: action.payload.title,
         color: action.payload.color,
       };
     case EModalColumnEditActions.CLOSE_MODAL:

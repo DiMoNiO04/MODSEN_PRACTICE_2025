@@ -2,6 +2,7 @@ import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { useForm } from '@/hooks';
+import { addColumn } from '@/store/columns/actions';
 import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getRandomColor, IFormDataColumn } from '@/utils';
@@ -15,10 +16,22 @@ export const ModalAddColumn = () => {
     resetForm();
   };
 
-  const initialData: IFormDataColumn = { id: `column-${Date.now()}`, name: '', color: getRandomColor() };
+  const onSubmit = () => {
+    dispatch(
+      addColumn({
+        id: `column-${Date.now()}`,
+        title: formData.title,
+        color: formData.color,
+        cardIds: [],
+      })
+    );
+  };
+
+  const initialData: IFormDataColumn = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };
   const { formData, handleChange, handleSubmit, resetForm } = useForm<IFormDataColumn>({
     initialData,
     onClose,
+    onSubmit,
   });
 
   if (!isOpen) return null;
@@ -29,9 +42,9 @@ export const ModalAddColumn = () => {
       <Form onSubmit={handleSubmit}>
         <Input
           labelText={UITexts.LABELS.NAME}
-          name="name"
+          name="title"
           type="text"
-          value={formData.name}
+          value={formData.title}
           onChange={handleChange}
           required
         />

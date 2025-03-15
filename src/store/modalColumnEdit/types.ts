@@ -4,7 +4,7 @@ enum EModalColumnEditActions {
 }
 
 interface IOpenModalColumnEditPayload {
-  name: string;
+  title: string;
   color: string;
 }
 

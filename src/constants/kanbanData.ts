@@ -1,14 +1,15 @@
 import { IKanbanData } from '@/utils/interfaces';
 
 // import { CARD_PRIORITY } from './cardPriority';
-import { CARD_STATUS } from './cardStatus';
+import { EColors } from './colors';
+import { UITexts } from './uiTexts';
 
 // export const KANBAN_DATA: IKanbanData = {
-//   columns: {
-//     'column-1': { id: 'column-1', status: CARD_STATUS.toDo, cardIds: ['card-1', 'card-2'] },
-//     'column-2': { id: 'column-2', status: CARD_STATUS.inProgress, cardIds: ['card-3', 'card-4'] },
-//     'column-3': { id: 'column-3', status: CARD_STATUS.done, cardIds: ['card-5', 'card-6', 'card-7'] },
-//   },
+//  columns: {
+//   'column-1': { id: 'column-1', title: UITexts.STATUSES.TODO, color: EColors.BLUE, cardIds: ['card-1', 'card-2'] },
+//   'column-2': { id: 'column-2', title: UITexts.STATUSES.PROGRESS, color: EColors.ORANGE, cardIds: ['card-3', 'card-4'] },
+//   'column-3': { id: 'column-3', title: UITexts.STATUSES.DONE, color: EColors.GREEN, cardIds: ['card-5', 'card-6', 'card-7'] },
+// },
 //   cards: {
 //     'card-1': {
 //       id: 'card-1',
@@ -64,9 +65,9 @@ import { CARD_STATUS } from './cardStatus';
 
 export const KANBAN_DATA: IKanbanData = {
   columns: {
-    'column-1': { id: 'column-1', status: CARD_STATUS.toDo, cardIds: [] },
-    'column-2': { id: 'column-2', status: CARD_STATUS.inProgress, cardIds: [] },
-    'column-3': { id: 'column-3', status: CARD_STATUS.done, cardIds: [] },
+    'column-1': { id: 'column-1', title: UITexts.STATUSES.TODO, color: EColors.BLUE, cardIds: [] },
+    'column-2': { id: 'column-2', title: UITexts.STATUSES.PROGRESS, color: EColors.ORANGE, cardIds: [] },
+    'column-3': { id: 'column-3', title: UITexts.STATUSES.DONE, color: EColors.GREEN, cardIds: [] },
   },
   cards: {},
 };

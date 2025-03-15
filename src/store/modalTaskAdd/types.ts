@@ -1,5 +1,3 @@
-import { IOption } from '@/utils';
-
 enum EModalTaskAddActions {
   OPEN_MODAL = 'OPEN_MODAL_TASK_ADD',
   CLOSE_MODAL = 'CLOSE_MODAL_TASK_ADD',
@@ -7,7 +5,6 @@ enum EModalTaskAddActions {
 
 interface IToggleModalTaskAddPayload {
   isFromHeader?: boolean;
-  status?: IOption;
 }
 
 interface IInitialModalTaskAddState extends IToggleModalTaskAddPayload {

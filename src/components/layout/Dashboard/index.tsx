@@ -1,10 +1,6 @@
-import { useEffect } from 'react';
-
 import { AddNewColumn, TodoColumn } from '@/components/blocks';
 import { EColors, UITexts } from '@/constants';
-import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
-import { useAppDispatch,useAppSelector } from '@/store/store';
-import { kanbanStorage } from '@/utils';
+import { useAppSelector } from '@/store/store';
 
 import { Container } from '..';
 import { DashboardContainer } from './styled';
@@ -18,9 +14,15 @@ export const Dashboard = () => {
       <Container>
         <DashboardContainer>
           {Object.values(columns).map((column) => (
-            <TodoColumn key={column.id} cardIds={column.cardIds} status={column.status} cards={cards} />
+            <TodoColumn
+              key={column.id}
+              cardIds={column.cardIds}
+              title={column.title}
+              color={column.color}
+              cards={cards}
+            />
           ))}
-          <AddNewColumn status={{ color: EColors.GRAY, value: UITexts.COLUMN.ADD_NEW }} count={0} />
+          <AddNewColumn color={EColors.GRAY} title={UITexts.COLUMN.ADD_NEW} count={0} />
         </DashboardContainer>
       </Container>
     </section>

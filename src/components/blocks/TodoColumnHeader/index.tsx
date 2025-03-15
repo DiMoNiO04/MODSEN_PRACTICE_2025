@@ -4,19 +4,19 @@ import { useDropdownToggle } from '@/hooks';
 import { openModaColumnAdd } from '@/store/modalColumnAdd/actions';
 import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch } from '@/store/store';
-import { IOption } from '@/utils';
 
 import { TitleWithCount } from '../TitleWithCount';
 import { TodoColumnHeaderDropdown } from '../TodoColumnHeaderDropdown';
 import { TodoColumnHeaderContainer } from './styled';
 
 export interface ITodoColumnHeaderProps {
-  status: IOption;
+  title: string;
+  color: string;
   count: number;
   isAddNewColumn?: boolean;
 }
 
-export const TodoColumnHeader = ({ status, count, isAddNewColumn = false }: ITodoColumnHeaderProps) => {
+export const TodoColumnHeader = ({ title, color, count, isAddNewColumn = false }: ITodoColumnHeaderProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
   const dispatch = useAppDispatch();
 
@@ -26,23 +26,21 @@ export const TodoColumnHeader = ({ status, count, isAddNewColumn = false }: ITod
     if (isAddNewColumn) {
       dispatch(openModaColumnAdd());
     } else {
-      dispatch(openModalTaskAdd({ status }));
+      dispatch(openModalTaskAdd());
     }
   };
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
-    <TodoColumnHeaderContainer color={status.color}>
-      <TitleWithCount color={status.color} title={status.value} count={count} />
+    <TodoColumnHeaderContainer color={color}>
+      <TitleWithCount color={color} title={title} count={count} />
       {isAddNewColumn ? (
         <BtnRound color={EColors.WHITE} handle={handleAddButtonClick} type="add" />
       ) : (
         <>
           <BtnRound ref={refDropdownBtn} color={buttonColor} handle={toggleDropdown} type="more" />
-          {isDropdownOpen && (
-            <TodoColumnHeaderDropdown id="1" ref={refDropdownMenu} name={status.value} color={status.color} />
-          )}
+          {isDropdownOpen && <TodoColumnHeaderDropdown id="1" ref={refDropdownMenu} title={title} color={color} />}
         </>
       )}
     </TodoColumnHeaderContainer>

@@ -2,7 +2,7 @@ import { BtnDef, BtnsBlock, Form, Input, ModalTitle, TextArea } from '@/componen
 import { Select } from '@/components/ui/Select';
 import { CARD_PRIORITY, CARD_STATUS, UITexts } from '@/constants';
 import { useForm } from '@/hooks';
-import { IFormDataTask, IOption } from '@/utils';
+import { IFormDataCard, IOption } from '@/utils';
 import { ICard } from '@/utils/interfaces';
 
 interface ITaskEditContentProps {
@@ -12,16 +12,16 @@ interface ITaskEditContentProps {
 }
 
 export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditContentProps) => {
-  const { title, desc, priority, status } = cardData;
+  const { title, desc, priority } = cardData;
 
-  const initialData: IFormDataTask = {
+  const initialData: IFormDataCard = {
     name: title,
     description: desc,
     priority: priority,
-    status: status,
+    columnId: 'column-1',
   };
 
-  const { formData, handleChange, handleSubmit } = useForm<IFormDataTask>({ initialData, onClose });
+  const { formData, handleChange, handleSubmit } = useForm<IFormDataCard>({ initialData, onClose });
 
   const onPriorityChange = (selectedOption: IOption) =>
     handleChange({ target: { name: 'priority', value: selectedOption } });
@@ -48,7 +48,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
         />
         <Select
           labelText={UITexts.LABELS.STATUS}
-          value={formData.status}
+          value={CARD_STATUS.done}
           onChange={onStatusChange}
           options={Object.values(CARD_STATUS)}
         />

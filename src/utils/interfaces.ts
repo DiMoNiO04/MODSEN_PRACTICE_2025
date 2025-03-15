@@ -9,15 +9,15 @@ interface IIconProps {
 
 interface IFormDataColumn {
   id: string;
-  name: string;
+  title: string;
   color: string;
 }
 
-interface IFormDataTask {
+interface IFormDataCard {
   name: string;
   description?: string;
   priority: IOption;
-  status: IOption;
+  columnId: string;
 }
 
 interface IOption {
@@ -39,7 +39,8 @@ interface ICard {
 
 interface IColumn {
   id: string;
-  status: IOption;
+  title: string;
+  color: string;
   cardIds: string[];
 }
 
@@ -48,4 +49,4 @@ interface IKanbanData {
   cards: Record<string, ICard>;
 }
 
-export type { ICard, IChildrenProps, IColumn, IFormDataColumn, IFormDataTask, IIconProps, IKanbanData, IOption, IText };
+export type { ICard, IChildrenProps, IColumn, IFormDataCard, IFormDataColumn, IIconProps, IKanbanData, IOption, IText };

@@ -7,18 +7,19 @@ import { TodoList } from '../TodoList';
 
 interface ITodoColumnProps {
   cardIds: string[];
-  status: IOption;
+  title: string;
+  color: string;
   cards: Record<string, ICard>;
 }
 
-export const TodoColumn = ({ cardIds, status, cards }: ITodoColumnProps) => {
+export const TodoColumn = ({ cardIds, color, title, cards }: ITodoColumnProps) => {
   const tasks = cardIds.map((id) => cards[id]);
 
   return (
     <TodoColumnContainer>
-      <TodoColumnHeader status={status} count={cardIds.length} />
+      <TodoColumnHeader title={title} color={color} count={cardIds.length} />
       <TodoList tasks={tasks} />
-      <TodoColumnTaskAdd status={status} />
+      <TodoColumnTaskAdd title={title} color={color} />
     </TodoColumnContainer>
   );
 };
