@@ -17,5 +17,5 @@ const ThemeContext = createContext<IThemeContext>({
   setTheme: () => {},
 });
 
-export { ETheme,LS_KEY_THEME, ThemeContext };
+export { ETheme, LS_KEY_THEME, ThemeContext };
 export type { IThemeContext };
