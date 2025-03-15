@@ -2,7 +2,7 @@ import { Component, ErrorInfo, ReactNode } from 'react';
 
 import { UITexts } from '@/constants';
 
-import { ErrorContent } from './blocks';
+import { ErrorContent } from '../components/blocks';
 
 interface IErrorBoundaryProps {
   children: ReactNode;
@@ -12,7 +12,7 @@ interface IErrorBoundaryState {
   hasError: boolean;
 }
 
-export class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
+export class ErrorBoundaryProvider extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
   constructor(props: IErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
@@ -31,10 +31,13 @@ export class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundary
   }
 
   render() {
-    if (this.state.hasError) {
+    const { hasError } = this.state;
+    const { children } = this.props;
+
+    if (hasError) {
       return <ErrorContent text={UITexts.ERRORS.GENERAL} />;
     }
 
-    return this.props.children;
+    return children;
   }
 }

@@ -1,4 +1,4 @@
-import { Notification } from '@/components/ui/Notification';
+import { Notification, ThemeSwitcher } from '@/components/ui';
 
 import { Dashboard } from '../Dashboard';
 import { Header } from '../Header';
@@ -14,6 +14,7 @@ export const App = () => {
       </Main>
       <Modals />
       <Notification />
+      <ThemeSwitcher />
     </>
   );
 };

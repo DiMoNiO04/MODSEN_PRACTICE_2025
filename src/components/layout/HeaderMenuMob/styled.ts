@@ -6,8 +6,8 @@ const Block = styled.div<{ $isOpen: boolean }>`
   left: 0;
   width: 100%;
   padding: 32px;
-  height: calc(100vh - 54px);
-  background-color: #ffffff;
+  height: calc(100vh - var(--height-header));
+  background-color: var(--color-light);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,6 @@ const Block = styled.div<{ $isOpen: boolean }>`
   align-items: center;
   gap: 20px;
 
-  /* Добавляем анимацию */
   transition:
     transform 0.3s ease-in-out,
     opacity 0.3s ease-in-out;

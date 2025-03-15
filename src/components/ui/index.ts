@@ -12,11 +12,13 @@ import { Label } from './Label';
 import { LabelText } from './LabelText';
 import { Logo } from './Logo';
 import { ModalTitle } from './ModalTitle';
+import { Notification } from './Notification';
 import { RequiredText } from './RequiredTxt';
 import { Select } from './Select';
 import { TextArea } from './Textarea';
 import { TextDef } from './TextDef';
 import { TextH3 } from './TextH3';
+import { ThemeSwitcher } from './ThemeSwitcher';
 
 export {
   BtnDef,
@@ -33,9 +35,11 @@ export {
   LabelText,
   Logo,
   ModalTitle,
+  Notification,
   RequiredText,
   Select,
   TextArea,
   TextDef,
   TextH3,
+  ThemeSwitcher,
 };
