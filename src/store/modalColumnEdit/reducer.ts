@@ -3,6 +3,7 @@ import { IInitialModalColumnEditState, TModalColumnEditAction } from './types';
 
 const initialModalColumnEditState: IInitialModalColumnEditState = {
   isOpen: false,
+  id: '',
   title: '',
   color: '',
 };

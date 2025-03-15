@@ -12,6 +12,8 @@ export const ModalAddColumn = () => {
   const { isOpen } = useAppSelector(({ modals }) => modals.modalColumnAdd);
   const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
 
+  const initialData: IFormDataColumn = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };
+
   const onClose = () => {
     dispatch(closeModaColumnAdd());
     resetForm();
@@ -28,22 +30,14 @@ export const ModalAddColumn = () => {
     const updatedKanbanData = {
       columns: {
         ...kanbanData.columns,
-        [newColumn.id]: {
-          id: newColumn.id,
-          title: newColumn.title,
-          color: newColumn.color,
-          cardIds: [],
-        },
+        [newColumn.id]: newColumn,
       },
       cards: kanbanData.cards,
     };
 
     dispatch(setKanbanBoardData(updatedKanbanData));
-
-    onClose();
   };
 
-  const initialData: IFormDataColumn = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };
   const { formData, handleChange, handleSubmit, resetForm } = useForm<IFormDataColumn>({
     initialData,
     onClose,
