@@ -29,11 +29,13 @@ export const ModalEditColumn = () => {
       cardIds: kanbanData.columns[id].cardIds,
     };
 
+    const updatedColums = {
+      ...kanbanData.columns,
+      [updateColumn.id]: updateColumn,
+    };
+
     const updatedKanbanData = {
-      columns: {
-        ...kanbanData.columns,
-        [updateColumn.id]: updateColumn,
-      },
+      columns: updatedColums,
       cards: kanbanData.cards,
     };
 
