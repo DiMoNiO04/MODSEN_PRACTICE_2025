@@ -48,8 +48,8 @@ const Block = styled.div<{ $isSuccess: boolean }>`
   column-gap: 12px;
   animation:
     ${slideIn} 0.5s ease-out,
-    ${shake} 0.5s ease 1s,
-    ${slideOut} 0.5s ease 4s;
+    ${shake} 0.5s ease 0.5s,
+    ${slideOut} 0.5s ease 1.8s;
 `;
 
 const ImageIcon = styled.img`
