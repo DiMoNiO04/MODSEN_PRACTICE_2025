@@ -13,7 +13,7 @@ const notificationReducer = (
   switch (action.type) {
     case ENotificationActions.OPEN_NOTIFICATION:
       return {
-        ...state,
+        ...initialNotificationState,
         isOpen: true,
         isSuccess: action.payload.isSuccess,
         text: action.payload.text,

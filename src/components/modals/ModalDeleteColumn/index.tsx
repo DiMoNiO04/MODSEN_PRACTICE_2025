@@ -10,8 +10,6 @@ export const ModalColumnDelete = () => {
   const dispatch = useAppDispatch();
   const { isOpen, id } = useAppSelector(({ modals }) => modals.modalColumnDelete);
 
-  console.log(id);
-
   const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
 
   const handleClose = () => dispatch(closeModalColumnDelete());

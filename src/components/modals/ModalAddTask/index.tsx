@@ -34,21 +34,22 @@ export const ModalAddTask = () => {
       ...formData,
     };
 
+    const updatedCards = { ...kanbanData.cards };
+    updatedCards[newTask.id] = newTask;
+
+    const updatedColumns = { ...kanbanData.columns };
+    updatedColumns[formData.columnId] = {
+      ...updatedColumns[formData.columnId],
+      cardIds: [...updatedColumns[formData.columnId].cardIds, newTask.id],
+    };
+
     const updatedKanbanData = {
-      columns: {
-        ...kanbanData.columns,
-        [formData.columnId]: {
-          ...kanbanData.columns[formData.columnId],
-          cardIds: [...kanbanData.columns[formData.columnId].cardIds, newTask.id],
-        },
-      },
-      cards: {
-        ...kanbanData.cards,
-        [newTask.id]: newTask,
-      },
+      columns: updatedColumns,
+      cards: updatedCards,
     };
 
     dispatch(setKanbanBoardData(updatedKanbanData));
+
     dispatch(
       openNotification({
         isSuccess: true,

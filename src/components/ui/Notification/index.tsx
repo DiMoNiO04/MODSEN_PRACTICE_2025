@@ -24,7 +24,7 @@ export const Notification = () => {
   if (!isOpen) return null;
 
   return (
-    <Block $isSuccess={isSuccess}>
+    <Block key={text} $isSuccess={isSuccess}>
       <ImageIcon src={isSuccess ? '/icons/success.svg' : '/icons/error.svg'} alt="" />
       <Text $isSuccess={isSuccess}>{text}</Text>
     </Block>

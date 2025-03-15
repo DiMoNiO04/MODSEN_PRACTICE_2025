@@ -32,7 +32,7 @@ export const ModalTask = () => {
       {isEditing ? (
         <TaskEditContent cardData={cardData} onClose={onClose} handleCancel={handleCancel} />
       ) : isDeleting ? (
-        <TaskDeleteContent handleCancel={handleCancel} handleClose={onClose} />
+        <TaskDeleteContent id={cardData.id} handleCancel={handleCancel} onClose={onClose} />
       ) : (
         <TaskModalContent cardData={cardData} handleOpenDelete={handleOpenDelete} handleOpenEdit={handleOpenEdit} />
       )}
