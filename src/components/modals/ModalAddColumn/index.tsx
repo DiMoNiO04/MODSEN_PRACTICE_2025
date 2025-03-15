@@ -21,9 +21,8 @@ export const ModalAddColumn = () => {
 
   const onSubmit = () => {
     const newColumn = {
+      ...formData,
       id: `column-${Date.now()}`,
-      title: formData.title,
-      color: formData.color,
       cardIds: [],
     };
 

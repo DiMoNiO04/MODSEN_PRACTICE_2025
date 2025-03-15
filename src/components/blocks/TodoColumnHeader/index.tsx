@@ -4,19 +4,17 @@ import { useDropdownToggle } from '@/hooks';
 import { openModaColumnAdd } from '@/store/modalColumnAdd/actions';
 import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch } from '@/store/store';
+import { IColumn } from '@/utils/interfaces';
 
 import { TitleWithCount } from '../TitleWithCount';
 import { TodoColumnHeaderDropdown } from '../TodoColumnHeaderDropdown';
 import { TodoColumnHeaderContainer } from './styled';
 
-export interface ITodoColumnHeaderProps {
-  title: string;
-  color: string;
-  count: number;
+export interface ITodoColumnHeaderProps extends IColumn {
   isAddNewColumn?: boolean;
 }
 
-export const TodoColumnHeader = ({ title, color, count, isAddNewColumn = false }: ITodoColumnHeaderProps) => {
+export const TodoColumnHeader = ({ id, title, color, cardIds, isAddNewColumn = false }: ITodoColumnHeaderProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
   const dispatch = useAppDispatch();
 
@@ -34,13 +32,13 @@ export const TodoColumnHeader = ({ title, color, count, isAddNewColumn = false }
 
   return (
     <TodoColumnHeaderContainer color={color}>
-      <TitleWithCount color={color} title={title} count={count} />
+      <TitleWithCount color={color} title={title} count={cardIds.length} />
       {isAddNewColumn ? (
         <BtnRound color={EColors.WHITE} handle={handleAddButtonClick} type="add" />
       ) : (
         <>
           <BtnRound ref={refDropdownBtn} color={buttonColor} handle={toggleDropdown} type="more" />
-          {isDropdownOpen && <TodoColumnHeaderDropdown id="1" ref={refDropdownMenu} title={title} color={color} />}
+          {isDropdownOpen && <TodoColumnHeaderDropdown id={id} title={title} color={color} ref={refDropdownMenu} />}
         </>
       )}
     </TodoColumnHeaderContainer>

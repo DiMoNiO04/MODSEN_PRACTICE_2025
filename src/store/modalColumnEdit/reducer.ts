@@ -16,9 +16,8 @@ const modalColumnEditReducer = (
     case EModalColumnEditActions.OPEN_MODAL:
       return {
         ...state,
+        ...action.payload,
         isOpen: true,
-        title: action.payload.title,
-        color: action.payload.color,
       };
     case EModalColumnEditActions.CLOSE_MODAL:
       return { ...initialModalColumnEditState };

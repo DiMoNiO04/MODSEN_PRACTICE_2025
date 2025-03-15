@@ -1,5 +1,4 @@
 import { AddNewColumn, TodoColumn } from '@/components/blocks';
-import { EColors, UITexts } from '@/constants';
 import { useAppSelector } from '@/store/store';
 import { IKanbanData } from '@/utils/interfaces';
 
@@ -17,7 +16,7 @@ export const Dashboard = () => {
           {Object.values(columns).map((column) => (
             <TodoColumn key={column.id} {...column} />
           ))}
-          <AddNewColumn color={EColors.GRAY} title={UITexts.COLUMN.ADD_NEW} count={0} />
+          <AddNewColumn />
         </DashboardContainer>
       </Container>
     </section>

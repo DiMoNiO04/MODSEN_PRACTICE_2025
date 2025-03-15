@@ -6,7 +6,7 @@ import { TodoColumnHeader } from '../TodoColumnHeader';
 import { TodoColumnTaskAdd } from '../TodoColumnTaskAdd';
 import { TodoList } from '../TodoList';
 
-export const TodoColumn = ({ cardIds, color, title }: IColumn) => {
+export const TodoColumn = ({ id, cardIds, color, title }: IColumn) => {
   const kanbanData: IKanbanData = useAppSelector((state) => state.kanbanBoard.kanbanData);
   const { cards } = kanbanData;
 
@@ -14,7 +14,7 @@ export const TodoColumn = ({ cardIds, color, title }: IColumn) => {
 
   return (
     <TodoColumnContainer>
-      <TodoColumnHeader title={title} color={color} count={cardIds.length} />
+      <TodoColumnHeader id={id} title={title} color={color} cardIds={cardIds} />
       <TodoList tasks={tasks} />
       <TodoColumnTaskAdd title={title} color={color} />
     </TodoColumnContainer>

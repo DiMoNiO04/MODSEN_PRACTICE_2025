@@ -4,6 +4,7 @@ import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { useForm } from '@/hooks';
+import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { IFormDataColumn } from '@/utils';
@@ -11,16 +12,37 @@ import { IFormDataColumn } from '@/utils';
 export const ModalEditColumn = () => {
   const dispatch = useAppDispatch();
   const { id, title, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
+
+  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+  const initialData: IFormDataColumn = { id, title, color };
+
   const onClose = () => {
     dispatch(closeModalColumnEdit());
     resetForm();
   };
 
-  const initialData: IFormDataColumn = { id, title, color };
+  const onSubmit = () => {
+    const updateColumn = {
+      ...formData,
+      id,
+      cardIds: kanbanData.columns[id].cardIds,
+    };
+
+    const updatedKanbanData = {
+      columns: {
+        ...kanbanData.columns,
+        [updateColumn.id]: updateColumn,
+      },
+      cards: kanbanData.cards,
+    };
+
+    dispatch(setKanbanBoardData(updatedKanbanData));
+  };
 
   const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataColumn>({
     initialData,
     onClose,
+    onSubmit,
   });
 
   useEffect(() => {
