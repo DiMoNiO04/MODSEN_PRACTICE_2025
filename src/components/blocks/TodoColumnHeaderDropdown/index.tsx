@@ -2,15 +2,32 @@ import { forwardRef } from 'react';
 
 import { BtnMenuItem, Dropdown } from '@/components/ui';
 import { UITexts } from '@/constants';
+import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { openModalColumnEdit } from '@/store/modalColumnEdit/actions';
 import { openModalConfirm } from '@/store/modalConfirm/actions';
 import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import { IFormDataColumn } from '@/utils';
 
 export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IFormDataColumn>(
   ({ id, color, title }: IFormDataColumn, ref) => {
     const dispatch = useAppDispatch();
+
+    const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+
+    const onConfirmDelete = () => {
+      const updatedKanbanData = { ...kanbanData };
+
+      const column = updatedKanbanData.columns[id];
+
+      column.cardIds.forEach((cardId) => {
+        delete updatedKanbanData.cards[cardId];
+      });
+
+      delete updatedKanbanData.columns[id];
+
+      dispatch(setKanbanBoardData(updatedKanbanData));
+    };
 
     const handleOpenModalTaskAdd = () => dispatch(openModalTaskAdd());
     const handleOpenModalColumnEdit = () => dispatch(openModalColumnEdit({ id, title, color }));
@@ -18,7 +35,7 @@ export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IFormDataColu
       dispatch(
         openModalConfirm({
           text: UITexts.COLUMN.CONFIRM_DELETE,
-          onConfirm: () => alert('Deleted'),
+          onConfirm: onConfirmDelete,
         })
       );
 

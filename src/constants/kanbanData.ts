@@ -1,6 +1,6 @@
 import { IKanbanData } from '@/utils/interfaces';
 
-// import { CARD_PRIORITY } from './cardPriority';
+import { CARD_PRIORITY } from './cardPriority';
 import { EColors } from './colors';
 import { UITexts } from './uiTexts';
 
@@ -16,49 +16,49 @@ import { UITexts } from './uiTexts';
 //       title: 'UI/UX Design in the age of Blog Copywriting',
 //       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
 //       priority: CARD_PRIORITY.critical,
-//       status: CARD_STATUS.toDo,
+//       columnId: 'column-1'
 //     },
 //     'card-2': {
 //       id: 'card-2',
 //       title: 'Blog Copywriting',
 //       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
 //       priority: CARD_PRIORITY.null,
-//       status: CARD_STATUS.toDo,
+//       columnId: 'column-1'
 //     },
 //     'card-3': {
 //       id: 'card-3',
 //       title: 'User flow confirmation for finance app',
 //       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
 //       priority: CARD_PRIORITY.high,
-//       status: CARD_STATUS.inProgress,
+//       columnId: 'column-2'
 //     },
 //     'card-4': {
 //       id: 'card-4',
 //       title: 'Healthcare app wireframe flow',
 //       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
 //       priority: CARD_PRIORITY.null,
-//       status: CARD_STATUS.inProgress,
+//       columnId: 'column-2'
 //     },
 //     'card-5': {
 //       id: 'card-5',
 //       title: 'UI/UX Design in the age of AI',
 //       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
 //       priority: CARD_PRIORITY.low,
-//       status: CARD_STATUS.done,
+//       columnId: 'column-3'
 //     },
 //     'card-6': {
 //       id: 'card-6',
 //       title: 'UI/UX Design in the age of AI',
 //       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
 //       priority: CARD_PRIORITY.normal,
-//       status: CARD_STATUS.done,
+//       columnId: 'column-3'
 //     },
 //     'card-7': {
 //       id: 'card-7',
 //       title: 'UI/UX Design in the age of AI',
 //       desc: 'Lorem ipsum dolor sit amet, libre unst consectetur adispicing elit.',
 //       priority: CARD_PRIORITY.critical,
-//       status: CARD_STATUS.done,
+//       columnId: 'column-3'
 //     },
 //   },
 // };

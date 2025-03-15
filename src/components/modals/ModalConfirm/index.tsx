@@ -7,16 +7,23 @@ import { useAppDispatch, useAppSelector } from '@/store/store';
 export const ModalConfirm = () => {
   const dispatch = useAppDispatch();
   const { isOpen, text, onConfirm } = useAppSelector(({ modals }) => modals.modalConfirm);
-  const onClose = () => dispatch(closeModalConfirm());
+
+  const handleClose = () => dispatch(closeModalConfirm());
+  const handleSubmit = () => {
+    if (onConfirm) {
+      onConfirm();
+    }
+    handleClose();
+  };
 
   if (!text || !isOpen) return null;
 
   return (
-    <ModalContainer onClose={onClose}>
+    <ModalContainer onClose={handleClose}>
       <ModalTitle text={text} />
       <BtnsBlock>
-        <BtnDef text={UITexts.BTNS.NO} typeBtn={'button'} onClick={onClose} />
-        <BtnDef text={UITexts.BTNS.YES} typeBtn={'button'} onClick={onConfirm} isInvert />
+        <BtnDef text={UITexts.BTNS.NO} typeBtn={'button'} onClick={handleClose} />
+        <BtnDef text={UITexts.BTNS.YES} typeBtn={'button'} onClick={handleSubmit} isInvert />
       </BtnsBlock>
     </ModalContainer>
   );
