@@ -1,24 +1,22 @@
-import { ICard, IOption } from '@/utils/interfaces';
+import { useAppSelector } from '@/store/store';
+import { ICard, IColumn, IKanbanData } from '@/utils/interfaces';
 
 import { TodoColumnContainer } from '../TodoColumnContainer';
 import { TodoColumnHeader } from '../TodoColumnHeader';
 import { TodoColumnTaskAdd } from '../TodoColumnTaskAdd';
 import { TodoList } from '../TodoList';
 
-interface ITodoColumnProps {
-  cardIds: string[];
-  status: IOption;
-  cards: Record<string, ICard>;
-}
+export const TodoColumn = ({ id, cardIds, color, title }: IColumn) => {
+  const kanbanData: IKanbanData = useAppSelector((state) => state.kanbanBoard.kanbanData);
+  const { cards } = kanbanData;
 
-export const TodoColumn = ({ cardIds, status, cards }: ITodoColumnProps) => {
-  const tasks = cardIds.map((id) => cards[id]);
+  const tasks: ICard[] = cardIds.map((id) => cards[id]);
 
   return (
     <TodoColumnContainer>
-      <TodoColumnHeader status={status} count={cardIds.length} />
+      <TodoColumnHeader id={id} title={title} color={color} cardIds={cardIds} columnId={id} />
       <TodoList tasks={tasks} />
-      <TodoColumnTaskAdd status={status} />
+      <TodoColumnTaskAdd columnId={id} title={title} color={color} />
     </TodoColumnContainer>
   );
 };

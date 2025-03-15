@@ -4,19 +4,25 @@ import { useDropdownToggle } from '@/hooks';
 import { openModaColumnAdd } from '@/store/modalColumnAdd/actions';
 import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch } from '@/store/store';
-import { IOption } from '@/utils';
+import { IColumn } from '@/utils/interfaces';
 
 import { TitleWithCount } from '../TitleWithCount';
 import { TodoColumnHeaderDropdown } from '../TodoColumnHeaderDropdown';
 import { TodoColumnHeaderContainer } from './styled';
 
-export interface ITodoColumnHeaderProps {
-  status: IOption;
-  count: number;
+export interface ITodoColumnHeaderProps extends IColumn {
   isAddNewColumn?: boolean;
+  columnId: string;
 }
 
-export const TodoColumnHeader = ({ status, count, isAddNewColumn = false }: ITodoColumnHeaderProps) => {
+export const TodoColumnHeader = ({
+  id,
+  title,
+  color,
+  cardIds,
+  columnId,
+  isAddNewColumn = false,
+}: ITodoColumnHeaderProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
   const dispatch = useAppDispatch();
 
@@ -26,23 +32,26 @@ export const TodoColumnHeader = ({ status, count, isAddNewColumn = false }: ITod
     if (isAddNewColumn) {
       dispatch(openModaColumnAdd());
     } else {
-      dispatch(openModalTaskAdd({ status }));
+      console.log(columnId);
+      dispatch(
+        openModalTaskAdd({
+          columnId,
+        })
+      );
     }
   };
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
-    <TodoColumnHeaderContainer color={status.color}>
-      <TitleWithCount color={status.color} title={status.value} count={count} />
+    <TodoColumnHeaderContainer color={color}>
+      <TitleWithCount color={color} title={title} count={cardIds.length} />
       {isAddNewColumn ? (
         <BtnRound color={EColors.WHITE} handle={handleAddButtonClick} type="add" />
       ) : (
         <>
           <BtnRound ref={refDropdownBtn} color={buttonColor} handle={toggleDropdown} type="more" />
-          {isDropdownOpen && (
-            <TodoColumnHeaderDropdown ref={refDropdownMenu} name={status.value} color={status.color} />
-          )}
+          {isDropdownOpen && <TodoColumnHeaderDropdown id={id} title={title} color={color} ref={refDropdownMenu} />}
         </>
       )}
     </TodoColumnHeaderContainer>

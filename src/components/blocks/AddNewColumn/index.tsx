@@ -1,10 +1,20 @@
-import { TodoColumnContainer } from '../TodoColumnContainer';
-import { ITodoColumnHeaderProps, TodoColumnHeader } from '../TodoColumnHeader';
+import { EColors, UITexts } from '@/constants';
+import { IColumn } from '@/utils/interfaces';
 
-export const AddNewColumn = ({ status, count }: ITodoColumnHeaderProps) => {
+import { TodoColumnContainer } from '../TodoColumnContainer';
+import { TodoColumnHeader } from '../TodoColumnHeader';
+
+export const AddNewColumn = () => {
+  const initialData: IColumn = {
+    id: `column-${Date.now()}`,
+    title: UITexts.COLUMN.ADD_NEW,
+    color: EColors.GRAY,
+    cardIds: [],
+  };
+
   return (
     <TodoColumnContainer isFullHeight={false}>
-      <TodoColumnHeader status={status} count={count} isAddNewColumn />
+      <TodoColumnHeader {...initialData} columnId={initialData.id} isAddNewColumn />
     </TodoColumnContainer>
   );
 };

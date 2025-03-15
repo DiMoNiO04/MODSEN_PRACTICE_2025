@@ -14,7 +14,7 @@ export const HeaderMenuMob = () => {
 
   const handleCloseMenuMob = () => dispatch(closeMenuMob());
   const openColumnModalAdd = () => dispatch(openModaColumnAdd());
-  const openTaskModalAdd = () => dispatch(openModalTaskAdd({ isFromHeader: true }));
+  const openTaskModalAdd = () => dispatch(openModalTaskAdd({ isFromHeader: true, columnId: '' }));
 
   const openColumnModal = () => {
     openColumnModalAdd();

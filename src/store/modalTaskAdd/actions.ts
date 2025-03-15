@@ -1,7 +1,7 @@
 import { EModalTaskAddActions } from './types';
 import { IToggleModalTaskAddPayload, TModalTaskAddAction } from './types';
 
-const openModalTaskAdd = (payload?: IToggleModalTaskAddPayload): TModalTaskAddAction => ({
+const openModalTaskAdd = (payload: IToggleModalTaskAddPayload): TModalTaskAddAction => ({
   type: EModalTaskAddActions.OPEN_MODAL,
   payload,
 });

@@ -2,20 +2,54 @@ import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { useForm } from '@/hooks';
+import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
+import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getRandomColor, IFormDataColumn } from '@/utils';
 
 export const ModalAddColumn = () => {
   const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector(({ modals }) => modals.modalColumnAdd);
+  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+
+  const initialData: IFormDataColumn = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };
+
   const onClose = () => {
     dispatch(closeModaColumnAdd());
     resetForm();
   };
 
-  const initialData: IFormDataColumn = { name: '', color: getRandomColor() };
-  const { formData, handleChange, handleSubmit, resetForm } = useForm<IFormDataColumn>({ initialData, onClose });
+  const onSubmit = () => {
+    const newColumn = {
+      ...formData,
+      id: `column-${Date.now()}`,
+      cardIds: [],
+    };
+
+    const updatedKanbanData = {
+      columns: {
+        ...kanbanData.columns,
+        [newColumn.id]: newColumn,
+      },
+      cards: kanbanData.cards,
+    };
+
+    dispatch(setKanbanBoardData(updatedKanbanData));
+
+    dispatch(
+      openNotification({
+        isSuccess: true,
+        text: `Column '${formData.title}' has been successfully added`,
+      })
+    );
+  };
+
+  const { formData, handleChange, handleSubmit, resetForm } = useForm<IFormDataColumn>({
+    initialData,
+    onClose,
+    onSubmit,
+  });
 
   if (!isOpen) return null;
 
@@ -25,9 +59,9 @@ export const ModalAddColumn = () => {
       <Form onSubmit={handleSubmit}>
         <Input
           labelText={UITexts.LABELS.NAME}
-          name="name"
+          name="title"
           type="text"
-          value={formData.name}
+          value={formData.title}
           onChange={handleChange}
           required
         />

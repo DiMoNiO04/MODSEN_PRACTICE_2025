@@ -1,8 +1,11 @@
 import { BtnDef, BtnsBlock, Form, Input, ModalTitle, TextArea } from '@/components/ui';
 import { Select } from '@/components/ui/Select';
-import { CARD_PRIORITY, CARD_STATUS, UITexts } from '@/constants';
+import { CARD_PRIORITY, UITexts } from '@/constants';
 import { useForm } from '@/hooks';
-import { IFormDataTask, IOption } from '@/utils';
+import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
+import { openNotification } from '@/store/notification/actions';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { IOption } from '@/utils';
 import { ICard } from '@/utils/interfaces';
 
 interface ITaskEditContentProps {
@@ -12,34 +15,71 @@ interface ITaskEditContentProps {
 }
 
 export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditContentProps) => {
-  const { title, desc, priority, status } = cardData;
+  const dispatch = useAppDispatch();
 
-  const initialData: IFormDataTask = {
-    name: title,
-    description: desc,
-    priority: priority,
-    status: status,
+  const initialData: ICard = { ...cardData };
+  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+
+  const { formData, handleChange, handleSubmit } = useForm<ICard>({ initialData, onClose });
+
+  const handleSave = () => {
+    const updateTask = { ...formData };
+
+    const oldColumnId = cardData.columnId;
+    const newColumnId = updateTask.columnId;
+
+    const updatedColumns = { ...kanbanData.columns };
+
+    if (oldColumnId !== newColumnId) {
+      updatedColumns[oldColumnId] = {
+        ...updatedColumns[oldColumnId],
+        cardIds: updatedColumns[oldColumnId].cardIds.filter((cardId) => cardId !== formData.id),
+      };
+
+      updatedColumns[newColumnId] = {
+        ...updatedColumns[newColumnId],
+        cardIds: [...updatedColumns[newColumnId].cardIds, formData.id],
+      };
+    }
+
+    const updatedCards = {
+      ...kanbanData.cards,
+      [formData.id]: updateTask,
+    };
+
+    const updatedKanbanData = {
+      columns: updatedColumns,
+      cards: updatedCards,
+    };
+
+    dispatch(setKanbanBoardData(updatedKanbanData));
+
+    dispatch(
+      openNotification({
+        isSuccess: true,
+        text: `Task '${formData.title}' has been successfully edited`,
+      })
+    );
   };
 
-  const { formData, handleChange, handleSubmit } = useForm<IFormDataTask>({ initialData, onClose });
-
   const onPriorityChange = (selectedOption: IOption) =>
-    handleChange({ target: { name: 'priority', value: selectedOption } });
+    handleChange({ target: { name: 'priority', value: selectedOption.id } });
 
   const onStatusChange = (selectedOption: IOption) =>
-    handleChange({ target: { name: 'status', value: selectedOption } });
+    handleChange({ target: { name: 'columnId', value: selectedOption.id } });
 
   return (
     <>
       <ModalTitle text={UITexts.TASK.EDIT} />
       <Form onSubmit={handleSubmit}>
-        <Input labelText={UITexts.LABELS.NAME} name="name" type="text" value={formData.name} onChange={handleChange} />
-        <TextArea
-          labelText={UITexts.LABELS.DESCRIPTION}
-          name="description"
-          value={formData.description}
+        <Input
+          labelText={UITexts.LABELS.NAME}
+          name="title"
+          type="text"
+          value={formData.title}
           onChange={handleChange}
         />
+        <TextArea labelText={UITexts.LABELS.DESCRIPTION} name="desc" value={formData.desc} onChange={handleChange} />
         <Select
           labelText={UITexts.LABELS.PRIORITY}
           value={formData.priority}
@@ -48,13 +88,16 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
         />
         <Select
           labelText={UITexts.LABELS.STATUS}
-          value={formData.status}
+          value={formData.columnId}
           onChange={onStatusChange}
-          options={Object.values(CARD_STATUS)}
+          options={Object.values(kanbanData.columns).map((column) => ({
+            id: column.id,
+            title: column.title,
+          }))}
         />
         <BtnsBlock>
           <BtnDef text={UITexts.TASK.INFO} typeBtn={'button'} onClick={handleCancel} isInvert />
-          <BtnDef text={UITexts.BTNS.SAVE} typeBtn={'submit'} />
+          <BtnDef text={UITexts.BTNS.SAVE} typeBtn={'submit'} onClick={handleSave} />
         </BtnsBlock>
       </Form>
     </>

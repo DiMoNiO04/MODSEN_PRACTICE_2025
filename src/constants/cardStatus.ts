@@ -3,10 +3,8 @@ import { IOption } from '@/utils';
 import { EColors } from './colors';
 import { UITexts } from './uiTexts';
 
-type TCardStatus = 'toDo' | 'inProgress' | 'done';
-
-export const CARD_STATUS: Record<TCardStatus, IOption> = {
-  toDo: { color: EColors.BLUE, value: UITexts.STATUSES.TODO },
-  inProgress: { color: EColors.ORANGE, value: UITexts.STATUSES.PROGRESS },
-  done: { color: EColors.GREEN, value: UITexts.STATUSES.DONE },
+export const CARD_STATUS: Record<string, IOption> = {
+  'column-1': { id: 'column-1', color: EColors.BLUE, title: UITexts.STATUSES.TODO },
+  'column-2': { id: 'column-2', color: EColors.ORANGE, title: UITexts.STATUSES.PROGRESS },
+  'column-3': { id: 'column-3', color: EColors.GREEN, title: UITexts.STATUSES.DONE },
 };

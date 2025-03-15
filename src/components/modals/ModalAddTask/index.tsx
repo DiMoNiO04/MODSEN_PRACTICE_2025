@@ -2,30 +2,66 @@ import { useEffect } from 'react';
 
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle, Select, TextArea } from '@/components/ui';
-import { CARD_PRIORITY, CARD_STATUS, UITexts } from '@/constants';
+import { CARD_PRIORITY, UITexts } from '@/constants';
 import { useForm } from '@/hooks';
+import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalTaskAdd } from '@/store/modalTaskAdd/actions';
+import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { IFormDataTask, IOption } from '@/utils';
+import { IOption } from '@/utils';
+import { ICard } from '@/utils/interfaces';
 
 export const ModalAddTask = () => {
   const dispatch = useAppDispatch();
-  const { isFromHeader, status, isOpen } = useAppSelector(({ modals }) => modals.modalTaskAdd);
+  const { isFromHeader, isOpen, columnId } = useAppSelector(({ modals }) => modals.modalTaskAdd);
+  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+
+  const initialData: ICard = {
+    id: `card-${Date.now()}`,
+    title: '',
+    desc: '',
+    priority: 'priority-1',
+    columnId: columnId || 'column-1',
+  };
+
   const onClose = () => {
     dispatch(closeModalTaskAdd());
     resetForm();
   };
 
-  const initialData: IFormDataTask = {
-    name: '',
-    description: '',
-    priority: CARD_PRIORITY.null,
-    status: status || CARD_STATUS.toDo,
+  const onSubmit = () => {
+    const newTask: ICard = {
+      ...formData,
+    };
+
+    const updatedCards = { ...kanbanData.cards };
+    updatedCards[newTask.id] = newTask;
+
+    const updatedColumns = { ...kanbanData.columns };
+    updatedColumns[formData.columnId] = {
+      ...updatedColumns[formData.columnId],
+      cardIds: [...updatedColumns[formData.columnId].cardIds, newTask.id],
+    };
+
+    const updatedKanbanData = {
+      columns: updatedColumns,
+      cards: updatedCards,
+    };
+
+    dispatch(setKanbanBoardData(updatedKanbanData));
+
+    dispatch(
+      openNotification({
+        isSuccess: true,
+        text: `Task '${formData.title}' has been successfully added`,
+      })
+    );
   };
 
-  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataTask>({
+  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<ICard>({
     initialData,
     onClose,
+    onSubmit,
   });
 
   useEffect(() => {
@@ -35,10 +71,10 @@ export const ModalAddTask = () => {
   }, [isOpen, status]);
 
   const onPriorityChange = (selectedOption: IOption) =>
-    handleChange({ target: { name: 'priority', value: selectedOption } });
+    handleChange({ target: { name: 'priority', value: selectedOption.id } });
 
   const onStatusChange = (selectedOption: IOption) =>
-    handleChange({ target: { name: 'status', value: selectedOption } });
+    handleChange({ target: { name: 'columnId', value: selectedOption.id } });
 
   if (!isOpen) return null;
 
@@ -48,18 +84,13 @@ export const ModalAddTask = () => {
       <Form onSubmit={handleSubmit}>
         <Input
           labelText={UITexts.LABELS.NAME}
-          name="name"
+          name="title"
           type="text"
-          value={formData.name}
+          value={formData.title}
           onChange={handleChange}
           required
         />
-        <TextArea
-          labelText={UITexts.LABELS.DESCRIPTION}
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-        />
+        <TextArea labelText={UITexts.LABELS.DESCRIPTION} name="desc" value={formData.desc} onChange={handleChange} />
         <Select
           labelText={UITexts.LABELS.PRIORITY}
           value={formData.priority}
@@ -70,11 +101,15 @@ export const ModalAddTask = () => {
         {isFromHeader && (
           <Select
             labelText={UITexts.LABELS.STATUS}
-            value={formData.status}
+            value={formData.columnId}
             onChange={onStatusChange}
-            options={Object.values(CARD_STATUS)}
+            options={Object.values(kanbanData.columns).map((column) => ({
+              id: column.id,
+              title: column.title,
+            }))}
           />
         )}
+
         <BtnDef text={UITexts.BTNS.SAVE} typeBtn="submit" />
       </Form>
     </ModalContainer>

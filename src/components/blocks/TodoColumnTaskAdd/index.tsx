@@ -2,22 +2,23 @@ import { ColorText } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch } from '@/store/store';
-import { IOption } from '@/utils';
 
 import { Button } from './styled';
 
 interface ITodoColumnTaskAddProps {
-  status: IOption;
+  columnId: string;
+  title: string;
+  color: string;
 }
 
-export const TodoColumnTaskAdd = ({ status }: ITodoColumnTaskAddProps) => {
+export const TodoColumnTaskAdd = ({ columnId, color }: ITodoColumnTaskAddProps) => {
   const dispatch = useAppDispatch();
 
-  const toggleTaskModal = () => dispatch(openModalTaskAdd({ status }));
+  const toggleTaskModal = () => dispatch(openModalTaskAdd({ columnId }));
 
   return (
-    <Button type="button" color={status.color} onClick={toggleTaskModal}>
-      <ColorText color={status.color} text={UITexts.BTNS.ADD_TASK} />
+    <Button type="button" color={color} onClick={toggleTaskModal}>
+      <ColorText color={color} text={UITexts.BTNS.ADD_TASK} />
     </Button>
   );
 };

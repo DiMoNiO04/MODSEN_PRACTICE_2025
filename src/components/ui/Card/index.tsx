@@ -16,11 +16,11 @@ export const Card = (cardData: ICard) => {
   return (
     <Block>
       <TopBlockInfo>
-        <Priority color={priority.color} value={priority.value} />
+        <Priority priorityId={priority} cardData={cardData} />
         <BtnRound type="maximize" handle={handleOpenModal} />
       </TopBlockInfo>
       <TextH3 text={title} />
-      <TextDef text={desc} maxLines={3} />
+      {desc && <TextDef text={desc} maxLines={3} />}
     </Block>
   );
 };

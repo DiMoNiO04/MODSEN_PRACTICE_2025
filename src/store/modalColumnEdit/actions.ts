@@ -1,7 +1,9 @@
-import { EModalColumnEditActions } from './types';
-import { IOpenModalColumnEditPayload, TModalColumnEditAction } from './types';
+import { IColumn } from '@/utils/interfaces';
 
-const openModalColumnEdit = (payload: IOpenModalColumnEditPayload): TModalColumnEditAction => ({
+import { EModalColumnEditActions } from './types';
+import { TModalColumnEditAction } from './types';
+
+const openModalColumnEdit = (payload: Omit<IColumn, 'cardIds'>): TModalColumnEditAction => ({
   type: EModalColumnEditActions.OPEN_MODAL,
   payload,
 });
