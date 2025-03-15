@@ -34,7 +34,7 @@ interface ICard {
   title: string;
   desc: string;
   priority: IOption;
-  status: IOption;
+  columnId: string;
 }
 
 interface IColumn {

@@ -7,7 +7,7 @@ import { DashboardContainer } from './styled';
 
 export const Dashboard = () => {
   const kanbanData = useAppSelector((state) => state.kanbanBoard.kanbanData);
-  const { columns, cards } = kanbanData.kanbanData;
+  const { columns, cards } = kanbanData;
 
   return (
     <section>

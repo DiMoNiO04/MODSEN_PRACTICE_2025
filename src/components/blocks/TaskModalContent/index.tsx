@@ -11,7 +11,7 @@ interface ITaskModalContentProps {
 }
 
 export const TaskModalContent = ({ cardData, handleOpenDelete, handleOpenEdit }: ITaskModalContentProps) => {
-  const { title, desc, priority, status } = cardData;
+  const { title, desc, priority } = cardData;
 
   return (
     <>
@@ -24,7 +24,7 @@ export const TaskModalContent = ({ cardData, handleOpenDelete, handleOpenEdit }:
         </div>
         <div>
           <TextDef text={UITexts.LABELS.STATUS} />
-          <ColorText color={status.color} text={status.value} isFullWidth />
+          {/* <ColorText color={status.color} text={status.value} isFullWidth /> */}
         </div>
         <BtnsBlock>
           <BtnDef text={UITexts.BTNS.EDIT} typeBtn={'button'} onClick={handleOpenEdit} />

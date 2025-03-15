@@ -2,7 +2,7 @@ import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { useForm } from '@/hooks';
-import { addColumn } from '@/store/columns/actions';
+import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getRandomColor, IFormDataColumn } from '@/utils';
@@ -10,6 +10,7 @@ import { getRandomColor, IFormDataColumn } from '@/utils';
 export const ModalAddColumn = () => {
   const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector(({ modals }) => modals.modalColumnAdd);
+  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
 
   const onClose = () => {
     dispatch(closeModaColumnAdd());
@@ -17,14 +18,29 @@ export const ModalAddColumn = () => {
   };
 
   const onSubmit = () => {
-    dispatch(
-      addColumn({
-        id: `column-${Date.now()}`,
-        title: formData.title,
-        color: formData.color,
-        cardIds: [],
-      })
-    );
+    const newColumn = {
+      id: `column-${Date.now()}`,
+      title: formData.title,
+      color: formData.color,
+      cardIds: [],
+    };
+
+    const updatedKanbanData = {
+      columns: {
+        ...kanbanData.columns,
+        [newColumn.id]: {
+          id: newColumn.id,
+          title: newColumn.title,
+          color: newColumn.color,
+          cardIds: [],
+        },
+      },
+      cards: kanbanData.cards,
+    };
+
+    dispatch(setKanbanBoardData(updatedKanbanData));
+
+    onClose();
   };
 
   const initialData: IFormDataColumn = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };

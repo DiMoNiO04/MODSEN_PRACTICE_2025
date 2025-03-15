@@ -8,11 +8,6 @@ const initialKanbanBoardData: IInitialKanbanBoardState = {
 
 const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoardAction): IInitialKanbanBoardState => {
   switch (action.type) {
-    case EKanbanBoardActions.GET_DATA: {
-      return {
-        ...state,
-      };
-    }
     case EKanbanBoardActions.SET_DATA: {
       kanbanStorage.saveKanbanData(action.payload);
       return {
