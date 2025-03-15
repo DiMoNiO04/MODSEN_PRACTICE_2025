@@ -20,7 +20,7 @@ export const Card = (cardData: ICard) => {
         <BtnRound type="maximize" handle={handleOpenModal} />
       </TopBlockInfo>
       <TextH3 text={title} />
-      <TextDef text={desc} maxLines={3} />
+      {desc && <TextDef text={desc} maxLines={3} />}
     </Block>
   );
 };

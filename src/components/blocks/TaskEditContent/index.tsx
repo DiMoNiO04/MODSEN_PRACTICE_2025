@@ -2,7 +2,7 @@ import { BtnDef, BtnsBlock, Form, Input, ModalTitle, TextArea } from '@/componen
 import { Select } from '@/components/ui/Select';
 import { CARD_PRIORITY, CARD_STATUS, UITexts } from '@/constants';
 import { useForm } from '@/hooks';
-import { IFormDataCard, IOption } from '@/utils';
+import { IOption } from '@/utils';
 import { ICard } from '@/utils/interfaces';
 
 interface ITaskEditContentProps {
@@ -12,16 +12,9 @@ interface ITaskEditContentProps {
 }
 
 export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditContentProps) => {
-  const { title, desc, priority } = cardData;
+  const initialData: ICard = { ...cardData };
 
-  const initialData: IFormDataCard = {
-    name: title,
-    description: desc,
-    priority: priority,
-    columnId: 'column-1',
-  };
-
-  const { formData, handleChange, handleSubmit } = useForm<IFormDataCard>({ initialData, onClose });
+  const { formData, handleChange, handleSubmit } = useForm<ICard>({ initialData, onClose });
 
   const onPriorityChange = (selectedOption: IOption) =>
     handleChange({ target: { name: 'priority', value: selectedOption } });
@@ -33,13 +26,14 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
     <>
       <ModalTitle text={UITexts.TASK.EDIT} />
       <Form onSubmit={handleSubmit}>
-        <Input labelText={UITexts.LABELS.NAME} name="name" type="text" value={formData.name} onChange={handleChange} />
-        <TextArea
-          labelText={UITexts.LABELS.DESCRIPTION}
-          name="description"
-          value={formData.description}
+        <Input
+          labelText={UITexts.LABELS.NAME}
+          name="title"
+          type="text"
+          value={formData.title}
           onChange={handleChange}
         />
+        <TextArea labelText={UITexts.LABELS.DESCRIPTION} name="desc" value={formData.desc} onChange={handleChange} />
         <Select
           labelText={UITexts.LABELS.PRIORITY}
           value={formData.priority}

@@ -14,7 +14,7 @@ export const AddNewColumn = () => {
 
   return (
     <TodoColumnContainer isFullHeight={false}>
-      <TodoColumnHeader {...initialData} isAddNewColumn />
+      <TodoColumnHeader {...initialData} columnId={initialData.id} isAddNewColumn />
     </TodoColumnContainer>
   );
 };

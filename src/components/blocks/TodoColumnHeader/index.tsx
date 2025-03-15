@@ -12,9 +12,17 @@ import { TodoColumnHeaderContainer } from './styled';
 
 export interface ITodoColumnHeaderProps extends IColumn {
   isAddNewColumn?: boolean;
+  columnId: string;
 }
 
-export const TodoColumnHeader = ({ id, title, color, cardIds, isAddNewColumn = false }: ITodoColumnHeaderProps) => {
+export const TodoColumnHeader = ({
+  id,
+  title,
+  color,
+  cardIds,
+  columnId,
+  isAddNewColumn = false,
+}: ITodoColumnHeaderProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
   const dispatch = useAppDispatch();
 
@@ -24,7 +32,12 @@ export const TodoColumnHeader = ({ id, title, color, cardIds, isAddNewColumn = f
     if (isAddNewColumn) {
       dispatch(openModaColumnAdd());
     } else {
-      dispatch(openModalTaskAdd());
+      console.log(columnId);
+      dispatch(
+        openModalTaskAdd({
+          columnId,
+        })
+      );
     }
   };
 

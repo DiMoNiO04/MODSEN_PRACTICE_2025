@@ -14,9 +14,9 @@ export const TodoColumn = ({ id, cardIds, color, title }: IColumn) => {
 
   return (
     <TodoColumnContainer>
-      <TodoColumnHeader id={id} title={title} color={color} cardIds={cardIds} />
+      <TodoColumnHeader id={id} title={title} color={color} cardIds={cardIds} columnId={id} />
       <TodoList tasks={tasks} />
-      <TodoColumnTaskAdd title={title} color={color} />
+      <TodoColumnTaskAdd columnId={id} title={title} color={color} />
     </TodoColumnContainer>
   );
 };

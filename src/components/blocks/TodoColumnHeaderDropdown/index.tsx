@@ -12,7 +12,7 @@ export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IFormDataColu
   ({ id, color, title }: IFormDataColumn, ref) => {
     const dispatch = useAppDispatch();
 
-    const handleOpenModalTaskAdd = () => dispatch(openModalTaskAdd());
+    const handleOpenModalTaskAdd = () => dispatch(openModalTaskAdd({ columnId: id }));
     const handleOpenModalColumnEdit = () => dispatch(openModalColumnEdit({ id, title, color }));
     const handleOpenModalConfirm = () => dispatch(openModalColumnDelete({ id }));
 

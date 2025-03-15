@@ -5,6 +5,7 @@ enum EModalTaskAddActions {
 
 interface IToggleModalTaskAddPayload {
   isFromHeader?: boolean;
+  columnId?: string;
 }
 
 interface IInitialModalTaskAddState extends IToggleModalTaskAddPayload {
@@ -12,7 +13,7 @@ interface IInitialModalTaskAddState extends IToggleModalTaskAddPayload {
 }
 
 type TModalTaskAddAction =
-  | { type: EModalTaskAddActions.OPEN_MODAL; payload?: IToggleModalTaskAddPayload }
+  | { type: EModalTaskAddActions.OPEN_MODAL; payload: IToggleModalTaskAddPayload }
   | { type: EModalTaskAddActions.CLOSE_MODAL };
 
 export { EModalTaskAddActions };

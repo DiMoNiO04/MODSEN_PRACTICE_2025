@@ -4,6 +4,7 @@ import { IInitialModalTaskAddState, TModalTaskAddAction } from './types';
 const initialModalTaskAddState: IInitialModalTaskAddState = {
   isOpen: false,
   isFromHeader: false,
+  columnId: 'column-1',
 };
 
 const modalTaskAddReducer = (
@@ -15,7 +16,8 @@ const modalTaskAddReducer = (
       return {
         ...state,
         isOpen: true,
-        isFromHeader: action.payload?.isFromHeader ?? false,
+        isFromHeader: action.payload.isFromHeader ?? false,
+        columnId: action.payload.columnId,
       };
     case EModalTaskAddActions.CLOSE_MODAL:
       return { ...initialModalTaskAddState };

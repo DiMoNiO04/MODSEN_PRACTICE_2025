@@ -1,6 +1,7 @@
 import { BtnDef, BtnsBlock, ColorText, ModalTitle, TextDef } from '@/components/ui';
 import { UITexts } from '@/constants';
-import { ICard } from '@/utils/interfaces';
+import { useAppSelector } from '@/store/store';
+import { ICard, IColumn, IKanbanData } from '@/utils/interfaces';
 
 import { Content } from './styled';
 
@@ -11,20 +12,24 @@ interface ITaskModalContentProps {
 }
 
 export const TaskModalContent = ({ cardData, handleOpenDelete, handleOpenEdit }: ITaskModalContentProps) => {
-  const { title, desc, priority } = cardData;
+  const { title, desc, priority, columnId } = cardData;
+
+  const kanbanData: IKanbanData = useAppSelector((state) => state.kanbanBoard.kanbanData);
+  const { columns } = kanbanData;
+  const column: IColumn = columns[columnId];
 
   return (
     <>
       <ModalTitle text={title} />
       <Content>
-        <TextDef text={desc} />
+        {desc && <TextDef text={desc} />}
         <div>
           <TextDef text={UITexts.LABELS.PRIORITY} />
           <ColorText color={priority.color} text={priority.value} isFullWidth />
         </div>
         <div>
           <TextDef text={UITexts.LABELS.STATUS} />
-          {/* <ColorText color={status.color} text={status.value} isFullWidth /> */}
+          <ColorText color={column.color} text={column.title} isFullWidth />
         </div>
         <BtnsBlock>
           <BtnDef text={UITexts.BTNS.EDIT} typeBtn={'button'} onClick={handleOpenEdit} />

@@ -4,28 +4,57 @@ import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle, Select, TextArea } from '@/components/ui';
 import { CARD_PRIORITY, CARD_STATUS, UITexts } from '@/constants';
 import { useForm } from '@/hooks';
+import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { IFormDataCard, IOption } from '@/utils';
+import { IOption } from '@/utils';
+import { ICard } from '@/utils/interfaces';
 
 export const ModalAddTask = () => {
   const dispatch = useAppDispatch();
-  const { isFromHeader, isOpen } = useAppSelector(({ modals }) => modals.modalTaskAdd);
+  const { isFromHeader, isOpen, columnId } = useAppSelector(({ modals }) => modals.modalTaskAdd);
+  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+
+  const initialData: ICard = {
+    id: `card-${Date.now()}`,
+    title: '',
+    desc: '',
+    priority: CARD_PRIORITY.null,
+    columnId: columnId || 'column-1',
+  };
+
   const onClose = () => {
     dispatch(closeModalTaskAdd());
     resetForm();
   };
 
-  const initialData: IFormDataCard = {
-    name: '',
-    description: '',
-    priority: CARD_PRIORITY.null,
-    columnId: 'column-1',
+  const onSubmit = () => {
+    const newTask: ICard = {
+      ...formData,
+    };
+
+    const updatedKanbanData = {
+      columns: {
+        ...kanbanData.columns,
+        [formData.columnId]: {
+          ...kanbanData.columns[formData.columnId],
+          cardIds: [...kanbanData.columns[formData.columnId].cardIds, newTask.id],
+        },
+      },
+      cards: {
+        ...kanbanData.cards,
+        [newTask.id]: newTask,
+      },
+    };
+
+    dispatch(setKanbanBoardData(updatedKanbanData));
+    onClose();
   };
 
-  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataCard>({
+  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<ICard>({
     initialData,
     onClose,
+    onSubmit,
   });
 
   useEffect(() => {
@@ -48,18 +77,13 @@ export const ModalAddTask = () => {
       <Form onSubmit={handleSubmit}>
         <Input
           labelText={UITexts.LABELS.NAME}
-          name="name"
+          name="title"
           type="text"
-          value={formData.name}
+          value={formData.title}
           onChange={handleChange}
           required
         />
-        <TextArea
-          labelText={UITexts.LABELS.DESCRIPTION}
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-        />
+        <TextArea labelText={UITexts.LABELS.DESCRIPTION} name="desc" value={formData.desc} onChange={handleChange} />
         <Select
           labelText={UITexts.LABELS.PRIORITY}
           value={formData.priority}
