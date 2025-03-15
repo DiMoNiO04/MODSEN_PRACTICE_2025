@@ -7,6 +7,7 @@ const InputField = styled.input`
   font-size: var(--font-size-m);
   border: 1px solid var(--color-dark);
   border-radius: var(--radius-xs);
+  background: var(--color-white);
 
   &:focus {
     border-color: var(--color-orange);

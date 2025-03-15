@@ -1,6 +1,28 @@
 @import './fonts.css';
 
+body.dark {
+  --color-light: #b0b7bf;
+  --color-body: #c1c9d1;
+  --color-white: #e1e7ed;
+  --color-gray-cool: #7e8a92;
+  --color-gray-slate: #2a2a2a;
+  --color-black: #333333;
+  --color-dark: #4c5a61;
+  --color-sage: #7b8d7a;
+  --color-red: #9f2a35;
+  --color-red-dark: #6a1111;
+  --color-red-hover: #f1a1a3;
+  --color-orange: #b76b13;
+  --color-orange-hover: #f7d59b;
+  --color-blue: #4f6a90;
+  --color-green: #1e7f5b;
+  --color-green-dark: #033b2d;
+  --color-green-hover: #aad6c3;
+  --color-shadow: #00000033;
+  --color-bg-mob: #e1e7ed;
+}
 :root {
+  --color-body: #ffffff;
   --color-white: #ffffff;
   --color-light: #f8fafc;
   --color-gray-cool: #e2e8f0;
@@ -100,6 +122,7 @@ html {
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--color-body);
 }
 
 body.--lock {
