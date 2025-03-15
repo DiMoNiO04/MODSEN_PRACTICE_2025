@@ -42,7 +42,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
         />
         <Select
           labelText={UITexts.LABELS.STATUS}
-          value={CARD_STATUS.done}
+          value={CARD_STATUS.done.id}
           onChange={onStatusChange}
           options={Object.values(CARD_STATUS)}
         />

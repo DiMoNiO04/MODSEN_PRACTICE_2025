@@ -1,5 +1,5 @@
 import { BtnDef, BtnsBlock, ColorText, ModalTitle, TextDef } from '@/components/ui';
-import { UITexts } from '@/constants';
+import { CARD_PRIORITY, UITexts } from '@/constants';
 import { useAppSelector } from '@/store/store';
 import { ICard, IColumn, IKanbanData } from '@/utils/interfaces';
 
@@ -18,6 +18,8 @@ export const TaskModalContent = ({ cardData, handleOpenDelete, handleOpenEdit }:
   const { columns } = kanbanData;
   const column: IColumn = columns[columnId];
 
+  const priorityData = CARD_PRIORITY[priority];
+
   return (
     <>
       <ModalTitle text={title} />
@@ -25,7 +27,7 @@ export const TaskModalContent = ({ cardData, handleOpenDelete, handleOpenEdit }:
         {desc && <TextDef text={desc} />}
         <div>
           <TextDef text={UITexts.LABELS.PRIORITY} />
-          <ColorText color={priority.color} text={priority.value} isFullWidth />
+          <ColorText color={priorityData.color} text={priorityData.title} isFullWidth />
         </div>
         <div>
           <TextDef text={UITexts.LABELS.STATUS} />

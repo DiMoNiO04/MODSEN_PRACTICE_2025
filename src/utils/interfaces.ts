@@ -14,8 +14,9 @@ interface IFormDataColumn {
 }
 
 interface IOption {
-  color: string;
-  value: string;
+  id: string;
+  color?: string;
+  title: string;
 }
 
 interface IText {
@@ -26,7 +27,7 @@ interface ICard {
   id: string;
   title: string;
   desc?: string;
-  priority: IOption;
+  priority: string;
   columnId: string;
 }
 

@@ -11,14 +11,14 @@ import { SelectArrowIcon, SelectButton, SelectContainer } from './styled';
 
 interface ISelectProps {
   labelText: string;
-  value: IOption;
+  value: string;
   options: IOption[];
   onChange: (selectedOption: IOption) => void;
 }
 
 export const Select = ({ labelText, value, options, onChange }: ISelectProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
-  const selectedOption = options.find((option) => option.value === value.value);
+  const selectedOption = options.find((option) => option.id === value);
 
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
   const closeDropdown = () => setTimeout(() => setIsDropdownOpen(false), 0);
@@ -28,12 +28,14 @@ export const Select = ({ labelText, value, options, onChange }: ISelectProps) =>
     closeDropdown();
   };
 
+  console.log(selectedOption);
+
   return (
     <Label>
       <LabelText text={labelText} />
       <SelectContainer>
         <SelectButton type="button" onClick={toggleDropdown} ref={refDropdownBtn}>
-          {selectedOption?.value || UITexts.LABELS.SELECT}
+          {selectedOption?.title || UITexts.LABELS.SELECT}
           <SelectArrowIcon $isRotate={isDropdownOpen}>
             <IconArrow />
           </SelectArrowIcon>
@@ -41,7 +43,7 @@ export const Select = ({ labelText, value, options, onChange }: ISelectProps) =>
         {isDropdownOpen && (
           <Dropdown isFullWidth={true} ref={refDropdownMenu}>
             {options.map((option) => (
-              <BtnMenuItem key={option.value} onClick={handleSelect.bind(null, option)} text={option.value} />
+              <BtnMenuItem key={option.id} onClick={handleSelect.bind(null, option)} text={option.title} />
             ))}
           </Dropdown>
         )}

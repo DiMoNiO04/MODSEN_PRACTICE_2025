@@ -16,7 +16,7 @@ export const Card = (cardData: ICard) => {
   return (
     <Block>
       <TopBlockInfo>
-        <Priority color={priority.color} value={priority.value} />
+        <Priority priorityId={priority} />
         <BtnRound type="maximize" handle={handleOpenModal} />
       </TopBlockInfo>
       <TextH3 text={title} />
