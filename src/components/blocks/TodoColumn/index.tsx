@@ -20,6 +20,7 @@ export const TodoColumn = ({ id, cardIds, color, title }: IColumn) => {
 
   const handleDragStart = (e: DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData('columnId', id);
+    e.dataTransfer.setData('fromColumnId', id);
   };
 
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
@@ -34,23 +35,52 @@ export const TodoColumn = ({ id, cardIds, color, title }: IColumn) => {
     setIsDragOver(false);
 
     const draggedColumnId = e.dataTransfer.getData('columnId');
-    if (!draggedColumnId || draggedColumnId === id) return;
+    const draggedCardId = e.dataTransfer.getData('cardId');
 
-    const updatedColumnsOrder = [...columnsOrder];
-    const fromIndex = updatedColumnsOrder.indexOf(draggedColumnId);
-    const toIndex = updatedColumnsOrder.indexOf(id);
+    if (draggedColumnId && draggedColumnId !== id) {
+      const fromIndex = columnsOrder.indexOf(draggedColumnId);
+      const toIndex = columnsOrder.indexOf(id);
 
-    if (fromIndex === -1 || toIndex === -1) return;
+      if (fromIndex === -1 || toIndex === -1) return;
 
-    updatedColumnsOrder.splice(fromIndex, 1);
-    updatedColumnsOrder.splice(toIndex, 0, draggedColumnId);
+      const updatedColumnsOrder = [...columnsOrder];
+      updatedColumnsOrder.splice(fromIndex, 1);
+      updatedColumnsOrder.splice(toIndex, 0, draggedColumnId);
 
-    const updatedKanbanData = {
-      ...kanbanData,
-      columnsOrder: updatedColumnsOrder,
-    };
+      const updatedKanbanData = {
+        ...kanbanData,
+        columnsOrder: updatedColumnsOrder,
+      };
 
-    dispatch(setKanbanBoardData(updatedKanbanData));
+      dispatch(setKanbanBoardData(updatedKanbanData));
+    }
+
+    if (draggedCardId) {
+      const fromColumnId = e.dataTransfer.getData('fromColumnId');
+      const updatedCardIds = [...cardIds];
+
+      if (fromColumnId === id) return;
+
+      const fromColumn = kanbanData.columns[fromColumnId];
+      const updatedFromCardIds = fromColumn.cardIds.filter((cardId) => cardId !== draggedCardId);
+
+      const updatedKanbanData: IKanbanData = {
+        ...kanbanData,
+        columns: {
+          ...kanbanData.columns,
+          [fromColumnId]: {
+            ...fromColumn,
+            cardIds: updatedFromCardIds,
+          },
+          [id]: {
+            ...kanbanData.columns[id],
+            cardIds: [...updatedCardIds, draggedCardId],
+          },
+        },
+      };
+
+      dispatch(setKanbanBoardData(updatedKanbanData));
+    }
   };
 
   return (

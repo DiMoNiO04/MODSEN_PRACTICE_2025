@@ -23,6 +23,7 @@ export const Card = (cardData: ICard) => {
 
   const handleDragStart = (e: DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData('cardId', id);
+    e.dataTransfer.setData('fromColumnId', columnId);
   };
 
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
@@ -37,30 +38,54 @@ export const Card = (cardData: ICard) => {
     setIsDragOver(false);
 
     const draggedCardId = e.dataTransfer.getData('cardId');
+    const fromColumnId = e.dataTransfer.getData('fromColumnId');
 
-    if (!draggedCardId || draggedCardId === id) return;
+    if (draggedCardId && fromColumnId === columnId) {
+      const updatedCardIds = [...cardIds];
+      const fromIndex = updatedCardIds.indexOf(draggedCardId);
+      const toIndex = updatedCardIds.indexOf(id);
 
-    const updatedCardIds = [...cardIds];
-    const fromIndex = updatedCardIds.indexOf(draggedCardId);
-    const toIndex = updatedCardIds.indexOf(id);
+      if (fromIndex === -1 || toIndex === -1 || fromIndex === toIndex) return;
 
-    if (fromIndex === -1 || toIndex === -1) return;
+      updatedCardIds.splice(fromIndex, 1);
+      updatedCardIds.splice(toIndex, 0, draggedCardId);
 
-    updatedCardIds.splice(fromIndex, 1);
-    updatedCardIds.splice(toIndex, 0, draggedCardId);
-
-    const updatedKanbanData: IKanbanData = {
-      ...kanbanData,
-      columns: {
-        ...kanbanData.columns,
-        [columnId]: {
-          ...column,
-          cardIds: updatedCardIds,
+      const updatedKanbanData: IKanbanData = {
+        ...kanbanData,
+        columns: {
+          ...kanbanData.columns,
+          [columnId]: {
+            ...column,
+            cardIds: updatedCardIds,
+          },
         },
-      },
-    };
+      };
 
-    dispatch(setKanbanBoardData(updatedKanbanData));
+      dispatch(setKanbanBoardData(updatedKanbanData));
+    } else if (draggedCardId && fromColumnId !== columnId) {
+      const updatedCardIds = [...cardIds];
+      const fromColumn = kanbanData.columns[fromColumnId];
+      const updatedFromCardIds = fromColumn.cardIds.filter((cardId) => cardId !== draggedCardId);
+
+      updatedCardIds.push(draggedCardId);
+
+      const updatedKanbanData: IKanbanData = {
+        ...kanbanData,
+        columns: {
+          ...kanbanData.columns,
+          [fromColumnId]: {
+            ...fromColumn,
+            cardIds: updatedFromCardIds,
+          },
+          [columnId]: {
+            ...kanbanData.columns[columnId],
+            cardIds: updatedCardIds,
+          },
+        },
+      };
+
+      dispatch(setKanbanBoardData(updatedKanbanData));
+    }
   };
 
   return (
