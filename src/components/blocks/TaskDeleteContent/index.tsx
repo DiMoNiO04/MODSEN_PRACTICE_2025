@@ -28,6 +28,7 @@ export const TaskDeleteContent = ({ id, handleCancel, onClose }: ITaskDeleteCont
     const updatedKanbanData = {
       columns: updatedColumns,
       cards: updatedCards,
+      columnsOrder: kanbanData.columnsOrder,
     };
 
     dispatch(setKanbanBoardData(updatedKanbanData));

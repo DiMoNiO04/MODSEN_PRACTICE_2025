@@ -33,6 +33,7 @@ export const ModalAddColumn = () => {
         [newColumn.id]: newColumn,
       },
       cards: kanbanData.cards,
+      columnsOrder: [...kanbanData.columnsOrder, newColumn.id],
     };
 
     dispatch(setKanbanBoardData(updatedKanbanData));

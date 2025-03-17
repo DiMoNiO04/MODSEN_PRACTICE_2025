@@ -46,6 +46,7 @@ export const ModalAddTask = () => {
     const updatedKanbanData = {
       columns: updatedColumns,
       cards: updatedCards,
+      columnsOrder: kanbanData.columnsOrder,
     };
 
     dispatch(setKanbanBoardData(updatedKanbanData));

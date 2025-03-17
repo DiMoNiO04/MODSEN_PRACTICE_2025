@@ -37,6 +37,7 @@ export const ModalEditColumn = () => {
     const updatedKanbanData = {
       columns: updatedColums,
       cards: kanbanData.cards,
+      columnsOrder: kanbanData.columnsOrder,
     };
 
     dispatch(setKanbanBoardData(updatedKanbanData));

@@ -9,7 +9,6 @@ import { TaskEditContent } from './TaskEditContent';
 import { TaskModalContent } from './TaskModalContent';
 import { TitleWithCount } from './TitleWithCount';
 import { TodoColumn } from './TodoColumn';
-import { TodoColumnContainer } from './TodoColumnContainer';
 import { TodoColumnHeader } from './TodoColumnHeader';
 import { TodoColumnHeaderDropdown } from './TodoColumnHeaderDropdown';
 import { TodoColumnTaskAdd } from './TodoColumnTaskAdd';
@@ -27,7 +26,6 @@ export {
   TaskModalContent,
   TitleWithCount,
   TodoColumn,
-  TodoColumnContainer,
   TodoColumnHeader,
   TodoColumnHeaderDropdown,
   TodoColumnTaskAdd,

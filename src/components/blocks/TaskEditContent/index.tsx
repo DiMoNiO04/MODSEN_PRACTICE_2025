@@ -50,6 +50,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
     const updatedKanbanData = {
       columns: updatedColumns,
       cards: updatedCards,
+      columnsOrder: kanbanData.columnsOrder,
     };
 
     dispatch(setKanbanBoardData(updatedKanbanData));

@@ -7,15 +7,16 @@ import { DashboardContainer } from './styled';
 
 export const Dashboard = () => {
   const kanbanData: IKanbanData = useAppSelector((state) => state.kanbanBoard.kanbanData);
-  const { columns } = kanbanData;
+  const { columnsOrder, columns } = kanbanData;
 
   return (
     <section>
       <Container>
         <DashboardContainer>
-          {Object.values(columns).map((column) => (
-            <TodoColumn key={column.id} {...column} />
-          ))}
+          {columnsOrder.map((columnId) => {
+            const column = columns[columnId];
+            return <TodoColumn key={column.id} {...column} />;
+          })}
           <AddNewColumn />
         </DashboardContainer>
       </Container>
