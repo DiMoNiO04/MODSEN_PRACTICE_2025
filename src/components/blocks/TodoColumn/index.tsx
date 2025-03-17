@@ -64,6 +64,8 @@ export const TodoColumn = ({ id, cardIds, color, title }: IColumn) => {
       const fromColumn = kanbanData.columns[fromColumnId];
       const updatedFromCardIds = fromColumn.cardIds.filter((cardId) => cardId !== draggedCardId);
 
+      const updatedCard = { ...kanbanData.cards[draggedCardId], columnId: id };
+
       const updatedKanbanData: IKanbanData = {
         ...kanbanData,
         columns: {
@@ -76,6 +78,10 @@ export const TodoColumn = ({ id, cardIds, color, title }: IColumn) => {
             ...kanbanData.columns[id],
             cardIds: [...updatedCardIds, draggedCardId],
           },
+        },
+        cards: {
+          ...kanbanData.cards,
+          [draggedCardId]: updatedCard,
         },
       };
 

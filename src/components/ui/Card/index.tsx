@@ -40,7 +40,35 @@ export const Card = (cardData: ICard) => {
     const draggedCardId = e.dataTransfer.getData('cardId');
     const fromColumnId = e.dataTransfer.getData('fromColumnId');
 
-    if (draggedCardId && fromColumnId === columnId) {
+    if (draggedCardId && fromColumnId !== columnId) {
+      const fromColumn = kanbanData.columns[fromColumnId];
+      const updatedFromCardIds = fromColumn.cardIds.filter((cardId) => cardId !== draggedCardId);
+
+      const updatedCard = { ...kanbanData.cards[draggedCardId], columnId };
+
+      const updatedCardIds = [...cardIds, draggedCardId];
+
+      const updatedKanbanData: IKanbanData = {
+        ...kanbanData,
+        columns: {
+          ...kanbanData.columns,
+          [fromColumnId]: {
+            ...fromColumn,
+            cardIds: updatedFromCardIds,
+          },
+          [columnId]: {
+            ...kanbanData.columns[columnId],
+            cardIds: updatedCardIds,
+          },
+        },
+        cards: {
+          ...kanbanData.cards,
+          [draggedCardId]: updatedCard,
+        },
+      };
+
+      dispatch(setKanbanBoardData(updatedKanbanData));
+    } else if (draggedCardId && fromColumnId === columnId) {
       const updatedCardIds = [...cardIds];
       const fromIndex = updatedCardIds.indexOf(draggedCardId);
       const toIndex = updatedCardIds.indexOf(id);
@@ -56,29 +84,6 @@ export const Card = (cardData: ICard) => {
           ...kanbanData.columns,
           [columnId]: {
             ...column,
-            cardIds: updatedCardIds,
-          },
-        },
-      };
-
-      dispatch(setKanbanBoardData(updatedKanbanData));
-    } else if (draggedCardId && fromColumnId !== columnId) {
-      const updatedCardIds = [...cardIds];
-      const fromColumn = kanbanData.columns[fromColumnId];
-      const updatedFromCardIds = fromColumn.cardIds.filter((cardId) => cardId !== draggedCardId);
-
-      updatedCardIds.push(draggedCardId);
-
-      const updatedKanbanData: IKanbanData = {
-        ...kanbanData,
-        columns: {
-          ...kanbanData.columns,
-          [fromColumnId]: {
-            ...fromColumn,
-            cardIds: updatedFromCardIds,
-          },
-          [columnId]: {
-            ...kanbanData.columns[columnId],
             cardIds: updatedCardIds,
           },
         },
