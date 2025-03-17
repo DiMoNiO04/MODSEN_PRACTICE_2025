@@ -1,20 +1,77 @@
+import { DragEvent, useState } from 'react';
+
 import { Priority } from '@/components/blocks';
+import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { openModalTask } from '@/store/modalTask/actions';
-import { useAppDispatch } from '@/store/store';
-import { ICard } from '@/utils/interfaces';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { ICard, IKanbanData } from '@/utils/interfaces';
 
 import { BtnRound, TextDef, TextH3 } from '..';
 import { Block, TopBlockInfo } from './styled';
 
 export const Card = (cardData: ICard) => {
-  const { title, desc, priority } = cardData;
+  const { id, title, desc, priority, columnId } = cardData;
 
   const dispatch = useAppDispatch();
+  const kanbanData: IKanbanData = useAppSelector((state) => state.kanbanBoard.kanbanData);
+  const column = kanbanData.columns[columnId];
+  const cardIds = column.cardIds;
+
+  const [isDragOver, setIsDragOver] = useState<boolean>(false);
 
   const handleOpenModal = () => dispatch(openModalTask(cardData));
 
+  const handleDragStart = (e: DragEvent<HTMLDivElement>) => {
+    e.dataTransfer.setData('cardId', id);
+  };
+
+  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = () => setIsDragOver(false);
+
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragOver(false);
+
+    const draggedCardId = e.dataTransfer.getData('cardId');
+
+    if (!draggedCardId || draggedCardId === id) return;
+
+    const updatedCardIds = [...cardIds];
+    const fromIndex = updatedCardIds.indexOf(draggedCardId);
+    const toIndex = updatedCardIds.indexOf(id);
+
+    if (fromIndex === -1 || toIndex === -1) return;
+
+    updatedCardIds.splice(fromIndex, 1);
+    updatedCardIds.splice(toIndex, 0, draggedCardId);
+
+    const updatedKanbanData: IKanbanData = {
+      ...kanbanData,
+      columns: {
+        ...kanbanData.columns,
+        [columnId]: {
+          ...column,
+          cardIds: updatedCardIds,
+        },
+      },
+    };
+
+    dispatch(setKanbanBoardData(updatedKanbanData));
+  };
+
   return (
-    <Block>
+    <Block
+      draggable
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+      $isDragOver={isDragOver}
+    >
       <TopBlockInfo>
         <Priority priorityId={priority} cardData={cardData} />
         <BtnRound type="maximize" handle={handleOpenModal} />

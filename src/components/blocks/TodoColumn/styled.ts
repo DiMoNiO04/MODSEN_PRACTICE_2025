@@ -9,13 +9,11 @@ const TodoColumnContainerBlock = styled.div<{ $isDragOver?: boolean }>`
   row-gap: var(--gap-xl);
   height: 100%;
   border: 2px solid transparent;
-  cursor: grab;
 
   ${({ $isDragOver }) =>
     $isDragOver &&
     `
     border: 2px dashed #92948f;
-    cursor: grabbing; 
   `}
 `;
 

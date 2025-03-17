@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { DragEvent, useState } from 'react';
 
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
@@ -18,42 +18,39 @@ export const TodoColumn = ({ id, cardIds, color, title }: IColumn) => {
 
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
 
-  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDragStart = (e: DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData('columnId', id);
   };
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragOver(true);
   };
 
-  const handleDragLeave = () => {
-    setIsDragOver(false);
-  };
+  const handleDragLeave = () => setIsDragOver(false);
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragOver(false);
 
     const draggedColumnId = e.dataTransfer.getData('columnId');
+    if (!draggedColumnId || draggedColumnId === id) return;
 
-    if (draggedColumnId === id) return;
+    const updatedColumnsOrder = [...columnsOrder];
+    const fromIndex = updatedColumnsOrder.indexOf(draggedColumnId);
+    const toIndex = updatedColumnsOrder.indexOf(id);
 
-    const updatedcolumnsOrder = [...columnsOrder];
-    const draggedIndex = updatedcolumnsOrder.indexOf(draggedColumnId);
-    const targetIndex = updatedcolumnsOrder.indexOf(id);
+    if (fromIndex === -1 || toIndex === -1) return;
 
-    if (draggedIndex !== targetIndex) {
-      updatedcolumnsOrder.splice(draggedIndex, 1);
-      updatedcolumnsOrder.splice(targetIndex, 0, draggedColumnId);
+    updatedColumnsOrder.splice(fromIndex, 1);
+    updatedColumnsOrder.splice(toIndex, 0, draggedColumnId);
 
-      const updatedKanbanData = {
-        ...kanbanData,
-        columnsOrder: updatedcolumnsOrder,
-      };
+    const updatedKanbanData = {
+      ...kanbanData,
+      columnsOrder: updatedColumnsOrder,
+    };
 
-      dispatch(setKanbanBoardData(updatedKanbanData));
-    }
+    dispatch(setKanbanBoardData(updatedKanbanData));
   };
 
   return (
