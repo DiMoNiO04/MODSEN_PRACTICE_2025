@@ -1,4 +1,5 @@
-import { IColumn, IKanbanData } from '@/utils/interfaces';
+import { EPriorityName } from '@/constants/cardPriority';
+import { ICard, IColumn, IKanbanData } from '@/utils/interfaces';
 
 import { EKanbanBoardActions, TKanbanBoardAction } from './types';
 
@@ -22,4 +23,33 @@ const deleteKanbanColumn = (payload: string): TKanbanBoardAction => ({
   payload,
 });
 
-export { addKanbanColumn, deleteKanbanColumn, editKanbanColumn, setKanbanBoardData };
+const addKanbanTask = (payload: ICard): TKanbanBoardAction => ({
+  type: EKanbanBoardActions.ADD_TASK,
+  payload,
+});
+
+const editKanbanTask = (payload: ICard): TKanbanBoardAction => ({
+  type: EKanbanBoardActions.EDIT_TASK,
+  payload,
+});
+
+const deleteKanbanTask = (payload: string): TKanbanBoardAction => ({
+  type: EKanbanBoardActions.DELETE_TASK,
+  payload,
+});
+
+const editKanbanTaskPriority = (payload: { taskId: string; priorityId: EPriorityName }): TKanbanBoardAction => ({
+  type: EKanbanBoardActions.EDIT_PRIORITY_TASK,
+  payload,
+});
+
+export {
+  addKanbanColumn,
+  addKanbanTask,
+  deleteKanbanColumn,
+  deleteKanbanTask,
+  editKanbanColumn,
+  editKanbanTask,
+  editKanbanTaskPriority,
+  setKanbanBoardData,
+};

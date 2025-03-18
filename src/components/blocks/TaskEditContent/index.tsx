@@ -4,11 +4,11 @@ import { BtnDef, BtnsBlock, Form, Input, ModalTitle, TextArea } from '@/componen
 import { Select } from '@/components/ui/Select';
 import { CARD_PRIORITY, UITexts } from '@/constants';
 import { useForm, useValidation } from '@/hooks';
-import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
+import { editKanbanTask } from '@/store/kanbanBoard/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getErrorMessage } from '@/utils/functions';
-import { ICard, IKanbanCards, IKanbanColums, IKanbanData, IOption } from '@/utils/interfaces';
+import { ICard, IOption } from '@/utils/interfaces';
 
 interface ITaskEditContentProps {
   cardData: ICard;
@@ -41,35 +41,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
 
     const updateTask: ICard = { ...formData };
 
-    const oldColumnId: string = cardData.columnId;
-    const newColumnId: string = updateTask.columnId;
-
-    const updatedColumns: IKanbanColums = { ...kanbanData.columns };
-
-    if (oldColumnId !== newColumnId) {
-      updatedColumns[oldColumnId] = {
-        ...updatedColumns[oldColumnId],
-        cardIds: updatedColumns[oldColumnId].cardIds.filter((cardId) => cardId !== formData.id),
-      };
-
-      updatedColumns[newColumnId] = {
-        ...updatedColumns[newColumnId],
-        cardIds: [...updatedColumns[newColumnId].cardIds, formData.id],
-      };
-    }
-
-    const updatedCards: IKanbanCards = {
-      ...kanbanData.cards,
-      [formData.id]: updateTask,
-    };
-
-    const updatedKanbanData: IKanbanData = {
-      columns: updatedColumns,
-      cards: updatedCards,
-      columnsOrder: kanbanData.columnsOrder,
-    };
-
-    dispatch(setKanbanBoardData(updatedKanbanData));
+    dispatch(editKanbanTask(updateTask));
 
     dispatch(
       openNotification({

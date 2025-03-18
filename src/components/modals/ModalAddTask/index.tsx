@@ -6,12 +6,12 @@ import { CARD_PRIORITY, UITexts } from '@/constants';
 import { EPriorityName } from '@/constants/cardPriority';
 import { EColumnsName } from '@/constants/kanbanData';
 import { useForm, useValidation } from '@/hooks';
-import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
+import { addKanbanTask } from '@/store/kanbanBoard/actions';
 import { closeModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getErrorMessage } from '@/utils/functions';
-import { ICard, IKanbanCards, IKanbanColums, IKanbanData, IOption } from '@/utils/interfaces';
+import { ICard, IOption } from '@/utils/interfaces';
 
 export const ModalAddTask = () => {
   const dispatch = useAppDispatch();
@@ -46,22 +46,7 @@ export const ModalAddTask = () => {
 
     const newTask: ICard = { ...formData };
 
-    const updatedCards: IKanbanCards = { ...kanbanData.cards };
-    updatedCards[newTask.id] = newTask;
-
-    const updatedColumns: IKanbanColums = { ...kanbanData.columns };
-    updatedColumns[formData.columnId] = {
-      ...updatedColumns[formData.columnId],
-      cardIds: [...updatedColumns[formData.columnId].cardIds, newTask.id],
-    };
-
-    const updatedKanbanData: IKanbanData = {
-      columns: updatedColumns,
-      cards: updatedCards,
-      columnsOrder: kanbanData.columnsOrder,
-    };
-
-    dispatch(setKanbanBoardData(updatedKanbanData));
+    dispatch(addKanbanTask(newTask));
 
     dispatch(
       openNotification({

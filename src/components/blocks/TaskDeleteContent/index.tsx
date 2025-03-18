@@ -1,9 +1,8 @@
 import { BtnDef, BtnsBlock, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
-import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
+import { deleteKanbanTask } from '@/store/kanbanBoard/actions';
 import { openNotification } from '@/store/notification/actions';
-import { useAppDispatch, useAppSelector } from '@/store/store';
-import { IKanbanCards, IKanbanColums, IKanbanData } from '@/utils/interfaces';
+import { useAppDispatch } from '@/store/store';
 
 interface ITaskDeleteContentProps {
   id: string;
@@ -13,26 +12,9 @@ interface ITaskDeleteContentProps {
 
 export const TaskDeleteContent = ({ id, handleCancel, onClose }: ITaskDeleteContentProps) => {
   const dispatch = useAppDispatch();
-  const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
-  const { columnId } = kanbanData.cards[id];
 
   const handeConfirm = () => {
-    const updatedCards: IKanbanCards = { ...kanbanData.cards };
-    delete updatedCards[id];
-
-    const updatedColumns: IKanbanColums = { ...kanbanData.columns };
-    updatedColumns[columnId] = {
-      ...updatedColumns[columnId],
-      cardIds: updatedColumns[columnId].cardIds.filter((cardId) => cardId !== id),
-    };
-
-    const updatedKanbanData: IKanbanData = {
-      columns: updatedColumns,
-      cards: updatedCards,
-      columnsOrder: kanbanData.columnsOrder,
-    };
-
-    dispatch(setKanbanBoardData(updatedKanbanData));
+    dispatch(deleteKanbanTask(id));
 
     dispatch(
       openNotification({
