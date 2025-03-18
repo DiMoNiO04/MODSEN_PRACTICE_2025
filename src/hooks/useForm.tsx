@@ -4,11 +4,10 @@ import { IOption } from '@/utils';
 
 interface IUseFormProps<T> {
   initialData: T;
-  onClose: () => void;
   onSubmit?: (data: T) => void;
 }
 
-export const useForm = <T,>({ initialData, onClose, onSubmit }: IUseFormProps<T>) => {
+export const useForm = <T,>({ initialData, onSubmit }: IUseFormProps<T>) => {
   const [formData, setFormData] = useState<T>(initialData);
 
   const handleChange = (e: { target: { name: string; value: IOption | string } }) => {
@@ -24,7 +23,6 @@ export const useForm = <T,>({ initialData, onClose, onSubmit }: IUseFormProps<T>
     if (onSubmit) {
       onSubmit(formData);
     }
-    onClose();
   };
 
   const resetForm = () => setFormData(initialData);

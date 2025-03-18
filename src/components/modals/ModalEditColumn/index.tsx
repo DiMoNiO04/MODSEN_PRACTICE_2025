@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
@@ -17,12 +17,43 @@ export const ModalEditColumn = () => {
   const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
   const initialData: IFormDataColumn = { id, title, color };
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const onClose = () => {
     dispatch(closeModalColumnEdit());
     resetForm();
+    setIsSubmitted(false);
   };
 
   const onSubmit = () => {
+    setIsSubmitted(true);
+
+    const trimmedTitle = formData.title.trim();
+
+    if (trimmedTitle === '') {
+      dispatch(
+        openNotification({
+          isSuccess: false,
+          text: `Please fill in all required fields`,
+        })
+      );
+      return;
+    }
+
+    const isDuplicateTitle = Object.values(kanbanData.columns).some(
+      (column) => column.title.toLowerCase() === trimmedTitle.toLowerCase()
+    );
+
+    if (isDuplicateTitle) {
+      dispatch(
+        openNotification({
+          isSuccess: false,
+          text: `Column with the name '${trimmedTitle}' already exists`,
+        })
+      );
+      return;
+    }
+
     const updateColumn = {
       ...formData,
       id,
@@ -52,7 +83,6 @@ export const ModalEditColumn = () => {
 
   const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataColumn>({
     initialData,
-    onClose,
     onSubmit,
   });
 
@@ -75,6 +105,7 @@ export const ModalEditColumn = () => {
           value={formData.title}
           onChange={handleChange}
           required
+          errorMessage={isSubmitted && formData.title.trim() === '' ? 'This field is required' : undefined}
         />
         <Input
           labelText={UITexts.LABELS.COLOR}

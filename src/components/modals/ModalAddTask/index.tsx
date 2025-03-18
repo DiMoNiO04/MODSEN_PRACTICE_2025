@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle, Select, TextArea } from '@/components/ui';
@@ -16,6 +16,8 @@ export const ModalAddTask = () => {
   const { isFromHeader, isOpen, columnId } = useAppSelector(({ modals }) => modals.modalTaskAdd);
   const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const initialData: ICard = {
     id: `card-${Date.now()}`,
     title: '',
@@ -27,12 +29,23 @@ export const ModalAddTask = () => {
   const onClose = () => {
     dispatch(closeModalTaskAdd());
     resetForm();
+    setIsSubmitted(false);
   };
 
   const onSubmit = () => {
-    const newTask: ICard = {
-      ...formData,
-    };
+    setIsSubmitted(true);
+
+    if (formData.title.trim() === '') {
+      dispatch(
+        openNotification({
+          isSuccess: false,
+          text: `Please fill in all required fields`,
+        })
+      );
+      return;
+    }
+
+    const newTask: ICard = { ...formData };
 
     const updatedCards = { ...kanbanData.cards };
     updatedCards[newTask.id] = newTask;
@@ -57,11 +70,12 @@ export const ModalAddTask = () => {
         text: `Task '${formData.title}' has been successfully added`,
       })
     );
+
+    onClose();
   };
 
   const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<ICard>({
     initialData,
-    onClose,
     onSubmit,
   });
 
@@ -90,6 +104,7 @@ export const ModalAddTask = () => {
           value={formData.title}
           onChange={handleChange}
           required
+          errorMessage={isSubmitted && formData.title.trim() === '' ? 'This field is required' : undefined}
         />
         <TextArea labelText={UITexts.LABELS.DESCRIPTION} name="desc" value={formData.desc} onChange={handleChange} />
         <Select

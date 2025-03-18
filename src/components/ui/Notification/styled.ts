@@ -49,7 +49,7 @@ const Block = styled.div<{ $isSuccess: boolean }>`
   animation:
     ${slideIn} 0.5s ease-out,
     ${shake} 0.5s ease 0.5s,
-    ${slideOut} 0.5s ease 1.8s;
+    ${slideOut} 0.5s ease 2.3s;
 `;
 
 const ImageIcon = styled.img`
