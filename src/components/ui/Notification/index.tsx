@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/store/store';
 
 import { Block, ImageIcon, Text } from './styled';
 
-const TIME_ANIMATION: number = 2000;
+const TIME_ANIMATION: number = 2500;
 
 export const Notification = () => {
   const dispatch = useAppDispatch();

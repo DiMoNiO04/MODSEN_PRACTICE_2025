@@ -1,8 +1,8 @@
 import { EColors, UITexts } from '@/constants';
 import { IColumn } from '@/utils/interfaces';
 
-import { TodoColumnContainer } from '../TodoColumnContainer';
 import { TodoColumnHeader } from '../TodoColumnHeader';
+import { TodoColumnContainerBlock } from './styled';
 
 export const AddNewColumn = () => {
   const initialData: IColumn = {
@@ -13,8 +13,8 @@ export const AddNewColumn = () => {
   };
 
   return (
-    <TodoColumnContainer isFullHeight={false}>
+    <TodoColumnContainerBlock>
       <TodoColumnHeader {...initialData} columnId={initialData.id} isAddNewColumn />
-    </TodoColumnContainer>
+    </TodoColumnContainerBlock>
   );
 };

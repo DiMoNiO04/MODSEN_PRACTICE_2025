@@ -8,6 +8,7 @@ const TodoColumnHeaderContainer = styled.div<{ color: string }>`
   justify-content: space-between;
   background-color: ${({ color }) => color || 'var(--color-sage)'};
   position: relative;
+  cursor: grab;
 `;
 
 export { TodoColumnHeaderContainer };

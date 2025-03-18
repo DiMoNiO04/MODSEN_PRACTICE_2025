@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { BtnDef, BtnsBlock, Form, Input, ModalTitle, TextArea } from '@/components/ui';
 import { Select } from '@/components/ui/Select';
 import { CARD_PRIORITY, UITexts } from '@/constants';
@@ -20,9 +22,28 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
   const initialData: ICard = { ...cardData };
   const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
 
-  const { formData, handleChange, handleSubmit } = useForm<ICard>({ initialData, onClose });
+  const { formData, handleChange, handleSubmit } = useForm<ICard>({ initialData });
 
-  const handleSave = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleClose = () => {
+    onClose();
+    setIsSubmitted(false);
+  };
+
+  const onSubmit = () => {
+    setIsSubmitted(true);
+
+    if (formData.title.trim() === '') {
+      dispatch(
+        openNotification({
+          isSuccess: false,
+          text: `Please fill in all required fields`,
+        })
+      );
+      return;
+    }
+
     const updateTask = { ...formData };
 
     const oldColumnId = cardData.columnId;
@@ -50,6 +71,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
     const updatedKanbanData = {
       columns: updatedColumns,
       cards: updatedCards,
+      columnsOrder: kanbanData.columnsOrder,
     };
 
     dispatch(setKanbanBoardData(updatedKanbanData));
@@ -60,6 +82,8 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
         text: `Task '${formData.title}' has been successfully edited`,
       })
     );
+
+    handleClose();
   };
 
   const onPriorityChange = (selectedOption: IOption) =>
@@ -78,6 +102,8 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
           type="text"
           value={formData.title}
           onChange={handleChange}
+          required
+          errorMessage={isSubmitted && formData.title.trim() === '' ? 'This field is required' : undefined}
         />
         <TextArea labelText={UITexts.LABELS.DESCRIPTION} name="desc" value={formData.desc} onChange={handleChange} />
         <Select
@@ -97,7 +123,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
         />
         <BtnsBlock>
           <BtnDef text={UITexts.TASK.INFO} typeBtn={'button'} onClick={handleCancel} isInvert />
-          <BtnDef text={UITexts.BTNS.SAVE} typeBtn={'submit'} onClick={handleSave} />
+          <BtnDef text={UITexts.BTNS.SAVE} typeBtn={'submit'} onClick={onSubmit} />
         </BtnsBlock>
       </Form>
     </>

@@ -10,4 +10,5 @@ export const KANBAN_DATA: IKanbanData = {
     'column-3': { id: 'column-3', title: UITexts.STATUSES.DONE, color: EColors.GREEN, cardIds: [] },
   },
   cards: {},
+  columnsOrder: ['column-1', 'column-2', 'column-3'],
 };

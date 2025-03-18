@@ -25,6 +25,8 @@ export const ModalColumnDelete = () => {
 
     delete updatedKanbanData.columns[id];
 
+    updatedKanbanData.columnsOrder = updatedKanbanData.columnsOrder.filter((columnId) => columnId !== id);
+
     dispatch(setKanbanBoardData(updatedKanbanData));
 
     dispatch(

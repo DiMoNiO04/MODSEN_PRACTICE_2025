@@ -41,6 +41,7 @@ interface IColumn {
 interface IKanbanData {
   columns: Record<string, IColumn>;
   cards: Record<string, ICard>;
+  columnsOrder: string[];
 }
 
 export type { ICard, IChildrenProps, IColumn, IFormDataColumn, IIconProps, IKanbanData, IOption, IText };
