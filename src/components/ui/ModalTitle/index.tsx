@@ -1,9 +1,7 @@
+import { IText } from '@/utils/interfaces';
+
 import { Text } from './styled';
 
-interface IModalTitleProps {
-  text: string;
-}
-
-export const ModalTitle = ({ text }: IModalTitleProps) => {
+export const ModalTitle = ({ text }: IText) => {
   return <Text>{text}</Text>;
 };

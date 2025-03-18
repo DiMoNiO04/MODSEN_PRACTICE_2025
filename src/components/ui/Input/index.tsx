@@ -1,8 +1,10 @@
+import { InputHTMLAttributes } from 'react';
+
 import { Label } from '../Label';
 import { LabelText } from '../LabelText';
 import { ErrorText, InputField } from './styled';
 
-interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   labelText: string;
   errorMessage?: string;
 }

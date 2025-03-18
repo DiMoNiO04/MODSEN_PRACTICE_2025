@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 
 import { IOption } from '@/utils/interfaces';
 
@@ -12,7 +12,7 @@ interface IUseFormReturn<T> {
   handleChange: (e: { target: { name: string; value: IOption | string } }) => void;
   handleSubmit: (e: FormEvent) => void;
   resetForm: () => void;
-  setFormData: React.Dispatch<React.SetStateAction<T>>;
+  setFormData: Dispatch<SetStateAction<T>>;
 }
 
 export const useForm = <T,>({ initialData, onSubmit }: IUseFormProps<T>): IUseFormReturn<T> => {

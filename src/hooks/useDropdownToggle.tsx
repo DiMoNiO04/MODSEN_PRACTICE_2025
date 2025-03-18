@@ -1,8 +1,8 @@
-import { Dispatch, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { Dispatch, RefObject, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 
 interface IUseDropdownToggleReturn {
   isDropdownOpen: boolean;
-  setIsDropdownOpen: Dispatch<React.SetStateAction<boolean>>;
+  setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
   refDropdownBtn: RefObject<HTMLButtonElement | null>;
   refDropdownMenu: RefObject<HTMLDivElement | null>;
 }

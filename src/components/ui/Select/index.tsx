@@ -18,17 +18,15 @@ interface ISelectProps {
 
 export const Select = ({ labelText, value, options, onChange }: ISelectProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
-  const selectedOption = options.find((option) => option.id === value);
+  const selectedOption: IOption | undefined = options.find((option) => option.id === value);
 
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
   const closeDropdown = () => setTimeout(() => setIsDropdownOpen(false), 0);
 
-  const handleSelect = (option: IOption) => {
+  const handleSelect = (option: IOption): void => {
     onChange(option);
     closeDropdown();
   };
-
-  console.log(selectedOption);
 
   return (
     <Label>

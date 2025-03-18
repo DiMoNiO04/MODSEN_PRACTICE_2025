@@ -1,7 +1,9 @@
+import { ReactNode } from 'react';
+
 import { EPriorityName } from '@/constants/cardPriority';
 
 interface IChildrenProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 interface IIconProps {

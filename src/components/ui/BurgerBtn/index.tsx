@@ -5,21 +5,21 @@ import { useAppDispatch, useAppSelector } from '@/store/store';
 import { BurgerButton, BurgerButtonLine } from './styled';
 
 export const BurgerBtn = () => {
-  const isOpenMenuMob = useAppSelector((state) => state.menuMob.isOpen);
+  const { isOpen } = useAppSelector((state) => state.menuMob);
   const dispatch = useAppDispatch();
 
   const onClickBurgerBtn = () => {
-    if (isOpenMenuMob) {
+    if (isOpen) {
       dispatch(closeMenuMob());
     } else {
       dispatch(openMenuMob());
     }
   };
 
-  useBodyScrollBlock(isOpenMenuMob);
+  useBodyScrollBlock(isOpen);
 
   return (
-    <BurgerButton className={isOpenMenuMob ? 'active' : ''} onClick={onClickBurgerBtn}>
+    <BurgerButton className={isOpen ? 'active' : ''} onClick={onClickBurgerBtn}>
       <BurgerButtonLine />
       <BurgerButtonLine />
       <BurgerButtonLine />
