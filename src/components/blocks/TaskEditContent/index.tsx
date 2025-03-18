@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { BtnDef, BtnsBlock, Form, Input, ModalTitle, TextArea } from '@/components/ui';
 import { Select } from '@/components/ui/Select';
 import { CARD_PRIORITY, UITexts } from '@/constants';
-import { useForm } from '@/hooks';
+import { useForm, useValidation } from '@/hooks';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
+import { getErrorMessage } from '@/utils/functions';
 import { ICard, IKanbanCards, IKanbanColums, IKanbanData, IOption } from '@/utils/interfaces';
 
 interface ITaskEditContentProps {
@@ -22,6 +23,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
   const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
 
   const { formData, handleChange, handleSubmit } = useForm<ICard>({ initialData });
+  const { isEmptyField } = useValidation();
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
@@ -33,13 +35,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
   const onSubmit = () => {
     setIsSubmitted(true);
 
-    if (formData.title.trim() === '') {
-      dispatch(
-        openNotification({
-          isSuccess: false,
-          text: UITexts.NOTIFICATION.ERROR_REQUIRED_FILEDS,
-        })
-      );
+    if (isEmptyField(formData.title)) {
       return;
     }
 
@@ -102,7 +98,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
           value={formData.title}
           onChange={handleChange}
           required
-          errorMessage={isSubmitted && formData.title.trim() === '' ? UITexts.NOTIFICATION.REQUIRED_FIELD : undefined}
+          errorMessage={getErrorMessage(isSubmitted, formData.title)}
         />
         <TextArea labelText={UITexts.LABELS.DESCRIPTION} name="desc" value={formData.desc} onChange={handleChange} />
         <Select

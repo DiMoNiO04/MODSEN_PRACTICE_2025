@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
-import { useForm } from '@/hooks';
+import { useForm, useValidation } from '@/hooks';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { getRandomColor } from '@/utils/functions';
+import { getErrorMessage, getRandomColor } from '@/utils/functions';
 import { IColumn, IColumnWithoutCardIds, IKanbanData } from '@/utils/interfaces';
 
 export const ModalAddColumn = () => {
@@ -16,6 +16,8 @@ export const ModalAddColumn = () => {
 
   const { isOpen } = useAppSelector(({ modals }) => modals.modalColumnAdd);
   const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
+
+  const { isEmptyField, isDuplicateColumn } = useValidation();
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
@@ -30,29 +32,7 @@ export const ModalAddColumn = () => {
   const onSubmit = () => {
     setIsSubmitted(true);
 
-    const trimmedTitle: string = formData.title.trim();
-
-    if (trimmedTitle === '') {
-      dispatch(
-        openNotification({
-          isSuccess: false,
-          text: UITexts.NOTIFICATION.ERROR_REQUIRED_FILEDS,
-        })
-      );
-      return;
-    }
-
-    const isDuplicateTitle: boolean = Object.values(kanbanData.columns).some(
-      (column) => column.title.toLowerCase() === trimmedTitle.toLowerCase()
-    );
-
-    if (isDuplicateTitle) {
-      dispatch(
-        openNotification({
-          isSuccess: false,
-          text: UITexts.NOTIFICATION.ERROR_DUPLICATED_COLUMN,
-        })
-      );
+    if (isEmptyField(formData.title) || isDuplicateColumn(formData.title)) {
       return;
     }
 
@@ -101,7 +81,7 @@ export const ModalAddColumn = () => {
           value={formData.title}
           onChange={handleChange}
           required
-          errorMessage={isSubmitted && formData.title.trim() === '' ? UITexts.NOTIFICATION.REQUIRED_FIELD : undefined}
+          errorMessage={getErrorMessage(isSubmitted, formData.title)}
         />
         <Input
           labelText={UITexts.LABELS.COLOR}

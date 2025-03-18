@@ -5,11 +5,12 @@ import { BtnDef, Form, Input, ModalTitle, Select, TextArea } from '@/components/
 import { CARD_PRIORITY, UITexts } from '@/constants';
 import { EPriorityName } from '@/constants/cardPriority';
 import { EColumnsName } from '@/constants/kanbanData';
-import { useForm } from '@/hooks';
+import { useForm, useValidation } from '@/hooks';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
+import { getErrorMessage } from '@/utils/functions';
 import { ICard, IKanbanCards, IKanbanColums, IKanbanData, IOption } from '@/utils/interfaces';
 
 export const ModalAddTask = () => {
@@ -19,6 +20,8 @@ export const ModalAddTask = () => {
   const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
+  const { isEmptyField } = useValidation();
 
   const initialData: ICard = {
     id: `card-${Date.now()}`,
@@ -37,13 +40,7 @@ export const ModalAddTask = () => {
   const onSubmit = () => {
     setIsSubmitted(true);
 
-    if (formData.title.trim() === '') {
-      dispatch(
-        openNotification({
-          isSuccess: false,
-          text: UITexts.NOTIFICATION.REQUIRED_FIELD,
-        })
-      );
+    if (isEmptyField(formData.title)) {
       return;
     }
 
@@ -106,7 +103,7 @@ export const ModalAddTask = () => {
           value={formData.title}
           onChange={handleChange}
           required
-          errorMessage={isSubmitted && formData.title.trim() === '' ? UITexts.NOTIFICATION.REQUIRED_FIELD : undefined}
+          errorMessage={getErrorMessage(isSubmitted, formData.title)}
         />
         <TextArea labelText={UITexts.LABELS.DESCRIPTION} name="desc" value={formData.desc} onChange={handleChange} />
         <Select

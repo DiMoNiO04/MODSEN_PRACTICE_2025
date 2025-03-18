@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { EColors, UITexts } from '@/constants';
-import { useForm } from '@/hooks';
+import { useForm, useValidation } from '@/hooks';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
+import { getErrorMessage } from '@/utils/functions';
 import { IColumn, IColumnWithoutCardIds, IKanbanColums, IKanbanData } from '@/utils/interfaces';
 
 export const ModalEditColumn = () => {
@@ -16,6 +17,8 @@ export const ModalEditColumn = () => {
 
   const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
   const initialData: IColumnWithoutCardIds = { id, title, color };
+
+  const { isEmptyField, isDuplicateColumn } = useValidation();
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
@@ -28,29 +31,7 @@ export const ModalEditColumn = () => {
   const onSubmit = () => {
     setIsSubmitted(true);
 
-    const trimmedTitle: string = formData.title.trim();
-
-    if (trimmedTitle === '') {
-      dispatch(
-        openNotification({
-          isSuccess: false,
-          text: UITexts.NOTIFICATION.REQUIRED_FIELD,
-        })
-      );
-      return;
-    }
-
-    const isDuplicateTitle: boolean = Object.values(kanbanData.columns).some(
-      (column) => column.title.toLowerCase() === trimmedTitle.toLowerCase()
-    );
-
-    if (isDuplicateTitle) {
-      dispatch(
-        openNotification({
-          isSuccess: false,
-          text: UITexts.NOTIFICATION.ERROR_DUPLICATED_COLUMN,
-        })
-      );
+    if (isEmptyField(formData.title) || isDuplicateColumn(formData.title)) {
       return;
     }
 
@@ -79,6 +60,8 @@ export const ModalEditColumn = () => {
         text: UITexts.NOTIFICATION.SUCCESS_EDIT_COLUMN,
       })
     );
+
+    onClose();
   };
 
   const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IColumnWithoutCardIds>({
@@ -105,7 +88,7 @@ export const ModalEditColumn = () => {
           value={formData.title}
           onChange={handleChange}
           required
-          errorMessage={isSubmitted && formData.title.trim() === '' ? UITexts.NOTIFICATION.REQUIRED_FIELD : undefined}
+          errorMessage={getErrorMessage(isSubmitted, formData.title)}
         />
         <Input
           labelText={UITexts.LABELS.COLOR}
