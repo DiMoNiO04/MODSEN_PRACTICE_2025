@@ -3,12 +3,25 @@ import { IKanbanData } from '@/utils/interfaces';
 import { EColors } from './colors';
 import { UITexts } from './uiTexts';
 
-export const KANBAN_DATA: IKanbanData = {
+enum EColumnsName {
+  TODO = 'column-1',
+  PROGRESS = 'column-2',
+  DONE = 'column-3',
+}
+
+const KANBAN_DATA: IKanbanData = {
   columns: {
-    'column-1': { id: 'column-1', title: UITexts.STATUSES.TODO, color: EColors.BLUE, cardIds: [] },
-    'column-2': { id: 'column-2', title: UITexts.STATUSES.PROGRESS, color: EColors.ORANGE, cardIds: [] },
-    'column-3': { id: 'column-3', title: UITexts.STATUSES.DONE, color: EColors.GREEN, cardIds: [] },
+    [EColumnsName.TODO]: { id: EColumnsName.TODO, title: UITexts.STATUSES.TODO, color: EColors.BLUE, cardIds: [] },
+    [EColumnsName.PROGRESS]: {
+      id: EColumnsName.PROGRESS,
+      title: UITexts.STATUSES.PROGRESS,
+      color: EColors.ORANGE,
+      cardIds: [],
+    },
+    [EColumnsName.DONE]: { id: EColumnsName.DONE, title: UITexts.STATUSES.DONE, color: EColors.GREEN, cardIds: [] },
   },
   cards: {},
-  columnsOrder: ['column-1', 'column-2', 'column-3'],
+  columnsOrder: [EColumnsName.TODO, EColumnsName.PROGRESS, EColumnsName.DONE],
 };
+
+export { EColumnsName, KANBAN_DATA };

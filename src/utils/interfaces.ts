@@ -1,3 +1,5 @@
+import { EPriorityName } from '@/constants/cardPriority';
+
 interface IChildrenProps {
   children: React.ReactNode;
 }
@@ -27,7 +29,7 @@ interface ICard {
   id: string;
   title: string;
   desc?: string;
-  priority: string;
+  priority: EPriorityName;
   columnId: string;
 }
 

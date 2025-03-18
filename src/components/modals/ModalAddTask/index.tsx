@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle, Select, TextArea } from '@/components/ui';
 import { CARD_PRIORITY, UITexts } from '@/constants';
+import { EPriorityName } from '@/constants/cardPriority';
+import { EColumnsName } from '@/constants/kanbanData';
 import { useForm } from '@/hooks';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalTaskAdd } from '@/store/modalTaskAdd/actions';
@@ -22,8 +24,8 @@ export const ModalAddTask = () => {
     id: `card-${Date.now()}`,
     title: '',
     desc: '',
-    priority: 'priority-1',
-    columnId: columnId || 'column-1',
+    priority: EPriorityName.NULL,
+    columnId: columnId || EColumnsName.TODO,
   };
 
   const onClose = () => {

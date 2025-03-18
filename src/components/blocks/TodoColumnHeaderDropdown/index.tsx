@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 
 import { BtnMenuItem, Dropdown } from '@/components/ui';
 import { UITexts } from '@/constants';
+import { EColumnsName } from '@/constants/kanbanData';
 import { openModalColumnDelete } from '@/store/modalColumnDelete/actions';
 import { openModalColumnEdit } from '@/store/modalColumnEdit/actions';
 import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
@@ -16,7 +17,7 @@ export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IFormDataColu
     const handleOpenModalColumnEdit = () => dispatch(openModalColumnEdit({ id, title, color }));
     const handleOpenModalConfirm = () => dispatch(openModalColumnDelete({ id }));
 
-    const isSpecialColumn = ['column-1', 'column-2', 'column-3'].includes(id);
+    const isSpecialColumn = [EColumnsName.TODO, EColumnsName.PROGRESS, EColumnsName.DONE].includes(id as EColumnsName);
 
     return (
       <Dropdown ref={ref}>

@@ -1,5 +1,6 @@
 import { ColorText } from '@/components/ui';
 import { CARD_PRIORITY } from '@/constants';
+import { EPriorityName } from '@/constants/cardPriority';
 import { useDropdownToggle } from '@/hooks';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { openNotification } from '@/store/notification/actions';
@@ -21,12 +22,12 @@ export const Priority = ({ priorityId, cardData }: IPriorityProps) => {
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
-  const priority = CARD_PRIORITY[priorityId];
+  const priority = CARD_PRIORITY[priorityId as EPriorityName];
 
   const handlePriorityChange = (selectedOption: IOption) => {
     setIsDropdownOpen(false);
 
-    const updatedCard: ICard = { ...cardData, priority: selectedOption.id };
+    const updatedCard: ICard = { ...cardData, priority: selectedOption.id as EPriorityName };
 
     const updatedCards = {
       ...kanbanData.cards,
