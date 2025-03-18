@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 
-import { IOption } from '@/utils';
+import { IOption } from '@/utils/interfaces';
 
 interface IUseFormProps<T> {
   initialData: T;

@@ -8,14 +8,14 @@ import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { IFormDataColumn } from '@/utils';
+import { IColumnWithoutCardIds } from '@/utils/interfaces';
 
 export const ModalEditColumn = () => {
   const dispatch = useAppDispatch();
   const { id, title, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
 
   const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
-  const initialData: IFormDataColumn = { id, title, color };
+  const initialData: IColumnWithoutCardIds = { id, title, color };
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -81,7 +81,7 @@ export const ModalEditColumn = () => {
     );
   };
 
-  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataColumn>({
+  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IColumnWithoutCardIds>({
     initialData,
     onSubmit,
   });

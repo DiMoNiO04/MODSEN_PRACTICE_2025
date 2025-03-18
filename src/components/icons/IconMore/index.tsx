@@ -1,5 +1,5 @@
 import { EColors } from '@/constants';
-import { IIconProps } from '@/utils';
+import { IIconProps } from '@/utils/interfaces';
 
 export const IconMore = ({ color = EColors.DARK }: IIconProps) => {
   return (

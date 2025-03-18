@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { BtnRound } from '@/components/ui';
 import { useBodyScrollBlock } from '@/hooks';
-import { IChildrenProps } from '@/utils';
+import { IChildrenProps } from '@/utils/interfaces';
 
 import { BtnCloseBlock, ModalContent, ModalOverlay } from './styled';
 

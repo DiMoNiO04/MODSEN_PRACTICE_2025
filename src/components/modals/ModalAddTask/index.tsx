@@ -10,8 +10,7 @@ import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { IOption } from '@/utils';
-import { ICard } from '@/utils/interfaces';
+import { ICard, IOption } from '@/utils/interfaces';
 
 export const ModalAddTask = () => {
   const dispatch = useAppDispatch();

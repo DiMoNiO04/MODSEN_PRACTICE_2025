@@ -1,4 +1,4 @@
-import { kanbanStorage } from '@/utils';
+import { kanbanStorage } from '@/utils/kanbanStorage';
 
 import { EKanbanBoardActions, IInitialKanbanBoardState, TKanbanBoardAction } from './types';
 

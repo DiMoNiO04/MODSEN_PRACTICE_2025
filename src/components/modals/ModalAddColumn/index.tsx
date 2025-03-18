@@ -8,7 +8,8 @@ import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { getRandomColor, IFormDataColumn } from '@/utils';
+import { getRandomColor } from '@/utils/functions';
+import { IColumnWithoutCardIds } from '@/utils/interfaces';
 
 export const ModalAddColumn = () => {
   const dispatch = useAppDispatch();
@@ -17,7 +18,7 @@ export const ModalAddColumn = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const initialData: IFormDataColumn = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };
+  const initialData: IColumnWithoutCardIds = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };
 
   const onClose = () => {
     dispatch(closeModaColumnAdd());
@@ -81,7 +82,7 @@ export const ModalAddColumn = () => {
     onClose();
   };
 
-  const { formData, handleChange, handleSubmit, resetForm } = useForm<IFormDataColumn>({
+  const { formData, handleChange, handleSubmit, resetForm } = useForm<IColumnWithoutCardIds>({
     initialData,
     onSubmit,
   });

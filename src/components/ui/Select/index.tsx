@@ -1,7 +1,7 @@
 import { IconArrow } from '@/components/icons';
 import { UITexts } from '@/constants';
 import { useDropdownToggle } from '@/hooks';
-import { IOption } from '@/utils';
+import { IOption } from '@/utils/interfaces';
 
 import { BtnMenuItem } from '../BtnMenuItem';
 import { Dropdown } from '../Dropdown';

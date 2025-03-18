@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { IChildrenProps } from '@/utils';
+import { IChildrenProps } from '@/utils/interfaces';
 
 import { DropdownBlock } from './styled';
 

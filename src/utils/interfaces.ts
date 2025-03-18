@@ -9,12 +9,6 @@ interface IIconProps {
   color?: string;
 }
 
-interface IFormDataColumn {
-  id: string;
-  title: string;
-  color: string;
-}
-
 interface IOption {
   id: string;
   color?: string;
@@ -46,4 +40,6 @@ interface IKanbanData {
   columnsOrder: string[];
 }
 
-export type { ICard, IChildrenProps, IColumn, IFormDataColumn, IIconProps, IKanbanData, IOption, IText };
+type IColumnWithoutCardIds = Omit<IColumn, 'cardIds'>;
+
+export type { ICard, IChildrenProps, IColumn, IColumnWithoutCardIds, IIconProps, IKanbanData, IOption, IText };

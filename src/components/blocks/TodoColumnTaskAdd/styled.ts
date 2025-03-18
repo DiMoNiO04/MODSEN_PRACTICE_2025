@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getOpacityColor } from '@/utils';
+import { getOpacityColor } from '@/utils/functions';
 
 const Button = styled.button<{ color: string }>`
   background: var(--color-white);
