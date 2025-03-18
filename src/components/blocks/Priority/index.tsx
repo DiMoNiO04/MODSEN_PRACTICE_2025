@@ -1,5 +1,5 @@
 import { ColorText } from '@/components/ui';
-import { CARD_PRIORITY } from '@/constants';
+import { CARD_PRIORITY, UITexts } from '@/constants';
 import { EPriorityName } from '@/constants/cardPriority';
 import { useDropdownToggle } from '@/hooks';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
@@ -44,7 +44,7 @@ export const Priority = ({ priorityId, cardData }: IPriorityProps) => {
     dispatch(
       openNotification({
         isSuccess: true,
-        text: `Priority card successfully edited`,
+        text: UITexts.NOTIFICATION.SUCCESS_EDIT_PRIORITY,
       })
     );
   };

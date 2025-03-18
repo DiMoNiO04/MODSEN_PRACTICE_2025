@@ -14,7 +14,7 @@ interface ITaskDeleteContentProps {
 export const TaskDeleteContent = ({ id, handleCancel, onClose }: ITaskDeleteContentProps) => {
   const dispatch = useAppDispatch();
   const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
-  const { title, columnId } = kanbanData.cards[id];
+  const { columnId } = kanbanData.cards[id];
 
   const handeConfirm = () => {
     const updatedCards: IKanbanCards = { ...kanbanData.cards };
@@ -37,7 +37,7 @@ export const TaskDeleteContent = ({ id, handleCancel, onClose }: ITaskDeleteCont
     dispatch(
       openNotification({
         isSuccess: true,
-        text: `Task '${title}' successfully deleted`,
+        text: UITexts.NOTIFICATION.SUCCESS_DELETE_CARD,
       })
     );
 

@@ -36,7 +36,7 @@ export const ModalAddColumn = () => {
       dispatch(
         openNotification({
           isSuccess: false,
-          text: `Please fill in all required fields`,
+          text: UITexts.NOTIFICATION.ERROR_REQUIRED_FILEDS,
         })
       );
       return;
@@ -50,7 +50,7 @@ export const ModalAddColumn = () => {
       dispatch(
         openNotification({
           isSuccess: false,
-          text: `Column with the name '${trimmedTitle}' already exists`,
+          text: UITexts.NOTIFICATION.ERROR_DUPLICATED_COLUMN,
         })
       );
       return;
@@ -76,7 +76,7 @@ export const ModalAddColumn = () => {
     dispatch(
       openNotification({
         isSuccess: true,
-        text: `Column '${trimmedTitle}' has been successfully added`,
+        text: UITexts.NOTIFICATION.SUCCESS_ADD_COLUMN,
       })
     );
 
@@ -101,7 +101,7 @@ export const ModalAddColumn = () => {
           value={formData.title}
           onChange={handleChange}
           required
-          errorMessage={isSubmitted && formData.title.trim() === '' ? 'This field is required' : undefined}
+          errorMessage={isSubmitted && formData.title.trim() === '' ? UITexts.NOTIFICATION.REQUIRED_FIELD : undefined}
         />
         <Input
           labelText={UITexts.LABELS.COLOR}

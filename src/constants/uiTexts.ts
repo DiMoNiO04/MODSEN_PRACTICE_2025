@@ -51,4 +51,16 @@ export const UITexts = {
     FAIL_SAVE_KANBAN_LS: 'Failed to save kanban data to LS:',
     LOGGED_ERROR: 'Logged Error:',
   },
+  NOTIFICATION: {
+    SUCCESS_ADD_COLUMN: 'Column has been successfully added',
+    SUCCESS_DELETE_COLUMN: `Column and all its cards successfully deleted`,
+    SUCCESS_EDIT_COLUMN: `Column has been successfully edited`,
+    SUCCESS_EDIT_PRIORITY: `Priority card successfully edited`,
+    SUCCESS_DELETE_CARD: `Task is successfully deleted`,
+    SUCCESS_ADD_CARD: `Task is successfully added`,
+    SUCCESS_EDIT_CARD: `Task is successfully edited`,
+    ERROR_REQUIRED_FILEDS: `Please fill in all required fields`,
+    ERROR_DUPLICATED_COLUMN: `Column with this name is already exists`,
+    REQUIRED_FIELD: 'This field is required',
+  },
 };

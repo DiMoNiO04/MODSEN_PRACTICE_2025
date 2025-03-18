@@ -19,7 +19,6 @@ export const ModalColumnDelete = () => {
     const updatedKanbanData: IKanbanData = { ...kanbanData };
 
     const column: IColumn = updatedKanbanData.columns[id];
-    const columnTitle: string = column.title;
 
     column.cardIds.forEach((cardId) => {
       delete updatedKanbanData.cards[cardId];
@@ -34,7 +33,7 @@ export const ModalColumnDelete = () => {
     dispatch(
       openNotification({
         isSuccess: true,
-        text: `Column '${columnTitle}' and all its cards successfully deleted`,
+        text: UITexts.NOTIFICATION.SUCCESS_DELETE_COLUMN,
       })
     );
 

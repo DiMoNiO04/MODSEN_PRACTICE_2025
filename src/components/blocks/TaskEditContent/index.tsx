@@ -37,7 +37,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
       dispatch(
         openNotification({
           isSuccess: false,
-          text: `Please fill in all required fields`,
+          text: UITexts.NOTIFICATION.ERROR_REQUIRED_FILEDS,
         })
       );
       return;
@@ -78,7 +78,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
     dispatch(
       openNotification({
         isSuccess: true,
-        text: `Task '${formData.title}' has been successfully edited`,
+        text: UITexts.NOTIFICATION.SUCCESS_EDIT_CARD,
       })
     );
 
@@ -102,7 +102,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
           value={formData.title}
           onChange={handleChange}
           required
-          errorMessage={isSubmitted && formData.title.trim() === '' ? 'This field is required' : undefined}
+          errorMessage={isSubmitted && formData.title.trim() === '' ? UITexts.NOTIFICATION.REQUIRED_FIELD : undefined}
         />
         <TextArea labelText={UITexts.LABELS.DESCRIPTION} name="desc" value={formData.desc} onChange={handleChange} />
         <Select

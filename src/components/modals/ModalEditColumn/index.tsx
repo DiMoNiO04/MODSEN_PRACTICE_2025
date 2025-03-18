@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
-import { UITexts } from '@/constants';
+import { EColors, UITexts } from '@/constants';
 import { useForm } from '@/hooks';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
@@ -34,7 +34,7 @@ export const ModalEditColumn = () => {
       dispatch(
         openNotification({
           isSuccess: false,
-          text: `Please fill in all required fields`,
+          text: UITexts.NOTIFICATION.REQUIRED_FIELD,
         })
       );
       return;
@@ -48,7 +48,7 @@ export const ModalEditColumn = () => {
       dispatch(
         openNotification({
           isSuccess: false,
-          text: `Column with the name '${trimmedTitle}' already exists`,
+          text: UITexts.NOTIFICATION.ERROR_DUPLICATED_COLUMN,
         })
       );
       return;
@@ -76,7 +76,7 @@ export const ModalEditColumn = () => {
     dispatch(
       openNotification({
         isSuccess: true,
-        text: `Column '${formData.title}' has been successfully edited`,
+        text: UITexts.NOTIFICATION.SUCCESS_EDIT_COLUMN,
       })
     );
   };
@@ -105,13 +105,13 @@ export const ModalEditColumn = () => {
           value={formData.title}
           onChange={handleChange}
           required
-          errorMessage={isSubmitted && formData.title.trim() === '' ? 'This field is required' : undefined}
+          errorMessage={isSubmitted && formData.title.trim() === '' ? UITexts.NOTIFICATION.REQUIRED_FIELD : undefined}
         />
         <Input
           labelText={UITexts.LABELS.COLOR}
           name="color"
           type="color"
-          value={formData.color || '#000000'}
+          value={formData.color || EColors.BLACK}
           onChange={handleChange}
         />
         <BtnDef text={UITexts.BTNS.SAVE} typeBtn="submit" />

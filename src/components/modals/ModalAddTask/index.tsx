@@ -41,7 +41,7 @@ export const ModalAddTask = () => {
       dispatch(
         openNotification({
           isSuccess: false,
-          text: `Please fill in all required fields`,
+          text: UITexts.NOTIFICATION.REQUIRED_FIELD,
         })
       );
       return;
@@ -69,7 +69,7 @@ export const ModalAddTask = () => {
     dispatch(
       openNotification({
         isSuccess: true,
-        text: `Task '${formData.title}' has been successfully added`,
+        text: UITexts.NOTIFICATION.SUCCESS_ADD_CARD,
       })
     );
 
@@ -106,7 +106,7 @@ export const ModalAddTask = () => {
           value={formData.title}
           onChange={handleChange}
           required
-          errorMessage={isSubmitted && formData.title.trim() === '' ? 'This field is required' : undefined}
+          errorMessage={isSubmitted && formData.title.trim() === '' ? UITexts.NOTIFICATION.REQUIRED_FIELD : undefined}
         />
         <TextArea labelText={UITexts.LABELS.DESCRIPTION} name="desc" value={formData.desc} onChange={handleChange} />
         <Select
