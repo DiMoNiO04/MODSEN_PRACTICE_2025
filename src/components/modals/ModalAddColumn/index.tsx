@@ -4,22 +4,19 @@ import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
 import { useForm, useValidation } from '@/hooks';
-import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
+import { addKanbanColumn } from '@/store/kanbanBoard/actions';
 import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getErrorMessage, getRandomColor } from '@/utils/functions';
-import { IColumn, IColumnWithoutCardIds, IKanbanData } from '@/utils/interfaces';
+import { IColumn, IColumnWithoutCardIds } from '@/utils/interfaces';
 
 export const ModalAddColumn = () => {
   const dispatch = useAppDispatch();
-
   const { isOpen } = useAppSelector(({ modals }) => modals.modalColumnAdd);
-  const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
-
-  const { isEmptyField, isDuplicateColumn } = useValidation();
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const { isEmptyField, isDuplicateColumn } = useValidation();
 
   const initialData: IColumnWithoutCardIds = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };
 
@@ -42,16 +39,7 @@ export const ModalAddColumn = () => {
       cardIds: [],
     };
 
-    const updatedKanbanData: IKanbanData = {
-      columns: {
-        ...kanbanData.columns,
-        [newColumn.id]: newColumn,
-      },
-      cards: kanbanData.cards,
-      columnsOrder: [...kanbanData.columnsOrder, newColumn.id],
-    };
-
-    dispatch(setKanbanBoardData(updatedKanbanData));
+    dispatch(addKanbanColumn(newColumn));
 
     dispatch(
       openNotification({

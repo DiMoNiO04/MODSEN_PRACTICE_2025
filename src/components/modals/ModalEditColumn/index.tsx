@@ -4,12 +4,12 @@ import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { EColors, UITexts } from '@/constants';
 import { useForm, useValidation } from '@/hooks';
-import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
+import { editKanbanColumn } from '@/store/kanbanBoard/actions';
 import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getErrorMessage } from '@/utils/functions';
-import { IColumn, IColumnWithoutCardIds, IKanbanColums, IKanbanData } from '@/utils/interfaces';
+import { IColumn, IColumnWithoutCardIds } from '@/utils/interfaces';
 
 export const ModalEditColumn = () => {
   const dispatch = useAppDispatch();
@@ -41,18 +41,7 @@ export const ModalEditColumn = () => {
       cardIds: kanbanData.columns[id].cardIds,
     };
 
-    const updatedColums: IKanbanColums = {
-      ...kanbanData.columns,
-      [updateColumn.id]: updateColumn,
-    };
-
-    const updatedKanbanData: IKanbanData = {
-      columns: updatedColums,
-      cards: kanbanData.cards,
-      columnsOrder: kanbanData.columnsOrder,
-    };
-
-    dispatch(setKanbanBoardData(updatedKanbanData));
+    dispatch(editKanbanColumn(updateColumn));
 
     dispatch(
       openNotification({
