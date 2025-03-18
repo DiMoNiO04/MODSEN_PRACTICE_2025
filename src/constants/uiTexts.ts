@@ -44,7 +44,9 @@ export const UITexts = {
     DONE: 'Done',
   },
   ERRORS: {
-    NOT_FOUND: 'Страница не найдена - 404',
-    GENERAL: 'Что-то пошло не так...',
+    NOT_FOUND: 'Page not found - 404',
+    GENERAL: 'Something went wrong...',
+    FAIL_LOAD_KANBAN_LS: 'Failed to load kanban data from LS:',
+    FAIL_SAVE_KANBAN_LS: 'Failed to save kanban data to LS:',
   },
 };
