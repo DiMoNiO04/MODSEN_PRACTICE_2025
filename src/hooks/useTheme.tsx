@@ -21,7 +21,7 @@ export const useTheme = (): IUseThemeResult => {
   }, [theme]);
 
   const toggleTheme = () => {
-    const newTheme = theme === ETheme.DARK ? ETheme.LIGHT : ETheme.DARK;
+    const newTheme: ETheme = theme === ETheme.DARK ? ETheme.LIGHT : ETheme.DARK;
     setTheme(newTheme);
     localStorage.setItem(LS_KEY_THEME, newTheme);
   };

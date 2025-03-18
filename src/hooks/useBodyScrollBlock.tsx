@@ -1,25 +1,27 @@
 import { useEffect } from 'react';
 
-export const useBodyScrollBlock = (isLocked: boolean) => {
+const clearStyle = (body: HTMLBodyElement, header: HTMLElement): void => {
+  body.style.overflow = '';
+  body.style.paddingRight = '';
+  header.style.paddingRight = '';
+};
+
+export const useBodyScrollBlock = (isLocked: boolean): void => {
   useEffect(() => {
-    const body = document.body;
-    const header = document.querySelector('header');
+    const body = document.body as HTMLBodyElement;
+    const header = document.querySelector('header') as HTMLElement;
 
     if (isLocked) {
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      const scrollbarWidth: number = window.innerWidth - document.documentElement.clientWidth;
       body.style.overflow = 'hidden';
       body.style.paddingRight = `${scrollbarWidth}px`;
-      header!.style.paddingRight = `${scrollbarWidth}px`;
+      header.style.paddingRight = `${scrollbarWidth}px`;
     } else {
-      body.style.overflow = '';
-      body.style.paddingRight = '';
-      header!.style.paddingRight = '';
+      clearStyle(body, header);
     }
 
     return () => {
-      body.style.overflow = '';
-      body.style.paddingRight = '';
-      header!.style.paddingRight = '';
+      clearStyle(body, header);
     };
   }, [isLocked]);
 };

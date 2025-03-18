@@ -48,5 +48,6 @@ export const UITexts = {
     GENERAL: 'Something went wrong...',
     FAIL_LOAD_KANBAN_LS: 'Failed to load kanban data from LS:',
     FAIL_SAVE_KANBAN_LS: 'Failed to save kanban data to LS:',
+    LOGGED_ERROR: 'Logged Error:',
   },
 };

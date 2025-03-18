@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-const LS_KEY_THEME = 'theme';
+const LS_KEY_THEME: string = 'theme';
 
 enum ETheme {
   LIGHT = 'light',

@@ -1,12 +1,24 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Dispatch, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
-export const useDropdownToggle = () => {
+interface IUseDropdownToggleReturn {
+  isDropdownOpen: boolean;
+  setIsDropdownOpen: Dispatch<React.SetStateAction<boolean>>;
+  refDropdownBtn: RefObject<HTMLButtonElement | null>;
+  refDropdownMenu: RefObject<HTMLDivElement | null>;
+}
+
+export const useDropdownToggle = (): IUseDropdownToggleReturn => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const refDropdownBtn = useRef<HTMLButtonElement | null>(null);
   const refDropdownMenu = useRef<HTMLDivElement | null>(null);
 
   const closeMenu = useCallback((e: MouseEvent) => {
-    if (refDropdownBtn.current && refDropdownMenu.current && !refDropdownBtn.current.contains(e.target as Node)) {
+    if (
+      refDropdownBtn.current &&
+      refDropdownMenu.current &&
+      !refDropdownBtn.current.contains(e.target as Node) &&
+      !refDropdownMenu.current.contains(e.target as Node)
+    ) {
       setIsDropdownOpen(false);
     }
   }, []);

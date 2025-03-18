@@ -27,7 +27,7 @@ export class ErrorBoundaryProvider extends Component<IErrorBoundaryProps, IError
   }
 
   logErrorToMyService(error: Error, errorInfo: ErrorInfo): void {
-    console.error('Logged Error:', error, errorInfo);
+    console.error(UITexts.ERRORS.LOGGED_ERROR, error, errorInfo);
   }
 
   render() {
