@@ -1,4 +1,5 @@
 import { AddNewColumn } from './AddNewColumn';
+import { Card } from './Card';
 import { ErrorContent } from './ErrorContent';
 import { HeaderBtnAdd } from './HeaderBtnAdd';
 import { HeaderDropdown } from './HeaderDropdown';
@@ -16,6 +17,7 @@ import { TodoList } from './TodoList';
 
 export {
   AddNewColumn,
+  Card,
   ErrorContent,
   HeaderBtnAdd,
   HeaderDropdown,

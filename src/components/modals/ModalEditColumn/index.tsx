@@ -8,16 +8,16 @@ import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { IColumnWithoutCardIds } from '@/utils/interfaces';
+import { IColumn, IColumnWithoutCardIds, IKanbanColums, IKanbanData } from '@/utils/interfaces';
 
 export const ModalEditColumn = () => {
   const dispatch = useAppDispatch();
   const { id, title, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
 
-  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+  const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
   const initialData: IColumnWithoutCardIds = { id, title, color };
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const onClose = () => {
     dispatch(closeModalColumnEdit());
@@ -28,7 +28,7 @@ export const ModalEditColumn = () => {
   const onSubmit = () => {
     setIsSubmitted(true);
 
-    const trimmedTitle = formData.title.trim();
+    const trimmedTitle: string = formData.title.trim();
 
     if (trimmedTitle === '') {
       dispatch(
@@ -40,7 +40,7 @@ export const ModalEditColumn = () => {
       return;
     }
 
-    const isDuplicateTitle = Object.values(kanbanData.columns).some(
+    const isDuplicateTitle: boolean = Object.values(kanbanData.columns).some(
       (column) => column.title.toLowerCase() === trimmedTitle.toLowerCase()
     );
 
@@ -54,18 +54,18 @@ export const ModalEditColumn = () => {
       return;
     }
 
-    const updateColumn = {
+    const updateColumn: IColumn = {
       ...formData,
       id,
       cardIds: kanbanData.columns[id].cardIds,
     };
 
-    const updatedColums = {
+    const updatedColums: IKanbanColums = {
       ...kanbanData.columns,
       [updateColumn.id]: updateColumn,
     };
 
-    const updatedKanbanData = {
+    const updatedKanbanData: IKanbanData = {
       columns: updatedColums,
       cards: kanbanData.cards,
       columnsOrder: kanbanData.columnsOrder,

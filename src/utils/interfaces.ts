@@ -21,6 +21,10 @@ interface IText {
   text: string;
 }
 
+type IColumnWithoutCardIds = Omit<IColumn, 'cardIds'>;
+type IKanbanCards = Record<string, ICard>;
+type IKanbanColums = Record<string, IColumn>;
+
 interface ICard {
   id: string;
   title: string;
@@ -37,11 +41,20 @@ interface IColumn {
 }
 
 interface IKanbanData {
-  columns: Record<string, IColumn>;
-  cards: Record<string, ICard>;
+  columns: IKanbanColums;
+  cards: IKanbanCards;
   columnsOrder: string[];
 }
 
-type IColumnWithoutCardIds = Omit<IColumn, 'cardIds'>;
-
-export type { ICard, IChildrenProps, IColumn, IColumnWithoutCardIds, IIconProps, IKanbanData, IOption, IText };
+export type {
+  ICard,
+  IChildrenProps,
+  IColumn,
+  IColumnWithoutCardIds,
+  IIconProps,
+  IKanbanCards,
+  IKanbanColums,
+  IKanbanData,
+  IOption,
+  IText,
+};

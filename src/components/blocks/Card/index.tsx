@@ -1,12 +1,12 @@
 import { DragEvent, useState } from 'react';
 
 import { Priority } from '@/components/blocks';
+import { BtnRound, TextDef, TextH3 } from '@/components/ui';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { openModalTask } from '@/store/modalTask/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { ICard, IKanbanData } from '@/utils/interfaces';
 
-import { BtnRound, TextDef, TextH3 } from '..';
 import { Block, TopBlockInfo } from './styled';
 
 export const Card = (cardData: ICard) => {

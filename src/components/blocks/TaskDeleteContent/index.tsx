@@ -3,6 +3,7 @@ import { UITexts } from '@/constants';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
+import { IKanbanCards, IKanbanColums, IKanbanData } from '@/utils/interfaces';
 
 interface ITaskDeleteContentProps {
   id: string;
@@ -12,20 +13,20 @@ interface ITaskDeleteContentProps {
 
 export const TaskDeleteContent = ({ id, handleCancel, onClose }: ITaskDeleteContentProps) => {
   const dispatch = useAppDispatch();
-  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+  const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
   const { title, columnId } = kanbanData.cards[id];
 
   const handeConfirm = () => {
-    const updatedCards = { ...kanbanData.cards };
+    const updatedCards: IKanbanCards = { ...kanbanData.cards };
     delete updatedCards[id];
 
-    const updatedColumns = { ...kanbanData.columns };
+    const updatedColumns: IKanbanColums = { ...kanbanData.columns };
     updatedColumns[columnId] = {
       ...updatedColumns[columnId],
       cardIds: updatedColumns[columnId].cardIds.filter((cardId) => cardId !== id),
     };
 
-    const updatedKanbanData = {
+    const updatedKanbanData: IKanbanData = {
       columns: updatedColumns,
       cards: updatedCards,
       columnsOrder: kanbanData.columnsOrder,

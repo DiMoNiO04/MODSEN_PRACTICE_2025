@@ -29,6 +29,7 @@ export const UITexts = {
     ADD_TASK: 'Add task ...',
     NO: 'No',
     YES: 'Yes',
+    HOME: 'Home',
   },
   LOGO_TITLE: 'Kanban Dashboard',
   PRIORITIES: {

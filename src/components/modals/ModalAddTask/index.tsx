@@ -10,14 +10,15 @@ import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { ICard, IOption } from '@/utils/interfaces';
+import { ICard, IKanbanCards, IKanbanColums, IKanbanData, IOption } from '@/utils/interfaces';
 
 export const ModalAddTask = () => {
   const dispatch = useAppDispatch();
-  const { isFromHeader, isOpen, columnId } = useAppSelector(({ modals }) => modals.modalTaskAdd);
-  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { isFromHeader, isOpen, columnId } = useAppSelector(({ modals }) => modals.modalTaskAdd);
+  const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
+
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const initialData: ICard = {
     id: `card-${Date.now()}`,
@@ -48,16 +49,16 @@ export const ModalAddTask = () => {
 
     const newTask: ICard = { ...formData };
 
-    const updatedCards = { ...kanbanData.cards };
+    const updatedCards: IKanbanCards = { ...kanbanData.cards };
     updatedCards[newTask.id] = newTask;
 
-    const updatedColumns = { ...kanbanData.columns };
+    const updatedColumns: IKanbanColums = { ...kanbanData.columns };
     updatedColumns[formData.columnId] = {
       ...updatedColumns[formData.columnId],
       cardIds: [...updatedColumns[formData.columnId].cardIds, newTask.id],
     };
 
-    const updatedKanbanData = {
+    const updatedKanbanData: IKanbanData = {
       columns: updatedColumns,
       cards: updatedCards,
       columnsOrder: kanbanData.columnsOrder,

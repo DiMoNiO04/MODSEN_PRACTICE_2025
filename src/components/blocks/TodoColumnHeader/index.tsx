@@ -26,7 +26,7 @@ export const TodoColumnHeader = ({
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
   const dispatch = useAppDispatch();
 
-  const buttonColor = isDropdownOpen ? EColors.DARK : EColors.WHITE;
+  const buttonColor: EColors = isDropdownOpen ? EColors.DARK : EColors.WHITE;
 
   const handleAddButtonClick = () => {
     if (isAddNewColumn) {

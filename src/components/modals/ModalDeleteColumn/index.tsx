@@ -5,19 +5,21 @@ import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { closeModalColumnDelete } from '@/store/modalColumnDelete/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
+import { IColumn, IKanbanData } from '@/utils/interfaces';
 
 export const ModalColumnDelete = () => {
   const dispatch = useAppDispatch();
-  const { isOpen, id } = useAppSelector(({ modals }) => modals.modalColumnDelete);
 
-  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+  const { isOpen, id } = useAppSelector(({ modals }) => modals.modalColumnDelete);
+  const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
 
   const handleClose = () => dispatch(closeModalColumnDelete());
-  const handleSubmit = () => {
-    const updatedKanbanData = { ...kanbanData };
 
-    const column = updatedKanbanData.columns[id];
-    const columnTitle = column.title;
+  const handleSubmit = () => {
+    const updatedKanbanData: IKanbanData = { ...kanbanData };
+
+    const column: IColumn = updatedKanbanData.columns[id];
+    const columnTitle: string = column.title;
 
     column.cardIds.forEach((cardId) => {
       delete updatedKanbanData.cards[cardId];

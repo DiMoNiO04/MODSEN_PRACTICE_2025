@@ -7,7 +7,7 @@ import { useForm } from '@/hooks';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { ICard, IOption } from '@/utils/interfaces';
+import { ICard, IKanbanCards, IKanbanColums, IKanbanData, IOption } from '@/utils/interfaces';
 
 interface ITaskEditContentProps {
   cardData: ICard;
@@ -19,11 +19,11 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
   const dispatch = useAppDispatch();
 
   const initialData: ICard = { ...cardData };
-  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+  const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
 
   const { formData, handleChange, handleSubmit } = useForm<ICard>({ initialData });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const handleClose = () => {
     onClose();
@@ -43,12 +43,12 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
       return;
     }
 
-    const updateTask = { ...formData };
+    const updateTask: ICard = { ...formData };
 
-    const oldColumnId = cardData.columnId;
-    const newColumnId = updateTask.columnId;
+    const oldColumnId: string = cardData.columnId;
+    const newColumnId: string = updateTask.columnId;
 
-    const updatedColumns = { ...kanbanData.columns };
+    const updatedColumns: IKanbanColums = { ...kanbanData.columns };
 
     if (oldColumnId !== newColumnId) {
       updatedColumns[oldColumnId] = {
@@ -62,12 +62,12 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
       };
     }
 
-    const updatedCards = {
+    const updatedCards: IKanbanCards = {
       ...kanbanData.cards,
       [formData.id]: updateTask,
     };
 
-    const updatedKanbanData = {
+    const updatedKanbanData: IKanbanData = {
       columns: updatedColumns,
       cards: updatedCards,
       columnsOrder: kanbanData.columnsOrder,

@@ -1,7 +1,7 @@
 import { BtnDef, BtnsBlock, ColorText, ModalTitle, TextDef } from '@/components/ui';
 import { CARD_PRIORITY, UITexts } from '@/constants';
 import { useAppSelector } from '@/store/store';
-import { ICard, IColumn, IKanbanData } from '@/utils/interfaces';
+import { ICard, IColumn } from '@/utils/interfaces';
 
 import { Content } from './styled';
 
@@ -14,10 +14,10 @@ interface ITaskModalContentProps {
 export const TaskModalContent = ({ cardData, handleOpenDelete, handleOpenEdit }: ITaskModalContentProps) => {
   const { title, desc, priority, columnId } = cardData;
 
-  const kanbanData: IKanbanData = useAppSelector((state) => state.kanbanBoard.kanbanData);
+  const { kanbanData } = useAppSelector((state) => state.kanbanBoard);
   const { columns } = kanbanData;
-  const column: IColumn = columns[columnId];
 
+  const column: IColumn = columns[columnId];
   const priorityData = CARD_PRIORITY[priority];
 
   return (

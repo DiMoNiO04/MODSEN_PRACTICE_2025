@@ -5,7 +5,7 @@ import { useDropdownToggle } from '@/hooks';
 import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { ICard, IOption } from '@/utils/interfaces';
+import { ICard, IKanbanCards, IKanbanData, IOption } from '@/utils/interfaces';
 
 import { PriorityDropdown } from '../PriorityDropdown';
 import { PriorityBlock, PriorityButton } from './styled';
@@ -18,23 +18,23 @@ interface IPriorityProps {
 export const Priority = ({ priorityId, cardData }: IPriorityProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
   const dispatch = useAppDispatch();
-  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+
+  const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
+  const priority = CARD_PRIORITY[priorityId as EPriorityName];
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-
-  const priority = CARD_PRIORITY[priorityId as EPriorityName];
 
   const handlePriorityChange = (selectedOption: IOption) => {
     setIsDropdownOpen(false);
 
     const updatedCard: ICard = { ...cardData, priority: selectedOption.id as EPriorityName };
 
-    const updatedCards = {
+    const updatedCards: IKanbanCards = {
       ...kanbanData.cards,
       [updatedCard.id]: updatedCard,
     };
 
-    const updatedKanbanData = {
+    const updatedKanbanData: IKanbanData = {
       ...kanbanData,
       cards: updatedCards,
     };

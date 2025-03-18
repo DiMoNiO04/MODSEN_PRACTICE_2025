@@ -17,7 +17,9 @@ export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IColumnWithou
     const handleOpenModalColumnEdit = () => dispatch(openModalColumnEdit({ id, title, color }));
     const handleOpenModalConfirm = () => dispatch(openModalColumnDelete({ id }));
 
-    const isSpecialColumn = [EColumnsName.TODO, EColumnsName.PROGRESS, EColumnsName.DONE].includes(id as EColumnsName);
+    const isSpecialColumn: boolean = [EColumnsName.TODO, EColumnsName.PROGRESS, EColumnsName.DONE].includes(
+      id as EColumnsName
+    );
 
     return (
       <Dropdown ref={ref}>

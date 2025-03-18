@@ -7,11 +7,12 @@ import { useAppDispatch, useAppSelector } from '@/store/store';
 
 export const ModalTask = () => {
   const dispatch = useAppDispatch();
+
   const { cardData, isOpen } = useAppSelector(({ modals }) => modals.modalTask);
   const onClose = () => dispatch(closeModalTask());
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const handleOpenEdit = () => setIsEditing(true);
   const handleOpenDelete = () => setIsDeleting(true);

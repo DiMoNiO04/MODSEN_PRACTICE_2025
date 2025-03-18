@@ -9,14 +9,15 @@ import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getRandomColor } from '@/utils/functions';
-import { IColumnWithoutCardIds } from '@/utils/interfaces';
+import { IColumn, IColumnWithoutCardIds, IKanbanData } from '@/utils/interfaces';
 
 export const ModalAddColumn = () => {
   const dispatch = useAppDispatch();
-  const { isOpen } = useAppSelector(({ modals }) => modals.modalColumnAdd);
-  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { isOpen } = useAppSelector(({ modals }) => modals.modalColumnAdd);
+  const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
+
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const initialData: IColumnWithoutCardIds = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };
 
@@ -29,7 +30,7 @@ export const ModalAddColumn = () => {
   const onSubmit = () => {
     setIsSubmitted(true);
 
-    const trimmedTitle = formData.title.trim();
+    const trimmedTitle: string = formData.title.trim();
 
     if (trimmedTitle === '') {
       dispatch(
@@ -41,7 +42,7 @@ export const ModalAddColumn = () => {
       return;
     }
 
-    const isDuplicateTitle = Object.values(kanbanData.columns).some(
+    const isDuplicateTitle: boolean = Object.values(kanbanData.columns).some(
       (column) => column.title.toLowerCase() === trimmedTitle.toLowerCase()
     );
 
@@ -55,13 +56,13 @@ export const ModalAddColumn = () => {
       return;
     }
 
-    const newColumn = {
+    const newColumn: IColumn = {
       ...formData,
       id: `column-${Date.now()}`,
       cardIds: [],
     };
 
-    const updatedKanbanData = {
+    const updatedKanbanData: IKanbanData = {
       columns: {
         ...kanbanData.columns,
         [newColumn.id]: newColumn,
