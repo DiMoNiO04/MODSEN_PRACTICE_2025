@@ -11,16 +11,16 @@ enum EColumnsName {
 
 const KANBAN_DATA: IKanbanData = {
   columns: {
-    [EColumnsName.TODO]: { id: EColumnsName.TODO, title: UITexts.STATUSES.TODO, color: EColors.BLUE, cardIds: [] },
+    [EColumnsName.TODO]: { id: EColumnsName.TODO, title: UITexts.STATUSES.TODO, color: EColors.BLUE, taskIds: [] },
     [EColumnsName.PROGRESS]: {
       id: EColumnsName.PROGRESS,
       title: UITexts.STATUSES.PROGRESS,
       color: EColors.ORANGE,
-      cardIds: [],
+      taskIds: [],
     },
-    [EColumnsName.DONE]: { id: EColumnsName.DONE, title: UITexts.STATUSES.DONE, color: EColors.GREEN, cardIds: [] },
+    [EColumnsName.DONE]: { id: EColumnsName.DONE, title: UITexts.STATUSES.DONE, color: EColors.GREEN, taskIds: [] },
   },
-  cards: {},
+  tasks: {},
   columnsOrder: [EColumnsName.TODO, EColumnsName.PROGRESS, EColumnsName.DONE],
 };
 

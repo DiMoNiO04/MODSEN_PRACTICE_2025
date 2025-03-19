@@ -1,10 +1,10 @@
 import { AddNewColumn } from './AddNewColumn';
-import { Card } from './Card';
 import { ErrorContent } from './ErrorContent';
 import { HeaderBtnAdd } from './HeaderBtnAdd';
 import { HeaderDropdown } from './HeaderDropdown';
 import { Priority } from './Priority';
 import { PriorityDropdown } from './PriorityDropdown';
+import { Task } from './Task';
 import { TaskDeleteContent } from './TaskDeleteContent';
 import { TaskEditContent } from './TaskEditContent';
 import { TaskModalContent } from './TaskModalContent';
@@ -17,12 +17,12 @@ import { TodoList } from './TodoList';
 
 export {
   AddNewColumn,
-  Card,
   ErrorContent,
   HeaderBtnAdd,
   HeaderDropdown,
   Priority,
   PriorityDropdown,
+  Task,
   TaskDeleteContent,
   TaskEditContent,
   TaskModalContent,

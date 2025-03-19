@@ -1,11 +1,11 @@
-import { ICard, IColumn, IKanbanData } from '@/utils/interfaces';
+import { IColumn, IKanbanData, ITask } from '@/utils/interfaces';
 
 import {
   EKanbanBoardActions,
-  IDragCardInBetweenColumnsPayload,
-  IDragCardInColumnPayload,
   IDragDropColumn,
-  IDragDropColumnCard,
+  IDragDropColumnTask,
+  IDragTaskInBetweenColumnsPayload,
+  IDragTaskInColumnPayload,
   IEditPriorityTaskPayload,
   TKanbanBoardAction,
 } from './types';
@@ -30,12 +30,12 @@ const deleteKanbanColumn = (payload: string): TKanbanBoardAction => ({
   payload,
 });
 
-const addKanbanTask = (payload: ICard): TKanbanBoardAction => ({
+const addKanbanTask = (payload: ITask): TKanbanBoardAction => ({
   type: EKanbanBoardActions.ADD_TASK,
   payload,
 });
 
-const editKanbanTask = (payload: ICard): TKanbanBoardAction => ({
+const editKanbanTask = (payload: ITask): TKanbanBoardAction => ({
   type: EKanbanBoardActions.EDIT_TASK,
   payload,
 });
@@ -50,13 +50,13 @@ const editKanbanTaskPriority = (payload: IEditPriorityTaskPayload): TKanbanBoard
   payload,
 });
 
-const dragDropCardBetweenColumns = (payload: IDragCardInBetweenColumnsPayload): TKanbanBoardAction => ({
-  type: EKanbanBoardActions.DRAG_DROP_CARD_BETWEEN_COLUMNS,
+const dragDropTaskBetweenColumns = (payload: IDragTaskInBetweenColumnsPayload): TKanbanBoardAction => ({
+  type: EKanbanBoardActions.DRAG_DROP_TASK_BETWEEN_COLUMNS,
   payload,
 });
 
-const dragDropCardInColumn = (payload: IDragCardInColumnPayload): TKanbanBoardAction => ({
-  type: EKanbanBoardActions.DRAG_DROP_CARD_IN_COLUMN,
+const dragDropTaskInColumn = (payload: IDragTaskInColumnPayload): TKanbanBoardAction => ({
+  type: EKanbanBoardActions.DRAG_DROP_TASK_IN_COLUMN,
   payload,
 });
 
@@ -65,8 +65,8 @@ const dragDropColumn = (payload: IDragDropColumn): TKanbanBoardAction => ({
   payload,
 });
 
-const dragDropColumnCard = (payload: IDragDropColumnCard): TKanbanBoardAction => ({
-  type: EKanbanBoardActions.DRAG_DROP_COLUMN_CARD,
+const dragDropColumnTask = (payload: IDragDropColumnTask): TKanbanBoardAction => ({
+  type: EKanbanBoardActions.DRAG_DROP_COLUMN_TASK,
   payload,
 });
 
@@ -75,10 +75,10 @@ export {
   addKanbanTask,
   deleteKanbanColumn,
   deleteKanbanTask,
-  dragDropCardBetweenColumns,
-  dragDropCardInColumn,
   dragDropColumn,
-  dragDropColumnCard,
+  dragDropColumnTask,
+  dragDropTaskBetweenColumns,
+  dragDropTaskInColumn,
   editKanbanColumn,
   editKanbanTask,
   editKanbanTaskPriority,

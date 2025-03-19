@@ -1,23 +1,23 @@
 import { Priority } from '@/components/blocks';
 import { BtnRound, TextDef, TextH3 } from '@/components/ui';
-import { useDragAndDropCard } from '@/hooks';
+import { useDragAndDropTask } from '@/hooks';
 import { openModalTask } from '@/store/modalTask/actions';
 import { useAppDispatch } from '@/store/store';
-import { ICard } from '@/utils/interfaces';
+import { ITask } from '@/utils/interfaces';
 
 import { Block, TopBlockInfo } from './styled';
 
-export const Card = (cardData: ICard) => {
-  const { id, title, desc, priority, columnId } = cardData;
+export const Task = (taskData: ITask) => {
+  const { id, title, desc, priority, columnId } = taskData;
 
   const dispatch = useAppDispatch();
 
-  const { isDragOver, handleDragStart, handleDragOver, handleDragLeave, handleDrop } = useDragAndDropCard({
-    cardId: id,
+  const { isDragOver, handleDragStart, handleDragOver, handleDragLeave, handleDrop } = useDragAndDropTask({
+    taskId: id,
     columnId,
   });
 
-  const handleOpenModal = () => dispatch(openModalTask(cardData));
+  const handleOpenModal = () => dispatch(openModalTask(taskData));
 
   return (
     <Block
@@ -29,7 +29,7 @@ export const Card = (cardData: ICard) => {
       $isDragOver={isDragOver}
     >
       <TopBlockInfo>
-        <Priority priorityId={priority} cardData={cardData} />
+        <Priority priorityId={priority} taskData={taskData} />
         <BtnRound type="maximize" handle={handleOpenModal} />
       </TopBlockInfo>
       <TextH3 text={title} />

@@ -7,10 +7,10 @@ import { openModalColumnDelete } from '@/store/modalColumnDelete/actions';
 import { openModalColumnEdit } from '@/store/modalColumnEdit/actions';
 import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch } from '@/store/store';
-import { IColumnWithoutCardIds } from '@/utils/interfaces';
+import { IColumnWithoutTaskIds } from '@/utils/interfaces';
 
-export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IColumnWithoutCardIds>(
-  ({ id, color, title }: IColumnWithoutCardIds, ref) => {
+export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IColumnWithoutTaskIds>(
+  ({ id, color, title }: IColumnWithoutTaskIds, ref) => {
     const dispatch = useAppDispatch();
 
     const handleOpenModalTaskAdd = () => dispatch(openModalTaskAdd({ columnId: id }));

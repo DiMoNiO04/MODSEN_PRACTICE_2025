@@ -1,7 +1,7 @@
 import { useBodyScrollBlock } from './useBodyScrollBlock';
 import { useColumnActions } from './useColumnActions';
-import { useDragAndDropCard } from './useDragAndDropCard';
 import { useDragAndDropColumn } from './useDragAndDropColumn';
+import { useDragAndDropTask } from './useDragAndDropTask';
 import { useDropdownToggle } from './useDropdownToggle';
 import { useForm } from './useForm';
 import { useTaskActions } from './useTaskActions';
@@ -11,8 +11,8 @@ import { useValidation } from './useValidation';
 export {
   useBodyScrollBlock,
   useColumnActions,
-  useDragAndDropCard,
   useDragAndDropColumn,
+  useDragAndDropTask,
   useDropdownToggle,
   useForm,
   useTaskActions,

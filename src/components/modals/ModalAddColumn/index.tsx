@@ -7,7 +7,7 @@ import { useColumnActions, useForm } from '@/hooks';
 import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getErrorMessage } from '@/utils/functions';
-import { IColumnWithoutCardIds } from '@/utils/interfaces';
+import { IColumnWithoutTaskIds } from '@/utils/interfaces';
 
 export const ModalAddColumn = () => {
   const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ export const ModalAddColumn = () => {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const { handleAddColumn } = useColumnActions();
 
-  const initialData: IColumnWithoutCardIds = { id: `column-${Date.now()}`, title: '', color: '' };
+  const initialData: IColumnWithoutTaskIds = { id: `column-${Date.now()}`, title: '', color: '' };
 
   const onClose = () => {
     dispatch(closeModaColumnAdd());
@@ -30,7 +30,7 @@ export const ModalAddColumn = () => {
     onClose();
   };
 
-  const { formData, handleChange, handleSubmit, resetForm } = useForm<IColumnWithoutCardIds>({
+  const { formData, handleChange, handleSubmit, resetForm } = useForm<IColumnWithoutTaskIds>({
     initialData,
     onSubmit,
   });

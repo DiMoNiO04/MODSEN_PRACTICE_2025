@@ -1,5 +1,5 @@
-import { EPriorityName } from '@/constants/cardPriority';
-import { ICard, IColumn, IKanbanData } from '@/utils/interfaces';
+import { EPriorityName } from '@/constants/taskPriority';
+import { IColumn, IKanbanData, ITask } from '@/utils/interfaces';
 
 enum EKanbanBoardActions {
   SET_DATA = 'SET_DATA_KANBAN',
@@ -10,10 +10,10 @@ enum EKanbanBoardActions {
   EDIT_TASK = 'EDIT_TASK_KANBAN',
   DELETE_TASK = 'DELETE_TASK_KANBAN',
   EDIT_PRIORITY_TASK = 'EDIT_PRIORITY_TASK',
-  DRAG_DROP_CARD_BETWEEN_COLUMNS = 'DRAG_DROP_CARD_BETWEEN_COLUMNS',
-  DRAG_DROP_CARD_IN_COLUMN = 'DRAG_DROP_CARD_IN_COLUMN',
+  DRAG_DROP_TASK_BETWEEN_COLUMNS = 'DRAG_DROP_TASK_BETWEEN_COLUMNS',
+  DRAG_DROP_TASK_IN_COLUMN = 'DRAG_DROP_TASK_IN_COLUMN',
   DRAG_DROP_COLUMN = 'DRAG_DROP_COLUMN',
-  DRAG_DROP_COLUMN_CARD = 'DRAG_DROP_COLUMN_CARD',
+  DRAG_DROP_COLUMN_TASK = 'DRAG_DROP_COLUMN_TASK',
 }
 
 interface IInitialKanbanBoardState {
@@ -25,29 +25,29 @@ interface IEditPriorityTaskPayload {
   priorityId: EPriorityName;
 }
 
-interface IDragCardInBetweenColumnsPayload {
+interface IDragTaskInBetweenColumnsPayload {
   fromColumnId: string;
-  draggedCardId: string;
+  draggedTaskId: string;
   columnId: string;
 }
 
-interface IDragCardInColumnPayload {
+interface IDragTaskInColumnPayload {
   columnId: string;
-  draggedCardId: string;
-  cardId: string;
+  draggedTaskId: string;
+  taskId: string;
 }
 
 interface IDragDropColumn {
   draggedColumnId: string;
   id: string;
-  draggedCardId: string;
+  draggedTaskId: string;
 }
 
-interface IDragDropColumnCard {
-  cardIds: string[];
+interface IDragDropColumnTask {
+  taskIds: string[];
   id: string;
   fromColumnId: string;
-  draggedCardId: string;
+  draggedTaskId: string;
 }
 
 type TKanbanBoardAction =
@@ -55,21 +55,21 @@ type TKanbanBoardAction =
   | { type: EKanbanBoardActions.ADD_COLUMN; payload: IColumn }
   | { type: EKanbanBoardActions.EDIT_COLUMN; payload: IColumn }
   | { type: EKanbanBoardActions.DELETE_COLUMN; payload: string }
-  | { type: EKanbanBoardActions.ADD_TASK; payload: ICard }
-  | { type: EKanbanBoardActions.EDIT_TASK; payload: ICard }
+  | { type: EKanbanBoardActions.ADD_TASK; payload: ITask }
+  | { type: EKanbanBoardActions.EDIT_TASK; payload: ITask }
   | { type: EKanbanBoardActions.DELETE_TASK; payload: string }
   | { type: EKanbanBoardActions.EDIT_PRIORITY_TASK; payload: IEditPriorityTaskPayload }
-  | { type: EKanbanBoardActions.DRAG_DROP_CARD_BETWEEN_COLUMNS; payload: IDragCardInBetweenColumnsPayload }
-  | { type: EKanbanBoardActions.DRAG_DROP_CARD_IN_COLUMN; payload: IDragCardInColumnPayload }
+  | { type: EKanbanBoardActions.DRAG_DROP_TASK_BETWEEN_COLUMNS; payload: IDragTaskInBetweenColumnsPayload }
+  | { type: EKanbanBoardActions.DRAG_DROP_TASK_IN_COLUMN; payload: IDragTaskInColumnPayload }
   | { type: EKanbanBoardActions.DRAG_DROP_COLUMN; payload: IDragDropColumn }
-  | { type: EKanbanBoardActions.DRAG_DROP_COLUMN_CARD; payload: IDragDropColumnCard };
+  | { type: EKanbanBoardActions.DRAG_DROP_COLUMN_TASK; payload: IDragDropColumnTask };
 
 export { EKanbanBoardActions };
 export type {
-  IDragCardInBetweenColumnsPayload,
-  IDragCardInColumnPayload,
   IDragDropColumn,
-  IDragDropColumnCard,
+  IDragDropColumnTask,
+  IDragTaskInBetweenColumnsPayload,
+  IDragTaskInColumnPayload,
   IEditPriorityTaskPayload,
   IInitialKanbanBoardState,
   TKanbanBoardAction,

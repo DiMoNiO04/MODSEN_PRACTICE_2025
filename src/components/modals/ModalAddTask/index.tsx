@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle, Select, TextArea } from '@/components/ui';
-import { CARD_PRIORITY, UITexts } from '@/constants';
-import { EPriorityName } from '@/constants/cardPriority';
+import { TASK_PRIORITY, UITexts } from '@/constants';
 import { EColumnsName } from '@/constants/kanbanData';
+import { EPriorityName } from '@/constants/taskPriority';
 import { useForm, useTaskActions } from '@/hooks';
 import { closeModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getErrorMessage } from '@/utils/functions';
-import { ICard, IOption } from '@/utils/interfaces';
+import { IOption, ITask } from '@/utils/interfaces';
 
 export const ModalAddTask = () => {
   const dispatch = useAppDispatch();
@@ -21,8 +21,8 @@ export const ModalAddTask = () => {
 
   const { handleAddTask } = useTaskActions();
 
-  const initialData: ICard = {
-    id: `card-${Date.now()}`,
+  const initialData: ITask = {
+    id: `task-${Date.now()}`,
     title: '',
     desc: '',
     priority: EPriorityName.NULL,
@@ -41,7 +41,7 @@ export const ModalAddTask = () => {
     onClose();
   };
 
-  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<ICard>({
+  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<ITask>({
     initialData,
     onSubmit,
   });
@@ -78,7 +78,7 @@ export const ModalAddTask = () => {
           labelText={UITexts.LABELS.PRIORITY}
           value={formData.priority}
           onChange={onPriorityChange}
-          options={Object.values(CARD_PRIORITY)}
+          options={Object.values(TASK_PRIORITY)}
         />
 
         {isFromHeader && (

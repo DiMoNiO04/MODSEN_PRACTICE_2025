@@ -3,21 +3,21 @@ import { addKanbanColumn, deleteKanbanColumn, editKanbanColumn } from '@/store/k
 import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch } from '@/store/store';
 import { getRandomColor } from '@/utils/functions';
-import { IColumn, IColumnWithoutCardIds } from '@/utils/interfaces';
+import { IColumn, IColumnWithoutTaskIds } from '@/utils/interfaces';
 
 import { useValidation } from './useValidation';
 
 interface IUseColumnActions {
-  handleAddColumn: (formData: IColumnWithoutCardIds) => void;
+  handleAddColumn: (formData: IColumnWithoutTaskIds) => void;
   handleDeleteColumn: (id: string) => void;
-  handleEditColumn: (formData: IColumnWithoutCardIds, id: string) => void;
+  handleEditColumn: (formData: IColumnWithoutTaskIds, id: string) => void;
 }
 
 export const useColumnActions = (): IUseColumnActions => {
   const dispatch = useAppDispatch();
   const { isEmptyField, isDuplicateColumn } = useValidation();
 
-  const handleAddColumn = (formData: IColumnWithoutCardIds) => {
+  const handleAddColumn = (formData: IColumnWithoutTaskIds) => {
     if (isEmptyField(formData.title) || isDuplicateColumn(formData.title)) {
       return;
     }
@@ -25,7 +25,7 @@ export const useColumnActions = (): IUseColumnActions => {
     const newColumn: IColumn = {
       ...formData,
       id: `column-${Date.now()}`,
-      cardIds: [],
+      taskIds: [],
       color: formData.color || getRandomColor(),
     };
 
@@ -38,7 +38,7 @@ export const useColumnActions = (): IUseColumnActions => {
     dispatch(openNotification({ isSuccess: true, text: UITexts.NOTIFICATION.SUCCESS_DELETE_COLUMN }));
   };
 
-  const handleEditColumn = (formData: IColumnWithoutCardIds, id: string) => {
+  const handleEditColumn = (formData: IColumnWithoutTaskIds, id: string) => {
     if (isEmptyField(formData.title) || isDuplicateColumn(formData.title)) {
       return;
     }
@@ -46,7 +46,7 @@ export const useColumnActions = (): IUseColumnActions => {
     const updatedColumn: IColumn = {
       ...formData,
       id,
-      cardIds: [],
+      taskIds: [],
     };
 
     dispatch(editKanbanColumn(updatedColumn));

@@ -9,7 +9,7 @@ export const AddNewColumn = () => {
     id: `column-${Date.now()}`,
     title: UITexts.COLUMN.ADD_NEW,
     color: EColors.GRAY,
-    cardIds: [],
+    taskIds: [],
   };
 
   return (

@@ -19,7 +19,7 @@ export const TodoColumnHeader = ({
   id,
   title,
   color,
-  cardIds,
+  taskIds,
   columnId,
   isAddNewColumn = false,
 }: ITodoColumnHeaderProps) => {
@@ -45,7 +45,7 @@ export const TodoColumnHeader = ({
 
   return (
     <TodoColumnHeaderContainer color={color}>
-      <TitleWithCount color={color} title={title} count={cardIds.length} />
+      <TitleWithCount color={color} title={title} count={taskIds.length} />
       {isAddNewColumn ? (
         <BtnRound color={EColors.WHITE} handle={handleAddButtonClick} type="add" />
       ) : (

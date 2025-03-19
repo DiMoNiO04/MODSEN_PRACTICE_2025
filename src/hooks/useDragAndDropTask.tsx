@@ -1,9 +1,9 @@
 import { DragEvent, useState } from 'react';
 
-import { dragDropCardBetweenColumns, dragDropCardInColumn } from '@/store/kanbanBoard/actions';
+import { dragDropTaskBetweenColumns, dragDropTaskInColumn } from '@/store/kanbanBoard/actions';
 import { useAppDispatch } from '@/store/store';
 
-interface IUseDragAndDropCardReturn {
+interface IUseDragAndDropTaskReturn {
   isDragOver: boolean;
   handleDragStart: (e: DragEvent<HTMLDivElement>) => void;
   handleDragOver: (e: DragEvent<HTMLDivElement>) => void;
@@ -11,17 +11,17 @@ interface IUseDragAndDropCardReturn {
   handleDrop: (e: DragEvent<HTMLDivElement>) => void;
 }
 
-interface IUseDragAndDropCardProps {
-  cardId: string;
+interface IUseDragAndDropTaskProps {
+  taskId: string;
   columnId: string;
 }
 
-export const useDragAndDropCard = ({ cardId, columnId }: IUseDragAndDropCardProps): IUseDragAndDropCardReturn => {
+export const useDragAndDropTask = ({ taskId, columnId }: IUseDragAndDropTaskProps): IUseDragAndDropTaskReturn => {
   const dispatch = useAppDispatch();
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
 
   const handleDragStart = (e: DragEvent<HTMLDivElement>) => {
-    e.dataTransfer.setData('cardId', cardId);
+    e.dataTransfer.setData('taskId', taskId);
     e.dataTransfer.setData('fromColumnId', columnId);
   };
 
@@ -36,13 +36,13 @@ export const useDragAndDropCard = ({ cardId, columnId }: IUseDragAndDropCardProp
     e.preventDefault();
     setIsDragOver(false);
 
-    const draggedCardId = e.dataTransfer.getData('cardId');
+    const draggedTaskId = e.dataTransfer.getData('taskId');
     const fromColumnId = e.dataTransfer.getData('fromColumnId');
 
-    if (draggedCardId && fromColumnId !== columnId) {
-      dispatch(dragDropCardBetweenColumns({ fromColumnId, draggedCardId, columnId }));
-    } else if (draggedCardId && fromColumnId === columnId) {
-      dispatch(dragDropCardInColumn({ columnId, draggedCardId, cardId }));
+    if (draggedTaskId && fromColumnId !== columnId) {
+      dispatch(dragDropTaskBetweenColumns({ fromColumnId, draggedTaskId, columnId }));
+    } else if (draggedTaskId && fromColumnId === columnId) {
+      dispatch(dragDropTaskInColumn({ columnId, draggedTaskId, taskId }));
     }
   };
 

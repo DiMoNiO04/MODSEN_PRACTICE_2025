@@ -15,7 +15,7 @@ interface IPriority {
   title: string;
 }
 
-const CARD_PRIORITY: Record<EPriorityName, IPriority> = {
+const TASK_PRIORITY: Record<EPriorityName, IPriority> = {
   [EPriorityName.NULL]: { id: EPriorityName.NULL, color: EColors.LIGHT_GRAY, title: UITexts.PRIORITIES.NULL },
   [EPriorityName.LOW]: { id: EPriorityName.LOW, color: EColors.GREEN, title: UITexts.PRIORITIES.LOW },
   [EPriorityName.NORMAL]: { id: EPriorityName.NORMAL, color: EColors.BLUE, title: UITexts.PRIORITIES.NORMAL },
@@ -23,4 +23,4 @@ const CARD_PRIORITY: Record<EPriorityName, IPriority> = {
   [EPriorityName.CRITICAL]: { id: EPriorityName.CRITICAL, color: EColors.RED, title: UITexts.PRIORITIES.CRITICAL },
 };
 
-export { CARD_PRIORITY, EPriorityName };
+export { EPriorityName, TASK_PRIORITY };

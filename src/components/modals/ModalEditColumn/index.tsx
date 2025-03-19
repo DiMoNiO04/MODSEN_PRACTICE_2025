@@ -7,13 +7,13 @@ import { useColumnActions, useForm } from '@/hooks';
 import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getErrorMessage } from '@/utils/functions';
-import { IColumnWithoutCardIds } from '@/utils/interfaces';
+import { IColumnWithoutTaskIds } from '@/utils/interfaces';
 
 export const ModalEditColumn = () => {
   const dispatch = useAppDispatch();
   const { id, title, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
 
-  const initialData: IColumnWithoutCardIds = { id, title, color };
+  const initialData: IColumnWithoutTaskIds = { id, title, color };
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
@@ -31,7 +31,7 @@ export const ModalEditColumn = () => {
     onClose();
   };
 
-  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IColumnWithoutCardIds>({
+  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IColumnWithoutTaskIds>({
     initialData,
     onSubmit,
   });

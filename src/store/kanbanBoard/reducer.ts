@@ -1,4 +1,4 @@
-import { ICard, IColumn, IKanbanData } from '@/utils/interfaces';
+import { IColumn, IKanbanData, ITask } from '@/utils/interfaces';
 import { kanbanStorage } from '@/utils/kanbanStorage';
 
 import { EKanbanBoardActions, IInitialKanbanBoardState, TKanbanBoardAction } from './types';
@@ -58,8 +58,8 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
       const updatedKanbanData: IKanbanData = { ...kanbanData };
 
       const column = updatedKanbanData.columns[columnId];
-      column.cardIds.forEach((cardId) => {
-        delete updatedKanbanData.cards[cardId];
+      column.taskIds.forEach((taskId) => {
+        delete updatedKanbanData.tasks[taskId];
       });
 
       delete updatedKanbanData.columns[columnId];
@@ -71,21 +71,21 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
 
     case EKanbanBoardActions.ADD_TASK: {
       const { kanbanData } = state;
-      const { cards, columns } = kanbanData;
+      const { tasks, columns } = kanbanData;
 
       const newTask = action.payload;
-      const updatedCards = { ...cards, [newTask.id]: newTask };
+      const updatedTasks = { ...tasks, [newTask.id]: newTask };
 
       const updatedColumns = { ...columns };
       updatedColumns[newTask.columnId] = {
         ...updatedColumns[newTask.columnId],
-        cardIds: [...updatedColumns[newTask.columnId].cardIds, newTask.id],
+        taskIds: [...updatedColumns[newTask.columnId].taskIds, newTask.id],
       };
 
       const updatedKanbanData: IKanbanData = {
         ...kanbanData,
         columns: updatedColumns,
-        cards: updatedCards,
+        tasks: updatedTasks,
       };
 
       kanbanStorage.saveKanbanData(updatedKanbanData);
@@ -94,30 +94,30 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
 
     case EKanbanBoardActions.EDIT_TASK: {
       const { kanbanData } = state;
-      const { cards, columns } = kanbanData;
+      const { tasks, columns } = kanbanData;
 
       const updatedTask = action.payload;
-      const updatedCards = { ...cards, [updatedTask.id]: updatedTask };
+      const updatedTasks = { ...tasks, [updatedTask.id]: updatedTask };
 
       const updatedColumns = { ...columns };
-      const currentCard = cards[updatedTask.id];
+      const currentTask = tasks[updatedTask.id];
 
-      if (currentCard.columnId !== updatedTask.columnId) {
-        updatedColumns[currentCard.columnId] = {
-          ...updatedColumns[currentCard.columnId],
-          cardIds: updatedColumns[currentCard.columnId].cardIds.filter((cardId) => cardId !== updatedTask.id),
+      if (currentTask.columnId !== updatedTask.columnId) {
+        updatedColumns[currentTask.columnId] = {
+          ...updatedColumns[currentTask.columnId],
+          taskIds: updatedColumns[currentTask.columnId].taskIds.filter((taskId) => taskId !== updatedTask.id),
         };
 
         updatedColumns[updatedTask.columnId] = {
           ...updatedColumns[updatedTask.columnId],
-          cardIds: [...updatedColumns[updatedTask.columnId].cardIds, updatedTask.id],
+          taskIds: [...updatedColumns[updatedTask.columnId].taskIds, updatedTask.id],
         };
       } else {
-        updatedColumns[currentCard.columnId] = {
-          ...updatedColumns[currentCard.columnId],
-          cardIds: updatedColumns[currentCard.columnId]
-            ? updatedColumns[currentCard.columnId].cardIds.map((cardId) =>
-                cardId === updatedTask.id ? updatedTask.id : cardId
+        updatedColumns[currentTask.columnId] = {
+          ...updatedColumns[currentTask.columnId],
+          taskIds: updatedColumns[currentTask.columnId]
+            ? updatedColumns[currentTask.columnId].taskIds.map((taskId) =>
+                taskId === updatedTask.id ? updatedTask.id : taskId
               )
             : [],
         };
@@ -126,7 +126,7 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
       const updatedKanbanData: IKanbanData = {
         ...kanbanData,
         columns: updatedColumns,
-        cards: updatedCards,
+        tasks: updatedTasks,
       };
 
       kanbanStorage.saveKanbanData(updatedKanbanData);
@@ -135,28 +135,28 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
 
     case EKanbanBoardActions.DELETE_TASK: {
       const { kanbanData } = state;
-      const { columns, cards } = kanbanData;
+      const { columns, tasks } = kanbanData;
 
       const taskId = action.payload;
 
-      const columnId = cards[taskId]?.columnId;
+      const columnId = tasks[taskId]?.columnId;
       if (!columnId) {
         return state;
       }
 
-      const updatedCards = { ...cards };
-      delete updatedCards[taskId];
+      const updatedTasks = { ...tasks };
+      delete updatedTasks[taskId];
 
       const updatedColumns = { ...columns };
       updatedColumns[columnId] = {
         ...updatedColumns[columnId],
-        cardIds: updatedColumns[columnId].cardIds.filter((id) => id !== taskId),
+        taskIds: updatedColumns[columnId].taskIds.filter((id) => id !== taskId),
       };
 
       const updatedKanbanData: IKanbanData = {
         ...kanbanData,
         columns: updatedColumns,
-        cards: updatedCards,
+        tasks: updatedTasks,
       };
 
       kanbanStorage.saveKanbanData(updatedKanbanData);
@@ -165,39 +165,39 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
 
     case EKanbanBoardActions.EDIT_PRIORITY_TASK: {
       const { kanbanData } = state;
-      const { cards } = kanbanData;
+      const { tasks } = kanbanData;
 
       const { taskId, priorityId } = action.payload;
 
-      const updatedCards = { ...cards };
-      if (updatedCards[taskId]) {
-        updatedCards[taskId] = {
-          ...updatedCards[taskId],
+      const updatedTasks = { ...tasks };
+      if (updatedTasks[taskId]) {
+        updatedTasks[taskId] = {
+          ...updatedTasks[taskId],
           priority: priorityId,
         };
       }
 
       const updatedKanbanData: IKanbanData = {
         ...kanbanData,
-        cards: updatedCards,
+        tasks: updatedTasks,
       };
 
       kanbanStorage.saveKanbanData(updatedKanbanData);
       return { ...state, kanbanData: updatedKanbanData };
     }
 
-    case EKanbanBoardActions.DRAG_DROP_CARD_BETWEEN_COLUMNS: {
+    case EKanbanBoardActions.DRAG_DROP_TASK_BETWEEN_COLUMNS: {
       const { kanbanData } = state;
-      const { columns, cards } = kanbanData;
+      const { columns, tasks } = kanbanData;
 
-      const { fromColumnId, draggedCardId, columnId } = action.payload;
+      const { fromColumnId, draggedTaskId, columnId } = action.payload;
 
       const fromColumn = columns[fromColumnId];
-      const updatedFromCardIds = fromColumn.cardIds.filter((cardId) => cardId !== draggedCardId);
+      const updatedFromTaskIds = fromColumn.taskIds.filter((taskId) => taskId !== draggedTaskId);
 
-      const updatedCard = { ...cards[draggedCardId], columnId };
+      const updatedTask = { ...tasks[draggedTaskId], columnId };
 
-      const updatedCardIds = [...columns[columnId].cardIds, draggedCardId];
+      const updatedTaskIds = [...columns[columnId].taskIds, draggedTaskId];
 
       const updatedKanbanData: IKanbanData = {
         ...kanbanData,
@@ -205,16 +205,16 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
           ...columns,
           [fromColumnId]: {
             ...fromColumn,
-            cardIds: updatedFromCardIds,
+            taskIds: updatedFromTaskIds,
           },
           [columnId]: {
             ...columns[columnId],
-            cardIds: updatedCardIds,
+            taskIds: updatedTaskIds,
           },
         },
-        cards: {
-          ...cards,
-          [draggedCardId]: updatedCard,
+        tasks: {
+          ...tasks,
+          [draggedTaskId]: updatedTask,
         },
       };
 
@@ -222,20 +222,20 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
       return { ...state, kanbanData: updatedKanbanData };
     }
 
-    case EKanbanBoardActions.DRAG_DROP_CARD_IN_COLUMN: {
+    case EKanbanBoardActions.DRAG_DROP_TASK_IN_COLUMN: {
       const { kanbanData } = state;
       const { columns } = kanbanData;
 
-      const { columnId, draggedCardId, cardId } = action.payload;
+      const { columnId, draggedTaskId, taskId } = action.payload;
 
-      const updatedCardIds = [...columns[columnId].cardIds];
-      const fromIndex = updatedCardIds.indexOf(draggedCardId);
-      const toIndex = updatedCardIds.indexOf(cardId);
+      const updatedTaskIds = [...columns[columnId].taskIds];
+      const fromIndex = updatedTaskIds.indexOf(draggedTaskId);
+      const toIndex = updatedTaskIds.indexOf(taskId);
 
       if (fromIndex === -1 || toIndex === -1 || fromIndex === toIndex) return state;
 
-      updatedCardIds.splice(fromIndex, 1);
-      updatedCardIds.splice(toIndex, 0, draggedCardId);
+      updatedTaskIds.splice(fromIndex, 1);
+      updatedTaskIds.splice(toIndex, 0, draggedTaskId);
 
       const updatedKanbanData: IKanbanData = {
         ...kanbanData,
@@ -243,7 +243,7 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
           ...columns,
           [columnId]: {
             ...columns[columnId],
-            cardIds: updatedCardIds,
+            taskIds: updatedTaskIds,
           },
         },
       };
@@ -256,9 +256,9 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
       const { kanbanData } = state;
       const { columnsOrder } = kanbanData;
 
-      const { draggedColumnId, id, draggedCardId } = action.payload;
+      const { draggedColumnId, id, draggedTaskId } = action.payload;
 
-      if (draggedCardId) return state;
+      if (draggedTaskId) return state;
 
       const fromIndex = columnsOrder.indexOf(draggedColumnId);
       const toIndex = columnsOrder.indexOf(id);
@@ -278,20 +278,20 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
       return { ...state, kanbanData: updatedKanbanData };
     }
 
-    case EKanbanBoardActions.DRAG_DROP_COLUMN_CARD: {
+    case EKanbanBoardActions.DRAG_DROP_COLUMN_TASK: {
       const { kanbanData } = state;
-      const { columns, cards } = kanbanData;
+      const { columns, tasks } = kanbanData;
 
-      const { cardIds, id, fromColumnId, draggedCardId } = action.payload;
+      const { taskIds, id, fromColumnId, draggedTaskId } = action.payload;
 
-      const updatedCardIds = [...cardIds];
+      const updatedTaskIds = [...taskIds];
 
       if (fromColumnId === id) return state;
 
       const fromColumn: IColumn = columns[fromColumnId];
-      const updatedFromCardIds: string[] = fromColumn.cardIds.filter((cardId) => cardId !== draggedCardId);
+      const updatedFromTaskIds: string[] = fromColumn.taskIds.filter((taskId) => taskId !== draggedTaskId);
 
-      const updatedCard: ICard = { ...cards[draggedCardId], columnId: id };
+      const updatedTask: ITask = { ...tasks[draggedTaskId], columnId: id };
 
       const updatedKanbanData: IKanbanData = {
         ...kanbanData,
@@ -299,16 +299,16 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
           ...columns,
           [fromColumnId]: {
             ...fromColumn,
-            cardIds: updatedFromCardIds,
+            taskIds: updatedFromTaskIds,
           },
           [id]: {
             ...columns[id],
-            cardIds: [...updatedCardIds, draggedCardId],
+            taskIds: [...updatedTaskIds, draggedTaskId],
           },
         },
-        cards: {
-          ...cards,
-          [draggedCardId]: updatedCard,
+        tasks: {
+          ...tasks,
+          [draggedTaskId]: updatedTask,
         },
       };
 

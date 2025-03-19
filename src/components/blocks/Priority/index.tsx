@@ -1,28 +1,28 @@
 import { ColorText } from '@/components/ui';
-import { CARD_PRIORITY } from '@/constants';
-import { EPriorityName } from '@/constants/cardPriority';
+import { TASK_PRIORITY } from '@/constants';
+import { EPriorityName } from '@/constants/taskPriority';
 import { useDropdownToggle, useTaskActions } from '@/hooks';
-import { ICard, IOption } from '@/utils/interfaces';
+import { IOption, ITask } from '@/utils/interfaces';
 
 import { PriorityDropdown } from '../PriorityDropdown';
 import { PriorityBlock, PriorityButton } from './styled';
 
 interface IPriorityProps {
   priorityId: string;
-  cardData: ICard;
+  taskData: ITask;
 }
 
-export const Priority = ({ priorityId, cardData }: IPriorityProps) => {
+export const Priority = ({ priorityId, taskData }: IPriorityProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
   const { handleEditPriority } = useTaskActions();
 
-  const priority = CARD_PRIORITY[priorityId as EPriorityName];
+  const priority = TASK_PRIORITY[priorityId as EPriorityName];
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   const handlePriorityChange = (selectedOption: IOption) => {
     setIsDropdownOpen(false);
-    handleEditPriority(cardData.id, selectedOption.id as EPriorityName);
+    handleEditPriority(taskData.id, selectedOption.id as EPriorityName);
   };
 
   return (

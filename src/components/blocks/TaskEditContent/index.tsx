@@ -2,23 +2,23 @@ import { useState } from 'react';
 
 import { BtnDef, BtnsBlock, Form, Input, ModalTitle, TextArea } from '@/components/ui';
 import { Select } from '@/components/ui/Select';
-import { CARD_PRIORITY, UITexts } from '@/constants';
+import { TASK_PRIORITY, UITexts } from '@/constants';
 import { useForm, useTaskActions } from '@/hooks';
 import { useAppSelector } from '@/store/store';
 import { getErrorMessage } from '@/utils/functions';
-import { ICard, IOption } from '@/utils/interfaces';
+import { IOption, ITask } from '@/utils/interfaces';
 
 interface ITaskEditContentProps {
-  cardData: ICard;
+  taskData: ITask;
   handleCancel: () => void;
   onClose: () => void;
 }
 
-export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditContentProps) => {
-  const initialData: ICard = { ...cardData };
+export const TaskEditContent = ({ taskData, handleCancel, onClose }: ITaskEditContentProps) => {
+  const initialData: ITask = { ...taskData };
   const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
 
-  const { formData, handleChange, handleSubmit } = useForm<ICard>({ initialData });
+  const { formData, handleChange, handleSubmit } = useForm<ITask>({ initialData });
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
@@ -59,7 +59,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
           labelText={UITexts.LABELS.PRIORITY}
           value={formData.priority}
           onChange={onPriorityChange}
-          options={Object.values(CARD_PRIORITY)}
+          options={Object.values(TASK_PRIORITY)}
         />
         <Select
           labelText={UITexts.LABELS.STATUS}
