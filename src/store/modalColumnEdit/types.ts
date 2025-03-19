@@ -16,4 +16,4 @@ type TModalColumnEditAction =
   | { type: EModalColumnEditActions.CLOSE_MODAL };
 
 export { EModalColumnEditActions };
-export type { IInitialModalColumnEditPayload,IInitialModalColumnEditState, TModalColumnEditAction };
+export type { IInitialModalColumnEditPayload, IInitialModalColumnEditState, TModalColumnEditAction };

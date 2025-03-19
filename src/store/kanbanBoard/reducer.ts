@@ -9,14 +9,6 @@ const initialKanbanBoardData: IInitialKanbanBoardState = {
 
 const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoardAction): IInitialKanbanBoardState => {
   switch (action.type) {
-    case EKanbanBoardActions.SET_DATA: {
-      kanbanStorage.saveKanbanData(action.payload);
-      return {
-        ...state,
-        kanbanData: action.payload,
-      };
-    }
-
     case EKanbanBoardActions.ADD_COLUMN: {
       const { kanbanData } = state;
       const { columnsOrder, columns } = kanbanData;
@@ -186,134 +178,130 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
       return { ...state, kanbanData: updatedKanbanData };
     }
 
-    case EKanbanBoardActions.DRAG_DROP_TASK_BETWEEN_COLUMNS: {
+    case EKanbanBoardActions.DRAG_DROP_TASK: {
       const { kanbanData } = state;
       const { columns, tasks } = kanbanData;
 
-      const { fromColumnId, draggedTaskId, columnId } = action.payload;
+      const { fromColumnId, draggedTaskId, columnId, taskId } = action.payload;
 
-      const fromColumn = columns[fromColumnId];
-      const updatedFromTaskIds = fromColumn.taskIds.filter((taskId) => taskId !== draggedTaskId);
+      if (draggedTaskId && fromColumnId !== columnId) {
+        const fromColumn = columns[fromColumnId];
+        const updatedFromTaskIds = fromColumn.taskIds.filter((taskId) => taskId !== draggedTaskId);
 
-      const updatedTask = { ...tasks[draggedTaskId], columnId };
+        const updatedTask = { ...tasks[draggedTaskId], columnId };
 
-      const updatedTaskIds = [...columns[columnId].taskIds, draggedTaskId];
+        const updatedTaskIds = [...columns[columnId].taskIds, draggedTaskId];
 
-      const updatedKanbanData: IKanbanData = {
-        ...kanbanData,
-        columns: {
-          ...columns,
-          [fromColumnId]: {
-            ...fromColumn,
-            taskIds: updatedFromTaskIds,
+        const updatedKanbanData: IKanbanData = {
+          ...kanbanData,
+          columns: {
+            ...columns,
+            [fromColumnId]: {
+              ...fromColumn,
+              taskIds: updatedFromTaskIds,
+            },
+            [columnId]: {
+              ...columns[columnId],
+              taskIds: updatedTaskIds,
+            },
           },
-          [columnId]: {
-            ...columns[columnId],
-            taskIds: updatedTaskIds,
+          tasks: {
+            ...tasks,
+            [draggedTaskId]: updatedTask,
           },
-        },
-        tasks: {
-          ...tasks,
-          [draggedTaskId]: updatedTask,
-        },
-      };
+        };
 
-      kanbanStorage.saveKanbanData(updatedKanbanData);
-      return { ...state, kanbanData: updatedKanbanData };
-    }
+        kanbanStorage.saveKanbanData(updatedKanbanData);
+        return { ...state, kanbanData: updatedKanbanData };
+      } else if (draggedTaskId && fromColumnId === columnId) {
+        const updatedTaskIds = [...columns[columnId].taskIds];
+        const fromIndex = updatedTaskIds.indexOf(draggedTaskId);
+        const toIndex = updatedTaskIds.indexOf(taskId);
 
-    case EKanbanBoardActions.DRAG_DROP_TASK_IN_COLUMN: {
-      const { kanbanData } = state;
-      const { columns } = kanbanData;
+        if (fromIndex === -1 || toIndex === -1 || fromIndex === toIndex) return state;
 
-      const { columnId, draggedTaskId, taskId } = action.payload;
+        updatedTaskIds.splice(fromIndex, 1);
+        updatedTaskIds.splice(toIndex, 0, draggedTaskId);
 
-      const updatedTaskIds = [...columns[columnId].taskIds];
-      const fromIndex = updatedTaskIds.indexOf(draggedTaskId);
-      const toIndex = updatedTaskIds.indexOf(taskId);
-
-      if (fromIndex === -1 || toIndex === -1 || fromIndex === toIndex) return state;
-
-      updatedTaskIds.splice(fromIndex, 1);
-      updatedTaskIds.splice(toIndex, 0, draggedTaskId);
-
-      const updatedKanbanData: IKanbanData = {
-        ...kanbanData,
-        columns: {
-          ...columns,
-          [columnId]: {
-            ...columns[columnId],
-            taskIds: updatedTaskIds,
+        const updatedKanbanData: IKanbanData = {
+          ...kanbanData,
+          columns: {
+            ...columns,
+            [columnId]: {
+              ...columns[columnId],
+              taskIds: updatedTaskIds,
+            },
           },
-        },
-      };
+        };
 
-      kanbanStorage.saveKanbanData(updatedKanbanData);
-      return { ...state, kanbanData: updatedKanbanData };
+        kanbanStorage.saveKanbanData(updatedKanbanData);
+        return { ...state, kanbanData: updatedKanbanData };
+      }
+
+      return state;
     }
 
     case EKanbanBoardActions.DRAG_DROP_COLUMN: {
       const { kanbanData } = state;
-      const { columnsOrder } = kanbanData;
+      const { columnsOrder, columns, tasks } = kanbanData;
 
-      const { draggedColumnId, id, draggedTaskId } = action.payload;
+      const { draggedColumnId, id, draggedTaskId, taskIds, fromColumnId } = action.payload;
 
-      if (draggedTaskId) return state;
+      if (draggedColumnId && draggedColumnId !== id) {
+        if (!draggedTaskId) {
+          const fromIndex = columnsOrder.indexOf(draggedColumnId);
+          const toIndex = columnsOrder.indexOf(id);
 
-      const fromIndex = columnsOrder.indexOf(draggedColumnId);
-      const toIndex = columnsOrder.indexOf(id);
+          if (fromIndex === -1 || toIndex === -1) return state;
 
-      if (fromIndex === -1 || toIndex === -1) return state;
+          const updatedColumnsOrder = [...columnsOrder];
+          updatedColumnsOrder.splice(fromIndex, 1);
+          updatedColumnsOrder.splice(toIndex, 0, draggedColumnId);
 
-      const updatedColumnsOrder = [...columnsOrder];
-      updatedColumnsOrder.splice(fromIndex, 1);
-      updatedColumnsOrder.splice(toIndex, 0, draggedColumnId);
+          const updatedKanbanData: IKanbanData = {
+            ...kanbanData,
+            columnsOrder: updatedColumnsOrder,
+          };
 
-      const updatedKanbanData: IKanbanData = {
-        ...kanbanData,
-        columnsOrder: updatedColumnsOrder,
-      };
+          kanbanStorage.saveKanbanData(updatedKanbanData);
+          return { ...state, kanbanData: updatedKanbanData };
+        }
+      }
 
-      kanbanStorage.saveKanbanData(updatedKanbanData);
-      return { ...state, kanbanData: updatedKanbanData };
-    }
+      if (draggedTaskId) {
+        const updatedTaskIds = [...taskIds];
 
-    case EKanbanBoardActions.DRAG_DROP_COLUMN_TASK: {
-      const { kanbanData } = state;
-      const { columns, tasks } = kanbanData;
+        if (fromColumnId === id) return state;
 
-      const { taskIds, id, fromColumnId, draggedTaskId } = action.payload;
+        const fromColumn: IColumn = columns[fromColumnId];
+        const updatedFromTaskIds: string[] = fromColumn.taskIds.filter((taskId) => taskId !== draggedTaskId);
 
-      const updatedTaskIds = [...taskIds];
+        const updatedTask: ITask = { ...tasks[draggedTaskId], columnId: id };
 
-      if (fromColumnId === id) return state;
-
-      const fromColumn: IColumn = columns[fromColumnId];
-      const updatedFromTaskIds: string[] = fromColumn.taskIds.filter((taskId) => taskId !== draggedTaskId);
-
-      const updatedTask: ITask = { ...tasks[draggedTaskId], columnId: id };
-
-      const updatedKanbanData: IKanbanData = {
-        ...kanbanData,
-        columns: {
-          ...columns,
-          [fromColumnId]: {
-            ...fromColumn,
-            taskIds: updatedFromTaskIds,
+        const updatedKanbanData: IKanbanData = {
+          ...kanbanData,
+          columns: {
+            ...columns,
+            [fromColumnId]: {
+              ...fromColumn,
+              taskIds: updatedFromTaskIds,
+            },
+            [id]: {
+              ...columns[id],
+              taskIds: [...updatedTaskIds, draggedTaskId],
+            },
           },
-          [id]: {
-            ...columns[id],
-            taskIds: [...updatedTaskIds, draggedTaskId],
+          tasks: {
+            ...tasks,
+            [draggedTaskId]: updatedTask,
           },
-        },
-        tasks: {
-          ...tasks,
-          [draggedTaskId]: updatedTask,
-        },
-      };
+        };
 
-      kanbanStorage.saveKanbanData(updatedKanbanData);
-      return { ...state, kanbanData: updatedKanbanData };
+        kanbanStorage.saveKanbanData(updatedKanbanData);
+        return { ...state, kanbanData: updatedKanbanData };
+      }
+
+      return state;
     }
 
     default: {

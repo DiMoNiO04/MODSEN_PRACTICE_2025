@@ -44,7 +44,7 @@ export const TodoColumnHeader = ({
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
-    <TodoColumnHeaderContainer color={color}>
+    <TodoColumnHeaderContainer color={color} $isAddNewColumn={isAddNewColumn}>
       <TitleWithCount color={color} title={title} count={taskIds.length} />
       {isAddNewColumn ? (
         <BtnRound color={EColors.WHITE} handle={handleAddButtonClick} type="add" />

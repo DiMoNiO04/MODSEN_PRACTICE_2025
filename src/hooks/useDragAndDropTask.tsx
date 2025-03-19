@@ -1,6 +1,6 @@
 import { DragEvent, useState } from 'react';
 
-import { dragDropTaskBetweenColumns, dragDropTaskInColumn } from '@/store/kanbanBoard/actions';
+import { dragDropTask } from '@/store/kanbanBoard/actions';
 import { useAppDispatch } from '@/store/store';
 
 interface IUseDragAndDropTaskReturn {
@@ -39,11 +39,7 @@ export const useDragAndDropTask = ({ taskId, columnId }: IUseDragAndDropTaskProp
     const draggedTaskId = e.dataTransfer.getData('taskId');
     const fromColumnId = e.dataTransfer.getData('fromColumnId');
 
-    if (draggedTaskId && fromColumnId !== columnId) {
-      dispatch(dragDropTaskBetweenColumns({ fromColumnId, draggedTaskId, columnId }));
-    } else if (draggedTaskId && fromColumnId === columnId) {
-      dispatch(dragDropTaskInColumn({ columnId, draggedTaskId, taskId }));
-    }
+    dispatch(dragDropTask({ fromColumnId, draggedTaskId, columnId, taskId }));
   };
 
   return {

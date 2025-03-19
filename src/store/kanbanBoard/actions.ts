@@ -1,19 +1,12 @@
-import { IColumn, IKanbanData, ITask } from '@/utils/interfaces';
+import { IColumn, ITask } from '@/utils/interfaces';
 
 import {
   EKanbanBoardActions,
   IDragDropColumn,
-  IDragDropColumnTask,
-  IDragTaskInBetweenColumnsPayload,
-  IDragTaskInColumnPayload,
+  IDragDropTask,
   IEditPriorityTaskPayload,
   TKanbanBoardAction,
 } from './types';
-
-const setKanbanBoardData = (payload: IKanbanData): TKanbanBoardAction => ({
-  type: EKanbanBoardActions.SET_DATA,
-  payload,
-});
 
 const addKanbanColumn = (payload: IColumn): TKanbanBoardAction => ({
   type: EKanbanBoardActions.ADD_COLUMN,
@@ -50,23 +43,13 @@ const editKanbanTaskPriority = (payload: IEditPriorityTaskPayload): TKanbanBoard
   payload,
 });
 
-const dragDropTaskBetweenColumns = (payload: IDragTaskInBetweenColumnsPayload): TKanbanBoardAction => ({
-  type: EKanbanBoardActions.DRAG_DROP_TASK_BETWEEN_COLUMNS,
-  payload,
-});
-
-const dragDropTaskInColumn = (payload: IDragTaskInColumnPayload): TKanbanBoardAction => ({
-  type: EKanbanBoardActions.DRAG_DROP_TASK_IN_COLUMN,
+const dragDropTask = (payload: IDragDropTask): TKanbanBoardAction => ({
+  type: EKanbanBoardActions.DRAG_DROP_TASK,
   payload,
 });
 
 const dragDropColumn = (payload: IDragDropColumn): TKanbanBoardAction => ({
   type: EKanbanBoardActions.DRAG_DROP_COLUMN,
-  payload,
-});
-
-const dragDropColumnTask = (payload: IDragDropColumnTask): TKanbanBoardAction => ({
-  type: EKanbanBoardActions.DRAG_DROP_COLUMN_TASK,
   payload,
 });
 
@@ -76,11 +59,8 @@ export {
   deleteKanbanColumn,
   deleteKanbanTask,
   dragDropColumn,
-  dragDropColumnTask,
-  dragDropTaskBetweenColumns,
-  dragDropTaskInColumn,
+  dragDropTask,
   editKanbanColumn,
   editKanbanTask,
   editKanbanTaskPriority,
-  setKanbanBoardData,
 };

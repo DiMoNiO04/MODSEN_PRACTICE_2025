@@ -2,7 +2,7 @@ import { UITexts } from '@/constants';
 import { EPriorityName } from '@/constants/taskPriority';
 import { addKanbanTask, deleteKanbanTask, editKanbanTask, editKanbanTaskPriority } from '@/store/kanbanBoard/actions';
 import { openNotification } from '@/store/notification/actions';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import { ITask } from '@/utils/interfaces';
 
 import { useValidation } from './useValidation';
@@ -16,6 +16,7 @@ interface IUseTaskActions {
 
 export const useTaskActions = (): IUseTaskActions => {
   const dispatch = useAppDispatch();
+  const { kanbanData } = useAppSelector((state) => state.kanbanBoard);
   const { isEmptyField } = useValidation();
 
   const handleAddTask = (formData: ITask, onClose: () => void) => {
@@ -53,8 +54,12 @@ export const useTaskActions = (): IUseTaskActions => {
   };
 
   const handleEditPriority = (taskId: string, priorityId: EPriorityName) => {
-    dispatch(editKanbanTaskPriority({ taskId, priorityId }));
-    dispatch(openNotification({ isSuccess: true, text: UITexts.NOTIFICATION.SUCCESS_EDIT_PRIORITY }));
+    const priorityCurrent = kanbanData.tasks[taskId].priority;
+
+    if (priorityCurrent !== priorityId) {
+      dispatch(editKanbanTaskPriority({ taskId, priorityId }));
+      dispatch(openNotification({ isSuccess: true, text: UITexts.NOTIFICATION.SUCCESS_EDIT_PRIORITY }));
+    }
   };
 
   return { handleAddTask, handleDeleteTask, handleEditTask, handleEditPriority };
