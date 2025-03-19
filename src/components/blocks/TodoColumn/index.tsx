@@ -14,7 +14,6 @@ export const TodoColumn = ({ id, cardIds, color, title }: IColumn) => {
   const { isDragOver, handleDragStart, handleDragOver, handleDragLeave, handleDrop } = useDragAndDropColumn({
     id,
     cardIds,
-    kanbanData,
   });
 
   return (

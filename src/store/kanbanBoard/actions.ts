@@ -4,6 +4,8 @@ import {
   EKanbanBoardActions,
   IDragCardInBetweenColumnsPayload,
   IDragCardInColumnPayload,
+  IDragDropColumn,
+  IDragDropColumnCard,
   IEditPriorityTaskPayload,
   TKanbanBoardAction,
 } from './types';
@@ -58,6 +60,16 @@ const dragDropCardInColumn = (payload: IDragCardInColumnPayload): TKanbanBoardAc
   payload,
 });
 
+const dragDropColumn = (payload: IDragDropColumn): TKanbanBoardAction => ({
+  type: EKanbanBoardActions.DRAG_DROP_COLUMN,
+  payload,
+});
+
+const dragDropColumnCard = (payload: IDragDropColumnCard): TKanbanBoardAction => ({
+  type: EKanbanBoardActions.DRAG_DROP_COLUMN_CARD,
+  payload,
+});
+
 export {
   addKanbanColumn,
   addKanbanTask,
@@ -65,6 +77,8 @@ export {
   deleteKanbanTask,
   dragDropCardBetweenColumns,
   dragDropCardInColumn,
+  dragDropColumn,
+  dragDropColumnCard,
   editKanbanColumn,
   editKanbanTask,
   editKanbanTaskPriority,
