@@ -165,6 +165,66 @@ const kanbanBoardReducer = (state = initialKanbanBoardData, action: TKanbanBoard
       return { ...state, kanbanData: updatedKanbanData };
     }
 
+    case EKanbanBoardActions.DRAG_DROP_CARD_BETWEEN_COLUMNS: {
+      const { fromColumnId, draggedCardId, columnId } = action.payload;
+
+      const fromColumn = state.kanbanData.columns[fromColumnId];
+      const updatedFromCardIds = fromColumn.cardIds.filter((cardId) => cardId !== draggedCardId);
+
+      const updatedCard = { ...state.kanbanData.cards[draggedCardId], columnId };
+
+      const updatedCardIds = [...state.kanbanData.columns[columnId].cardIds, draggedCardId];
+
+      const updatedKanbanData: IKanbanData = {
+        ...state.kanbanData,
+        columns: {
+          ...state.kanbanData.columns,
+          [fromColumnId]: {
+            ...fromColumn,
+            cardIds: updatedFromCardIds,
+          },
+          [columnId]: {
+            ...state.kanbanData.columns[columnId],
+            cardIds: updatedCardIds,
+          },
+        },
+        cards: {
+          ...state.kanbanData.cards,
+          [draggedCardId]: updatedCard,
+        },
+      };
+
+      kanbanStorage.saveKanbanData(updatedKanbanData);
+      return { ...state, kanbanData: updatedKanbanData };
+    }
+
+    case EKanbanBoardActions.DRAG_DROP_CARD_IN_COLUMN: {
+      const { columnId, draggedCardId, cardId } = action.payload;
+
+      const updatedCardIds = [...state.kanbanData.columns[columnId].cardIds];
+      const fromIndex = updatedCardIds.indexOf(draggedCardId);
+      const toIndex = updatedCardIds.indexOf(cardId);
+
+      if (fromIndex === -1 || toIndex === -1 || fromIndex === toIndex) return state;
+
+      updatedCardIds.splice(fromIndex, 1);
+      updatedCardIds.splice(toIndex, 0, draggedCardId);
+
+      const updatedKanbanData: IKanbanData = {
+        ...state.kanbanData,
+        columns: {
+          ...state.kanbanData.columns,
+          [columnId]: {
+            ...state.kanbanData.columns[columnId],
+            cardIds: updatedCardIds,
+          },
+        },
+      };
+
+      kanbanStorage.saveKanbanData(updatedKanbanData);
+      return { ...state, kanbanData: updatedKanbanData };
+    }
+
     default: {
       return state;
     }

@@ -10,10 +10,29 @@ enum EKanbanBoardActions {
   EDIT_TASK = 'EDIT_TASK_KANBAN',
   DELETE_TASK = 'DELETE_TASK_KANBAN',
   EDIT_PRIORITY_TASK = 'EDIT_PRIORITY_TASK',
+  DRAG_DROP_CARD_BETWEEN_COLUMNS = 'DRAG_DROP_CARD_BETWEEN_COLUMNS',
+  DRAG_DROP_CARD_IN_COLUMN = 'DRAG_DROP_CARD_IN_COLUMN',
 }
 
 interface IInitialKanbanBoardState {
   kanbanData: IKanbanData;
+}
+
+interface IEditPriorityTaskPayload {
+  taskId: string;
+  priorityId: EPriorityName;
+}
+
+interface IDragCardInBetweenColumnsPayload {
+  fromColumnId: string;
+  draggedCardId: string;
+  columnId: string;
+}
+
+interface IDragCardInColumnPayload {
+  columnId: string;
+  draggedCardId: string;
+  cardId: string;
 }
 
 type TKanbanBoardAction =
@@ -24,7 +43,15 @@ type TKanbanBoardAction =
   | { type: EKanbanBoardActions.ADD_TASK; payload: ICard }
   | { type: EKanbanBoardActions.EDIT_TASK; payload: ICard }
   | { type: EKanbanBoardActions.DELETE_TASK; payload: string }
-  | { type: EKanbanBoardActions.EDIT_PRIORITY_TASK; payload: { taskId: string; priorityId: EPriorityName } };
+  | { type: EKanbanBoardActions.EDIT_PRIORITY_TASK; payload: IEditPriorityTaskPayload }
+  | { type: EKanbanBoardActions.DRAG_DROP_CARD_BETWEEN_COLUMNS; payload: IDragCardInBetweenColumnsPayload }
+  | { type: EKanbanBoardActions.DRAG_DROP_CARD_IN_COLUMN; payload: IDragCardInColumnPayload };
 
 export { EKanbanBoardActions };
-export type { IInitialKanbanBoardState, TKanbanBoardAction };
+export type {
+  IDragCardInBetweenColumnsPayload,
+  IDragCardInColumnPayload,
+  IEditPriorityTaskPayload,
+  IInitialKanbanBoardState,
+  TKanbanBoardAction,
+};

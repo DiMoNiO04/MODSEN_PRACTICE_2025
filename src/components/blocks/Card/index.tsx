@@ -2,8 +2,8 @@ import { Priority } from '@/components/blocks';
 import { BtnRound, TextDef, TextH3 } from '@/components/ui';
 import { useDragAndDropCard } from '@/hooks';
 import { openModalTask } from '@/store/modalTask/actions';
-import { useAppDispatch, useAppSelector } from '@/store/store';
-import { ICard, IKanbanData } from '@/utils/interfaces';
+import { useAppDispatch } from '@/store/store';
+import { ICard } from '@/utils/interfaces';
 
 import { Block, TopBlockInfo } from './styled';
 
@@ -11,12 +11,10 @@ export const Card = (cardData: ICard) => {
   const { id, title, desc, priority, columnId } = cardData;
 
   const dispatch = useAppDispatch();
-  const kanbanData: IKanbanData = useAppSelector((state) => state.kanbanBoard.kanbanData);
 
   const { isDragOver, handleDragStart, handleDragOver, handleDragLeave, handleDrop } = useDragAndDropCard({
     cardId: id,
     columnId,
-    kanbanData,
   });
 
   const handleOpenModal = () => dispatch(openModalTask(cardData));

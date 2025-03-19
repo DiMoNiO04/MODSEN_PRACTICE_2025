@@ -1,7 +1,12 @@
-import { EPriorityName } from '@/constants/cardPriority';
 import { ICard, IColumn, IKanbanData } from '@/utils/interfaces';
 
-import { EKanbanBoardActions, TKanbanBoardAction } from './types';
+import {
+  EKanbanBoardActions,
+  IDragCardInBetweenColumnsPayload,
+  IDragCardInColumnPayload,
+  IEditPriorityTaskPayload,
+  TKanbanBoardAction,
+} from './types';
 
 const setKanbanBoardData = (payload: IKanbanData): TKanbanBoardAction => ({
   type: EKanbanBoardActions.SET_DATA,
@@ -38,8 +43,18 @@ const deleteKanbanTask = (payload: string): TKanbanBoardAction => ({
   payload,
 });
 
-const editKanbanTaskPriority = (payload: { taskId: string; priorityId: EPriorityName }): TKanbanBoardAction => ({
+const editKanbanTaskPriority = (payload: IEditPriorityTaskPayload): TKanbanBoardAction => ({
   type: EKanbanBoardActions.EDIT_PRIORITY_TASK,
+  payload,
+});
+
+const dragDropCardBetweenColumns = (payload: IDragCardInBetweenColumnsPayload): TKanbanBoardAction => ({
+  type: EKanbanBoardActions.DRAG_DROP_CARD_BETWEEN_COLUMNS,
+  payload,
+});
+
+const dragDropCardInColumn = (payload: IDragCardInColumnPayload): TKanbanBoardAction => ({
+  type: EKanbanBoardActions.DRAG_DROP_CARD_IN_COLUMN,
   payload,
 });
 
@@ -48,6 +63,8 @@ export {
   addKanbanTask,
   deleteKanbanColumn,
   deleteKanbanTask,
+  dragDropCardBetweenColumns,
+  dragDropCardInColumn,
   editKanbanColumn,
   editKanbanTask,
   editKanbanTaskPriority,
