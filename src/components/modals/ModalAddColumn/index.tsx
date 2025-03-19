@@ -3,22 +3,20 @@ import { useState } from 'react';
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
-import { useForm, useValidation } from '@/hooks';
-import { addKanbanColumn } from '@/store/kanbanBoard/actions';
+import { useColumnActions, useForm } from '@/hooks';
 import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
-import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { getErrorMessage, getRandomColor } from '@/utils/functions';
-import { IColumn, IColumnWithoutCardIds } from '@/utils/interfaces';
+import { getErrorMessage } from '@/utils/functions';
+import { IColumnWithoutCardIds } from '@/utils/interfaces';
 
 export const ModalAddColumn = () => {
   const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector(({ modals }) => modals.modalColumnAdd);
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-  const { isEmptyField, isDuplicateColumn } = useValidation();
+  const { handleAddColumn } = useColumnActions();
 
-  const initialData: IColumnWithoutCardIds = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };
+  const initialData: IColumnWithoutCardIds = { id: `column-${Date.now()}`, title: '', color: '' };
 
   const onClose = () => {
     dispatch(closeModaColumnAdd());
@@ -28,26 +26,7 @@ export const ModalAddColumn = () => {
 
   const onSubmit = () => {
     setIsSubmitted(true);
-
-    if (isEmptyField(formData.title) || isDuplicateColumn(formData.title)) {
-      return;
-    }
-
-    const newColumn: IColumn = {
-      ...formData,
-      id: `column-${Date.now()}`,
-      cardIds: [],
-    };
-
-    dispatch(addKanbanColumn(newColumn));
-
-    dispatch(
-      openNotification({
-        isSuccess: true,
-        text: UITexts.NOTIFICATION.SUCCESS_ADD_COLUMN,
-      })
-    );
-
+    handleAddColumn(formData);
     onClose();
   };
 

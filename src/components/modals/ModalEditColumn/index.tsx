@@ -3,24 +3,21 @@ import { useEffect, useState } from 'react';
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { EColors, UITexts } from '@/constants';
-import { useForm, useValidation } from '@/hooks';
-import { editKanbanColumn } from '@/store/kanbanBoard/actions';
+import { useColumnActions, useForm } from '@/hooks';
 import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
-import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getErrorMessage } from '@/utils/functions';
-import { IColumn, IColumnWithoutCardIds } from '@/utils/interfaces';
+import { IColumnWithoutCardIds } from '@/utils/interfaces';
 
 export const ModalEditColumn = () => {
   const dispatch = useAppDispatch();
   const { id, title, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
 
-  const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
   const initialData: IColumnWithoutCardIds = { id, title, color };
 
-  const { isEmptyField, isDuplicateColumn } = useValidation();
-
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
+  const { handleEditColumn } = useColumnActions();
 
   const onClose = () => {
     dispatch(closeModalColumnEdit());
@@ -30,26 +27,7 @@ export const ModalEditColumn = () => {
 
   const onSubmit = () => {
     setIsSubmitted(true);
-
-    if (isEmptyField(formData.title) || isDuplicateColumn(formData.title)) {
-      return;
-    }
-
-    const updateColumn: IColumn = {
-      ...formData,
-      id,
-      cardIds: kanbanData.columns[id].cardIds,
-    };
-
-    dispatch(editKanbanColumn(updateColumn));
-
-    dispatch(
-      openNotification({
-        isSuccess: true,
-        text: UITexts.NOTIFICATION.SUCCESS_EDIT_COLUMN,
-      })
-    );
-
+    handleEditColumn(formData, id);
     onClose();
   };
 

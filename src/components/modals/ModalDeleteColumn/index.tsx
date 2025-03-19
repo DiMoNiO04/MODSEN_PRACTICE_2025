@@ -1,28 +1,20 @@
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, BtnsBlock, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
-import { deleteKanbanColumn } from '@/store/kanbanBoard/actions';
+import { useColumnActions } from '@/hooks';
 import { closeModalColumnDelete } from '@/store/modalColumnDelete/actions';
-import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 
 export const ModalColumnDelete = () => {
   const dispatch = useAppDispatch();
-
   const { isOpen, id } = useAppSelector(({ modals }) => modals.modalColumnDelete);
+
+  const { handleDeleteColumn } = useColumnActions();
 
   const handleClose = () => dispatch(closeModalColumnDelete());
 
   const handleSubmit = () => {
-    dispatch(deleteKanbanColumn(id));
-
-    dispatch(
-      openNotification({
-        isSuccess: true,
-        text: UITexts.NOTIFICATION.SUCCESS_DELETE_COLUMN,
-      })
-    );
-
+    handleDeleteColumn(id);
     handleClose();
   };
 
