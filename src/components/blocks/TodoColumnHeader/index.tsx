@@ -19,14 +19,14 @@ export const TodoColumnHeader = ({
   id,
   title,
   color,
-  cardIds,
+  taskIds,
   columnId,
   isAddNewColumn = false,
 }: ITodoColumnHeaderProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
   const dispatch = useAppDispatch();
 
-  const buttonColor = isDropdownOpen ? EColors.DARK : EColors.WHITE;
+  const buttonColor: EColors = isDropdownOpen ? EColors.DARK : EColors.WHITE;
 
   const handleAddButtonClick = () => {
     if (isAddNewColumn) {
@@ -44,8 +44,8 @@ export const TodoColumnHeader = ({
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
-    <TodoColumnHeaderContainer color={color}>
-      <TitleWithCount color={color} title={title} count={cardIds.length} />
+    <TodoColumnHeaderContainer color={color} $isAddNewColumn={isAddNewColumn}>
+      <TitleWithCount color={color} title={title} count={taskIds.length} />
       {isAddNewColumn ? (
         <BtnRound color={EColors.WHITE} handle={handleAddButtonClick} type="add" />
       ) : (

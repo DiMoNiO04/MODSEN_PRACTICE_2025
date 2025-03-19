@@ -1,22 +1,20 @@
 import styled from 'styled-components';
 
-import { BREAKPOINTS } from '@/utils';
+import { BREAKPOINTS } from '@/utils/breakpoints';
 
 const Button = styled.button`
   position: fixed;
   z-index: var(--index-xl);
-  left: var(--right-xl);
-  bottom: var(--top-xl);
-  width: var(--width-l);
-  height: var(--height-l);
+  left: var(--right-m);
+  bottom: var(--top-m);
+  width: var(--width-m);
+  height: var(--height-m);
 
   @media (max-width: ${BREAKPOINTS.mobile}) {
     left: auto;
     bottom: auto;
-    top: 16px;
-    right: 16px;
-    width: var(--width-m);
-    height: var(--height-m);
+    top: var(--top-l);
+    right: var(--right-l);
   }
 `;
 

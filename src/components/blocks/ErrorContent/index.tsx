@@ -1,16 +1,14 @@
 import { BtnDef } from '@/components/ui';
+import { UITexts } from '@/constants';
+import { IText } from '@/utils/interfaces';
 
 import { Block, Title } from './styled';
 
-interface IErrorContentProps {
-  text: string;
-}
-
-export const ErrorContent = ({ text }: IErrorContentProps) => {
+export const ErrorContent = ({ text }: IText) => {
   return (
     <Block>
       <Title>{text}</Title>
-      <BtnDef text={'На главную'} typeBtn={'button'} to="/" />
+      <BtnDef text={UITexts.BTNS.HOME} typeBtn={'button'} to="/" />
     </Block>
   );
 };

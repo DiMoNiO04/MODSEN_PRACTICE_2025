@@ -1,4 +1,4 @@
-import { ICard } from '@/utils/interfaces';
+import { ITask } from '@/utils/interfaces';
 
 enum EModalTaskActions {
   OPEN_MODAL = 'OPEN_MODAL_TASK',
@@ -7,11 +7,11 @@ enum EModalTaskActions {
 
 interface IInitialModalTaskState {
   isOpen: boolean;
-  cardData: ICard | null;
+  taskData: ITask | null;
 }
 
 type TModalTaskAction =
-  | { type: EModalTaskActions.OPEN_MODAL; payload: ICard }
+  | { type: EModalTaskActions.OPEN_MODAL; payload: ITask }
   | { type: EModalTaskActions.CLOSE_MODAL };
 
 export { EModalTaskActions };

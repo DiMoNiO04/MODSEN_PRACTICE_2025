@@ -2,29 +2,25 @@ import { useState } from 'react';
 
 import { BtnDef, BtnsBlock, Form, Input, ModalTitle, TextArea } from '@/components/ui';
 import { Select } from '@/components/ui/Select';
-import { CARD_PRIORITY, UITexts } from '@/constants';
-import { useForm } from '@/hooks';
-import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
-import { openNotification } from '@/store/notification/actions';
-import { useAppDispatch, useAppSelector } from '@/store/store';
-import { IOption } from '@/utils';
-import { ICard } from '@/utils/interfaces';
+import { TASK_PRIORITY, UITexts } from '@/constants';
+import { useForm, useTaskActions } from '@/hooks';
+import { useAppSelector } from '@/store/store';
+import { getErrorMessage } from '@/utils/functions';
+import { IOption, ITask } from '@/utils/interfaces';
 
 interface ITaskEditContentProps {
-  cardData: ICard;
+  taskData: ITask;
   handleCancel: () => void;
   onClose: () => void;
 }
 
-export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditContentProps) => {
-  const dispatch = useAppDispatch();
+export const TaskEditContent = ({ taskData, handleCancel, onClose }: ITaskEditContentProps) => {
+  const initialData: ITask = { ...taskData };
+  const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
 
-  const initialData: ICard = { ...cardData };
-  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  const { formData, handleChange, handleSubmit } = useForm<ICard>({ initialData });
-
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { handleEditTask } = useTaskActions();
 
   const handleClose = () => {
     onClose();
@@ -33,58 +29,10 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
 
   const onSubmit = () => {
     setIsSubmitted(true);
-
-    if (formData.title.trim() === '') {
-      dispatch(
-        openNotification({
-          isSuccess: false,
-          text: `Please fill in all required fields`,
-        })
-      );
-      return;
-    }
-
-    const updateTask = { ...formData };
-
-    const oldColumnId = cardData.columnId;
-    const newColumnId = updateTask.columnId;
-
-    const updatedColumns = { ...kanbanData.columns };
-
-    if (oldColumnId !== newColumnId) {
-      updatedColumns[oldColumnId] = {
-        ...updatedColumns[oldColumnId],
-        cardIds: updatedColumns[oldColumnId].cardIds.filter((cardId) => cardId !== formData.id),
-      };
-
-      updatedColumns[newColumnId] = {
-        ...updatedColumns[newColumnId],
-        cardIds: [...updatedColumns[newColumnId].cardIds, formData.id],
-      };
-    }
-
-    const updatedCards = {
-      ...kanbanData.cards,
-      [formData.id]: updateTask,
-    };
-
-    const updatedKanbanData = {
-      columns: updatedColumns,
-      cards: updatedCards,
-      columnsOrder: kanbanData.columnsOrder,
-    };
-
-    dispatch(setKanbanBoardData(updatedKanbanData));
-
-    dispatch(
-      openNotification({
-        isSuccess: true,
-        text: `Task '${formData.title}' has been successfully edited`,
-      })
-    );
-
-    handleClose();
+    handleEditTask(formData, handleClose);
   };
+
+  const { formData, handleChange, handleSubmit } = useForm<ITask>({ initialData, onSubmit });
 
   const onPriorityChange = (selectedOption: IOption) =>
     handleChange({ target: { name: 'priority', value: selectedOption.id } });
@@ -103,14 +51,14 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
           value={formData.title}
           onChange={handleChange}
           required
-          errorMessage={isSubmitted && formData.title.trim() === '' ? 'This field is required' : undefined}
+          errorMessage={getErrorMessage(isSubmitted, formData.title)}
         />
         <TextArea labelText={UITexts.LABELS.DESCRIPTION} name="desc" value={formData.desc} onChange={handleChange} />
         <Select
           labelText={UITexts.LABELS.PRIORITY}
           value={formData.priority}
           onChange={onPriorityChange}
-          options={Object.values(CARD_PRIORITY)}
+          options={Object.values(TASK_PRIORITY)}
         />
         <Select
           labelText={UITexts.LABELS.STATUS}

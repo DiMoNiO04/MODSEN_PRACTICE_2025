@@ -1,4 +1,4 @@
-import { IChildrenProps } from '@/utils';
+import { IChildrenProps } from '@/utils/interfaces';
 
 import { ContainerBlock } from './styled';
 

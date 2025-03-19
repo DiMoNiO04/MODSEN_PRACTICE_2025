@@ -4,8 +4,6 @@ import { IInitialModalColumnEditState, TModalColumnEditAction } from './types';
 const initialModalColumnEditState: IInitialModalColumnEditState = {
   isOpen: false,
   id: '',
-  title: '',
-  color: '',
 };
 
 const modalColumnEditReducer = (
@@ -15,8 +13,7 @@ const modalColumnEditReducer = (
   switch (action.type) {
     case EModalColumnEditActions.OPEN_MODAL:
       return {
-        ...state,
-        ...action.payload,
+        id: action.payload.id,
         isOpen: true,
       };
     case EModalColumnEditActions.CLOSE_MODAL:

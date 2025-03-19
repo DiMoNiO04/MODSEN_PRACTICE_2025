@@ -93,10 +93,12 @@ body.dark {
   --index-xl: 100;
   --index-xxl: 1000;
 
-  --top-l: 12px;
+  --top-m: 12px;
+  --top-l: 16px;
   --top-xl: 28px;
 
-  --right-l: 12px;
+  --right-m: 12px;
+  --right-l: 16px;
   --right-xl: 28px;
   --right-xxl: 40px;
 

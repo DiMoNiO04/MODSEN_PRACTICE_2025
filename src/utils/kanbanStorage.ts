@@ -1,4 +1,4 @@
-import { KANBAN_DATA } from '@/constants';
+import { KANBAN_DATA, UITexts } from '@/constants';
 
 import { IKanbanData } from './interfaces';
 
@@ -14,7 +14,7 @@ class KanbanStorage {
       const kanbanData = localStorage.getItem(this.LS_KEY_KANBAN);
       return kanbanData ? (JSON.parse(kanbanData) as IKanbanData) : KANBAN_DATA;
     } catch (error) {
-      console.error('Failed to load kanban data from LS:', error);
+      console.error(UITexts.ERRORS.FAIL_LOAD_KANBAN_LS, error);
       return KANBAN_DATA;
     }
   }
@@ -23,7 +23,7 @@ class KanbanStorage {
     try {
       localStorage.setItem(this.LS_KEY_KANBAN, JSON.stringify(data));
     } catch (error) {
-      console.error('Failed to save kanban data to LS:', error);
+      console.error(UITexts.ERRORS.FAIL_SAVE_KANBAN_LS, error);
     }
   }
 }

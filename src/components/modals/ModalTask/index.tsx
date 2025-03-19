@@ -7,11 +7,12 @@ import { useAppDispatch, useAppSelector } from '@/store/store';
 
 export const ModalTask = () => {
   const dispatch = useAppDispatch();
-  const { cardData, isOpen } = useAppSelector(({ modals }) => modals.modalTask);
+
+  const { taskData, isOpen } = useAppSelector(({ modals }) => modals.modalTask);
   const onClose = () => dispatch(closeModalTask());
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const handleOpenEdit = () => setIsEditing(true);
   const handleOpenDelete = () => setIsDeleting(true);
@@ -25,16 +26,16 @@ export const ModalTask = () => {
     setIsEditing(false);
   }, [isOpen]);
 
-  if (!cardData || !isOpen) return null;
+  if (!taskData || !isOpen) return null;
 
   return (
     <ModalContainer onClose={onClose}>
       {isEditing ? (
-        <TaskEditContent cardData={cardData} onClose={onClose} handleCancel={handleCancel} />
+        <TaskEditContent taskData={taskData} onClose={onClose} handleCancel={handleCancel} />
       ) : isDeleting ? (
-        <TaskDeleteContent id={cardData.id} handleCancel={handleCancel} onClose={onClose} />
+        <TaskDeleteContent id={taskData.id} handleCancel={handleCancel} onClose={onClose} />
       ) : (
-        <TaskModalContent cardData={cardData} handleOpenDelete={handleOpenDelete} handleOpenEdit={handleOpenEdit} />
+        <TaskModalContent taskData={taskData} handleOpenDelete={handleOpenDelete} handleOpenEdit={handleOpenEdit} />
       )}
     </ModalContainer>
   );

@@ -1,8 +1,6 @@
 import { BtnDef, BtnsBlock, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
-import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
-import { openNotification } from '@/store/notification/actions';
-import { useAppDispatch, useAppSelector } from '@/store/store';
+import { useTaskActions } from '@/hooks';
 
 interface ITaskDeleteContentProps {
   id: string;
@@ -11,35 +9,10 @@ interface ITaskDeleteContentProps {
 }
 
 export const TaskDeleteContent = ({ id, handleCancel, onClose }: ITaskDeleteContentProps) => {
-  const dispatch = useAppDispatch();
-  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
-  const { title, columnId } = kanbanData.cards[id];
+  const { handleDeleteTask } = useTaskActions();
 
   const handeConfirm = () => {
-    const updatedCards = { ...kanbanData.cards };
-    delete updatedCards[id];
-
-    const updatedColumns = { ...kanbanData.columns };
-    updatedColumns[columnId] = {
-      ...updatedColumns[columnId],
-      cardIds: updatedColumns[columnId].cardIds.filter((cardId) => cardId !== id),
-    };
-
-    const updatedKanbanData = {
-      columns: updatedColumns,
-      cards: updatedCards,
-      columnsOrder: kanbanData.columnsOrder,
-    };
-
-    dispatch(setKanbanBoardData(updatedKanbanData));
-
-    dispatch(
-      openNotification({
-        isSuccess: true,
-        text: `Task '${title}' successfully deleted`,
-      })
-    );
-
+    handleDeleteTask(id);
     onClose();
   };
 

@@ -1,10 +1,10 @@
-import { ICard } from '@/utils/interfaces';
+import { ITask } from '@/utils/interfaces';
 
 import { EModalTaskActions, TModalTaskAction } from './types';
 
-const openModalTask = (cardData: ICard): TModalTaskAction => ({
+const openModalTask = (taskData: ITask): TModalTaskAction => ({
   type: EModalTaskActions.OPEN_MODAL,
-  payload: cardData,
+  payload: taskData,
 });
 
 const closeModalTask = (): TModalTaskAction => ({

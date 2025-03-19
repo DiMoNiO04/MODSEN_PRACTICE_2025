@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { BREAKPOINTS } from '@/utils';
+import { BREAKPOINTS } from '@/utils/breakpoints';
 
 const LogoBlock = styled.h1`
   font-size: var(--font-size-xxl);

@@ -10,7 +10,7 @@ export const HeaderBtnAdd = () => {
 
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
-  const buttonColor = isDropdownOpen ? EColors.BLACK : EColors.DARK;
+  const buttonColor: EColors = isDropdownOpen ? EColors.BLACK : EColors.DARK;
 
   return (
     <HeaderBtnAddBlock>

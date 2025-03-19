@@ -1,8 +1,10 @@
+import { TextareaHTMLAttributes } from 'react';
+
 import { Label } from '../Label';
 import { LabelText } from '../LabelText';
 import { TextAreaField } from './styled';
 
-interface ITextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface ITextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   labelText: string;
 }
 

@@ -1,4 +1,4 @@
-import { IText } from '@/utils';
+import { IText } from '@/utils/interfaces';
 
 import { Text } from './styled';
 

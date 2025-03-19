@@ -1,7 +1,6 @@
-import { CARD_PRIORITY } from './cardPriority';
-import { CARD_STATUS } from './cardStatus';
 import { EColors } from './colors';
 import { KANBAN_DATA } from './kanbanData';
+import { TASK_PRIORITY } from './taskPriority';
 import { UITexts } from './uiTexts';
 
-export { CARD_PRIORITY, CARD_STATUS, EColors, KANBAN_DATA, UITexts };
+export { EColors, KANBAN_DATA, TASK_PRIORITY, UITexts };

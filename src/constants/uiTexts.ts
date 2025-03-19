@@ -29,6 +29,7 @@ export const UITexts = {
     ADD_TASK: 'Add task ...',
     NO: 'No',
     YES: 'Yes',
+    HOME: 'Home',
   },
   LOGO_TITLE: 'Kanban Dashboard',
   PRIORITIES: {
@@ -44,7 +45,22 @@ export const UITexts = {
     DONE: 'Done',
   },
   ERRORS: {
-    NOT_FOUND: 'Страница не найдена - 404',
-    GENERAL: 'Что-то пошло не так...',
+    NOT_FOUND: 'Page not found - 404',
+    GENERAL: 'Something went wrong...',
+    FAIL_LOAD_KANBAN_LS: 'Failed to load kanban data from LS:',
+    FAIL_SAVE_KANBAN_LS: 'Failed to save kanban data to LS:',
+    LOGGED_ERROR: 'Logged Error:',
+  },
+  NOTIFICATION: {
+    SUCCESS_ADD_COLUMN: 'Column has been successfully added',
+    SUCCESS_DELETE_COLUMN: `Column and all its taskss successfully deleted`,
+    SUCCESS_EDIT_COLUMN: `Column has been successfully edited`,
+    SUCCESS_EDIT_PRIORITY: `Priority task successfully edited`,
+    SUCCESS_DELETE_TASK: `Task is successfully deleted`,
+    SUCCESS_ADD_TASK: `Task is successfully added`,
+    SUCCESS_EDIT_TASK: `Task is successfully edited`,
+    ERROR_REQUIRED_FILEDS: `Please fill in all required fields`,
+    ERROR_DUPLICATED_COLUMN: `Column with this name is already exists`,
+    REQUIRED_FIELD: 'This field is required',
   },
 };

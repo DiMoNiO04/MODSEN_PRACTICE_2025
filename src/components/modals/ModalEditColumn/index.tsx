@@ -2,22 +2,23 @@ import { useEffect, useState } from 'react';
 
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
-import { UITexts } from '@/constants';
-import { useForm } from '@/hooks';
-import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
+import { EColors, UITexts } from '@/constants';
+import { useColumnActions, useForm } from '@/hooks';
 import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
-import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { IFormDataColumn } from '@/utils';
+import { getErrorMessage } from '@/utils/functions';
+import { IColumn } from '@/utils/interfaces';
 
 export const ModalEditColumn = () => {
   const dispatch = useAppDispatch();
-  const { id, title, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
+  const { id, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
+  const { kanbanData } = useAppSelector((state) => state.kanbanBoard);
 
-  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
-  const initialData: IFormDataColumn = { id, title, color };
+  const initialData: IColumn = { ...kanbanData.columns[id] };
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
+  const { handleEditColumn } = useColumnActions();
 
   const onClose = () => {
     dispatch(closeModalColumnEdit());
@@ -27,61 +28,10 @@ export const ModalEditColumn = () => {
 
   const onSubmit = () => {
     setIsSubmitted(true);
-
-    const trimmedTitle = formData.title.trim();
-
-    if (trimmedTitle === '') {
-      dispatch(
-        openNotification({
-          isSuccess: false,
-          text: `Please fill in all required fields`,
-        })
-      );
-      return;
-    }
-
-    const isDuplicateTitle = Object.values(kanbanData.columns).some(
-      (column) => column.title.toLowerCase() === trimmedTitle.toLowerCase()
-    );
-
-    if (isDuplicateTitle) {
-      dispatch(
-        openNotification({
-          isSuccess: false,
-          text: `Column with the name '${trimmedTitle}' already exists`,
-        })
-      );
-      return;
-    }
-
-    const updateColumn = {
-      ...formData,
-      id,
-      cardIds: kanbanData.columns[id].cardIds,
-    };
-
-    const updatedColums = {
-      ...kanbanData.columns,
-      [updateColumn.id]: updateColumn,
-    };
-
-    const updatedKanbanData = {
-      columns: updatedColums,
-      cards: kanbanData.cards,
-      columnsOrder: kanbanData.columnsOrder,
-    };
-
-    dispatch(setKanbanBoardData(updatedKanbanData));
-
-    dispatch(
-      openNotification({
-        isSuccess: true,
-        text: `Column '${formData.title}' has been successfully edited`,
-      })
-    );
+    handleEditColumn(formData, onClose);
   };
 
-  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IFormDataColumn>({
+  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IColumn>({
     initialData,
     onSubmit,
   });
@@ -105,13 +55,13 @@ export const ModalEditColumn = () => {
           value={formData.title}
           onChange={handleChange}
           required
-          errorMessage={isSubmitted && formData.title.trim() === '' ? 'This field is required' : undefined}
+          errorMessage={getErrorMessage(isSubmitted, formData.title)}
         />
         <Input
           labelText={UITexts.LABELS.COLOR}
           name="color"
           type="color"
-          value={formData.color || '#000000'}
+          value={formData.color || EColors.BLACK}
           onChange={handleChange}
         />
         <BtnDef text={UITexts.BTNS.SAVE} typeBtn="submit" />

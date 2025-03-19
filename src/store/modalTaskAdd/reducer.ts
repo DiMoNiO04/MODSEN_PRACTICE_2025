@@ -1,10 +1,12 @@
+import { EColumnsName } from '@/constants/kanbanData';
+
 import { EModalTaskAddActions } from './types';
 import { IInitialModalTaskAddState, TModalTaskAddAction } from './types';
 
 const initialModalTaskAddState: IInitialModalTaskAddState = {
   isOpen: false,
   isFromHeader: false,
-  columnId: 'column-1',
+  columnId: EColumnsName.TODO,
 };
 
 const modalTaskAddReducer = (

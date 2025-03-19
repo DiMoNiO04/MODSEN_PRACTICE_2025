@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getOpacityColor } from '@/utils';
+import { getOpacityColor } from '@/utils/functions';
 
 const Text = styled.div<{ color: string; $isFullWidth?: boolean }>`
   border-radius: var(--radius-xl);

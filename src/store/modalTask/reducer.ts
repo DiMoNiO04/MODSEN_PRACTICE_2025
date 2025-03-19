@@ -3,13 +3,13 @@ import { IInitialModalTaskState, TModalTaskAction } from './types';
 
 const initialModalTaskState: IInitialModalTaskState = {
   isOpen: false,
-  cardData: null,
+  taskData: null,
 };
 
 const modalTaskReducer = (state = initialModalTaskState, action: TModalTaskAction): IInitialModalTaskState => {
   switch (action.type) {
     case EModalTaskActions.OPEN_MODAL:
-      return { ...state, isOpen: true, cardData: action.payload };
+      return { ...state, isOpen: true, taskData: action.payload };
     case EModalTaskActions.CLOSE_MODAL:
       return { ...initialModalTaskState };
     default:

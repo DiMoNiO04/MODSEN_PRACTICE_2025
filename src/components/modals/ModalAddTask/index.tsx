@@ -2,28 +2,31 @@ import { useEffect, useState } from 'react';
 
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle, Select, TextArea } from '@/components/ui';
-import { CARD_PRIORITY, UITexts } from '@/constants';
-import { useForm } from '@/hooks';
-import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
+import { TASK_PRIORITY, UITexts } from '@/constants';
+import { EColumnsName } from '@/constants/kanbanData';
+import { EPriorityName } from '@/constants/taskPriority';
+import { useForm, useTaskActions } from '@/hooks';
 import { closeModalTaskAdd } from '@/store/modalTaskAdd/actions';
-import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { IOption } from '@/utils';
-import { ICard } from '@/utils/interfaces';
+import { getErrorMessage } from '@/utils/functions';
+import { IOption, ITask } from '@/utils/interfaces';
 
 export const ModalAddTask = () => {
   const dispatch = useAppDispatch();
+
   const { isFromHeader, isOpen, columnId } = useAppSelector(({ modals }) => modals.modalTaskAdd);
-  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
+  const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  const initialData: ICard = {
-    id: `card-${Date.now()}`,
+  const { handleAddTask } = useTaskActions();
+
+  const initialData: ITask = {
+    id: `task-${Date.now()}`,
     title: '',
     desc: '',
-    priority: 'priority-1',
-    columnId: columnId || 'column-1',
+    priority: EPriorityName.NULL,
+    columnId: columnId || EColumnsName.TODO,
   };
 
   const onClose = () => {
@@ -34,47 +37,10 @@ export const ModalAddTask = () => {
 
   const onSubmit = () => {
     setIsSubmitted(true);
-
-    if (formData.title.trim() === '') {
-      dispatch(
-        openNotification({
-          isSuccess: false,
-          text: `Please fill in all required fields`,
-        })
-      );
-      return;
-    }
-
-    const newTask: ICard = { ...formData };
-
-    const updatedCards = { ...kanbanData.cards };
-    updatedCards[newTask.id] = newTask;
-
-    const updatedColumns = { ...kanbanData.columns };
-    updatedColumns[formData.columnId] = {
-      ...updatedColumns[formData.columnId],
-      cardIds: [...updatedColumns[formData.columnId].cardIds, newTask.id],
-    };
-
-    const updatedKanbanData = {
-      columns: updatedColumns,
-      cards: updatedCards,
-      columnsOrder: kanbanData.columnsOrder,
-    };
-
-    dispatch(setKanbanBoardData(updatedKanbanData));
-
-    dispatch(
-      openNotification({
-        isSuccess: true,
-        text: `Task '${formData.title}' has been successfully added`,
-      })
-    );
-
-    onClose();
+    handleAddTask(formData, onClose);
   };
 
-  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<ICard>({
+  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<ITask>({
     initialData,
     onSubmit,
   });
@@ -83,7 +49,7 @@ export const ModalAddTask = () => {
     if (isOpen) {
       setFormData(initialData);
     }
-  }, [isOpen, status]);
+  }, [isOpen]);
 
   const onPriorityChange = (selectedOption: IOption) =>
     handleChange({ target: { name: 'priority', value: selectedOption.id } });
@@ -104,14 +70,14 @@ export const ModalAddTask = () => {
           value={formData.title}
           onChange={handleChange}
           required
-          errorMessage={isSubmitted && formData.title.trim() === '' ? 'This field is required' : undefined}
+          errorMessage={getErrorMessage(isSubmitted, formData.title)}
         />
         <TextArea labelText={UITexts.LABELS.DESCRIPTION} name="desc" value={formData.desc} onChange={handleChange} />
         <Select
           labelText={UITexts.LABELS.PRIORITY}
           value={formData.priority}
           onChange={onPriorityChange}
-          options={Object.values(CARD_PRIORITY)}
+          options={Object.values(TASK_PRIORITY)}
         />
 
         {isFromHeader && (

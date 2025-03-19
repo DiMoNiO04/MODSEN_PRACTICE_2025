@@ -2,21 +2,24 @@ import { forwardRef } from 'react';
 
 import { BtnMenuItem, Dropdown } from '@/components/ui';
 import { UITexts } from '@/constants';
+import { EColumnsName } from '@/constants/kanbanData';
 import { openModalColumnDelete } from '@/store/modalColumnDelete/actions';
 import { openModalColumnEdit } from '@/store/modalColumnEdit/actions';
 import { openModalTaskAdd } from '@/store/modalTaskAdd/actions';
 import { useAppDispatch } from '@/store/store';
-import { IFormDataColumn } from '@/utils';
+import { IColumnWithoutTaskIds } from '@/utils/interfaces';
 
-export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IFormDataColumn>(
-  ({ id, color, title }: IFormDataColumn, ref) => {
+export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IColumnWithoutTaskIds>(
+  ({ id }: IColumnWithoutTaskIds, ref) => {
     const dispatch = useAppDispatch();
 
     const handleOpenModalTaskAdd = () => dispatch(openModalTaskAdd({ columnId: id }));
-    const handleOpenModalColumnEdit = () => dispatch(openModalColumnEdit({ id, title, color }));
+    const handleOpenModalColumnEdit = () => dispatch(openModalColumnEdit({ id }));
     const handleOpenModalConfirm = () => dispatch(openModalColumnDelete({ id }));
 
-    const isSpecialColumn = ['column-1', 'column-2', 'column-3'].includes(id);
+    const isSpecialColumn: boolean = [EColumnsName.TODO, EColumnsName.PROGRESS, EColumnsName.DONE].includes(
+      id as EColumnsName
+    );
 
     return (
       <Dropdown ref={ref}>

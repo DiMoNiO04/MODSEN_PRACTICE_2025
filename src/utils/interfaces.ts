@@ -1,16 +1,14 @@
+import { ReactNode } from 'react';
+
+import { EPriorityName } from '@/constants/taskPriority';
+
 interface IChildrenProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 interface IIconProps {
   size?: number;
   color?: string;
-}
-
-interface IFormDataColumn {
-  id: string;
-  title: string;
-  color: string;
 }
 
 interface IOption {
@@ -23,11 +21,15 @@ interface IText {
   text: string;
 }
 
-interface ICard {
+type IColumnWithoutTaskIds = Omit<IColumn, 'taskIds'>;
+type IKanbanTasks = Record<string, ITask>;
+type IKanbanColums = Record<string, IColumn>;
+
+interface ITask {
   id: string;
   title: string;
   desc?: string;
-  priority: string;
+  priority: EPriorityName;
   columnId: string;
 }
 
@@ -35,13 +37,24 @@ interface IColumn {
   id: string;
   title: string;
   color: string;
-  cardIds: string[];
+  taskIds: string[];
 }
 
 interface IKanbanData {
-  columns: Record<string, IColumn>;
-  cards: Record<string, ICard>;
+  columns: IKanbanColums;
+  tasks: IKanbanTasks;
   columnsOrder: string[];
 }
 
-export type { ICard, IChildrenProps, IColumn, IFormDataColumn, IIconProps, IKanbanData, IOption, IText };
+export type {
+  IChildrenProps,
+  IColumn,
+  IColumnWithoutTaskIds,
+  IIconProps,
+  IKanbanColums,
+  IKanbanData,
+  IKanbanTasks,
+  IOption,
+  ITask,
+  IText,
+};

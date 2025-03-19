@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux';
 
-import { IChildrenProps } from '@/utils';
+import { IChildrenProps } from '@/utils/interfaces';
 
 import { store } from '../store/store';
 

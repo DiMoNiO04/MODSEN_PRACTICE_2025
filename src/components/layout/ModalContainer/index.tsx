@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 
 import { BtnRound } from '@/components/ui';
 import { useBodyScrollBlock } from '@/hooks';
-import { IChildrenProps } from '@/utils';
+import { IChildrenProps } from '@/utils/interfaces';
 
 import { BtnCloseBlock, ModalContent, ModalOverlay } from './styled';
 
@@ -24,7 +24,7 @@ export const ModalContainer = ({ onClose, children }: IModalProps) => {
     setTimeout(onClose, 200);
   };
 
-  const stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation();
+  const stopPropagation = (e: MouseEvent<HTMLDivElement>) => e.stopPropagation();
 
   return (
     <ModalOverlay $isVisible={isVisible} onClick={closeModalWithAnimation}>

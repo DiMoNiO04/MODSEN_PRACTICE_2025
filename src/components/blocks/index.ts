@@ -4,6 +4,7 @@ import { HeaderBtnAdd } from './HeaderBtnAdd';
 import { HeaderDropdown } from './HeaderDropdown';
 import { Priority } from './Priority';
 import { PriorityDropdown } from './PriorityDropdown';
+import { Task } from './Task';
 import { TaskDeleteContent } from './TaskDeleteContent';
 import { TaskEditContent } from './TaskEditContent';
 import { TaskModalContent } from './TaskModalContent';
@@ -21,6 +22,7 @@ export {
   HeaderDropdown,
   Priority,
   PriorityDropdown,
+  Task,
   TaskDeleteContent,
   TaskEditContent,
   TaskModalContent,

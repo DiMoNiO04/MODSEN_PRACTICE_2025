@@ -3,21 +3,20 @@ import { useState } from 'react';
 import { ModalContainer } from '@/components/layout';
 import { BtnDef, Form, Input, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
-import { useForm } from '@/hooks';
-import { setKanbanBoardData } from '@/store/kanbanBoard/actions';
+import { useColumnActions, useForm } from '@/hooks';
 import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
-import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { getRandomColor, IFormDataColumn } from '@/utils';
+import { getErrorMessage, getRandomColor } from '@/utils/functions';
+import { IColumnWithoutTaskIds } from '@/utils/interfaces';
 
 export const ModalAddColumn = () => {
   const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector(({ modals }) => modals.modalColumnAdd);
-  const kanbanData = useAppSelector(({ kanbanBoard }) => kanbanBoard.kanbanData);
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const { handleAddColumn } = useColumnActions();
 
-  const initialData: IFormDataColumn = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };
+  const initialData: IColumnWithoutTaskIds = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };
 
   const onClose = () => {
     dispatch(closeModaColumnAdd());
@@ -27,61 +26,10 @@ export const ModalAddColumn = () => {
 
   const onSubmit = () => {
     setIsSubmitted(true);
-
-    const trimmedTitle = formData.title.trim();
-
-    if (trimmedTitle === '') {
-      dispatch(
-        openNotification({
-          isSuccess: false,
-          text: `Please fill in all required fields`,
-        })
-      );
-      return;
-    }
-
-    const isDuplicateTitle = Object.values(kanbanData.columns).some(
-      (column) => column.title.toLowerCase() === trimmedTitle.toLowerCase()
-    );
-
-    if (isDuplicateTitle) {
-      dispatch(
-        openNotification({
-          isSuccess: false,
-          text: `Column with the name '${trimmedTitle}' already exists`,
-        })
-      );
-      return;
-    }
-
-    const newColumn = {
-      ...formData,
-      id: `column-${Date.now()}`,
-      cardIds: [],
-    };
-
-    const updatedKanbanData = {
-      columns: {
-        ...kanbanData.columns,
-        [newColumn.id]: newColumn,
-      },
-      cards: kanbanData.cards,
-      columnsOrder: [...kanbanData.columnsOrder, newColumn.id],
-    };
-
-    dispatch(setKanbanBoardData(updatedKanbanData));
-
-    dispatch(
-      openNotification({
-        isSuccess: true,
-        text: `Column '${trimmedTitle}' has been successfully added`,
-      })
-    );
-
-    onClose();
+    handleAddColumn(formData, onClose);
   };
 
-  const { formData, handleChange, handleSubmit, resetForm } = useForm<IFormDataColumn>({
+  const { formData, handleChange, handleSubmit, resetForm } = useForm<IColumnWithoutTaskIds>({
     initialData,
     onSubmit,
   });
@@ -99,7 +47,7 @@ export const ModalAddColumn = () => {
           value={formData.title}
           onChange={handleChange}
           required
-          errorMessage={isSubmitted && formData.title.trim() === '' ? 'This field is required' : undefined}
+          errorMessage={getErrorMessage(isSubmitted, formData.title)}
         />
         <Input
           labelText={UITexts.LABELS.COLOR}

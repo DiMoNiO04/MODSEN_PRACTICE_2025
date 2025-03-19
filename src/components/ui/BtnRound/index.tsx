@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
 import { IconAdd, IconClose, IconMaximize, IconMore } from '@/components/icons';
-import { IIconProps } from '@/utils';
+import { IIconProps } from '@/utils/interfaces';
 
 import { Button } from './styled';
 

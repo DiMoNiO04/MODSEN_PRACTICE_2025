@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { BREAKPOINTS } from '@/utils';
+import { BREAKPOINTS } from '@/utils/breakpoints';
 
 const DashboardContainer = styled.div`
   padding: var(--padding-xxl);

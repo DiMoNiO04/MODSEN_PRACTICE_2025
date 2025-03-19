@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '@/store/store';
 import { Block } from './styled';
 
 export const HeaderMenuMob = () => {
-  const isOpenMenuMob = useAppSelector((state) => state.menuMob.isOpen);
+  const { isOpen } = useAppSelector((state) => state.menuMob);
   const dispatch = useAppDispatch();
 
   const handleCloseMenuMob = () => dispatch(closeMenuMob());
@@ -26,10 +26,10 @@ export const HeaderMenuMob = () => {
     handleCloseMenuMob();
   };
 
-  useBodyScrollBlock(isOpenMenuMob);
+  useBodyScrollBlock(isOpen);
 
   return (
-    <Block $isOpen={isOpenMenuMob}>
+    <Block $isOpen={isOpen}>
       <BtnMenuItem onClick={openColumnModal} text={UITexts.COLUMN.ADD_NEW} />
       <BtnMenuItem onClick={openTaskModal} text={UITexts.TASK.ADD_NEW} />
     </Block>

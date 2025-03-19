@@ -38,8 +38,8 @@ const ModalContent = styled.div<{ $isVisible: boolean }>`
 
 const BtnCloseBlock = styled.div`
   position: absolute;
-  top: var(--top-l);
-  right: var(--right-l);
+  top: var(--top-m);
+  right: var(--right-m);
 `;
 
 export { BtnCloseBlock, ModalContent, ModalOverlay };
