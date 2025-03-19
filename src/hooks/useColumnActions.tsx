@@ -10,7 +10,7 @@ import { useValidation } from './useValidation';
 interface IUseColumnActions {
   handleAddColumn: (formData: IColumnWithoutTaskIds, onClose: () => void) => void;
   handleDeleteColumn: (id: string) => void;
-  handleEditColumn: (formData: IColumnWithoutTaskIds, id: string, onClose: () => void) => void;
+  handleEditColumn: (formData: IColumn, onClose: () => void) => void;
 }
 
 export const useColumnActions = (): IUseColumnActions => {
@@ -40,16 +40,12 @@ export const useColumnActions = (): IUseColumnActions => {
     dispatch(openNotification({ isSuccess: true, text: UITexts.NOTIFICATION.SUCCESS_DELETE_COLUMN }));
   };
 
-  const handleEditColumn = (formData: IColumnWithoutTaskIds, id: string, onClose: () => void) => {
-    if (isEmptyField(formData.title) || isDuplicateColumn(formData.title)) {
+  const handleEditColumn = (formData: IColumn, onClose: () => void) => {
+    if (isEmptyField(formData.title) || isDuplicateColumn(formData.title, formData.id)) {
       return;
     }
 
-    const updatedColumn: IColumn = {
-      ...formData,
-      id,
-      taskIds: [],
-    };
+    const updatedColumn: IColumn = { ...formData };
 
     dispatch(editKanbanColumn(updatedColumn));
     dispatch(openNotification({ isSuccess: true, text: UITexts.NOTIFICATION.SUCCESS_EDIT_COLUMN }));

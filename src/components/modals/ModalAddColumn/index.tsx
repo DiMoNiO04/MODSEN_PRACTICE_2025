@@ -6,7 +6,7 @@ import { UITexts } from '@/constants';
 import { useColumnActions, useForm } from '@/hooks';
 import { closeModaColumnAdd } from '@/store/modalColumnAdd/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { getErrorMessage } from '@/utils/functions';
+import { getErrorMessage, getRandomColor } from '@/utils/functions';
 import { IColumnWithoutTaskIds } from '@/utils/interfaces';
 
 export const ModalAddColumn = () => {
@@ -16,7 +16,7 @@ export const ModalAddColumn = () => {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const { handleAddColumn } = useColumnActions();
 
-  const initialData: IColumnWithoutTaskIds = { id: `column-${Date.now()}`, title: '', color: '' };
+  const initialData: IColumnWithoutTaskIds = { id: `column-${Date.now()}`, title: '', color: getRandomColor() };
 
   const onClose = () => {
     dispatch(closeModaColumnAdd());

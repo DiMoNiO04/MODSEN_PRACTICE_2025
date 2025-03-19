@@ -7,13 +7,14 @@ import { useColumnActions, useForm } from '@/hooks';
 import { closeModalColumnEdit } from '@/store/modalColumnEdit/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getErrorMessage } from '@/utils/functions';
-import { IColumnWithoutTaskIds } from '@/utils/interfaces';
+import { IColumn } from '@/utils/interfaces';
 
 export const ModalEditColumn = () => {
   const dispatch = useAppDispatch();
-  const { id, title, color, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
+  const { id, isOpen } = useAppSelector(({ modals }) => modals.modalColumnEdit);
+  const { kanbanData } = useAppSelector((state) => state.kanbanBoard);
 
-  const initialData: IColumnWithoutTaskIds = { id, title, color };
+  const initialData: IColumn = { ...kanbanData.columns[id] };
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
@@ -27,10 +28,10 @@ export const ModalEditColumn = () => {
 
   const onSubmit = () => {
     setIsSubmitted(true);
-    handleEditColumn(formData, id, onClose);
+    handleEditColumn(formData, onClose);
   };
 
-  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IColumnWithoutTaskIds>({
+  const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IColumn>({
     initialData,
     onSubmit,
   });

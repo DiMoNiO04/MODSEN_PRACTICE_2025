@@ -18,8 +18,6 @@ export const TaskEditContent = ({ taskData, handleCancel, onClose }: ITaskEditCo
   const initialData: ITask = { ...taskData };
   const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
 
-  const { formData, handleChange, handleSubmit } = useForm<ITask>({ initialData });
-
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const { handleEditTask } = useTaskActions();
@@ -33,6 +31,8 @@ export const TaskEditContent = ({ taskData, handleCancel, onClose }: ITaskEditCo
     setIsSubmitted(true);
     handleEditTask(formData, handleClose);
   };
+
+  const { formData, handleChange, handleSubmit } = useForm<ITask>({ initialData, onSubmit });
 
   const onPriorityChange = (selectedOption: IOption) =>
     handleChange({ target: { name: 'priority', value: selectedOption.id } });

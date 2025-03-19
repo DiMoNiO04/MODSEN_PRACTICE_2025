@@ -10,11 +10,11 @@ import { useAppDispatch } from '@/store/store';
 import { IColumnWithoutTaskIds } from '@/utils/interfaces';
 
 export const TodoColumnHeaderDropdown = forwardRef<HTMLDivElement, IColumnWithoutTaskIds>(
-  ({ id, color, title }: IColumnWithoutTaskIds, ref) => {
+  ({ id }: IColumnWithoutTaskIds, ref) => {
     const dispatch = useAppDispatch();
 
     const handleOpenModalTaskAdd = () => dispatch(openModalTaskAdd({ columnId: id }));
-    const handleOpenModalColumnEdit = () => dispatch(openModalColumnEdit({ id, title, color }));
+    const handleOpenModalColumnEdit = () => dispatch(openModalColumnEdit({ id }));
     const handleOpenModalConfirm = () => dispatch(openModalColumnDelete({ id }));
 
     const isSpecialColumn: boolean = [EColumnsName.TODO, EColumnsName.PROGRESS, EColumnsName.DONE].includes(
