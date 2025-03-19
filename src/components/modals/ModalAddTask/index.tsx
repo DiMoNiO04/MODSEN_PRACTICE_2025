@@ -37,8 +37,7 @@ export const ModalAddTask = () => {
 
   const onSubmit = () => {
     setIsSubmitted(true);
-    handleAddTask(formData);
-    onClose();
+    handleAddTask(formData, onClose);
   };
 
   const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<ITask>({

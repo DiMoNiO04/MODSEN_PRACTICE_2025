@@ -8,9 +8,9 @@ import { ITask } from '@/utils/interfaces';
 import { useValidation } from './useValidation';
 
 interface IUseTaskActions {
-  handleAddTask: (formData: ITask) => void;
+  handleAddTask: (formData: ITask, onClose: () => void) => void;
   handleDeleteTask: (id: string) => void;
-  handleEditTask: (formData: ITask) => void;
+  handleEditTask: (formData: ITask, onClose: () => void) => void;
   handleEditPriority: (taskId: string, priorityId: EPriorityName) => void;
 }
 
@@ -18,7 +18,7 @@ export const useTaskActions = (): IUseTaskActions => {
   const dispatch = useAppDispatch();
   const { isEmptyField } = useValidation();
 
-  const handleAddTask = (formData: ITask) => {
+  const handleAddTask = (formData: ITask, onClose: () => void) => {
     if (isEmptyField(formData.title)) {
       return;
     }
@@ -30,6 +30,8 @@ export const useTaskActions = (): IUseTaskActions => {
 
     dispatch(addKanbanTask(newTask));
     dispatch(openNotification({ isSuccess: true, text: UITexts.NOTIFICATION.SUCCESS_ADD_TASK }));
+
+    onClose();
   };
 
   const handleDeleteTask = (id: string) => {
@@ -37,7 +39,7 @@ export const useTaskActions = (): IUseTaskActions => {
     dispatch(openNotification({ isSuccess: true, text: UITexts.NOTIFICATION.SUCCESS_DELETE_TASK }));
   };
 
-  const handleEditTask = (formData: ITask) => {
+  const handleEditTask = (formData: ITask, onClose: () => void) => {
     if (isEmptyField(formData.title)) {
       return;
     }
@@ -46,6 +48,8 @@ export const useTaskActions = (): IUseTaskActions => {
 
     dispatch(editKanbanTask(updatedTask));
     dispatch(openNotification({ isSuccess: true, text: UITexts.NOTIFICATION.SUCCESS_EDIT_TASK }));
+
+    onClose();
   };
 
   const handleEditPriority = (taskId: string, priorityId: EPriorityName) => {

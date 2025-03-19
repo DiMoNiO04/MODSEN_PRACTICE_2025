@@ -8,16 +8,16 @@ import { IColumn, IColumnWithoutTaskIds } from '@/utils/interfaces';
 import { useValidation } from './useValidation';
 
 interface IUseColumnActions {
-  handleAddColumn: (formData: IColumnWithoutTaskIds) => void;
+  handleAddColumn: (formData: IColumnWithoutTaskIds, onClose: () => void) => void;
   handleDeleteColumn: (id: string) => void;
-  handleEditColumn: (formData: IColumnWithoutTaskIds, id: string) => void;
+  handleEditColumn: (formData: IColumnWithoutTaskIds, id: string, onClose: () => void) => void;
 }
 
 export const useColumnActions = (): IUseColumnActions => {
   const dispatch = useAppDispatch();
   const { isEmptyField, isDuplicateColumn } = useValidation();
 
-  const handleAddColumn = (formData: IColumnWithoutTaskIds) => {
+  const handleAddColumn = (formData: IColumnWithoutTaskIds, onClose: () => void) => {
     if (isEmptyField(formData.title) || isDuplicateColumn(formData.title)) {
       return;
     }
@@ -31,6 +31,8 @@ export const useColumnActions = (): IUseColumnActions => {
 
     dispatch(addKanbanColumn(newColumn));
     dispatch(openNotification({ isSuccess: true, text: UITexts.NOTIFICATION.SUCCESS_ADD_COLUMN }));
+
+    onClose();
   };
 
   const handleDeleteColumn = (id: string) => {
@@ -38,7 +40,7 @@ export const useColumnActions = (): IUseColumnActions => {
     dispatch(openNotification({ isSuccess: true, text: UITexts.NOTIFICATION.SUCCESS_DELETE_COLUMN }));
   };
 
-  const handleEditColumn = (formData: IColumnWithoutTaskIds, id: string) => {
+  const handleEditColumn = (formData: IColumnWithoutTaskIds, id: string, onClose: () => void) => {
     if (isEmptyField(formData.title) || isDuplicateColumn(formData.title)) {
       return;
     }
@@ -51,6 +53,8 @@ export const useColumnActions = (): IUseColumnActions => {
 
     dispatch(editKanbanColumn(updatedColumn));
     dispatch(openNotification({ isSuccess: true, text: UITexts.NOTIFICATION.SUCCESS_EDIT_COLUMN }));
+
+    onClose();
   };
 
   return { handleAddColumn, handleDeleteColumn, handleEditColumn };

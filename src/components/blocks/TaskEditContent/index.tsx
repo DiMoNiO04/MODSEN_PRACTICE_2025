@@ -31,8 +31,7 @@ export const TaskEditContent = ({ taskData, handleCancel, onClose }: ITaskEditCo
 
   const onSubmit = () => {
     setIsSubmitted(true);
-    handleEditTask(formData);
-    handleClose();
+    handleEditTask(formData, handleClose);
   };
 
   const onPriorityChange = (selectedOption: IOption) =>

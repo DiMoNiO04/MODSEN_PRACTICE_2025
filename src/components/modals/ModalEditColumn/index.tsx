@@ -27,8 +27,7 @@ export const ModalEditColumn = () => {
 
   const onSubmit = () => {
     setIsSubmitted(true);
-    handleEditColumn(formData, id);
-    onClose();
+    handleEditColumn(formData, id, onClose);
   };
 
   const { formData, handleChange, handleSubmit, resetForm, setFormData } = useForm<IColumnWithoutTaskIds>({

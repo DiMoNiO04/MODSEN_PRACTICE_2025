@@ -15,9 +15,9 @@ export const useDropdownToggle = (): IUseDropdownToggleReturn => {
   const closeMenu = useCallback((e: MouseEvent) => {
     if (
       refDropdownBtn.current &&
-      refDropdownMenu.current &&
-      !refDropdownBtn.current.contains(e.target as Node) &&
-      !refDropdownMenu.current.contains(e.target as Node)
+      // refDropdownMenu.current &&
+      !refDropdownBtn.current.contains(e.target as Node)
+      // !refDropdownMenu.current.contains(e.target as Node)
     ) {
       setIsDropdownOpen(false);
     }

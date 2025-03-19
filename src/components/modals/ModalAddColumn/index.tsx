@@ -26,8 +26,7 @@ export const ModalAddColumn = () => {
 
   const onSubmit = () => {
     setIsSubmitted(true);
-    handleAddColumn(formData);
-    onClose();
+    handleAddColumn(formData, onClose);
   };
 
   const { formData, handleChange, handleSubmit, resetForm } = useForm<IColumnWithoutTaskIds>({

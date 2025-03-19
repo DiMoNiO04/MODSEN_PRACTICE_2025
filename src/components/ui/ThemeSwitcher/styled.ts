@@ -5,16 +5,16 @@ import { BREAKPOINTS } from '@/utils/breakpoints';
 const Button = styled.button`
   position: fixed;
   z-index: var(--index-xl);
-  left: var(--right-l);
-  bottom: var(--top-l);
+  left: var(--right-m);
+  bottom: var(--top-m);
   width: var(--width-m);
   height: var(--height-m);
 
   @media (max-width: ${BREAKPOINTS.mobile}) {
     left: auto;
     bottom: auto;
-    top: 16px;
-    right: 16px;
+    top: var(--top-l);
+    right: var(--right-l);
   }
 `;
 
