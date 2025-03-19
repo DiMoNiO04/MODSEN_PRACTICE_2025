@@ -1,10 +1,7 @@
 import { ColorText } from '@/components/ui';
-import { CARD_PRIORITY, UITexts } from '@/constants';
+import { CARD_PRIORITY } from '@/constants';
 import { EPriorityName } from '@/constants/cardPriority';
-import { useDropdownToggle } from '@/hooks';
-import { editKanbanTaskPriority } from '@/store/kanbanBoard/actions';
-import { openNotification } from '@/store/notification/actions';
-import { useAppDispatch } from '@/store/store';
+import { useDropdownToggle, useTaskActions } from '@/hooks';
 import { ICard, IOption } from '@/utils/interfaces';
 
 import { PriorityDropdown } from '../PriorityDropdown';
@@ -17,7 +14,7 @@ interface IPriorityProps {
 
 export const Priority = ({ priorityId, cardData }: IPriorityProps) => {
   const { isDropdownOpen, setIsDropdownOpen, refDropdownBtn, refDropdownMenu } = useDropdownToggle();
-  const dispatch = useAppDispatch();
+  const { handleEditPriority } = useTaskActions();
 
   const priority = CARD_PRIORITY[priorityId as EPriorityName];
 
@@ -25,15 +22,7 @@ export const Priority = ({ priorityId, cardData }: IPriorityProps) => {
 
   const handlePriorityChange = (selectedOption: IOption) => {
     setIsDropdownOpen(false);
-
-    dispatch(editKanbanTaskPriority({ taskId: cardData.id, priorityId: selectedOption.id as EPriorityName }));
-
-    dispatch(
-      openNotification({
-        isSuccess: true,
-        text: UITexts.NOTIFICATION.SUCCESS_EDIT_PRIORITY,
-      })
-    );
+    handleEditPriority(cardData.id, selectedOption.id as EPriorityName);
   };
 
   return (

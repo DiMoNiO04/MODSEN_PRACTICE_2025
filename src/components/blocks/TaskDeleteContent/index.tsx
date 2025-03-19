@@ -1,8 +1,6 @@
 import { BtnDef, BtnsBlock, ModalTitle } from '@/components/ui';
 import { UITexts } from '@/constants';
-import { deleteKanbanTask } from '@/store/kanbanBoard/actions';
-import { openNotification } from '@/store/notification/actions';
-import { useAppDispatch } from '@/store/store';
+import { useTaskActions } from '@/hooks';
 
 interface ITaskDeleteContentProps {
   id: string;
@@ -11,18 +9,10 @@ interface ITaskDeleteContentProps {
 }
 
 export const TaskDeleteContent = ({ id, handleCancel, onClose }: ITaskDeleteContentProps) => {
-  const dispatch = useAppDispatch();
+  const { handleDeleteTask } = useTaskActions();
 
   const handeConfirm = () => {
-    dispatch(deleteKanbanTask(id));
-
-    dispatch(
-      openNotification({
-        isSuccess: true,
-        text: UITexts.NOTIFICATION.SUCCESS_DELETE_CARD,
-      })
-    );
-
+    handleDeleteTask(id);
     onClose();
   };
 

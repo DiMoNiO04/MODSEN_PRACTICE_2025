@@ -3,10 +3,8 @@ import { useState } from 'react';
 import { BtnDef, BtnsBlock, Form, Input, ModalTitle, TextArea } from '@/components/ui';
 import { Select } from '@/components/ui/Select';
 import { CARD_PRIORITY, UITexts } from '@/constants';
-import { useForm, useValidation } from '@/hooks';
-import { editKanbanTask } from '@/store/kanbanBoard/actions';
-import { openNotification } from '@/store/notification/actions';
-import { useAppDispatch, useAppSelector } from '@/store/store';
+import { useForm, useTaskActions } from '@/hooks';
+import { useAppSelector } from '@/store/store';
 import { getErrorMessage } from '@/utils/functions';
 import { ICard, IOption } from '@/utils/interfaces';
 
@@ -17,15 +15,14 @@ interface ITaskEditContentProps {
 }
 
 export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditContentProps) => {
-  const dispatch = useAppDispatch();
-
   const initialData: ICard = { ...cardData };
   const { kanbanData } = useAppSelector(({ kanbanBoard }) => kanbanBoard);
 
   const { formData, handleChange, handleSubmit } = useForm<ICard>({ initialData });
-  const { isEmptyField } = useValidation();
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
+  const { handleEditTask } = useTaskActions();
 
   const handleClose = () => {
     onClose();
@@ -34,22 +31,7 @@ export const TaskEditContent = ({ cardData, handleCancel, onClose }: ITaskEditCo
 
   const onSubmit = () => {
     setIsSubmitted(true);
-
-    if (isEmptyField(formData.title)) {
-      return;
-    }
-
-    const updateTask: ICard = { ...formData };
-
-    dispatch(editKanbanTask(updateTask));
-
-    dispatch(
-      openNotification({
-        isSuccess: true,
-        text: UITexts.NOTIFICATION.SUCCESS_EDIT_CARD,
-      })
-    );
-
+    handleEditTask(formData);
     handleClose();
   };
 

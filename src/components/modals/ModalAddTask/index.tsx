@@ -5,10 +5,8 @@ import { BtnDef, Form, Input, ModalTitle, Select, TextArea } from '@/components/
 import { CARD_PRIORITY, UITexts } from '@/constants';
 import { EPriorityName } from '@/constants/cardPriority';
 import { EColumnsName } from '@/constants/kanbanData';
-import { useForm, useValidation } from '@/hooks';
-import { addKanbanTask } from '@/store/kanbanBoard/actions';
+import { useForm, useTaskActions } from '@/hooks';
 import { closeModalTaskAdd } from '@/store/modalTaskAdd/actions';
-import { openNotification } from '@/store/notification/actions';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getErrorMessage } from '@/utils/functions';
 import { ICard, IOption } from '@/utils/interfaces';
@@ -21,7 +19,7 @@ export const ModalAddTask = () => {
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  const { isEmptyField } = useValidation();
+  const { handleAddTask } = useTaskActions();
 
   const initialData: ICard = {
     id: `card-${Date.now()}`,
@@ -39,22 +37,7 @@ export const ModalAddTask = () => {
 
   const onSubmit = () => {
     setIsSubmitted(true);
-
-    if (isEmptyField(formData.title)) {
-      return;
-    }
-
-    const newTask: ICard = { ...formData };
-
-    dispatch(addKanbanTask(newTask));
-
-    dispatch(
-      openNotification({
-        isSuccess: true,
-        text: UITexts.NOTIFICATION.SUCCESS_ADD_CARD,
-      })
-    );
-
+    handleAddTask(formData);
     onClose();
   };
 
@@ -67,7 +50,7 @@ export const ModalAddTask = () => {
     if (isOpen) {
       setFormData(initialData);
     }
-  }, [isOpen, status]);
+  }, [isOpen]);
 
   const onPriorityChange = (selectedOption: IOption) =>
     handleChange({ target: { name: 'priority', value: selectedOption.id } });

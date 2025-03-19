@@ -21,6 +21,7 @@ interface IText {
   text: string;
 }
 
+type ICardWithoutColumnId = Omit<ICard, 'id'>;
 type IColumnWithoutCardIds = Omit<IColumn, 'cardIds'>;
 type IKanbanCards = Record<string, ICard>;
 type IKanbanColums = Record<string, IColumn>;
@@ -48,6 +49,7 @@ interface IKanbanData {
 
 export type {
   ICard,
+  ICardWithoutColumnId,
   IChildrenProps,
   IColumn,
   IColumnWithoutCardIds,
